@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 function autoload($clase){
 	if (file_exists("controlador/$clase.php")) {
@@ -11,8 +11,26 @@ function autoload($clase){
 	}
 }
 spl_autoload_register('autoload');
+$menuItems = ['Recogida'		=> 'Recogida',
+							'Galpon'			=> 'Galpón',
+							'ControlAves' => 'Control de Aves',
+							'Lote'				=> 'Lotes',
+							'InsumosAvicolas' => 'Insumos Avicolas',
+							'Responsables' => 'Responsables',
+							'Usuarios'		=> 'Usuarios',
+							'Reportes'		=> ['ProduccionDiaria' => 'Producción Diaria',
+																'ProduccionEntreFechas' => 'Producción Entre Fechas',
+																'FormatoDistribucion' => 'Formato de Distribución']
+							];
 
 
+
+
+
+define('MENUITEMS', $menuItems);
+/**
+ * ROUTER
+ */
 $controlador = isset($_GET['c']) ? $_GET['c'] : 'Login';
 $metodo		 = isset($_GET['m']) ? $_REQUEST['m'] : 'index';
 define('CONTROLADOR', $controlador);
