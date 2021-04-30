@@ -16,7 +16,7 @@
 						<strong class="d-block text-center text-white">Contraseña</strong>
 						<input type="password" name="claveUsuario" class="form-control" required minlength="6" maxlength="15">
 					</div>
-					<button class="btn btn-warning text-dark btn-block">Aceptar</button>
+					<button class="btn b1 b1-primary btn-block">Aceptar</button>
 					<button class="col-auto btn btn-Secondary text-white" data-toggle="modal" data-target="#CambiarContra" type="button">¿Olvidó su contraseña?</button>
 				</form>
 			</div>
