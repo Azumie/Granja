@@ -16,12 +16,18 @@
 				<div class="row justify-content-center">
 					<div class="col-12 col-md-8 mb-4">
 						<div class="row justify-content-center">
-							<div class="input-group mb-4 col-12">
+							<div class="input-group mb-4 col-10">
 								<div class="input-group-prepend">
 									<span class="input-group-text">Granja</span>
 								</div>
 								<select class="form-control idSector" name="idSector" id="idSector">
 								</select>
+							</div>
+							<div class="col-auto">
+								<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input  mt-2" id="activo" name="activo"disabled checked>
+										<label class="custom-control-label mt-1" for="activo">Activo</label>
+									</div>
 							</div>
 							<div class="col-8 col-md-5">
 								<div class="input-group mb-4">
@@ -48,6 +54,9 @@
 							</div>
 							<button class="btn btn-block col-8 btn-info">Guardar</button>
 						</div>
+					</div>
+					<div class="col-4 d-flex bg-danger">
+						<img src="assets/img/granero.png" class="cir  align-self-center">
 					</div>
 				</div>
 			</div>

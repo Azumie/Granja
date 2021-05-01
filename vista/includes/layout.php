@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title><?php echo CONTROLADOR; ?></title>
+		<title><?= CONTROLADOR ?></title>
 		<link rel="stylesheet" href="assets/css/css/all.min.css">
 		<!-- Bootstrap core CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap.css">
+		<link rel="stylesheet" href="assets/cssCompilado/bootstrap.css">
 		<!-- Datatable css -->
 		<link rel="stylesheet" href="assets/css/Datatable.min.css">
 		<!-- Imagen de la pestaña  POR ALGUNARAZÓN NO AGARRA >N<-->
@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="assets/css/main.css">
 	</head>
 	<body>
+
 		<?php if (CONTROLADOR != 'Login'): ?>
 
 			<!-- NAVEGACION -->
@@ -66,6 +67,7 @@
 			<!-- NAVEGACION -->
 
 		<?php endif ?>
+		<div class="f fondo<?php echo ( CONTROLADOR == 'Login') ? CONTROLADOR : '' ?>"></div>
 		<?php if (CONTROLADOR == 'Login'): ?>
 			<div class="burbujas">
 				<div class="burbuja"></div>
@@ -76,7 +78,6 @@
 				<div class="burbuja"></div>
 			</div>
 		<?php endif ?>
-		<div class="f fondo<?php echo ( CONTROLADOR == 'Login') ? CONTROLADOR : '' ?>"></div>
 		<div class="container-fluid my-3">
 			<div class="row <?php echo ( CONTROLADOR == 'Login') ? 'justify-content-end' : '' ?>">
 				<div class="col<?php echo ( CONTROLADOR == 'Login') ? '-8 col-md-6 col-lg-4' : '-12' ?>">
@@ -88,5 +89,20 @@
 				</div>
 			</div>
 		</div>
+		<!-- jQuery -->
+		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+		<!-- Bootstrap tooltips -->
+		<script type="text/javascript" src="assets/js/popper.js"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+		<!-- DataTable core JavaScript -->
+		<script type="text/javascript" src="assets/js/Datatable.min.js"></script>
+		<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script>
+		<!-- JSPDF core JavaScript -->
+		<script type="text/javascript" src="assets/js/html2pdf.bundle.min.js"></script>
+		<!-- CHARTjs core JavaScript -->
+		<script type="text/javascript" src="assets/js/Chart.min.js"></script>
+		<!-- CAMBIO AQUIIIIIII -->
+		<script type="text/javascript" src="assets/js/moment.min.js"></script>
 	</body>
 </html>
