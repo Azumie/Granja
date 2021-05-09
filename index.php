@@ -11,16 +11,16 @@ function autoload($clase){
 	}
 }
 spl_autoload_register('autoload');
-$menuItems = ['Recogida'		=> 'Recogida',
-							'Galpon'			=> 'Galpón',
-							'ControlAves' => 'Control de Aves',
-							'Lote'				=> 'Lotes',
-							'InsumosAvicolas' => 'Insumos Avicolas',
+$menuItems = [#'Recogida'		=> 'Recogida',
+							#'Galpon'			=> 'Galpón',
+							#'ControlAves' => 'Control de Aves',
+							#'Lote'				=> 'Lotes',
+							'Inventario' => 'Inventario',
 							'Responsables' => 'Responsables',
 							'Usuarios'		=> 'Usuarios',
-							'Reportes'		=> ['ProduccionDiaria' => 'Producción Diaria',
-																'ProduccionEntreFechas' => 'Producción Entre Fechas',
-																'FormatoDistribucion' => 'Formato de Distribución']
+							'Reportes'		=> ['Alimentacion' => 'Alimentaciónn',
+																'Mortalidad' => 'Mortalidad',
+																'Produccion' => 'Produccion']
 							];
 
 
