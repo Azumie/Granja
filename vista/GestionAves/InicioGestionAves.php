@@ -43,7 +43,7 @@
 							<td></td>
 							<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
 							<td>
-								<button class="btn btn-info btn-sm" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
+								<button class="btn btn-info btn-sm rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
 							</td>
 						</tr>
 					</tbody>

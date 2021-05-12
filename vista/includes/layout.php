@@ -21,7 +21,7 @@
 
 			<!-- NAVEGACION -->
 
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-nav animate__animated  animate__fadeInDown">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-nav">
 				<a class="navbar-brand text-warning" href="#"><img src="assets/img/EggL.png" class="img-fluid" style="width: 1.4em">Las Tunas</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
