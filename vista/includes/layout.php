@@ -21,7 +21,7 @@
 
 			<!-- NAVEGACION -->
 
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-nav animate__animated  animate__fadeInDown">
 				<a class="navbar-brand text-warning" href="#"><img src="assets/img/EggL.png" class="img-fluid" style="width: 1.4em">Las Tunas</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -78,7 +78,7 @@
 				<div class="burbuja"></div>
 			</div>
 		<?php endif ?>
-		<div class="container-fluid my-3">
+		<div class="container-fluid my-4">
 			<div class="row <?php echo ( CONTROLADOR == 'Login') ? 'justify-content-end' : '' ?>">
 				<div class="col<?php echo ( CONTROLADOR == 'Login') ? '-8 col-md-6 col-lg-4' : '-12' ?>">
 					<?php

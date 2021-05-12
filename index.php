@@ -12,8 +12,8 @@ function autoload($clase){
 }
 spl_autoload_register('autoload');
 $menuItems = [#'Recogida'		=> 'Recogida',
-							#'Galpon'			=> 'Galpón',
-							#'ControlAves' => 'Control de Aves',
+							'Galpon'			=> 'Galpón',
+							'GestionAves' => 'Gestion de aves',
 							#'Lote'				=> 'Lotes',
 							'Inventario' => 'Inventario',
 							'Responsables' => 'Responsables',
