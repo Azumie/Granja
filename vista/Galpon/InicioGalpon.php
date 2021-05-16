@@ -38,7 +38,6 @@
 							<td></td>
 							<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
 							<td class="btn-group justify-content-center d-flex">
-								<button class="btn btn-info cambiarLote" data-toggle="modal" data-target='#CambiarLote'><i class="fas fa-exchange-alt pl-1">Lote</i> </button>
 								<button class="btn btn-danger editarGalpon" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
 							</td>
 						</tr>

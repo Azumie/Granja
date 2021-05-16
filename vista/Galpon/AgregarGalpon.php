@@ -48,15 +48,15 @@
 							</div>
 							<div class="input-group mb-4 col-9">
 								<div class="input-group-prepend">
-									<label for="inicioLote" class="input-group-text">Inicio Galpón</label>
+									<label for="inicioLote" class="input-group-text">Inicio G.</label>
 								</div>
 								<input type="date" name="inicioLote" id="inicioLote" class="form-control" min="2000-01-01" value="<?php echo date("Y-m-d");?>" required>
 							</div>
 							<button class="btn btn-block col-8 btn-info">Guardar</button>
 						</div>
 					</div>
-					<div class="col-4 d-flex bg-danger">
-						<img src="assets/img/granero.png" class="cir  align-self-center">
+					<div class="col-4 d-flex">
+						<img src="assets/img/granero.png" class="cir">
 					</div>
 				</div>
 			</div>
