@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 function autoload($clase){
 	if (file_exists("controlador/$clase.php")) {
@@ -11,9 +11,20 @@ function autoload($clase){
 	}
 }
 spl_autoload_register('autoload');
+$menuItems = [#'Recogida'		=> 'Recogida',
+							'Galpon'			=> 'Galpón',
+							'GestionAves' => 'Gestion de aves',
+							#'Lote'				=> 'Lotes',
+							#'Inventario' => 'Inventario',
+							'Responsables' => 'Responsables',
+							'Usuarios'		=> 'Usuarios',
+							'Reportes'		=> ['Alimentacion' => 'Alimentaciónn',
+																'Mortalidad' => 'Mortalidad',
+																'Produccion' => 'Produccion']
+							];
 
-
-$controlador = isset($_GET['c'], $_SESSION['nombreUsuario']) ? $_GET['c'] : 'Login';
+define('MENUITEMS', $menuItems);
+$controlador = isset($_GET['c']) ? $_GET['c'] : 'Login';
 $metodo		 = isset($_GET['m']) ? $_REQUEST['m'] : 'index';
 define('CONTROLADOR', $controlador);
 $controlador = ucwords($controlador).'Controlador';
