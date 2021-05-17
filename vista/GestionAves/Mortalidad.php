@@ -10,8 +10,8 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-lg-5 mb-3 mb-lg-0 ">
-						<div class="input-group input-group-sm mb-2">
+					<div class="col-lg-5 mb-3 mb-lg-0 d-flex align-items-center">
+						<div class="input-group input-group-sm mb-2 ">
 						  	<div class="input-group-prepend">
 						    	<label for="idGalponEnLote" class="input-group-text">
 						    		Galpón en Lote
@@ -24,6 +24,8 @@
 								<option value="4">4</option>
 								<option value="5">5</option>
 							</select>
+							<button type="button" class="btn btn-primary text-white  btn-block font-weight-bold" data-dismiss="modal">Guardar</button>
+							<button type="button" class="btn btn-danger btn-block font-weight-bold">Cancelar</button>
 						</div>
 						<div class="input-group input-group-sm mb-2">
 						  <div class="input-group-prepend">
@@ -38,7 +40,7 @@
 						  <input type="number" class="form-control" id="fechaMortalidad" name="fechaMortalidad">
 						</div>
 					</div>
-					<div class="col-lg-7">
+					<div class="col-lg-7 table-scrolly">
 						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center">
 							<thead class="table-info" >
 								<th>Fecha</th>
@@ -61,14 +63,106 @@
 										</button>
 									</td>
 								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>
+										<button class="btn btn-info rounded-circle btn-sm">
+											<i class="fas fa-pen-fancy"></i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>
+										<button class="btn btn-info rounded-circle btn-sm">
+											<i class="fas fa-pen-fancy"></i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>
+										<button class="btn btn-info rounded-circle btn-sm">
+											<i class="fas fa-pen-fancy"></i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>
+										<button class="btn btn-info rounded-circle btn-sm">
+											<i class="fas fa-pen-fancy"></i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>
+										<button class="btn btn-info rounded-circle btn-sm">
+											<i class="fas fa-pen-fancy"></i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>
+										<button class="btn btn-info rounded-circle btn-sm">
+											<i class="fas fa-pen-fancy"></i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>
+										<button class="btn btn-info rounded-circle btn-sm">
+											<i class="fas fa-pen-fancy"></i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>
+										<button class="btn btn-info rounded-circle btn-sm">
+											<i class="fas fa-pen-fancy"></i>
+										</button>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-				<button type="button" class="btn btn-danger">Cancelar</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->

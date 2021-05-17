@@ -260,6 +260,11 @@ tr td input {
     font-weight: 600;
 }
 
+.table-scrolly{
+    max-height: 20em;
+    overflow-y: scroll;
+}
+
 .dataTables_wrapper label {
     font-weight: 600 !important;
 }
