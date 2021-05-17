@@ -23,14 +23,8 @@ $menuItems = [#'Recogida'		=> 'Recogida',
 																'Produccion' => 'Produccion']
 							];
 
-
-
-
-
 define('MENUITEMS', $menuItems);
-/**
- * ROUTER
- */
+$controlador = isset($_GET['c'], $_SESSION['nombreUsuario']) ? $_GET['c'] : 'Login';
 $controlador = isset($_GET['c']) ? $_GET['c'] : 'Login';
 $metodo		 = isset($_GET['m']) ? $_REQUEST['m'] : 'index';
 define('CONTROLADOR', $controlador);

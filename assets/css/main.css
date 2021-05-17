@@ -125,14 +125,14 @@ min-height: 100vh;
     animation-delay: 4s;
 
 }
-burbuja:nth-child(5){
+.burbuja:nth-child(5){
     width: 70px;
     height: 70px;
     left: 15%;
     animation-duration: 2s;
     animation-delay: 3s;
 }
-burbuja:nth-child(6){
+.burbuja:nth-child(6){
     width: 80px;
     height: 80px;
     left: 5%;
@@ -160,7 +160,7 @@ burbuja:nth-child(6){
 ----------------------------------------------------- */
 .cir {
     border-radius: 60px;
-    width: 10em;
+    height: 10em;
 }
 .btn-group .btn {
 	padding: 0 .4em;
@@ -232,7 +232,7 @@ tbody tr td .btn-group {
 }
 tbody tr {
     margin: 0;
-    padding: 0;
+    padding: 0;}
 /*}
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: #c4c4c4 ;
@@ -448,3 +448,9 @@ a.article:hover {
     right: -0.3em;
     filter: brightness(0.85);
 }
+.modales{
+    background: rgba(248, 249, 250,0.6);
+}
+/*.tablaProduccion th, .tablaProduccion td {
+    width: 3em;
+}*/
