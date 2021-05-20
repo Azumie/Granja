@@ -14,15 +14,22 @@
     z-index: -1;
 }
 
-.btn-secondary {
+.btn {
+    font-weight: 700;
+}
+
+.btn-secondary, .btn-warning, .btn-primary {
     color: white;
 }
 
-.btn-warning {
+.btn-secondary:hover, .btn-warning:hover, .btn-primary:hover {
     color: white;
 }
 
-.btn-warning:hover {
+.btn-secondary:active, .btn-warning:active, .btn-primary:active {
+    color: white !important;
+}
+.btn-secondary:focus, .btn-warning:focus, .btn-primary:focus {
     color: white;
 }
 
