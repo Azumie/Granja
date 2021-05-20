@@ -5,7 +5,7 @@ class LoteControlador
 	
 	function __construct()	{}
 	function index(){
-		$vistas = ['InicioLote'];
+		$vistas = ['InicioLote', 'LineaGenetica', 'NuevoLote', 'Galponeros'];
 		require_once 'vista/includes/layout.php';
 	}
 }

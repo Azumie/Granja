@@ -2,11 +2,12 @@
 	<div class="modal-dialog modal-fluid" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				<div class="row "style="position: relative; top: -2em;">
-					<div class="col-auto d-flex bg-primary p-2 shadow rounded ml-3">
+
+				<div class="row iconosModales">
+					<div class="col-auto bg-warning p-2 icono">
 						<img src="https://image.flaticon.com/icons/png/128/1979/1979819.png" height="40px" class="align-self-center">
 					</div>
-					<div class="col-9 col-md-10 text-dark"><h4 class="mt-3 ml-2">Mortalidad</h4></div>
+					<div class="col-9 col-md-10 text-dark"><h4 class="mt-3">Mortalidad</h4></div>
 					<button type="button" class="close ml-3 ml-md-5 mt-4" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true" class="white-text">&times;</span>
 					</button>
@@ -40,8 +41,10 @@
 						  </div>
 						  <input type="number" class="form-control" id="GallinaMortalidad" name="GallinaMortalidad">
 						</div>
-						<button type="button" class="btn btn-info text-white  btn-block font-weight-bold" data-dismiss="modal">Guardar</button>
-						<button type="button" class="btn btn-outline-danger btn-block font-weight-bold">Cancelar</button>
+						<div class="row justify-content-center d-flex">
+							<button class="btn btn-primary btn-sm col-5 form-control text-white"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
+							<button class="btn btn-outline-danger btn-sm col-5 form-control ml-4"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+						</div>
 					</form>
 					<div class="col-lg-7 table-scrolly">
 						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center">
@@ -50,10 +53,9 @@
 								<th>Galpón en lote</th>
 								<th>Alimento</th>
 								<th>Cantidad</th>
-								<th>Editar</th>
+								<th>Acción</th>
 							</thead>
-							<tbody>
-
+							<tbody class="table-light">
 								<tr>
 									<td></td>
 									<td></td>
@@ -61,9 +63,16 @@
 									<td></td>
 									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
 									<td>
-										<button class="btn btn-info rounded-circle btn-sm">
-											<i class="fas fa-pen-fancy"></i>
-										</button>
+										<button class="btn btn-info rounded-circle btn-sm icono"><i class="fas fa-pen-fancy"></i></button>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>
+										<button class="btn btn-info rounded-circle btn-sm icono"><i class="fas fa-pen-fancy"></i></button>
 									</td>
 								</tr>
 								<tr>
