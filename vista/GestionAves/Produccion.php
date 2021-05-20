@@ -1,14 +1,9 @@
-<style>
-/*.tablaProduccion th, .tablaProduccion td {
-    width: 11em;
-}*/
-</style>
 <div class="modal fade" id="Produccion">
 	<div class="modal-dialog modal-fluid" role="document">
-		<div class="modal-content modales">
-			<div class="modal-body modales">
-				<div class="row "style="position: relative; top: -2em;">
-					<div class="col-auto d-flex amarillo p-2" style=" border-radius: 5px; left:1em">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="row iconosModales">
+					<div class="col-auto d-flex gb-warning p-2 icono">
 						<img src="https://image.flaticon.com/icons/png/128/1979/1979819.png" height="40px" class="align-self-center">
 					</div>
 					<div class="col-9 col-md-10 text-dark"><h4 class="mt-3 ml-2">Producción</h4></div>
@@ -34,7 +29,8 @@
 						  </div>
 						  <input type="date" class="form-control" id="fechaProduccion" name="fechaProduccion">
 						</div>
-						<table class="table table-responsive p-0 table-sm text-center col-12 tablaProduccion">
+
+						<table class="table table-responsive p-0 table-sm text-center col-12">
 							<thead class="table-info" >
 								<th>Grandes</th>
 								<th>Medianos</th>
@@ -58,6 +54,11 @@
 								</tr>
 							</tbody>
 						</table>
+						<div class="row justify-content-center d-flex">
+							<button class="btn btn-primary btn-sm col-5 form-control text-white"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
+							<button class="btn btn-outline-danger btn-sm col-5 form-control ml-4"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+						</div>
+
 					</div>
 					<div class="col-6">
 						<table class="table table-sm text-center">
@@ -72,15 +73,16 @@
 									<td>a</td>
 									<td>s</td>
 								</tr>
+								<tr>
+									<td>h</td>
+									<td>a</td>
+									<td>s</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="justify-content-center">
-			<button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-			<button type="button" class="btn btn-danger">Cancelar</button>
 		</div>
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

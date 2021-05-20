@@ -20,7 +20,8 @@ $menuItems = [#'Recogida'		=> 'Recogida',
 							'Usuarios'		=> 'Usuarios',
 							'Reportes'		=> ['Alimentacion' => 'Alimentaciónn',
 																'Mortalidad' => 'Mortalidad',
-																'Produccion' => 'Produccion']
+																'Produccion' => 'Produccion'],
+							'Lote' => 'Lotes'
 							];
 
 define('MENUITEMS', $menuItems);
