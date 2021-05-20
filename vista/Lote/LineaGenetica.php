@@ -1,16 +1,17 @@
 <div class="modal fade" id="LineaGenetica">
 	<div class="modal-dialog modal-fluid" role="document">
 		<div class="modal-content">
-			<div class="modal-body">
-				<div class="row iconosModales">
-					<div class="col-auto d-flex bg-warning p-2 icono">
-						<img src="assets/img/aves-de-corral(1).svg" height="40px" class="align-self-center">
-					</div>
-					<div class="col-9 col-md-10 text-dark"><h4 class="mt-3 ml-2">Líneas Genéticas</h4></div>
-					<button type="button" class="close ml-3 ml-md-5 mt-4" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true" class="white-text">&times;</span>
-					</button>
+			<div class="modal-header iconosModales mt-2 mt-md-0">
+				<div class="col-auto bg-warning p-2 icono">
+					<img src="assets/img/transportador.svg" height="40px" class="align-self-center">
 				</div>
+				<h4 class="modal-title mt-3 ml-2">Galponeros</h4>
+				<button type="button" class="close mt-2" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body">
 				<div class="row">
 					<div class="col-6">
 						<div class="input-group input-group-sm mb-2">

@@ -1,94 +1,109 @@
 <div class="modal fade" id="Galponeros">
 	<div class="modal-dialog modal-fluid" role="document">
 		<div class="modal-content">
-			<div class="modal-body">
-				<div class="row iconosModales">
-					<div class="col-auto d-flex bg-warning p-2 icono">
-						<img src="assets/img/aves-de-corral(1).svg" height="40px" class="align-self-center">
-					</div>
-					<div class="col-9 col-md-10 text-dark"><h4 class="mt-3 ml-2">Nuevo Lote</h4></div>
-					<button type="button" class="close ml-3 ml-md-5 mt-4" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true" class="white-text">&times;</span>
-					</button>
+			<div class="modal-header iconosModales mt-2 mt-md-0">
+				<div class="col-auto bg-warning p-2 icono">
+					<img src="assets/img/empleados.svg" height="40px" class="align-self-center">
 				</div>
+				<h4 class="modal-title mt-3 ml-2">Galponeros</h4>
+				<button type="button" class="close mt-2" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body">
 				<div class="row">
-					<div class="col-6">
-						<div class="input-group input-group-sm mb-2">
-							<div class="input-group-prepend">
-								<label class="input-group-text">Línea Genética</label>
-							</div>
-							<select class="form-control">
-								<option disabled selected>Escoge la Línea Genética</option>
-							</select>
-						</div>
+					<div class="col-lg-5 mb-3 mb-lg-0 ">
+						<!-- DOCUMENTO -->
 						<div class="row">
-							<div class="input-group input-group-sm mb-2 col-5">
+							
+							<div class="input-group input-group-sm mb-3 col-md-10">
 								<div class="input-group-prepend">
-									<label class="input-group-text">Lote</label>
+									<label for="idGalponero" class="input-group-text">
+										Documento
+									</label>
 								</div>
-								<input type="number" name="loteNuevoLote" placeholder="Número del lote">
+								<select id='nacionalidadGalponero' name="nacionalidadGalponero" class="form-control" style="max-width: 25%">
+									<option>V</option>
+									<option>R</option>
+								</select>
+								<input type="text" name="idGalponero" id="idGalponero" class="form-control">
 							</div>
-							<div class="input-group input-group-sm mb-2 col-5">
-								<div class="input-group-prepend">
-									<label class="input-group-text">N° Gallinas</label>
-								</div>
-								<input type="number" name="GallinasNuevoLote">
+							<div class="form-check col-md-2 mt-1">
+								<input class="form-check-input" type="checkbox" id="activo" name="activo">
+								<label class="form-check-label mb-1" for="activo">
+									Activo
+								</label>
 							</div>
 						</div>
-						<div class="input-group input-group-sm mb-2">
+						<!-- NOMBRES Galponero -->
+						<div class="input-group mb-3 input-group-sm">
 							<div class="input-group-prepend">
-								<label class="input-group-text">Galpón</label>
+								<label for="nombresGalponero" class="input-group-text">
+									Nombres
+								</label>
 							</div>
-							<select class="form-control">
-								<option disabled select>Escoge el galpón deseado</option>
-							</select>
+							<input type="text" name="nombresGalponero" id="nombresGalponero" class="form-control" placeholder="Nombres del galponero">
 						</div>
-						<div class="input-group input-group-sm mb-2">
+						<!-- APELLIDOS Galponero -->
+						<div class="input-group mb-3 ">
 							<div class="input-group-prepend">
-								<label class="input-group-text">Fecha Inicio</label>
+								<label for="apellidosGalponero" class="input-group-text">
+									Apellidos
+								</label>
 							</div>
-							<input type="date" name="fechaInicioNuevoLote">
+							<input type="text" name="apellidosGalponero" id="apellidosGalponero" class="form-control">
 						</div>
-						<h5>Características de la línea genética</h5>
-						<table class="table table-responsive p-0 table-sm text-center col-12">
-							<thead class="table-info" >
-								<th>N° Galpón</th>
-								<th>N° Gallinas</th>
-								<th>Borrar</th>
-							</thead>
-							<tbody class="table-light">
-								<tr>
-									<td><input type="number" id="Mortalidad" name="Mortalidad"></td>
-									<td><input type="number" id="pMortalidad" name="pMortalidad"></td>
-									<td><input type="number" id="Produccion" name="Produccion"></td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="row justify-content-center d-flex">
-							<button class="btn btn-primary btn-sm col-5 form-control text-white"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-5 form-control ml-4"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+						<!-- TELEFONO	 -->
+						<div class="input-group mb-3 ">
+							<div class="input-group-prepend">
+								<label for="telefono" class="input-group-text">
+									Telefono
+								</label>
+							</div>
+							<input type="text" name="telefono" id="telefono" class="form-control">
 						</div>
+						<!-- EMAIL -->
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label for="emal" class="input-group-text">
+									Email
+								</label>
+							</div>
+							<input class="form-control" type="email" id="emal" name="emal"></input>
+						</div>
+						<!-- BOTONES GUARDAR Y CANCELAR -->
+						<button type="button" class="btn btn-primary text-white  btn-block font-weight-bold mt-4" data-dismiss="modal">Guardar</button>
+						<button type="button" class="btn btn-outline-danger btn-block font-weight-bold">Cancelar</button>
 					</div>
-					<div class="col-6">
-						<table class="table table-sm text-center">
-							<thead class="table-info">
-								<th>Nombre</th>
-								<th>Acción</th>
+					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
+					<div class="col-lg-7">
+						<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
+							<thead class="table-info" >
+								<th>Documento</th>
+								<th>Nombres</th>
+								<th>Apellidos</th>
+								<th>Activo</th>
+								<th>Editar</th>
 							</thead>
-							<tbody class="table-light">
+							<tbody>
 								<tr>
-									<td>h</td>
-									<td><button class="btn btn-info btn-sm rounded-circle botonesModales" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button></td>
-								</tr>
-								<tr>
-									<td>a</td>
-									<td><button class="btn btn-info btn-sm rounded-circle botonesModales" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>
+										<span class="badge badge-info">Activo</span>
+									</td>
+									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>
+										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
+									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
+			</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
 		</div>
-		</div><!-- /.modal-dialog -->
-	</div>
