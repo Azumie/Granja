@@ -11,16 +11,15 @@ function autoload($clase){
 	}
 }
 spl_autoload_register('autoload');
-$menuItems = [#'Recogida'		=> 'Recogida',
+$menuItems = [
 							'Galpon'			=> 'Galpón',
 							'GestionAves' => 'Gestion de aves',
-							#'Lote'				=> 'Lotes',
 							'InventarioGeneral' => 'Inventario General',
 							'Responsables' => 'Responsables',
 							'Usuarios'		=> 'Usuarios',
-							'Reportes'		=> ['Alimentacion' => 'Alimentaciónn',
+							'Reportes'		=> ['Alimentacion' => 'Alimentación',
 																'Mortalidad' => 'Mortalidad',
-																'Produccion' => 'Produccion'],
+																'Produccion' => 'Producción'],
 							'Lote' => 'Lotes'
 							];
 

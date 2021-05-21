@@ -13,7 +13,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-6">
+					<div class="col-md-6">
 						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
 								<label class="input-group-text">Línea Genética</label>
@@ -23,13 +23,13 @@
 							</select>
 						</div>
 						<div class="row">
-							<div class="input-group input-group-sm mb-2 col-6">
+							<div class="input-group input-group-sm mb-2 col-md-6">
 								<div class="input-group-prepend">
 									<label class="input-group-text">Lote</label>
 								</div>
 								<input type="number" name="loteNuevoLote" placeholder="Número del lote" class="form-control">
 							</div>
-							<div class="input-group input-group-sm mb-2 col-6">
+							<div class="input-group input-group-sm mb-2 col-md-6">
 								<div class="input-group-prepend">
 									<label class="input-group-text">N° Gallinas</label>
 								</div>
@@ -37,7 +37,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="input-group input-group-sm mb-2 col-5">
+							<div class="input-group input-group-sm mb-2 col-md-5">
 								<div class="input-group-prepend">
 									<label class="input-group-text">Galpón</label>
 								</div>
@@ -45,7 +45,7 @@
 									<option disabled selected>Escoge el galpón deseado</option>
 								</select>
 							</div>
-							<div class="input-group input-group-sm mb-2 col-7">
+							<div class="input-group input-group-sm mb-2 col-md-7">
 								<div class="input-group-prepend">
 									<label class="input-group-text">Fecha Inicio</label>
 								</div>
@@ -66,6 +66,17 @@
 									<td><input type="number" id="Produccion" name="Produccion"></td>
 								</tr>
 							</tbody>
+						</table>
+						<div class="row justify-content-center d-flex">
+							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<table class="table table-sm table-striped">
+							<thead>
+								
+							</thead>
 						</table>
 					</div>
 				</div>

@@ -13,8 +13,9 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<form method="POST" action="#" class="col-lg-5 mb-3 mb-lg-0 align-self-center h-100">
-						<div class="input-group mb-2 ">
+					<form method="POST" action="#" class="col-lg-5 mb-3 mb-lg-0 align-self-center h-50">
+						<h6>A continuación... <br> Ingrese la información de la <em>mortalidad</em> de las gallinas:</h6>
+						<div class="input-group input-group-sm mb-2 ">
 							<div class="input-group-prepend">
 								<label for="idGalponEnLote" class="input-group-text">
 									Galpón en Lote
@@ -28,13 +29,13 @@
 								<option value="5">5</option>
 							</select>
 						</div>
-						<div class="input-group mb-2">
+						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
 								<label for="fechaMortalidad" class="input-group-text">Fecha</label>
 							</div>
 							<input type="date" class="form-control" id="fechaMortalidad" name="fechaMortalidad">
 						</div>
-						<div class="input-group mb-2">
+						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
 								<label for="fechaMortalidad" class="input-group-text">Gallinas</label>
 							</div>

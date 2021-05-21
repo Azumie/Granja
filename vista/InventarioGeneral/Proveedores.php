@@ -1,11 +1,14 @@
 <div class="modal fade" id="Proveedores">
 	<div class="modal-dialog modal-fluid" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">Proveedores</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					<span class="sr-only">Close</span>
+			<div class="modal-header iconosModales mt-2 mt-md-0">
+				<div class="col-auto bg-warning p-2 icono">
+					<img src="assets/img/equipo.svg" height="40px" class="align-self-center">
+				</div>
+				<h4 class="modal-title mt-3 ml-2">Proveedores</h4>
+				<button type="button" class="close mt-2" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				<span class="sr-only">Close</span>
 				</button>
 			</div>
 			<div class="modal-body">
@@ -81,9 +84,10 @@
 						</div>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
-
-						<button type="button" class="btn btn-primary text-white  btn-block font-weight-bold mt-4" data-dismiss="modal">Guardar</button>
-						<button type="button" class="btn btn-outline-danger btn-block font-weight-bold">Cancelar</button>
+						<div class="row justify-content-center d-flex">
+							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+						</div>
 					</div>
 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
