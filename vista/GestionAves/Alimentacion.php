@@ -3,7 +3,7 @@
 		<div class="modal-content">
 			<div class="modal-header iconosModales mt-2 mt-md-0">
 				<div class="col-auto bg-warning p-2 icono">
-					<img src="https://www.flaticon.es/icono-premium/proteina-en-polvo_1764252?related_id=1764252" height="40px" class="align-self-center">
+					<img src="https://image.flaticon.com/icons/png/128/3363/3363571.png" height="40px" class="align-self-center">
 				</div>
 				<h4 class="modal-title mt-3 ml-2">Alimentación</h4>
 				<button type="button" class="close mt-2" data-dismiss="modal" aria-label="Close">
@@ -14,7 +14,8 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-lg-5">
-						<div class="input-group mb-3">
+						<h6>A continuación... <br>Ingrese la información del alimento consumido</h6>
+						<div class="input-group input-group-sm mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">Galpón:</span>
 							</div>
@@ -26,7 +27,7 @@
 								<option value="5">5</option>
 							</select>
 						</div>
-						<div class="input-group mb-3">
+						<div class="input-group input-group-sm mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">Alimento:</span>
 							</div>
@@ -38,7 +39,7 @@
 								<option value="5">5</option>
 							</select>
 						</div>
-						<div class="input-group mb-4">
+						<div class="input-group input-group-sm mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">Cantidad</span>
 							</div>
@@ -47,7 +48,7 @@
 								<span class="input-group-text">Kg</span>
 							</div>
 						</div>
-						<div class="input-group mb-2">
+						<div class="input-group input-group-sm mb-3">
 							<div class="input-group-prepend">
 								<div class="input-group-text">Fecha de alimentación</div>
 							</div>
@@ -59,13 +60,13 @@
 						</div>
 					</div>
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
-							<thead class="bg-warning" >
+						<table class="table table-striped table-responsive-sm p-0 tablas table-sm text-center">
+							<thead class="table-info" >
 								<th>Fecha</th>
-								<th>Galpón en lote</th>
+								<th>Galpón</th>
 								<th>Alimento</th>
 								<th>Cantidad</th>
-								<th>Editar</th>
+								<th>Acción</th>
 							</thead>
 							<tbody>
 								<tr>
@@ -75,7 +76,7 @@
 									<td></td>
 									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
 									<td>
-										<button class="btn btn-danger editarGalpon" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
+										<button class="btn btn-info btn-sm rounded-circle botonesModales editarGalpon" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
 									</td>
 								</tr>
 							</tbody>

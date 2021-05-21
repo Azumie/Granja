@@ -1,7 +1,7 @@
 <div class="card shadow animate__animated  animate__fadeInUp">
 	<div class="card-header d-flex justify-content-between">
 		<div class="d-flex justify-content-between">
-			<img src="https://image.flaticon.com/icons/png/128/3628/3628652.png" height="40px" class="mr-1 bg-warning rounded p-1 float-left icono">
+			<img src="https://img-premium.flaticon.com/png/512/1764/1764252.png" height="40px" class="mr-1 bg-warning rounded p-1 float-left icono">
 			<h3>Lotes</h3>
 		</div>
 		<div class="col-auto btn-group d-flex">

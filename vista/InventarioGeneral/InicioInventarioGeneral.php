@@ -4,7 +4,7 @@
 		<div class="d-flex justify-content-between">
 			<i class="text-white">
 				
-			<img src="https://img-premium.flaticon.com/png/512/2897/2897616.png?token=exp=1621401376~hmac=fbf2b7318feef5c3d838ab7e734a48b9" height="35px" class="mr-1 bg-warning rounded p-1 float-left">
+			<img src="assets/img/inventario.svg" height="35px" class="mr-1 bg-warning rounded p-1 float-left">
 			</i>
 			<h3>Inventario General</h3>
 		</div>

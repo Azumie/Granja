@@ -26,7 +26,7 @@
 						<span class="input-group-text">Fecha Creación</span>
 					</div>
 					<input type="date" class="form-control">
-				</div>				
+				</div>
 				<div class="row">
 					<div class="col-12 col-md-6">
 						<div class="input-group input-group-sm mb-4">
@@ -44,7 +44,7 @@
 							<input type="number" class="form-control" placeholder="Área útil del galpón">
 						</div>
 					</div>
-				</div>				
+				</div>
 				<div class="input-group input-group-sm mb-4 col-12 col-md-10">
 					<div class="input-group-prepend">
 						<div class="input-group-text">Confinamiento</div>
@@ -54,8 +54,8 @@
 					</select>
 				</div>
 				<div class="row justify-content-center d-flex">
-					<button class="btn btn-primary btn-sm col-4 form-control text-white"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-					<button class="btn btn-outline-danger btn-sm col-4 form-control ml-4"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+					<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
+					<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 				</div>
 			</div>
 			<div class="col-12 col-md-6 table-scrolly">
@@ -78,7 +78,7 @@
 							<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
 							<td>
 								<button class="btn btn-info rounded-circle btn-sm botonesModales" data-toggle="modal" data-target='#editarGalpon'>
-									<i class="fas fa-pen-fancy"></i>
+								<i class="fas fa-pen-fancy"></i>
 								</button>
 							</td>
 						</tr>
