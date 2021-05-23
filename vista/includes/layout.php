@@ -106,24 +106,9 @@
 		<script type="text/javascript" src="assets/js/chartist.min.js"></script>
 		<!-- CAMBIO AQUIIIIIII -->
 		<!-- <script type="text/javascript" src="assets/js/moment.min.js"></script> -->
-		<script type="text/javascript">
-			document.addEventListener('DOMContentLoaded', () => {
-        new Chartist.Line('.contenedor-grafico', {
-          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          series: [
-            [12, 9, 7, 8, 5],
-            [2, 1, 3.5, 7, 3],
-            [1, 3, 4, 5, 6]
-          ]
-        }, {
-          fullWidth: true,
-          chartPadding: {
-            right: 40
-          }
-        });
-
-      });
+		<script type="module" src="assets/js/main.js">
+			
 		</script>
 
 	</body>
-</html>
+</html>	

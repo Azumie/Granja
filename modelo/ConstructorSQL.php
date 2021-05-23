@@ -18,8 +18,8 @@ class ConstructorSQL {
 		$valores     = []; 
 		foreach ($datos as $valor) array_push($valores, '?');
 		$valores     = implode(', ', array_values($valores));
-		$valores     = "VALUES ($valores)";
-		$this->sql   = "INSERT INTO $tabla $campos $valores";
+		$valores     = "( $valores )";
+		$this->sql   = "INSERT INTO $tabla $campos VALUES $valores";
 		$this->datos = array_values($datos);
 		$this->tipo  = 'insertGetId';
 		return $this;
@@ -83,7 +83,7 @@ class ConstructorSQL {
 		return call_user_func( [$pdo, $this->tipo], $this->sql, $this->datos);
 	}
 
-	public function toString(){
+	public function getSql(){
 		return $this->sql;
 	}
 
