@@ -106,6 +106,7 @@
 		<script type="text/javascript" src="assets/js/chartist.min.js"></script>
 		<!-- CAMBIO AQUIIIIIII -->
 		<!-- <script type="text/javascript" src="assets/js/moment.min.js"></script> -->
+
 		<script type="text/javascript">
 			document.addEventListener('DOMContentLoaded', () => {
         new Chartist.Line('.contenedor-grafico', {
@@ -126,4 +127,4 @@
 		</script>
 
 	</body>
-</html>
+</html>	
