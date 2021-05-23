@@ -13,6 +13,8 @@
 		<link rel="shortcut icon" href="assets/img/EggL.png">
 		<!-- Am¿nimate css -->
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+		<!-- chartist js -->
+		<link rel="stylesheet" type="text/css" href="assets/css/chartist.min.css">
 		<link rel="stylesheet" href="assets/css/main.css">
 	</head>
 	<body>
@@ -96,13 +98,32 @@
 		<!-- Bootstrap core JavaScript -->
 		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 		<!-- DataTable core JavaScript -->
-		<script type="text/javascript" src="assets/js/Datatable.min.js"></script>
-		<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script>
+<!-- 		<script type="text/javascript" src="assets/js/Datatable.min.js"></script>
+		<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script> -->
 		<!-- JSPDF core JavaScript -->
-		<script type="text/javascript" src="assets/js/html2pdf.bundle.min.js"></script>
+		<!-- <script type="text/javascript" src="assets/js/html2pdf.bundle.min.js"></script> -->
 		<!-- CHARTjs core JavaScript -->
-		<script type="text/javascript" src="assets/js/Chart.min.js"></script>
+		<script type="text/javascript" src="assets/js/chartist.min.js"></script>
 		<!-- CAMBIO AQUIIIIIII -->
-		<script type="text/javascript" src="assets/js/moment.min.js"></script>
+		<!-- <script type="text/javascript" src="assets/js/moment.min.js"></script> -->
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', () => {
+        new Chartist.Line('.contenedor-grafico', {
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          series: [
+            [12, 9, 7, 8, 5],
+            [2, 1, 3.5, 7, 3],
+            [1, 3, 4, 5, 6]
+          ]
+        }, {
+          fullWidth: true,
+          chartPadding: {
+            right: 40
+          }
+        });
+
+      });
+		</script>
+
 	</body>
 </html>
