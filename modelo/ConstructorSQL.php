@@ -13,7 +13,7 @@ class ConstructorSQL {
 	function __construct() {}
 
 	public function insert($tabla, array $datos = [] ){
-		$campos      = implode(', ', array_keys($datos));
+		$campos      = implode(', ', array_keys($datos));//agarra los títulos del campo del array
 		$campos      = "( $campos )";
 		$valores     = []; 
 		foreach ($datos as $valor) array_push($valores, '?');
