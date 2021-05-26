@@ -24,15 +24,28 @@ class ConfiguracionControlador
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Operacion Exitosa');
 			} catch (PDOException $e) {
-				echo json_encode('Operacion Exitosa');
+				echo json_encode('Operacion Fallida');
 			}
 		}
 	}
 
 	public function obtenerGranjas () {
 		$granjas = $this->constructorSQL->select('granjas')->ejecutarSQL();
-		$granjas = json_encode($granjas);
-		echo $granjas;
+		echo json_encode($granjas);
+	}
+
+	public function editarGranja () {
+		if (isset($_POST['nombreGranja'], $_POST['ubicacionGranja'], $_POST['idGranja'])) {
+			try {
+				$this->constructorSQL->update('granjas', ['nombreGranja' => $_POST['nombreGranja'],
+																									'ubicacion'		 => $_POST['ubicacionGranja']]);
+				$this->constructorSQL->where('idGranja', '=', $_POST['idGranja']);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Operacion Exitosa');
+			} catch (PDOException $e) {
+				echo json_encode($e->getMessage());
+			}
+		}
 	}
 
 }
