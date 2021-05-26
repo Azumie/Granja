@@ -19,7 +19,7 @@
 				
 					<div class="modal-body">
 						<div class="row">
-							<div class="col-md-6">
+							<form id="formAgregarGranja" class="col-md-6">
 
 								<!-- NOMBRE GRANJA -->
 
@@ -37,23 +37,22 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text text-white">Ubicación</span>
 									</div>
-									<textarea class="form-control" id="ubicacionGranja" name="ubucacionGranja" placeholder="Ubicacion de la Granja">
-									</textarea>
+									<textarea class="form-control" id="ubicacionGranja" name="ubicacionGranja"></textarea>
 								</div>
 									
 
 								<!-- BOTONES - AGREGAR Y CANCELAR -->
 
-								<button type="button" class="btn btn-primary text-white  btn-block mt-4" data-dismiss="modal">Guardar</button>
-								<button type="button" class="btn btn-outline-danger btn-block">Cancelar</button>
+								<button class="btn btn-primary text-white  btn-block mt-4">Guardar</button>
+								<button type="button" class="btn btn-outline-danger btn-block" data-dismiss="modal">Cancelar</button>
 
-							</div>
+							</form>
 
 
 						
 						
 							<div class="col-6">
-								<table class="table table-striped table-responsive-md table-sm">
+								<table id="tablaGranjas" class="table table-striped table-responsive-md table-sm">
 									<thead class="table-info">
 										<th>Nombre Granja</th>
 										<th>Ubicacion</th>
