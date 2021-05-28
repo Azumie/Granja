@@ -19,27 +19,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // AGREGAR GRANJA
+  // AGREGAR/EDITAR GRANJA
 
-  const formAgregarGranja = document.getElementById('formAgregarGranja');
+  const formGranja = document.getElementById('formGranja');
 
-  formAgregarGranja.addEventListener('submit', (e) =>{
+  formGranja.addEventListener('submit', (e) =>{
     e.preventDefault();
-    const datosAgregarGranja = new FormData(formAgregarGranja);
+    const datosAgregarGranja = new FormData(formGranja);
 
-    fetch('?c=Configuracion&m=agregarGranja', {
+    let metodo = elementoExiste('idGranja') ? 'editarGranja' : 'agregarGranja';
+
+    fetch(`?c=Configuracion&m=${metodo}`, {
       method: 'POST',
       body: datosAgregarGranja
     })
     .then(resp => resp.json())
     .then(datos => {
       obtenerGranjas();
-      formAgregarGranja.reset();
+      formGranja.reset();
+      if (elementoExiste('idGranja')) {
+        document.getElementById('idGranja').remove();
+        document.getElementById('estadoFormGranja').innerText = 'Agregando...'
+      }
     });
 
   });
 
-  // EDITAR GRANJA
+  // EDITAR - CARGAR DATA EN EL FORMULARIO
 
   let tablaGranjas = document.getElementById('tablaGranjas');
 
@@ -48,8 +54,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (target.tagName === 'BUTTON') {
       // target.attributes
       let idGranja = target.getAttribute('idGranja');
-      console.log(idGranja);
-      console.log(granjas);
+      granjas.forEach(granja => {
+        if (granja.idGranja === idGranja) {
+
+          if (elementoExiste('idGranja')) {
+            document.getElementById('idGranja').value = idGranja;
+          }else {
+            let inputIdGranja = document.createElement('input');
+            inputIdGranja.id = 'idGranja';
+            inputIdGranja.name = 'idGranja';
+            inputIdGranja.type = 'hidden';
+            inputIdGranja.value = idGranja;
+            formGranja.appendChild(inputIdGranja);
+          }
+
+          document.getElementById('nombreGranja').value = granja.nombreGranja;
+          document.getElementById('ubicacionGranja').value = granja.ubicacion;
+          document.getElementById('estadoFormGranja').innerText = 'Editando...'
+        }
+      });
     }
   });
 
@@ -84,5 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#tablaGranjas tbody').innerHTML = tbody;
     });
   };
+
+  function elementoExiste (elemento) {
+    if (document.getElementById(elemento) === null || document.getElementById(elemento) === undefined) {
+      return false;
+    }else {
+      return true;
+    }
+  }
 
 });

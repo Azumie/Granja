@@ -19,11 +19,13 @@
 				
 					<div class="modal-body">
 						<div class="row">
-							<form id="formAgregarGranja" class="col-md-6">
+							<form id="formGranja" class="col-md-6">
+
+								<span id="estadoFormGranja">Agregando...</span>
 
 								<!-- NOMBRE GRANJA -->
 
-								<div class="input-group form-group">
+								<div class="input-group form-group mt-3">
 									<div class="input-group-prepend">
 										<span class="input-group-text text-white">Nombre</span>
 									</div>

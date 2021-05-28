@@ -39,7 +39,8 @@ class ConstructorSQL {
 	public function where($campo , $signo, $valor){
 		if ($this->where == '') {
 			$this->where = " WHERE $campo $signo ?";
-			$this->datos = [$valor];
+			// $this->datos = [$valor];
+			array_push($this->datos, $valor);
 			$this->sql  .= $this->where;
 		}else {
 			$where        = " AND $campo $signo ?";
@@ -61,13 +62,14 @@ class ConstructorSQL {
 
 	public function update($tabla , array $datos = []){
 		if (!empty($datos)) {
-			$sql = "UPDATE $tabla SET";
+			$sql = "UPDATE $tabla SET ";
 			foreach ($datos as $campo => $valor) {
 				$sql .= "$campo = ? ,";
 			}
-			$this->sql = $sql; 
+			$this->sql = rtrim($sql, ','); 
+			$this->datos = array_values($datos);
+			$this->tipo  = 'consulta';
 		}
-		$this->tipo  = 'consulta';
 	}
 
 	public function delete($tabla , array $datos = []){
