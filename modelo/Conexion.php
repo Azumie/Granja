@@ -5,7 +5,7 @@ class Conexion{
 
 	private $link          = "mysql:host=localhost;dbname=granja;charset=utf8";
 	private $nombreUsuario = 'root';
-	private $clave         = '';
+	private $clave         = '123456';
 	private static $pdo = null;
 
 	function __construct(){}
