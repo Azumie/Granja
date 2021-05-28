@@ -16,14 +16,6 @@
 			<form id="formularioAgregarGalpon">
 				<div class="input-group input-group-sm mb-4 col-12 col-md-10">
 					<div class="input-group-prepend">
-						<span class="input-group-text">Granja</span>
-					</div>
-					<select class="form-control" name="idGranjaGalpon">
-						<option disabled selected>Granja a la que se le agregará el galpón</option>
-					</select>
-				</div>
-				<div class="input-group input-group-sm mb-4 col-12 col-md-10">
-					<div class="input-group-prepend">
 						<span class="input-group-text">Fecha Creación</span>
 					</div>
 					<input type="date" class="form-control" name="fechaGalpon">
@@ -50,7 +42,7 @@
 					<div class="input-group-prepend">
 						<div class="input-group-text">Confinamiento</div>
 					</div>
-					<select name="ConfinamientoGalpon" class="form-control">
+					<select name="ConfinamientoGalpon" id="ConfinamientoGalpon" class="form-control">
 						<option disabled selected>Forma de resguarde</option>
 					</select>
 				</div>
@@ -61,7 +53,7 @@
 			</form>
 			</div>
 			<div class="col-12 col-md-6 table-scrolly">
-				<table class="table table-striped table-responsive-sm p-0 table-sm text-center">
+				<table class="table table-striped table-responsive-sm p-0 table-sm text-center" id="tablaGalpon">
 					<thead class="table-info">
 						<th>Número Galpón</th>
 						<th>Área útil</th>

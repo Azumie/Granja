@@ -2,8 +2,8 @@
 -- sáb 22 may 2021 12:01:56
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
--- create database granja;
--- use granja;	
+create database granja;
+use granja;	
 -- -----------------------------------------------------
 -- Table `granjas`
 -- -----------------------------------------------------
