@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 
-  let tabla;
-  obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacion'], 'idGranja');
+  obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
+
   new Chartist.Line('.contenedor-grafico', {
     labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     series: [
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(resp => resp.json())
     .then(datos => {
-      obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacion'], 'idGranja');
+      obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
       formGranja.reset();
       let mensaje = 'Granja agregada Exitosamente';
       if (elementoExiste('idGranja')) {
