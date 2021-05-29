@@ -197,14 +197,15 @@ min-height: 100vh;
 ----------------------------------------------------- */
 .alertBox {
 	position: absolute;
-    z-index: 999;
+    z-index: 1050;
 	max-width: 40%;
+    max-height: 60%;
 	bottom: 0;
 	right: 0;
-	bottom:0;
+    overflow-y: scroll;
 }
 .alertBox .alert {
-    margin: 1em 2em;
+    margin: .3em;
 }
 /* ---------------------------------------------------
     CARD DARK STYLE

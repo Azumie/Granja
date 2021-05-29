@@ -10,23 +10,33 @@ function elementoExiste (elemento) {
 }
  // OBTENER GRANJAS
 
-  function obtenerGranjas (url,nomtabla,valores, id) {
-    fetch(url).then(resp => resp.json())
+function obtenerGranjas (url,nomtabla,valores, id) {
+	fetch(url).then(resp => resp.json())
     .then(resp => {
     	// console.log(resp);
-		let tbody = '';
-		Object.entries(resp).forEach(([pos]) => {
-			// console.log(resp[pos]);
-			tbody += `<tr>`
-			for (let e = 0; e < valores.length; e++) {
-				console.log(resp[pos][valores[e]]);
-				tbody += `<td>${resp[pos][valores[e]]}</td>`;
-			}
-			tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
-                        <i class="fas fa-pen-fancy"></i></button>`
-			tbody += `</tr>`
-		});
-	    tabla = resp;
+			let tbody = '';
+			Object.entries(resp).forEach(([pos]) => {
+				// console.log(resp[pos]);
+				tbody += `<tr>`
+				for (let e = 0; e < valores.length; e++) {
+					tbody += `<td>${resp[pos][valores[e]]}</td>`;
+				}
+				tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
+	                        <i class="fas fa-pen-fancy"></i></button>`
+				tbody += `</tr>`
+			});
 	    document.querySelector(nomtabla+' tbody').innerHTML = tbody;
-     });
+    });
+}
+
+function alerta (mensaje, color = 'info') {
+	const alertBox = document.getElementById('alertas');
+
+	let alerta = document.createElement('div');
+	alerta.classList.add('alert', `alert-${color}`);
+	alerta.innerHTML = `${mensaje}
+				<button type="button" class="close ml-2" data-dismiss="alert" aria-label="Cerrar">
+					<span aria-hidden="true">&times;</span>
+				</button>`;
+	alertBox.appendChild(alerta);
 }

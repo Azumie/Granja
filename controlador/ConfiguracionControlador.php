@@ -30,7 +30,11 @@ class ConfiguracionControlador
 	}
 
 	public function obtenerGranjas () {
-		$granjas = $this->constructorSQL->select('granjas')->ejecutarSQL();
+		$this->constructorSQL->select('granjas');
+		if (isset($_GET['idGranja'])) {
+			$this->constructorSQL->where('idGranja', '=', $_GET['idGranja']);
+		}
+		$granjas = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($granjas);
 	}
 

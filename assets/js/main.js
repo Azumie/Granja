@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-      obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacion'], 'idGranja');
-  // let granjas = [];
+
+  let tabla;
+  obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacion'], 'idGranja');
   new Chartist.Line('.contenedor-grafico', {
     labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     series: [
@@ -34,10 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(datos => {
       obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacion'], 'idGranja');
       formGranja.reset();
+      let mensaje = 'Granja agregada Exitosamente';
       if (elementoExiste('idGranja')) {
         document.getElementById('idGranja').remove();
         document.getElementById('estadoFormGranja').innerText = 'Agregando...'
+        mensaje = 'Granja editada Exitosamente';
       }
+      alerta(mensaje);
     });
 
   });
@@ -50,25 +54,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
     if (target.tagName === 'BUTTON') {
       // target.attributes
-      let idGranja = target.getAttribute('idGranja');
-      granjas.forEach(granja => {
-        if (granja.idGranja === idGranja) {
-
-          if (elementoExiste('idGranja')) {
-            document.getElementById('idGranja').value = idGranja;
-          }else {
-            let inputIdGranja = document.createElement('input');
-            inputIdGranja.id = 'idGranja';
-            inputIdGranja.name = 'idGranja';
-            inputIdGranja.type = 'hidden';
-            inputIdGranja.value = idGranja;
-            formGranja.appendChild(inputIdGranja);
-          }
-
-          document.getElementById('nombreGranja').value = granja.nombreGranja;
-          document.getElementById('ubicacionGranja').value = granja.ubicacion;
-          document.getElementById('estadoFormGranja').innerText = 'Editando...'
+      let idGranja = target.getAttribute('id');
+      fetch(`?c=Configuracion&m=obtenerGranjas&idGranja=${idGranja}`)
+      .then(resp => resp.json())
+      .then(resp => {
+        resp = resp[0];
+        if (elementoExiste('idGranja')) {
+          document.getElementById('idGranja').value = idGranja;
+        }else {
+          let inputIdGranja = document.createElement('input');
+          inputIdGranja.id = 'idGranja';
+          inputIdGranja.name = 'idGranja';
+          inputIdGranja.type = 'hidden';
+          inputIdGranja.value = idGranja;
+          formGranja.appendChild(inputIdGranja);
         }
+
+        document.getElementById('nombreGranja').value = resp.nombreGranja;
+        document.getElementById('ubicacionGranja').value = resp.ubicacion;
+        document.getElementById('estadoFormGranja').innerText = 'Editando...'
       });
     }
   });

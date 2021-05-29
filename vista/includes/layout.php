@@ -91,6 +91,10 @@
 				</div>
 			</div>
 		</div>
+
+		<div id="alertas" class="alertBox d-flex flex-column-reverse mb-2 mr-2">
+	
+		</div>
 		<!-- jQuery -->
 		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
 		<!-- Bootstrap tooltips -->
