@@ -20,7 +20,7 @@ class ConfiguracionControlador
 		if (isset($_POST['nombreGranja'], $_POST['ubicacionGranja'])) {
 			try {
 				$this->constructorSQL->insert('granjas', ['nombreGranja' => $_POST['nombreGranja'],
-																						'ubicacion'		 => $_POST['ubicacionGranja']]);
+				'ubicacionGranja'		 => $_POST['ubicacionGranja']]);
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Operacion Exitosa');
 			} catch (PDOException $e) {

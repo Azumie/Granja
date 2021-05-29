@@ -18,7 +18,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text">Fecha Creación</span>
 					</div>
-					<input type="date" class="form-control" name="fechaGalpon">
+					<input type="date" class="form-control" name="fechaCreacionGalpon">
 				</div>
 				<div class="row">
 					<div class="col-12 col-md-6">
@@ -26,7 +26,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">Galpón</span>
 							</div>
-							<input type="number" class="form-control" placeholder="Número de Galpón" name="numeroGalpon">
+							<input type="number" class="form-control" placeholder="Número de Galpón" name="numeroGalpon" min="0" max="500">
 						</div>
 					</div>
 					<div class="col-12 col-md-6">
@@ -34,7 +34,7 @@
 							<div class="input-group-prepend">
 								<div class="input-group-text">Área útil</div>
 							</div>
-							<input type="number" class="form-control" placeholder="Área útil del galpón" name="areaUtilGalpon">
+							<input type="number" class="form-control" placeholder="Área útil del galpón" name="areaUtilGalpon" min="100" max="2000" step="0.01">
 						</div>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 						<div class="input-group-text">Confinamiento</div>
 					</div>
 					<select name="ConfinamientoGalpon" id="ConfinamientoGalpon" class="form-control">
-						<option disabled selected>Forma de resguarde</option>
+						<option disabled selected value=''>Forma de resguarde</option>
 					</select>
 				</div>
 				<div class="row justify-content-center d-flex">

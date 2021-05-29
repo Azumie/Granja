@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-      obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacion'], 'idGranja');
+      obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
   // let granjas = [];
   new Chartist.Line('.contenedor-grafico', {
     labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(resp => resp.json())
     .then(datos => {
-      obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacion'], 'idGranja');
+      obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
       formGranja.reset();
       if (elementoExiste('idGranja')) {
         document.getElementById('idGranja').remove();

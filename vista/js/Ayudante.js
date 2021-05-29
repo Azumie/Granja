@@ -13,19 +13,23 @@ function elementoExiste (elemento) {
   function obtenerGranjas (url,nomtabla,valores, id) {
     fetch(url).then(resp => resp.json())
     .then(resp => {
-    	// console.log(resp);
 		let tbody = '';
 		Object.entries(resp).forEach(([pos]) => {
-			// console.log(resp[pos]);
 			tbody += `<tr>`
 			for (let e = 0; e < valores.length; e++) {
-				console.log(resp[pos][valores[e]]);
 				tbody += `<td>${resp[pos][valores[e]]}</td>`;
 			}
 			tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
-                        <i class="fas fa-pen-fancy"></i></button>`
+                        <i class="fas fa-pen-fancy"></i></button></td>`
 			tbody += `</tr>`
 		});
+		for (var i = 0; i < 4; i++) {
+			tbody += `<tr>`
+			for (var e = 0; e <= valores.length; e++) {
+				tbody += `<td></td>`;
+			}
+			tbody += `</tr>`
+		}
 	    tabla = resp;
 	    document.querySelector(nomtabla+' tbody').innerHTML = tbody;
      });
