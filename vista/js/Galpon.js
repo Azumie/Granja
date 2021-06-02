@@ -2,12 +2,7 @@
 if(elementoExiste('formularioAgregarGalpon')){
 	// Rellenando tabla con la información de los Galpones
 	obtenerGranjas('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
-	var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    today = yyyy+'-'+mm+'-'+dd;
-	document.getElementsByName('fechaCreacionGalpon')[0].value= today;
+	document.getElementsByName('fechaCreacionGalpon')[0].value= fechaHoy();
 	// Rellenando Select llamado ConfinamientoGalpon
 	const select = document.getElementById('ConfinamientoGalpon');
 	agregarOption(select, 'P','Piso'); agregarOption(select,'J','Jaula');
@@ -29,18 +24,19 @@ if(elementoExiste('formularioAgregarGalpon')){
 					console.log('pasamos areautil');
 					if (probar == 'P' || probar == 'J') {
 						console.log('pasamos confinamiento');
-						let datos = new FormData(formularioAgregarGalpon);
-						fetch('?c=Galpon&m=agregarGalpon',{
-							method: 'POST',
-							body: datos
-						})
-						.then(res => res.json())
-						.then(res => {
-							console.log(res);
-							formularioAgregarGalpon.reset();
-							obtenerGranjas('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
-							document.getElementsByName('fechaCreacionGalpon')[0].value= today;
-						});
+						agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
+						// let datos = new FormData(formularioAgregarGalpon);
+						// fetch('?c=Galpon&m=agregarGalpon',{
+						// 	method: 'POST',
+						// 	body: datos
+						// })
+						// .then(res => res.json())
+						// .then(res => {
+						// 	console.log(res);
+						// 	formularioAgregarGalpon.reset();
+						// 	obtenerGranjas('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
+						// 	document.getElementsByName('fechaCreacionGalpon')[0].value= today;
+						// });
 					}else alert('Error al escoger el tipo de Confinamiento');
 				}else alert('Error al indicar Área Útil');
 			}else alert('Error en número galpón');

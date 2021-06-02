@@ -12,6 +12,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				<form id="formularioAgregarAlimentacion">
 				<div class="row">
 					<div class="col-lg-5">
 						<h6>A continuación... <br>Ingrese la información del alimento consumido</h6>
@@ -19,12 +20,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">Galpón:</span>
 							</div>
-							<select id="idGalpónEnLote" class="form-control">
-								<option disabled selected>Elige Galpón a alimentar</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
+							<select name="idAlimentandoGalpon" class="form-control">
+								<option disabled selected value=''>Elige Galpón a alimentar</option>
 							</select>
 						</div>
 						<div class="input-group input-group-sm mb-3">
@@ -52,7 +49,7 @@
 							<div class="input-group-prepend">
 								<div class="input-group-text">Fecha de alimentación</div>
 							</div>
-							<input type="date" class="form-control">
+							<input type="date" class="form-control" name="fechaDeAlimentacion">
 						</div>
 						<div class="row justify-content-center d-flex">
 							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
@@ -83,6 +80,7 @@
 						</table>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 		</div><!-- /.modal-content -->

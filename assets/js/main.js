@@ -51,30 +51,33 @@ document.addEventListener('DOMContentLoaded', () => {
   let tablaGranjas = document.getElementById('tablaGranjas');
 
   tablaGranjas.addEventListener('click', (e) => {
-    let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
-    if (target.tagName === 'BUTTON') {
-      // target.attributes
-      let idGranja = target.getAttribute('id');
-      fetch(`?c=Configuracion&m=obtenerGranjas&idGranja=${idGranja}`)
-      .then(resp => resp.json())
-      .then(resp => {
-        resp = resp[0];
-        if (elementoExiste('idGranja')) {
-          document.getElementById('idGranja').value = idGranja;
-        }else {
-          let inputIdGranja = document.createElement('input');
-          inputIdGranja.id = 'idGranja';
-          inputIdGranja.name = 'idGranja';
-          inputIdGranja.type = 'hidden';
-          inputIdGranja.value = idGranja;
-          formGranja.appendChild(inputIdGranja);
-        }
+    console.log(e.target);
+    editarObjetoBD(e, 'obtenerGranjas', 'idGranja', ['nombreGranja', 'ubicacionGranja'], ['nombreGranja', 'ubicacion']);
+    // let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
+    // if (target.tagName === 'BUTTON') {
+    //   // target.attributes
+    //   let idGranja = target.getAttribute('id');
+    //   console.log(idGranja);
+    //   fetch(`?c=Configuracion&m=obtenerGranjas&idGranja=${idGranja}`)
+    //   .then(resp => resp.json())
+    //   .then(resp => {
+    //     resp = resp[0];
+    //     if (elementoExiste('idGranja')) {
+    //       document.getElementById('idGranja').value = idGranja;
+    //     }else {
+    //       let inputIdGranja = document.createElement('input');
+    //       inputIdGranja.id = 'idGranja';
+    //       inputIdGranja.name = 'idGranja';
+    //       inputIdGranja.type = 'hidden';
+    //       inputIdGranja.value = idGranja;
+    //       formGranja.appendChild(inputIdGranja);
+    //     }
 
-        document.getElementById('nombreGranja').value = resp.nombreGranja;
-        document.getElementById('ubicacionGranja').value = resp.ubicacion;
-        document.getElementById('estadoFormGranja').innerText = 'Editando...'
-      });
-    }
+    //     document.getElementById('nombreGranja').value = resp.nombreGranja;
+    //     document.getElementById('ubicacionGranja').value = resp.ubicacion;
+    //     document.getElementById('estadoFormGranja').innerText = 'Editando...'
+    //   });
+    // }
   });
 })
 
