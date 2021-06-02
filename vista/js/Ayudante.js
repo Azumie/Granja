@@ -9,7 +9,6 @@ function elementoExiste (elemento) {
 	elemento.innerHTML += `<option value="${valor}">${texto}</option>`;
 }
  // OBTENER GRANJAS
-
 function obtenerGranjas (url,nomtabla,valores, id) {
 	fetch(url).then(resp => resp.json())
     .then(resp => {
@@ -45,4 +44,61 @@ function alerta (mensaje, color = 'info') {
 					<span aria-hidden="true">&times;</span>
 				</button>`;
 	alertBox.appendChild(alerta);
+}
+
+function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id, fecha = ''){
+	let datos = new FormData(formulario);
+	fetch(url,{
+		method: 'POST',
+		body: datos
+	})
+	.then(res => res.json())
+	.then(res => {
+		console.log(res);
+		formulario.reset();
+		obtenerGranjas(funcion, tabla,infotabla, id);
+		if (fecha =! '') {
+			formulario.fecha.value= fechaHoy();
+		}
+	});
+}
+
+function editarObjetoBD(e, funcion, buscarId, inputs, campo){
+    console.log(e.target.tagName);
+    let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
+    if (target.tagName === 'BUTTON') {
+      // target.attributes
+      let obtenerId = target.getAttribute('id');
+      fetch(`?c=Configuracion&m=${funcion}&${buscarId}=${obtenerId}`)
+      .then(resp => resp.json())
+      .then(resp => {
+        resp = resp[0];
+        if (elementoExiste(buscarId)) {
+          document.getElementById(buscarId).value = obtenerId;
+        }else {
+          let input = document.createElement('input');
+          input.id = buscarId;
+          input.name = buscarId;
+          input.type = 'hidden';
+          input.value = obtenerId;
+          formGranja.appendChild(input);
+        }
+        // for (var i = 0; i < inputs.length -1; i++) {
+        	console.log(resp);
+        	console.log(resp.(campo));
+        	// document.getElementById(inputs[1]).value = resp[campo[1]];
+        // }
+        // document.getElementById(inputs.length-1).innerText = 'Editando...'
+      });
+    }
+}
+
+// Mas no me estás diciendo porque piensas que es  lo correcto.
+function fechaHoy(){
+	let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    today = yyyy+'-'+mm+'-'+dd;
+    return today;
 }

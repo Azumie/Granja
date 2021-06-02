@@ -39,7 +39,8 @@ class GalponControlador{
 		}else echo json_encode('Campos Vacíos');
 	}
 	public function obtenerGalpones(){
-		$galpon = $this->ConstructorSQL->select('galpones')->ejecutarSQL();
+		(isset($_GET['e'])) ? $galpon = 'galpones '.$_GET['e'] : $galpon = 'galpones';
+		$galpon = $this->ConstructorSQL->select($galpon)->ejecutarSQL();
 		echo json_encode($galpon);
 	}
 }
