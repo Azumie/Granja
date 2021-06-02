@@ -5,7 +5,7 @@
 				<div class="col-auto bg-warning p-2 icono">
 					<img src="assets/img/transportador.svg" height="40px" class="align-self-center">
 				</div>
-				<h4 class="modal-title mt-3 ml-2">Producción</h4>
+				<h4 class="modal-title mt-3 ml-2">Tipos de Huevo</h4>
 				<button type="button" class="close mt-2" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				<span class="sr-only">Close</span>
@@ -13,7 +13,9 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-lg-5 mb-3 mb-lg-0 ">
+					<form id="formTiposHuevo" class="col-lg-5 mb-3 mb-lg-0 ">
+
+						<span id="estadoFormTipoHuevo">Agregando...</span>
 
 						<!-- NOMBRE TIPO HUEVO -->
 
@@ -28,47 +30,19 @@
 
 						<!-- BOTONES - AGREGAR Y CANCELAR -->
 
-						<button type="button" class="btn btn-primary text-white  btn-block mt-4" data-dismiss="modal">Guardar</button>
-						<button type="button" class="btn btn-outline-danger btn-block">Cancelar</button>
-					</div>
+						<button class="btn btn-primary btn-block mt-4">Guardar</button>
+						<button type="button" class="btn btn-outline-danger btn-block" data-dismiss="modal">Cancelar</button>
+					</form>
 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
+						<table id="tablaTiposHuevo" class="table table-striped table-responsive-lg p-0 tablas table-sm">
 							<thead class="table-info" >
 								<th>Nombre</th>
 								<th>Editar</th>
 							</thead>
 							<tbody>
-
-								<tr>
-									<td></td>
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-
-								<tr>
-									<td></td>
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-
-								<tr>
-									<td></td>
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-
-								<tr>
-									<td></td>
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
 
 							</tbody>
 						</table>

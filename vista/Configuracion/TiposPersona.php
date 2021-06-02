@@ -13,9 +13,9 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-lg-5 mb-3 mb-lg-0 ">
+					<form id="formTipoPersona" class="col-lg-5 mb-3 mb-lg-0 ">
 
-						<!-- NOMBRE TIPO HUEVO -->
+						<!-- NOMBRE TIPO PERSONA -->
 
 						<div class="input-group mb-3">
 						  	<div class="input-group-prepend">
@@ -28,14 +28,14 @@
 
 						<!-- BOTONES - AGREGAR Y CANCELAR -->
 
-						<button type="button" class="btn btn-primary text-white  btn-block mt-4" data-dismiss="modal">Guardar</button>
-						<button type="button" class="btn btn-outline-danger btn-block">Cancelar</button>
-					</div>
+						<button class="btn btn-primary text-white  btn-block mt-4">Guardar</button>
+						<button type="button" class="btn btn-outline-danger btn-block"  data-dismiss="modal">Cancelar</button>
+					</form>
 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
+						<table id="tablaTiposPersona" class="table table-striped table-responsive-lg p-0 tablas table-sm">
 							<thead class="table-info" >
 								<th>Nombre</th>
 								<th>Editar</th>

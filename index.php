@@ -15,13 +15,11 @@ $menuItems = [
 							'Galpon'			=> 'Galpón',
 							'GestionAves' => 'Gestion de aves',
 							'InventarioGeneral' => 'Inventario General',
-							'Configuracion' => 'Configuracion',
-							'Responsables' => 'Responsables',
-							'Usuarios'		=> 'Usuarios',
+							'Lote' => 'Lotes',
 							'Reportes'		=> ['Alimentacion' => 'Alimentación',
 																'Mortalidad' => 'Mortalidad',
 																'Produccion' => 'Producción'],
-							'Lote' => 'Lotes'
+							'Configuracion' => 'Configuracion',
 							];
 
 define ('MENUITEMS', $menuItems);
