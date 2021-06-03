@@ -85,7 +85,7 @@ function editarObjetoBD(e, funcion, buscarId, inputs, campo){
         }
         // for (var i = 0; i < inputs.length -1; i++) {
         	console.log(resp);
-        	console.log(resp.(campo));
+        	// console.log(resp.(campo));
         	// document.getElementById(inputs[1]).value = resp[campo[1]];
         // }
         // document.getElementById(inputs.length-1).innerText = 'Editando...'

@@ -12,6 +12,7 @@ function autoload($clase){
 }
 spl_autoload_register('autoload');
 $menuItems = [
+							'Inicio'=> 'Inicio',
 							'Galpon'			=> 'Galpón',
 							'GestionAves' => 'Gestion de aves',
 							'InventarioGeneral' => 'Inventario General',
