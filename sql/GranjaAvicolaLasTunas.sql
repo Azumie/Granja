@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `personas` (
   `emailPersona` VARCHAR(45) NULL,
   `activoPersona` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`documento`),
-  CONSTRAINT `fk_personas_tipopersona1`
+  CONSTRAINT `fk_personas_tipopersona11`
     FOREIGN KEY (`idTipoPersona`)
     REFERENCES `tipopersona` (`idTipoPersona`)
     ON DELETE CASCADE

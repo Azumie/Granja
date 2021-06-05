@@ -9,29 +9,37 @@ function elementoExiste (elemento) {
 	elemento.innerHTML += `<option value="${valor}">${texto}</option>`;
 }
  // OBTENER GRANJAS
-function obtenerGranjas (url,nomtabla,valores, id) {
+function obtenerObjeto (url,nomtabla,valores, id, funcion = '') {
 	fetch(url).then(resp => resp.json())
     .then(resp => {
-		let tbody = '';
-		Object.entries(resp).forEach(([pos]) => {
-			tbody += `<tr>`
-			for (let e = 0; e < valores.length; e++) {
-				tbody += `<td>${resp[pos][valores[e]]}</td>`;
-			}
-			tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
-                        <i class="fas fa-pen-fancy"></i></button></td>`
-			tbody += `</tr>`
-		});
-		for (var i = 0; i < 4; i++) {
-			tbody += `<tr>`
-			for (var e = 0; e <= valores.length; e++) {
-				tbody += `<td></td>`;
-			}
-			tbody += `</tr>`
-		}
-	    tabla = resp;
-	    document.querySelector(nomtabla+' tbody').innerHTML = tbody;
+    	if (funcion != '') {
+    		funcion(resp, nomtabla,valores, id);
+    	}
     });
+}
+
+function llenarTabla(resp, nomtabla,valores, id){
+	console.log('pasamos')
+	let tbody = '';
+	Object.entries(resp).forEach(([pos]) => {
+		tbody += `<tr>`
+		for (let e = 0; e < valores.length; e++) {
+			tbody += `<td>${resp[pos][valores[e]]}</td>`;
+		}
+		tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
+                    <i class="fas fa-pen-fancy"></i></button></td>`
+		tbody += `</tr>`
+	});
+	for (var i = 0; i < 4; i++) {
+		tbody += `<tr>`
+		for (var e = 0; e <= valores.length; e++) {
+			tbody += `<td></td>`;
+		}
+		tbody += `</tr>`
+	}
+    tabla = resp;
+    document.querySelector(nomtabla+' tbody').innerHTML = tbody;
+
 }
 
 function alerta (mensaje, color = 'info') {
@@ -56,9 +64,9 @@ function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id, fecha =
 	.then(res => {
 		console.log(res);
 		formulario.reset();
-		obtenerGranjas(funcion, tabla,infotabla, id);
-		if (fecha =! '') {
-			formulario.fecha.value= fechaHoy();
+		obtenerObjeto(funcion, tabla,infotabla, id);
+		if (fecha != '') {
+			fecha.value= fechaHoy();
 		}
 	});
 }

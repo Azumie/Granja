@@ -1,7 +1,7 @@
 // Validando de que exista el formulario respectivo al módulo de Galpón
 if(elementoExiste('formularioAgregarGalpon')){
 	// Rellenando tabla con la información de los Galpones
-	obtenerGranjas('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
+	obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon', llenarTabla);
 	document.getElementsByName('fechaCreacionGalpon')[0].value= fechaHoy();
 	// Rellenando Select llamado ConfinamientoGalpon
 	const select = document.getElementById('ConfinamientoGalpon');
@@ -24,7 +24,7 @@ if(elementoExiste('formularioAgregarGalpon')){
 					console.log('pasamos areautil');
 					if (probar == 'P' || probar == 'J') {
 						console.log('pasamos confinamiento');
-						agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
+						agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon', formularioAgregarGalpon.fechaCreacionGalpon);
 						// let datos = new FormData(formularioAgregarGalpon);
 						// fetch('?c=Galpon&m=agregarGalpon',{
 						// 	method: 'POST',
