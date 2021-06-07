@@ -44,6 +44,8 @@
 					</div>
 					<select name="ConfinamientoGalpon" id="ConfinamientoGalpon" class="form-control">
 						<option disabled selected value=''>Forma de resguarde</option>
+						<option value="P">Piso</option>
+						<option value="J">Jaula</option>
 					</select>
 				</div>
 				<div class="row justify-content-center d-flex">

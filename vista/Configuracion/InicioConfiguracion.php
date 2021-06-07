@@ -15,6 +15,8 @@
 			<button class="btn btn-danger btn-sm botonesModales mb-2" data-toggle="modal" data-target="#TipoProducto">Tipos de Producto</button>
 			<button class="btn btn-primary btn-sm botonesModales mb-2" data-toggle="modal" data-target="#Usuarios">Usuarios</button>
 			<button class="btn btn-info btn-sm botonesModales mb-2" data-toggle="modal" data-target="#Granjas">Granja</button>
+			<button class="btn btn-secondary btn-sm mb-2" data-toggle="modal" data-target="#Clientes">Clientes</button>
+			<button class="btn btn-dark btn-sm botonesModales mb-2" data-toggle="modal" data-target="#Proveedores">Proveedores</button>
 			<!-- <button class="btn btn-secondary" style="font-weight: 600" data-toggle="modal" data-target="#Produccion">Producción</button> -->
 		</div>
 	</div>

@@ -19,8 +19,7 @@ class ConfiguracionControlador
 	public function agregarGranja () {
 		if (isset($_POST['nombreGranja'], $_POST['ubicacionGranja'])) {
 			try {
-				$this->constructorSQL->insert('granjas', ['nombreGranja' => $_POST['nombreGranja'],
-																									'ubicacionGranja'		 => $_POST['ubicacionGranja']]);
+				$this->constructorSQL->insert('granjas', ['nombreGranja' => $_POST['nombreGranja'],	'ubicacionGranja'  => $_POST['ubicacionGranja']]);
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Operacion Exitosa');
 			} catch (PDOException $e) {
@@ -41,8 +40,7 @@ class ConfiguracionControlador
 	public function editarGranja () {
 		if (isset($_POST['nombreGranja'], $_POST['ubicacionGranja'], $_POST['idGranja'])) {
 			try {
-				$this->constructorSQL->update('granjas', ['nombreGranja' => $_POST['nombreGranja'],
-																									'ubicacionGranja'	=> $_POST['ubicacionGranja']]);
+				$this->constructorSQL->update('granjas', ['nombreGranja' => $_POST['nombreGranja'], 'ubicacionGranja'	=> $_POST['ubicacionGranja']]);
 				$this->constructorSQL->where('idGranja', '=', $_POST['idGranja']);
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Operacion Exitosa');
@@ -106,6 +104,25 @@ class ConfiguracionControlador
 		}
 		$tiposhuevo = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($tiposhuevo);
+	}
+
+	public function obtenerTipoProducto(){
+		$this->constructorSQL->select('tiposproducto');
+		if (isset($_GET['idTipoProducto'])) {
+			$this->constructorSQL->where('idTipoProducto', '=', $_GET['idTipoProducto']);
+		}
+		$tiposproducto = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($tiposproducto);
+	}
+
+	public function agregarProductos(){
+		try {
+			$this->ConstructorSQL->insert('productos', ['documentoProveedor' => $_POST['idProveedorProducto'],'idTipoProducto' => $_POST['idTipoProducto'], 'nombreProducto' => $_POST['nombreProducto']]);
+			$this->ConstructorSQL->ejecutarSQL();
+			echo json_encode('Eres una ganadora');
+		} catch (PDOException $e) {
+			echo json_encode('Fallida');
+		}
 	}
 
 }

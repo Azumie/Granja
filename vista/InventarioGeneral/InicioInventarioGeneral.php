@@ -14,8 +14,6 @@
 				<button class="btn btn-danger" data-toggle="modal" data-target="#Compras">Compras</button>
 				<button class="btn btn-primary" data-toggle="modal" data-target="#Consumos">Consumos</button>
 				<button class="btn btn-info" data-toggle="modal" data-target="#Despachos">Despachos</button>
-				<button class="btn btn-secondary" data-toggle="modal" data-target="#Clientes">Clientes</button>
-				<button class="btn btn-dark" data-toggle="modal" data-target="#Proveedores">Proveedores</button>
 			</div>
 			<!-- <button class="btn btn-secondary" style="font-weight: 600" data-toggle="modal" data-target="#Produccion">Producción</button> -->
 		</div>

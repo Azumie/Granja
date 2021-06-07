@@ -9,29 +9,50 @@ function elementoExiste (elemento) {
 	elemento.innerHTML += `<option value="${valor}">${texto}</option>`;
 }
  // OBTENER GRANJAS
-function obtenerGranjas (url,nomtabla,valores, id) {
+function obtenerObjeto (url,elemento,valores, id, funcion = '') {
 	fetch(url).then(resp => resp.json())
     .then(resp => {
-		let tbody = '';
-		Object.entries(resp).forEach(([pos]) => {
-			tbody += `<tr>`
-			for (let e = 0; e < valores.length; e++) {
-				tbody += `<td>${resp[pos][valores[e]]}</td>`;
-			}
-			tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
-                        <i class="fas fa-pen-fancy"></i></button></td>`
-			tbody += `</tr>`
-		});
-		for (var i = 0; i < 4; i++) {
-			tbody += `<tr>`
-			for (var e = 0; e <= valores.length; e++) {
-				tbody += `<td></td>`;
-			}
-			tbody += `</tr>`
-		}
-	    tabla = resp;
-	    document.querySelector(nomtabla+' tbody').innerHTML = tbody;
+    	if (funcion != '') {
+    		funcion(resp, elemento,valores, id);
+    	}
     });
+}
+
+function llenarTabla(resp, elemento,valores, id){
+	console.log('pasamos')
+	let tbody = '';
+	Object.entries(resp).forEach(([pos]) => {
+		tbody += `<tr>`
+		for (let e = 0; e < valores.length; e++) {
+			tbody += `<td>${resp[pos][valores[e]]}</td>`;
+		}
+		tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
+                    <i class="fas fa-pen-fancy"></i></button></td>`
+		tbody += `</tr>`
+	});
+	for (var i = 0; i < 4; i++) {
+		tbody += `<tr>`
+		for (var e = 0; e <= valores.length; e++) {
+			tbody += `<td></td>`;
+		}
+		tbody += `</tr>`
+	}
+    tabla = resp;
+    document.querySelector(elemento+' tbody').innerHTML = tbody;
+}
+
+function llenarSelect(resp, elemento,valores, id){
+	for (a in resp) {
+		let select = [];
+		console.log(resp[a])
+		for (propiedad in resp[a]) {
+			if (propiedad == valores[0] || propiedad == valores[1]) {
+				select.push(resp[a][propiedad]);
+			}
+		}
+		console.log(select)
+		agregarOption(elemento, select[0], select[1]);
+	}
 }
 
 function alerta (mensaje, color = 'info') {
@@ -46,7 +67,7 @@ function alerta (mensaje, color = 'info') {
 	alertBox.appendChild(alerta);
 }
 
-function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id, fecha = ''){
+function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id){
 	let datos = new FormData(formulario);
 	fetch(url,{
 		method: 'POST',
@@ -56,10 +77,7 @@ function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id, fecha =
 	.then(res => {
 		console.log(res);
 		formulario.reset();
-		obtenerGranjas(funcion, tabla,infotabla, id);
-		if (fecha =! '') {
-			formulario.fecha.value= fechaHoy();
-		}
+		obtenerObjeto(funcion, tabla,infotabla, id);
 	});
 }
 
