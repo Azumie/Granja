@@ -14,13 +14,18 @@ spl_autoload_register('autoload');
 $menuItems = [
 							'Inicio'=> 'Inicio',
 							'Galpon'			=> 'Galpón',
-							'GestionAves' => 'Gestion de aves',
+							'GestionAves' => 'Gestión de aves',
 							'InventarioGeneral' => 'Inventario General',
 							'Lote' => 'Lotes',
 							'Reportes'		=> ['Alimentacion' => 'Alimentación',
 																'Mortalidad' => 'Mortalidad',
 																'Produccion' => 'Producción'],
-							'Configuracion' => 'Configuracion',
+							'Configuración' => ['TiposHuevo' => 'Tipos de Huevo',
+												'TiposVenta' => 'Tipos de Venta',
+												'Usuarios' => 'Usuarios',
+												'Granjas' => 'Granjas',
+												'Clientes' => 'Clientes',
+												'Proveedores' => 'Proveedores']
 							];
 
 define ('MENUITEMS', $menuItems);

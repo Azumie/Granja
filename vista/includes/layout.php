@@ -33,7 +33,7 @@
 						<?php
 						foreach (MENUITEMS as $nombreItem => $item) {
 							$activo = (CONTROLADOR == $nombreItem) ? 'active' : '';
-							if (is_array($item)) {
+							if (is_array($item) && $nombreItem == 'Reportes') {
 								?>
 								<!-- inicio -->
 								<li class="nav-item dropdown <?= $activo ?>">
@@ -50,7 +50,22 @@
 								</li>
 								<!-- fin -->
 								<?php
-							} else{
+							} else if (is_array($item) && $nombreItem == 'Configuración') {
+								?>
+									<li class="nav-item dropdown <?= $activo ?>">
+									<a class="nav-link dropdown-toggle rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<?=$nombreItem?>
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<?php foreach ($item as $nombreSubItem => $subItem): ?>
+											
+											<a class="dropdown-item"  data-toggle="modal" data-target="#<?=$nombreSubItem?>"><?=$subItem?>
+											</a>
+										<?php endforeach ?>
+									</div>
+								</li>
+								<?php
+							}else{
 								?>
 								<li class="nav-item">
 									<a href="?c=<?=$nombreItem?>" class="nav-link">

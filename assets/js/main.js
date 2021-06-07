@@ -1,7 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   if (elementoExiste('formularioAgregarProducto')) {
-    obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
+    const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
+    obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
     console.log('yes');
+    //Presionar botón Guardar en Productos se enviará el Formulario
+    formularioAgregarProducto.addEventListener('submit',function(e){
+      console.log('hola');
+      e.preventDefault();
+      agragarObjetoBD(formularioAgregarProducto, '?c=Configuracion&m=agregarProductos', '?c=Configuracion&m=obtenerTipoProducto', '#tablaProducto', ['nombreProducto'], 'idGalpon');
+      obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
+
+    })
   }
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');

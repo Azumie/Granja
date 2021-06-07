@@ -9,16 +9,16 @@ function elementoExiste (elemento) {
 	elemento.innerHTML += `<option value="${valor}">${texto}</option>`;
 }
  // OBTENER GRANJAS
-function obtenerObjeto (url,nomtabla,valores, id, funcion = '') {
+function obtenerObjeto (url,elemento,valores, id, funcion = '') {
 	fetch(url).then(resp => resp.json())
     .then(resp => {
     	if (funcion != '') {
-    		funcion(resp, nomtabla,valores, id);
+    		funcion(resp, elemento,valores, id);
     	}
     });
 }
 
-function llenarTabla(resp, nomtabla,valores, id){
+function llenarTabla(resp, elemento,valores, id){
 	console.log('pasamos')
 	let tbody = '';
 	Object.entries(resp).forEach(([pos]) => {
@@ -38,8 +38,21 @@ function llenarTabla(resp, nomtabla,valores, id){
 		tbody += `</tr>`
 	}
     tabla = resp;
-    document.querySelector(nomtabla+' tbody').innerHTML = tbody;
+    document.querySelector(elemento+' tbody').innerHTML = tbody;
+}
 
+function llenarSelect(resp, elemento,valores, id){
+	for (a in resp) {
+		let select = [];
+		console.log(resp[a])
+		for (propiedad in resp[a]) {
+			if (propiedad == valores[0] || propiedad == valores[1]) {
+				select.push(resp[a][propiedad]);
+			}
+		}
+		console.log(select)
+		agregarOption(elemento, select[0], select[1]);
+	}
 }
 
 function alerta (mensaje, color = 'info') {
@@ -54,7 +67,7 @@ function alerta (mensaje, color = 'info') {
 	alertBox.appendChild(alerta);
 }
 
-function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id, fecha = ''){
+function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id){
 	let datos = new FormData(formulario);
 	fetch(url,{
 		method: 'POST',
@@ -65,9 +78,6 @@ function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id, fecha =
 		console.log(res);
 		formulario.reset();
 		obtenerObjeto(funcion, tabla,infotabla, id);
-		if (fecha != '') {
-			fecha.value= fechaHoy();
-		}
 	});
 }
 
