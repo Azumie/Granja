@@ -103,6 +103,7 @@
 		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 		<!-- DataTable core JavaScript -->
 		<script type="text/javascript" src="assets/js/Datatable.min.js"></script>
+		<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script>
 		<!-- <script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script> -->
 		<!-- JSPDF core JavaScript -->
 		<!-- <script type="text/javascript" src="assets/js/html2pdf.bundle.min.js"></script> -->

@@ -95,7 +95,7 @@
 						<canvas id="graficoHuevos" style="height: 15em"></canvas>
 					</div>
 					<div class="col-4 align-self-center">
-						<table class="table table-sm table-responsive text-center">
+						<table class="table-sm table-responsive text-center">
 							<thead class="table-secondary">
 								<th width="100">Dias</th>
 								<th>Grandes</th>

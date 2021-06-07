@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// TABLAS
 
+	$('.table').DataTable();
+
 	// $(".table").DataTable({
 	// // responsive: true,
 	// "language": {
