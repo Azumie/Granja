@@ -102,15 +102,16 @@
 		<!-- Bootstrap core JavaScript -->
 		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 		<!-- DataTable core JavaScript -->
-<!-- 		<script type="text/javascript" src="assets/js/Datatable.min.js"></script>
-		<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script> -->
+		<script type="text/javascript" src="assets/js/Datatable.min.js"></script>
+		<!-- <script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js"></script> -->
 		<!-- JSPDF core JavaScript -->
 		<!-- <script type="text/javascript" src="assets/js/html2pdf.bundle.min.js"></script> -->
 		<!-- CHARTjs core JavaScript -->
-		<script type="text/javascript" src="assets/js/chartist.min.js"></script>
+		<script type="text/javascript" src="assets/js/Chart.min.js"></script>
 		<script type="text/javascript" src="vista/js/Ayudante.js"></script>
 		<script type="text/javascript" src="vista/js/Galpon.js"></script>
 		<script type="text/javascript" src="vista/js/GestionAves.js"></script>
+		<script type="text/javascript" src="vista/js/Reportes.js"></script>
 		<!-- CAMBIO AQUIIIIIII -->
 		<!-- <script type="text/javascript" src="assets/js/moment.min.js"></script> -->
 
