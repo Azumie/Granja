@@ -28,29 +28,18 @@
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 				</button>
+
+				<!-- ITEMS DEL MENU -->
+
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
 						<?php
 						foreach (MENUITEMS as $nombreItem => $item) {
 							$activo = (CONTROLADOR == $nombreItem) ? 'active' : '';
-							if (is_array($item) && $nombreItem == 'Reportes') {
-								?>
-								<!-- inicio -->
-								<li class="nav-item dropdown <?= $activo ?>">
-									<a class="nav-link dropdown-toggle rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<?=$nombreItem?>
-									</a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<?php foreach ($item as $nombreSubItem => $subItem): ?>
-											<a class="dropdown-item" href="?c=<?=$nombreItem?>&p=<?=$nombreSubItem?>">
-												<?=$subItem?>
-											</a>
-										<?php endforeach ?>
-									</div>
-								</li>
-								<!-- fin -->
-								<?php
-							} else if (is_array($item) && $nombreItem == 'Configuración') {
+
+							// LINK SUB-MODULOS
+
+							if (is_array($item)) {
 								?>
 									<li class="nav-item dropdown <?= $activo ?>">
 									<a class="nav-link dropdown-toggle rounded" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,13 +47,23 @@
 									</a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 										<?php foreach ($item as $nombreSubItem => $subItem): ?>
-											
-											<a class="dropdown-item"  data-toggle="modal" data-target="#<?=$nombreSubItem?>"><?=$subItem?>
-											</a>
+											<?php if ($nombreItem == 'Reportes'): ?>
+												<a class="dropdown-item" href="?c=<?=$nombreItem?>&p=<?=$nombreSubItem?>">
+													<?=$subItem?>
+												</a>
+											<?php else: ?>
+												<a class="dropdown-item"  data-toggle="modal" data-target="#<?=$nombreSubItem?>"><?=$subItem?>
+												</a>
+											<?php endif ?>
+
+
 										<?php endforeach ?>
 									</div>
 								</li>
 								<?php
+
+							// LINK MODULO
+								
 							}else{
 								?>
 								<li class="nav-item">
@@ -106,6 +105,23 @@
 				</div>
 			</div>
 		</div>
+
+		<?php 
+			foreach (MENUITEMS as $nombreItem => $item) {
+				if (is_array($item) && $nombreItem != 'Reportes') {
+					foreach ($item as $nombreSubIteme => $subItem) {
+						$nombreItem = quitarAcentos($nombreItem);
+						$nombreSubIteme = quitarAcentos($nombreSubIteme);
+						if (file_exists("vista/$nombreItem/$nombreSubIteme.php")) {
+							require_once "vista/$nombreItem/$nombreSubIteme.php";
+						}
+					}
+				}
+			}
+		?>
+		<?php foreach (MENUITEMS as $nombreItem => $item): ?>
+			
+		<?php endforeach ?>
 
 		<div id="alertas" class="alertBox d-flex flex-column-reverse mb-2 mr-2">
 	
