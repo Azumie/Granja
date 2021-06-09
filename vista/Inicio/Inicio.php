@@ -139,7 +139,7 @@
 				Inventario de Productos
 			</div>
 			<div class="card-body pb-2">
-				<table class="table table-responsive-sm table-sm table-striped">
+				<table class="datatable table table-responsive-sm table-sm table-striped">
 					<thead class="table-info">
 						<th>Tipo de Producto</th>
 						<th>Nombre Producto</th>

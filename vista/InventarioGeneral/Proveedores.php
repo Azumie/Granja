@@ -28,7 +28,7 @@
 						  		<option>V</option>
 						  		<option>R</option>
 						  	</select>
-								<input type="text" name="documento" id="documento" class="form-control">
+								<input type="text" name="documentoProveedor" id="documentoProveedor" class="form-control">
 							</div>
 							<div class="form-check col-md-2">
 				        <input class="form-check-input" type="checkbox" id="activo" name="activo">
@@ -38,26 +38,26 @@
 				      </div>
 
 						</div>
-						<!-- NOMBRES CLIENTE -->
+						<!-- NOMBRES Proveedor -->
 
 						<div class="input-group mb-3 ">
 					  	<div class="input-group-prepend">
-					    	<label for="nombresCliente" class="input-group-text">
-					    		Nombre Cliente
+					    	<label for="nombresProveedor" class="input-group-text">
+					    		Nombre Proveedor
 					    	</label>
 					  	</div>
-							<input type="text" name="nombresCliente" id="nombresCliente" class="form-control">
+							<input type="text" name="nombresProveedor" id="nombresProveedor" class="form-control">
 						</div>
 
-						<!-- APELLIDOS CLIENTE -->
+						<!-- APELLIDOS Proveedor -->
 
 						<div class="input-group mb-3 ">
 					  	<div class="input-group-prepend">
-					    	<label for="apellidosCliente" class="input-group-text">
-					    		Apellidos Cliente
+					    	<label for="apellidosProveedor" class="input-group-text">
+					    		Apellidos Proveedor
 					    	</label>
 					  	</div>
-							<input type="text" name="apellidosCliente" id="apellidosCliente" class="form-control">
+							<input type="text" name="apellidosProveedor" id="apellidosProveedor" class="form-control">
 						</div>
 
 						<!-- TELEFONO	 -->
@@ -68,7 +68,7 @@
 					    		Telefono
 					    	</label>
 					  	</div>
-							<input type="text" name="telefono" id="telefono" class="form-control">
+							<input type="text" name="telefonoProveedor" id="telefonoProveedor" class="form-control">
 						</div>
 
 
@@ -80,7 +80,7 @@
 						    		Email
 						    	</label>
 						  	</div>
-						  	<input class="form-control" type="email" id="emal" name="emal"></input>
+						  	<input class="form-control" type="emailProveedor" id="emailProveedor" name="emal"></input>
 						</div>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->

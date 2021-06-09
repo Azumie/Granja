@@ -95,8 +95,8 @@
 			</div>
 		<?php endif ?>
 		<div class="container-fluid my-4">
-			<div class="row <?php echo ( CONTROLADOR == 'Login') ? 'justify-content-end' : '' ?>">
-				<div class="col<?php echo ( CONTROLADOR == 'Login') ? '-8 col-md-6 col-lg-4' : '-12' ?>">
+			<div class="row <?php echo ( CONTROLADOR == 'Login') ? 'justify-content-center' : '' ?>">
+				<div class="col<?php echo ( CONTROLADOR == 'Login') ? '-8 col-md-6 col-lg-4 align-self-center' : '-12' ?>">
 					<?php
 						foreach ($vistas as $vista) {
 							require_once "vista/".CONTROLADOR."/$vista.php";
@@ -110,8 +110,8 @@
 			foreach (MENUITEMS as $nombreItem => $item) {
 				if (is_array($item) && $nombreItem != 'Reportes') {
 					foreach ($item as $nombreSubIteme => $subItem) {
-						$nombreItem = quitarAcentos($nombreItem);
-						$nombreSubIteme = quitarAcentos($nombreSubIteme);
+						$nombreItem = prepararRequire($nombreItem);
+						$nombreSubIteme = prepararRequire($nombreSubIteme);
 						if (file_exists("vista/$nombreItem/$nombreSubIteme.php")) {
 							require_once "vista/$nombreItem/$nombreSubIteme.php";
 						}

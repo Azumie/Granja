@@ -92,7 +92,7 @@
 						
 						
 						<div class="col-7">
-							<table class="table table-striped table-responsive-md table-sm">
+							<table class=" datatable table table-striped table-responsive table-sm">
 								<thead class="table-info">
 									<th>Estado</th>
 									<th>Cédula</th>

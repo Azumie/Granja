@@ -115,7 +115,7 @@ function editarObjetoBD(idElemento, metodo, buscarId, inputs){
 	    };
 
 
-    }
+    });
 }
 
 // Mas no me estás diciendo porque piensas que es  lo correcto.

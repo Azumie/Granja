@@ -12,31 +12,50 @@ function autoload($clase){
 }
 spl_autoload_register('autoload');
 
-function quitarAcentos ($string){
+function prepararRequire ($string){
 	$string = str_replace('á', 'a', $string);
 	$string = str_replace('é', 'e', $string);
 	$string = str_replace('í', 'i', $string);
 	$string = str_replace('ó', 'o', $string);
 	$string = str_replace('ú', 'u', $string);
+	$string = str_replace('de', '', $string);
+	$string = str_replace(' ', '', $string);
 	return $string;
 }
 
 $menuItems = 
 [
 	'Inicio'=> 'Inicio',
-	'Galpon'			=> 'Galpón',
-	'GestionAves' => 'Gestión de aves',
-	'InventarioGeneral' => 'Inventario General',
-	'Lote' => 'Lotes',
-	'Reportes'		=> ['Alimentacion' => 'Alimentación',
-										'Mortalidad' => 'Mortalidad',
-										'Produccion' => 'Producción'],
-	'Configuración' => ['TiposHuevo' => 'Tipos de Huevo',
-						'TiposVenta' => 'Tipos de Venta',
-						'Usuarios' => 'Usuarios',
-						'Granjas' => 'Granjas',
-						'Clientes' => 'Clientes',
-						'Proveedores' => 'Proveedores']
+	'Gestion de Aves' => 
+		[
+			'Alimentacion' => 'Alimentación',
+			'Mortalidad' => 'Mortalidad',
+			'Produccion' => 'Producción'
+		],
+	'InventarioGeneral' => [
+		'Consumos' => 'Consumos',
+		'Despachos' => 'Despachos',
+		'Compras' => 'Compras'
+	],
+	'Lote' => [
+		'LineaGenetica' => 'Lineas Geneticas',
+		'Galponeros' => 'Galponeros',
+		'NuevoLote' => 'Nuevo Lote'
+	],
+	'Reportes'		=> [
+		'Alimentacion' => 'Alimentación',
+		'Mortalidad' => 'Mortalidad',
+		'Produccion' => 'Producción'
+	],
+	'Configuración' => [
+			'TiposHuevo' => 'Tipos de Huevo',
+			'TiposVenta' => 'Tipos de Venta',
+			'Usuarios' => 'Usuarios',
+			'Granjas' => 'Granjas',
+			'Clientes' => 'Clientes',
+			'Proveedores' => 'Proveedores',
+			'Galpones' => 'Galpones'
+		]
 	];
 
 define ('MENUITEMS', $menuItems);
