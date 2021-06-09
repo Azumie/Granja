@@ -11,22 +11,33 @@ function autoload($clase){
 	}
 }
 spl_autoload_register('autoload');
-$menuItems = [
-							'Inicio'=> 'Inicio',
-							'Galpon'			=> 'Galpón',
-							'GestionAves' => 'Gestión de aves',
-							'InventarioGeneral' => 'Inventario General',
-							'Lote' => 'Lotes',
-							'Reportes'		=> ['Alimentacion' => 'Alimentación',
-																'Mortalidad' => 'Mortalidad',
-																'Produccion' => 'Producción'],
-							'Configuración' => ['TiposHuevo' => 'Tipos de Huevo',
-												'TiposVenta' => 'Tipos de Venta',
-												'Usuarios' => 'Usuarios',
-												'Granjas' => 'Granjas',
-												'Clientes' => 'Clientes',
-												'Proveedores' => 'Proveedores']
-							];
+
+function quitarAcentos ($string){
+	$string = str_replace('á', 'a', $string);
+	$string = str_replace('é', 'e', $string);
+	$string = str_replace('í', 'i', $string);
+	$string = str_replace('ó', 'o', $string);
+	$string = str_replace('ú', 'u', $string);
+	return $string;
+}
+
+$menuItems = 
+[
+	'Inicio'=> 'Inicio',
+	'Galpon'			=> 'Galpón',
+	'GestionAves' => 'Gestión de aves',
+	'InventarioGeneral' => 'Inventario General',
+	'Lote' => 'Lotes',
+	'Reportes'		=> ['Alimentacion' => 'Alimentación',
+										'Mortalidad' => 'Mortalidad',
+										'Produccion' => 'Producción'],
+	'Configuración' => ['TiposHuevo' => 'Tipos de Huevo',
+						'TiposVenta' => 'Tipos de Venta',
+						'Usuarios' => 'Usuarios',
+						'Granjas' => 'Granjas',
+						'Clientes' => 'Clientes',
+						'Proveedores' => 'Proveedores']
+	];
 
 define ('MENUITEMS', $menuItems);
 $controlador = isset($_GET['c'], $_SESSION['nombreUsuario']) ? $_GET['c'] : 'Login';
