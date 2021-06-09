@@ -8,7 +8,7 @@ function elementoExiste (elemento) {
  function agregarOption(elemento, valor, texto){
 	elemento.innerHTML += `<option value="${valor}">${texto}</option>`;
 }
- // OBTENER GRANJAS
+ // OBTENER GRANJAS 
 function obtenerObjeto (url,elemento,valores, id, funcion = '') {
 	fetch(url).then(resp => resp.json())
     .then(resp => {
@@ -67,7 +67,7 @@ function alerta (mensaje, color = 'info') {
 	alertBox.appendChild(alerta);
 }
 
-function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id){
+function agragarObjetoBD(formulario, url, funcion = '', tabla, infotabla, id){
 	let datos = new FormData(formulario);
 	fetch(url,{
 		method: 'POST',
@@ -77,48 +77,45 @@ function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id){
 	.then(res => {
 		console.log(res);
 		formulario.reset();
-		obtenerObjeto(funcion, tabla,infotabla, id);
+		obtenerObjeto(funcion, tabla,infotabla, id, llenarTabla);
 	});
 }
 
 function editarObjetoBD(idElemento, metodo, buscarId, inputs){
-    console.log(e.target.tagName);
-    let elemento = document.getElementById(idElemento);
+  console.log(e.target.tagName);
+  let elemento = document.getElementById(idElemento);
 
 
-    elemento.addEventListener('click', (e) => {
+  elemento.addEventListener('click', (e) => {
 
-	    let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
-	    if (target.tagName === 'BUTTON') {
-	      // target.attributes
-	      let obtenerId = target.getAttribute('id');
-	      fetch(`?c=Configuracion&m=${metodo}&${buscarId}=${obtenerId}`)
-	      .then(resp => resp.json())
-	      .then(resp => {
-	        resp = resp[0];
-	        // llenarForm(resp[0]);
-	        if (elementoExiste(buscarId)) {
-	          document.getElementById(buscarId).value = obtenerId;
-	        }else {
-	          let input = document.createElement('input');
-	          input.id = buscarId;
-	          input.name = buscarId;
-	          input.type = 'hidden';
-	          input.value = obtenerId;
-	          formGranja.appendChild(input);
-	        }
-	        inputs.forEach((pos) => {
-	        	let inputForm = document.getElementById(pos);
-	        	inputForm.value = resp[pos];
-	        });
-	      });
-	    };
-
-
-    });
+    let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
+    if (target.tagName === 'BUTTON') {
+      // target.attributes
+      let obtenerId = target.getAttribute('id');
+      fetch(`?c=Configuracion&m=${metodo}&${buscarId}=${obtenerId}`)
+      .then(resp => resp.json())
+      .then(resp => {
+        resp = resp[0];
+        // llenarForm(resp[0]);
+        if (elementoExiste(buscarId)) {
+          document.getElementById(buscarId).value = obtenerId;
+        }else {
+          let input = document.createElement('input');
+          input.id = buscarId;
+          input.name = buscarId;
+          input.type = 'hidden';
+          input.value = obtenerId;
+          formGranja.appendChild(input);
+        }
+        inputs.forEach((pos) => {
+        	let inputForm = document.getElementById(pos);
+        	inputForm.value = resp[pos];
+        });
+      });
+    };
+  });
 }
 
-// Mas no me estás diciendo porque piensas que es  lo correcto.
 function fechaHoy(){
 	let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');

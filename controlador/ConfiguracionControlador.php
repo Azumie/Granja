@@ -117,12 +117,34 @@ class ConfiguracionControlador
 
 	public function agregarProductos(){
 		try {
-			$this->ConstructorSQL->insert('productos', ['documentoProveedor' => $_POST['idProveedorProducto'],'idTipoProducto' => $_POST['idTipoProducto'], 'nombreProducto' => $_POST['nombreProducto']]);
-			$this->ConstructorSQL->ejecutarSQL();
+			$this->constructorSQL->insert('productos', ['documentoProveedor' => $_POST['idProveedorProducto'],'idTipoProducto' => $_POST['idTipoProducto'], 'nombreProducto' => $_POST['nombreProducto']]);
+			$this->constructorSQL->ejecutarSQL();
 			echo json_encode('Eres una ganadora');
 		} catch (PDOException $e) {
 			echo json_encode('Fallida');
 		}
 	}
 
+	public function agregarProveedor(){
+		if (isset($_POST['documento'], $_POST['nombresProveedor'], $_POST['apellidosProveedor'], $_POST['telefonoProveedor'], $_POST['emailProveedor'])) {
+			try {
+				$documento =$_POST['nacionalidad'].'-'.$_POST['documento'];
+				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 4, 'nombrePersona' => $_POST['nombresProveedor'], 'apellidosPersona' => $_POST['apellidosProveedor'], 'telefonoPersona' => $_POST['telefonoProveedor'],'emailPersona' => $_POST['emailProveedor'], 'activoPersona' => 1]);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Eres una ganadora');
+			} catch (PDOException $e) {
+				echo json_encode('Fallida');
+			}
+		}else echo json_encode('No existe');
+	}
+	public function obtenerProveedor(){
+		(isset($_GET['e'])) ? $persona = 'personas '.$_GET['e'] : $persona = 'personas';
+		$persona = $this->constructorSQL->select($persona)->ejecutarSQL();
+		foreach ($persona as $key => $value) {
+			if ($persona[$key]->activoPersona == 1) {
+				$persona[$key]->activoPersona = 'Activo';
+			}else $persona[$key]->activoPersona = 'Inactivo';
+		}
+		echo json_encode($persona);
+	}
 }

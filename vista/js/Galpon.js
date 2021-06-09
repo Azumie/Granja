@@ -23,7 +23,7 @@ if(elementoExiste('formularioAgregarGalpon')){
 					console.log('pasamos areautil');
 					if (probar == 'P' || probar == 'J') {
 						console.log('pasamos confinamiento');
-						agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon', formularioAgregarGalpon.fechaCreacionGalpon);
+						agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
 						document.getElementsByName('fechaCreacionGalpon')[0].value= fechaHoy();
 						// let datos = new FormData(formularioAgregarGalpon);
 						// fetch('?c=Galpon&m=agregarGalpon',{
