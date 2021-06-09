@@ -113,12 +113,9 @@ function editarObjetoBD(idElemento, metodo, buscarId, inputs){
 	        });
 	      });
 	    };
-
-
-    }
+    })
 }
 
-// Mas no me estás diciendo porque piensas que es  lo correcto.
 function fechaHoy(){
 	let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');

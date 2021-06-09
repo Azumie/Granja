@@ -14,11 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (elementoExiste('formularioProveedores')) {
     const formularioProveedores = document.getElementById('formularioProveedores');
+    obtenerObjeto('?c=Configuracion&m=obtenerProveedor','#tablaProveedor',['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla)
     formularioProveedores.addEventListener('submit', (e) =>{
       e.preventDefault();
       console.log('cliks');
       agragarObjetoBD(formularioProveedores, '?c=Configuracion&m=agregarProveedor', '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
-
+      
     })
   }
 });

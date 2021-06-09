@@ -38,7 +38,7 @@
 				      </div>
 
 						</div>
-						<!-- NOMBRES CLIENTE -->
+						<!-- NOMBRES Proveedor -->
 
 						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
@@ -49,12 +49,12 @@
 							<input type="text" name="nombresProveedor" class="form-control">
 						</div>
 
-						<!-- APELLIDOS CLIENTE -->
+						<!-- APELLIDOS Proveedor -->
 
 						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
 					    	<label for="apellidosProveedor" class="input-group-text">
-					    		Apellidos Cliente
+					    		Apellidos
 					    	</label>
 					  	</div>
 							<input type="text" name="apellidosProveedor" id="apellidosProveedor" class="form-control">
@@ -65,7 +65,7 @@
 						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
 					    	<label for="telefonoProveedor" class="input-group-text">
-					    		Telefono
+					    		Teléfono
 					    	</label>
 					  	</div>
 							<input type="text" name="telefonoProveedor" id="telefonoProveedor" class="form-control">
@@ -93,7 +93,7 @@
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm" id="tablaProveedor">
+						<table class="table table-striped table-responsive p-0 tablas table-sm" id="tablaProveedor">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>
