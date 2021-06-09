@@ -13,14 +13,14 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<form class="col-lg-5 mb-3 mb-lg-0 ">
+					<form id="formularioProveedores" class="col-lg-5 mb-3 mb-lg-0 ">
 
 						<!-- DOCUMENTO -->
 						<div class="row">
-							
-							<div class="input-group mb-3 col-md-10">
+							<h6>A continuación...<br>Proporcione la información referente al proveedor </h6>
+							<div class="input-group input-group-sm mb-3 col-md-10">
 						  	<div class="input-group-prepend">
-						    	<label for="idClinete" class="input-group-text">
+						    	<label for="idProveedor" class="input-group-text">
 						    		Documento
 						    	</label>
 						  	</div>
@@ -31,8 +31,8 @@
 								<input type="text" name="documento" id="documento" class="form-control">
 							</div>
 							<div class="form-check col-md-2">
-				        <input class="form-check-input" type="checkbox" id="activo" name="activo">
-				        <label class="form-check-label" for="activo">
+				        <input class="form-check-input" type="checkbox" id="activoProveedor" name="activoProveedor" checked>
+				        <label class="form-check-label" for="activoProveedor">
 				          Activo
 				        </label>
 				      </div>
@@ -40,47 +40,47 @@
 						</div>
 						<!-- NOMBRES CLIENTE -->
 
-						<div class="input-group mb-3 ">
+						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
-					    	<label for="nombresCliente" class="input-group-text">
-					    		Nombre Cliente
+					    	<label for="nombresProveedor" class="input-group-text">
+					    		Nombre
 					    	</label>
 					  	</div>
-							<input type="text" name="nombresCliente" id="nombresCliente" class="form-control">
+							<input type="text" name="nombresProveedor" class="form-control">
 						</div>
 
 						<!-- APELLIDOS CLIENTE -->
 
-						<div class="input-group mb-3 ">
+						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
-					    	<label for="apellidosCliente" class="input-group-text">
+					    	<label for="apellidosProveedor" class="input-group-text">
 					    		Apellidos Cliente
 					    	</label>
 					  	</div>
-							<input type="text" name="apellidosCliente" id="apellidosCliente" class="form-control">
+							<input type="text" name="apellidosProveedor" id="apellidosProveedor" class="form-control">
 						</div>
 
 						<!-- TELEFONO	 -->
 
-						<div class="input-group mb-3 ">
+						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
-					    	<label for="telefono" class="input-group-text">
+					    	<label for="telefonoProveedor" class="input-group-text">
 					    		Telefono
 					    	</label>
 					  	</div>
-							<input type="text" name="telefono" id="telefono" class="form-control">
+							<input type="text" name="telefonoProveedor" id="telefonoProveedor" class="form-control">
 						</div>
 
 
 						<!-- EMAIL -->
 
-						<div class="input-group mb-3">
+						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
-						    	<label for="emal" class="input-group-text">
+						    	<label for="emailProveedor" class="input-group-text">
 						    		Email
 						    	</label>
 						  	</div>
-						  	<input class="form-control" type="email" id="emal" name="emal"></input>
+						  	<input class="form-control" type="email" id="emailProveedor" name="emailProveedor"></input>
 						</div>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
@@ -93,11 +93,13 @@
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
+						<table class="table table-striped table-responsive-lg p-0 tablas table-sm" id="tablaProveedor">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>
 								<th>Apellidos</th>
+								<th>Teléfono</th>
+								<th>Email</th>
 								<th>Activo</th>
 								<th>Editar</th>
 							</thead>
@@ -114,7 +116,7 @@
 									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
 
 									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
+										<button type="button" class="btn btn-info btn-sm rounded-circle"><i class="fas fa-pen-fancy"></i></button>
 									</td>
 								</tr>
 

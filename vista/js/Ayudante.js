@@ -8,7 +8,7 @@ function elementoExiste (elemento) {
  function agregarOption(elemento, valor, texto){
 	elemento.innerHTML += `<option value="${valor}">${texto}</option>`;
 }
- // OBTENER GRANJAS
+ // OBTENER GRANJAS 
 function obtenerObjeto (url,elemento,valores, id, funcion = '') {
 	fetch(url).then(resp => resp.json())
     .then(resp => {
@@ -67,7 +67,7 @@ function alerta (mensaje, color = 'info') {
 	alertBox.appendChild(alerta);
 }
 
-function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id){
+function agragarObjetoBD(formulario, url, funcion = '', tabla, infotabla, id){
 	let datos = new FormData(formulario);
 	fetch(url,{
 		method: 'POST',
@@ -77,7 +77,7 @@ function agragarObjetoBD(formulario, url, funcion, tabla, infotabla, id){
 	.then(res => {
 		console.log(res);
 		formulario.reset();
-		obtenerObjeto(funcion, tabla,infotabla, id);
+		obtenerObjeto(funcion, tabla,infotabla, id, llenarTabla);
 	});
 }
 

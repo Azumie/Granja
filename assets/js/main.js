@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  //&& class === modal fade
   if (elementoExiste('formularioAgregarProducto')) {
     const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
@@ -7,8 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     formularioAgregarProducto.addEventListener('submit',function(e){
       console.log('hola');
       e.preventDefault();
-      agragarObjetoBD(formularioAgregarProducto, '?c=Configuracion&m=agregarProductos', '?c=Configuracion&m=obtenerTipoProducto', '#tablaProducto', ['nombreProducto'], 'idGalpon');
       obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
+
+    })
+  }
+  if (elementoExiste('formularioProveedores')) {
+    const formularioProveedores = document.getElementById('formularioProveedores');
+    formularioProveedores.addEventListener('submit', (e) =>{
+      e.preventDefault();
+      console.log('cliks');
+      agragarObjetoBD(formularioProveedores, '?c=Configuracion&m=agregarProveedor', '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
 
     })
   }
