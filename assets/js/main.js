@@ -3,18 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
   if (elementoExiste('formularioAgregarProducto')) {
     const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
+      obtenerObjeto('?c=Configuracion&m=obtenerProveedor', document.getElementById('idProveedorProducto'), ['documento', 'nombrePersona'], '', llenarSelect);
+
     console.log('yes');
     //Presionar botón Guardar en Productos se enviará el Formulario
     formularioAgregarProducto.addEventListener('submit',function(e){
       console.log('hola');
       e.preventDefault();
-      obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
-
+      agragarObjetoBD(formularioAgregarProducto, '?c=Configuracion&m=agregarProductos', '?c=Configuracion&m=obtenerProducto', '#tablaProducto', ['nombreProducto', 'documentoProveedor'], 'documento');
     })
   }
   if (elementoExiste('formularioProveedores')) {
+    // console.log(document.getElementById('Proveedores').classList.contains('show'))
     const formularioProveedores = document.getElementById('formularioProveedores');
-    obtenerObjeto('?c=Configuracion&m=obtenerProveedor','#tablaProveedor',['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla)
+    obtenerObjeto('?c=Configuracion&m=obtenerProveedor','#tablaProveedor',['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'idProducto', llenarTabla)
     formularioProveedores.addEventListener('submit', (e) =>{
       e.preventDefault();
       console.log('cliks');
