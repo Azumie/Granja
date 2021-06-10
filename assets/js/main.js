@@ -19,8 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       console.log('cliks');
       agragarObjetoBD(formularioProveedores, '?c=Configuracion&m=agregarProveedor', '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
-      
-    })
+    });
+
+    editarObjetoBD(
+      'tablaProveedor', 
+      'Configuracion', 
+      'obtenerProveedor', 
+      'documentoProveedor',
+      {
+        'nombresProveedor': 'nombrePersona',
+        'apellidosProveedor': 'apellidosPersona',
+        'telefonoProveedor': 'telefonoPersona',
+        'emailProveedor': 'emailPersona', 
+        'activoProveedor': 'activoPersona'}
+    );
+
   }
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');

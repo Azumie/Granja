@@ -81,38 +81,46 @@ function agragarObjetoBD(formulario, url, funcion = '', tabla, infotabla, id){
 	});
 }
 
-function editarObjetoBD(idElemento, metodo, buscarId, inputs){
-  console.log(e.target.tagName);
-  let elemento = document.getElementById(idElemento);
+function editarObjetoBD(idTabla, controlador, metodo, nombreId, inputs){
 
+  let elemento = document.getElementById(idTabla);
 
   elemento.addEventListener('click', (e) => {
 
     let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
     if (target.tagName === 'BUTTON') {
       // target.attributes
-      let obtenerId = target.getAttribute('id');
-      fetch(`?c=Configuracion&m=${metodo}&${buscarId}=${obtenerId}`)
+      let idElemento = target.getAttribute('id');
+      
+      fetch(`?c=${controlador}&m=${metodo}&${nombreId}=${idElemento}`)
       .then(resp => resp.json())
       .then(resp => {
         resp = resp[0];
         // llenarForm(resp[0]);
-        if (elementoExiste(buscarId)) {
-          document.getElementById(buscarId).value = obtenerId;
+        if (elementoExiste(nombreId)) {
+        	
+        	if (nombreId.includes('documento')) {
+        		console.log('lo contiene')
+        		idElemento = idElemento.split('-')[1];
+        	}
+          document.getElementById(nombreId).value = idElemento;
+        		console.log("idElemento", idElemento);
         }else {
           let input = document.createElement('input');
-          input.id = buscarId;
-          input.name = buscarId;
+          input.id = nombreId;
+          input.name = nombreId;
           input.type = 'hidden';
-          input.value = obtenerId;
+          input.value = idElemento;
           formGranja.appendChild(input);
         }
-        inputs.forEach((pos) => {
-        	let inputForm = document.getElementById(pos);
-        	inputForm.value = resp[pos];
+        Object.entries(inputs).forEach(([nombreInput, nombreCampo]) => {
+        	let inputForm = document.getElementById(nombreInput);
+        	// console.log("inputForm", inputForm);
+
+        	inputForm.value = resp[nombreCampo];
         });
       });
-    };
+    }
   });
 }
 
