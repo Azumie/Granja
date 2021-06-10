@@ -31,7 +31,7 @@
 						</div>
 						<div class="input-group input-group-sm">
 							<div class="input-group-prepend"><label class="input-group-text">Proveedor</label></div>
-							<select name="idProveedorProducto" class="form-control"></select>
+							<select name="idProveedorProducto" id="idProveedorProducto" class="form-control"></select>
 							<div class="input-group-append">
 								<button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#Proveedores">+</button>
 							</div>
@@ -47,6 +47,7 @@
 						<table class="table table-striped table-responsive-sm p-0 tablas table-sm text-center" id="tablaProducto">
 							<thead class="table-info" >
 								<th>Nombre</th>
+								<th>Proveedor</th>
 								<th>Editar</th>
 							</thead>
 							<tbody>

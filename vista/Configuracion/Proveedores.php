@@ -17,7 +17,7 @@
 
 						<!-- DOCUMENTO -->
 						<div class="row">
-							<h6>A continuación...<br>Proporcione la información referente al proveedor </h6>
+							<h6 class="ml-2">A continuación...<br>Proporcione la información referente al proveedor </h6>
 							<div class="input-group input-group-sm mb-3 col-md-10">
 						  	<div class="input-group-prepend">
 						    	<label for="idProveedor" class="input-group-text">
@@ -28,7 +28,7 @@
 						  		<option>V</option>
 						  		<option>R</option>
 						  	</select>
-								<input type="text" name="documentoProveedor" id="documentoProveedor" class="form-control">
+								<input type="text" name="documento" id="documento" class="form-control" minlength="7" maxlength="9">
 							</div>
 							<div class="form-check col-md-2">
 				        <input class="form-check-input" type="checkbox" id="activoProveedor" name="activoProveedor" checked>
@@ -46,7 +46,7 @@
 					    		Nombre Proveedor
 					    	</label>
 					  	</div>
-							<input type="text" name="nombresProveedor" id="nombresProveedor" class="form-control">
+							<input type="text" name="nombresProveedor" class="form-control" minlength="2" maxlength="40">
 						</div>
 
 						<!-- APELLIDOS Proveedor -->
@@ -57,7 +57,7 @@
 					    		Apellidos
 					    	</label>
 					  	</div>
-							<input type="text" name="apellidosProveedor" id="apellidosProveedor" class="form-control">
+							<input type="text" name="apellidosProveedor" id="apellidosProveedor" class="form-control" minlength="2" maxlength="40">
 						</div>
 
 						<!-- TELEFONO	 -->
@@ -93,6 +93,7 @@
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
+						<p>Edite o busque mayor información acerca de un Proveedor</p>
 						<table class="table table-striped table-responsive p-0 tablas table-sm" id="tablaProveedor">
 							<thead class="table-info" >
 								<th>Documento</th>

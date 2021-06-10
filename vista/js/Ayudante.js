@@ -44,13 +44,11 @@ function llenarTabla(resp, elemento,valores, id){
 function llenarSelect(resp, elemento,valores, id){
 	for (a in resp) {
 		let select = [];
-		console.log(resp[a])
 		for (propiedad in resp[a]) {
 			if (propiedad == valores[0] || propiedad == valores[1]) {
 				select.push(resp[a][propiedad]);
 			}
 		}
-		console.log(select)
 		agregarOption(elemento, select[0], select[1]);
 	}
 }

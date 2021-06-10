@@ -116,13 +116,21 @@ class ConfiguracionControlador
 	}
 
 	public function agregarProductos(){
-		try {
-			$this->constructorSQL->insert('productos', ['documentoProveedor' => $_POST['idProveedorProducto'],'idTipoProducto' => $_POST['idTipoProducto'], 'nombreProducto' => $_POST['nombreProducto']]);
-			$this->constructorSQL->ejecutarSQL();
-			echo json_encode('Eres una ganadora');
-		} catch (PDOException $e) {
-			echo json_encode('Fallida');
-		}
+		if (isset($_POST['idProveedorProducto'], $_POST['idTipoProducto'], $_POST['nombreProducto'])) {
+			try {
+				$this->constructorSQL->insert('productos', ['documentoProveedor' => $_POST['idProveedorProducto'],'idTipoProducto' => $_POST['idTipoProducto'], 'nombreProducto' => $_POST['nombreProducto']]);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Eres una ganadora');
+			} catch (PDOException $e) {
+				echo json_encode('Fallida');
+			}
+		}else echo json_decode('no existe');
+	}
+
+	public function obtenerProducto(){
+		(isset($_GET['e'])) ? $productos = 'productos '.$_GET['e'] : $productos = 'productos';
+		$productos = $this->constructorSQL->select($productos)->ejecutarSQL();
+		echo json_encode($productos);
 	}
 
 	public function agregarProveedor(){
