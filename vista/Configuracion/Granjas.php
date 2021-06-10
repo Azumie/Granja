@@ -19,7 +19,7 @@
 				
 					<div class="modal-body">
 						<div class="row">
-							<form id="formGranja" class="col-md-6">
+							<form id="formGranja" class="col-md-5">
 
 								<span id="estadoFormGranja">Agregando...</span>
 
@@ -53,8 +53,8 @@
 
 						
 						
-							<div class="col-6">
-								<table id="tablaGranjas" class="table table-striped table-responsive-md table-sm">
+							<div class="col-7">
+								<table id="tablaGranjas" class=" datatable table table-striped table-responsive-sm table-sm">
 									<thead class="table-info">
 										<th>Nombre Granja</th>
 										<th>Ubicacion</th>

@@ -1,5 +1,5 @@
 <div class="modal fade" id="TiposHuevo">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog modal-fluid" role="document">
 		<div class="modal-content">
 			<div class="modal-header iconosModales mt-2 mt-md-0">
 				<div class="col-auto bg-warning p-2 icono">
@@ -37,7 +37,7 @@
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
-						<table id="tablaTiposHuevo" class="table table-striped table-responsive-lg p-0 tablas table-sm">
+						<table id="tablaTiposHuevo" class=" datatable table table-striped table-responsive-lg p-0 tablas table-sm">
 							<thead class="table-info" >
 								<th>Nombre</th>
 								<th>Editar</th>

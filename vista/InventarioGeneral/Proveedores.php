@@ -43,7 +43,7 @@
 						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
 					    	<label for="nombresProveedor" class="input-group-text">
-					    		Nombre
+					    		Nombre Proveedor
 					    	</label>
 					  	</div>
 							<input type="text" name="nombresProveedor" class="form-control" minlength="2" maxlength="40">

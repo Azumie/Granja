@@ -20,7 +20,7 @@ class LoginControlador
 				// $_SESSION['login'] = true;
 				$_SESSION['nombreUsuario'] = $_REQUEST['nombreUsuario'];
 				// $_SESSION['claveUsuario'] = $usuario->claveUsuario;
-				header('location:?c=Galpon');
+				header('location:?c=Inicio');
 			// }else{
 			// 	alerta('danger', 'El usuario y/o la clave con la que intenta acceder no son válidos.');
 			// 	header('location:./');

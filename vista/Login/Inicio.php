@@ -1,6 +1,6 @@
-<div class="card card-dark">
+<div class="card">
 	<div class="card-body">
-		<h4 class="text-center text-white esconder">Iniciar Sesión</h4>
+		<h4 class="text-center esconder font-weight-bold text-muted">Iniciar Sesión</h4>
 		<div class="row justify-content-center">
 			<div class="col-auto mb-2  esconder">
 				<img src="assets/img/Logo.png" class="rounded-circle">
@@ -9,15 +9,15 @@
 				<!-- action="?c=login&m=login" -->
 				<form method="post" action="?c=login&m=login" id="formLogin">
 					<div class="form-group">
-						<strong class="d-block text-center text-white">Usuario</strong>
+						<strong class="d-block text-center  text-muted">Usuario</strong>
 						<input type="text" name="nombreUsuario" class="form-control" required minlength="4" maxlength="20">
 					</div>
 					<div class="form-group">
-						<strong class="d-block text-center text-white">Contraseña</strong>
+						<strong class="d-block text-center  text-muted">Contraseña</strong>
 						<input type="password" name="claveUsuario" class="form-control" required minlength="6" maxlength="15">
 					</div>
-					<button class="btn b1 b1-primary btn-block">Aceptar</button>
-					<button class="col-auto btn btn-Secondary text-white" data-toggle="modal" data-target="#CambiarContra" type="button">¿Olvidó su contraseña?</button>
+					<button class="btn btn-primary btn-block">Aceptar</button>
+					<button class="btn  btn-block text-muted" data-toggle="modal" data-target="#CambiarContra" type="button">¿Olvidó su contraseña?</button>
 				</form>
 			</div>
 		</div>
