@@ -96,13 +96,12 @@ function editarObjetoBD(idTabla, controlador, metodo, nombreId, inputs){
         resp = resp[0];
         // llenarForm(resp[0]);
         if (elementoExiste(nombreId)) {
-        	
+          let inputId = document.getElementById(nombreId);
         	if (nombreId.includes('documento')) {
-        		console.log('lo contiene')
         		idElemento = idElemento.split('-')[1];
+            inputId.setAttribute('editar', true);
         	}
-          document.getElementById(nombreId).value = idElemento;
-        		console.log("idElemento", idElemento);
+          inputId.value = idElemento
         }else {
           let input = document.createElement('input');
           input.id = nombreId;
@@ -111,10 +110,14 @@ function editarObjetoBD(idTabla, controlador, metodo, nombreId, inputs){
           input.value = idElemento;
           formGranja.appendChild(input);
         }
+        let inputDocumentoEncontrado = false;
         Object.entries(inputs).forEach(([nombreInput, nombreCampo]) => {
+          if ((nombreInput.includes('documento') || nombreInput.includes('nacionalidad')) && inputDocumentoEncontrado == false) {
+            resp['nacionalidad'] = resp['documento'].split('-')[0];
+            resp['documento'] = resp['documento'].split('-')[1];
+            inputDocumentoEncontrado = true;
+          }
         	let inputForm = document.getElementById(nombreInput);
-        	// console.log("inputForm", inputForm);
-
         	inputForm.value = resp[nombreCampo];
         });
       });

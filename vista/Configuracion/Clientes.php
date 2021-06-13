@@ -25,7 +25,7 @@
 						  		<option>V</option>
 						  		<option>R</option>
 						  	</select>
-								<input placeholder="28368737" type="text" name="documento" id="documento" class="form-control">
+								<input placeholder="28368737" type="text" name="documentoCliente" id="Cliente" class="form-control">
 							</div>
 							<div class="form-check col-md-2">
 				        <input placeholder="" class="form-check-input" type="checkbox" id="activo" name="activo">
@@ -65,7 +65,7 @@
 					    		Teléfono
 					    	</label>
 					  	</div>
-							<input placeholder="04162244105" type="text" name="telefono" id="telefono" class="form-control">
+							<input placeholder="04162244105" type="text" name="telefonoCliente" id="telefonoCliente" class="form-control">
 						</div>
 
 
@@ -77,14 +77,14 @@
 						    		Email
 						    	</label>
 						  	</div>
-						  	<input placeholder="ejemplo@gmail.com" class="form-control" type="email" id="emal" name="emal"></input>
+						  	<input placeholder="ejemplo@gmail.com" class="form-control" type="email" id="emailCliente" name="emailCliente"></input>
 						</div>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
 
 						<div class="row justify-content-center d-flex">
 							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button type="button" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 						</div>
 					</div>
 

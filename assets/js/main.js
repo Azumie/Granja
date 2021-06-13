@@ -16,11 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
   if (elementoExiste('formularioProveedores')) {
     // console.log(document.getElementById('Proveedores').classList.contains('show'))
     const formularioProveedores = document.getElementById('formularioProveedores');
-    obtenerObjeto('?c=Configuracion&m=obtenerProveedor','#tablaProveedor',['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'idProducto', llenarTabla)
+    obtenerObjeto('?c=Configuracion&m=obtenerProveedor','#tablaProveedor',['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla);
     formularioProveedores.addEventListener('submit', (e) =>{
       e.preventDefault();
       console.log('cliks');
-      agragarObjetoBD(formularioProveedores, '?c=Configuracion&m=agregarProveedor', '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
+      let metodo;
+      if (elementoExiste('documentoProveedor')) {
+        let inputDocumento = document.getElementById('documentoProveedor');
+
+        metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
+        metodo += 'Proveedor';
+        console.log(metodo)
+      }
+      agragarObjetoBD(formularioProveedores, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
     });
 
     editarObjetoBD(
@@ -29,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'obtenerProveedor', 
       'documentoProveedor',
       {
+        'nacionalidadProveedor': 'nacionalidad',
+        'documentoProveedor': 'documento',
         'nombresProveedor': 'nombrePersona',
         'apellidosProveedor': 'apellidosPersona',
         'telefonoProveedor': 'telefonoPersona',
