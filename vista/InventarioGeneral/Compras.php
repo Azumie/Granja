@@ -14,40 +14,10 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-lg-5 mb-3 mb-lg-0 ">
-
-						<!-- RADIO BUTTON - GRANJA O GALPON -->
-
-						<div class="form-check mb-3">
-							<label class="form-check-label mr-5">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-								Granja
-							</label>
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-								Galpon en Lote
-							</label>
-						</div>
-
-						<!-- SELECT GALPON EN LOTE O GRANJA -->
-
-						<div class="input-group mb-3 ">
-						  	<div class="input-group-prepend">
-						    	<label for="idGalponEnLote" class="input-group-text">
-						    		Granja - Galpón en Lote
-						    	</label>
-						  	</div>
-							<select id="idGalponEnLote" class="form-control" name="idGalponEnLote">
-								<option selected disabled>Elegir Galpón en Lote</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select>
-						</div>
-
+						<p>A continuación...<br>Ingrese la información de la compra realizada.</p>
 						<!-- PROVEEDOR -->
 
-						<div class="input-group mb-3 ">
+						<div class="input-group input-group-sm mb-3 ">
 						  	<div class="input-group-prepend">
 						    	<label for="idProveeor" class="input-group-text">
 						    		Proveedor
@@ -64,7 +34,7 @@
 
 						<!-- FECHA DE LA COMPRA -->
 
-						<div class="input-group mb-3">
+						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
 						    	<label for="fechaCompra" class="input-group-text">
 						    		Fecha Compra
@@ -73,13 +43,10 @@
 						  	<input class="form-control" type="date" id="fechaCompra" name="fechaCompra"></input>
 						</div>
 
-						<hr>
-
-						<div class="row">
-
+						<div class="row justify-content-center">
+							<p class="ml-3">Indique los productos comprados y presione en el botón + para adicionarlo a la cola.</p>
 							<!-- TIPO DE PRODUCTO -->
-
-							<div class="input-group mb-3 col-md-6">
+							<div class="input-group input-group-sm mb-3 col-12">
 							  	<div class="input-group-prepend">
 							    	<label for="idTipoProducto" class="input-group-text">
 							    		Tipo Producto
@@ -96,7 +63,7 @@
 
 							<!-- PRODUCTO -->
 
-							<div class="input-group mb-3  col-md-6">
+							<div class="input-group input-group-sm mb-3 col-12">
 							  	<div class="input-group-prepend">
 							    	<label for="idProducto" class="input-group-text">
 							    		Producto
@@ -113,7 +80,7 @@
 
 							<!-- CANTIDAD -->
 
-							<div class="input-group mb-3  col-md-6">
+							<div class="input-group input-group-sm mb-3 col-6">
 							  	<div class="input-group-prepend">
 							    	<label for="cantidadProducto" class="input-group-text">
 							    		Cantidad
@@ -124,7 +91,7 @@
 
 							<!-- PRECIO -->
 
-							<div class="input-group mb-3  col-md-5">
+							<div class="input-group input-group-sm mb-3 col-6">
 							  	<div class="input-group-prepend">
 							    	<label for="precioProducto" class="input-group-text">
 							    		Precio
@@ -132,13 +99,16 @@
 							  	</div>
 								<input id="precioProducto" class="form-control" name="precioProducto">
 							</div>
-							<button class="btn btn-info col-md-auto h-100">+</button>
+							<button class="btn btn-info btn-sm col-5 col-md-3 justify-content-center mb-2">+</button>
 						</div>
-
+<!--https://www.youtube.com/watch?v=iq-CYBnGM-8&list=TLPQMTMwNjIwMjGOi0aUHBiflg&index=7 
+https://www.youtube.com/watch?v=THAldKSrw0U&list=TLPQMTMwNjIwMjGOi0aUHBiflg&index=8
+https://www.youtube.com/watch?v=1KPY1an0V4A&list=TLPQMTMwNjIwMjGOi0aUHBiflg&index=9 
+https://www.youtube.com/watch?v=Vf7N6ADsmKg-->
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center">
-							<thead class="table-warning">
+						<table class="table table-striped table-responsive p-0 tablas table-sm text-center">
+							<thead class="table-info">
 								<th>Tipo</th>
 								<th>Producto</th>
 								<th>Cantidad</th>
@@ -172,7 +142,7 @@
 								<th>Galpón en lote</th>
 								<th>Alimento</th>
 								<th>Cantidad</th>
-								<th>Editar</th>
+								<th>Acción</th>
 							</thead>
 							<tbody>
 
@@ -185,79 +155,7 @@
 									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
 
 									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
+										<button class="btn btn-info btn-sm rounded-circle"><i class="fas fa-pen-fancy"></i></button>
 									</td>
 								</tr>
 							</tbody>

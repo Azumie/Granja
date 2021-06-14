@@ -13,59 +13,44 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-lg-5 mb-3 mb-lg-0 ">
-
-						<!-- CLIENTE -->
-
+					<div class="col-lg-5 mb-3 mb-lg-0">
 						<div class="row">
-							<div class="col-md-11 input-group mb-3 ">
-						  	<div class="input-group-prepend">
-						    	<label for="idClinete" class="input-group-text">
-						    		Cliente
-						    	</label>
-						  	</div>
-								<select id="idClinete" class="form-control" name="idClinete">
+							<p class="ml-3">A continuación...<br>Ingresa la información pertinente a los despachos realizados.</p>
+							<div class="col-md-11 input-group input-group-sm mb-3 ">
+							  	<div class="input-group-prepend">
+							    	<label for="idCliente" class="input-group-text">
+							    		Cliente
+							    	</label>
+							  	</div>
+								<select id="idCliente" class="form-control" name="idCliente">
 									<option selected disabled>Elegir Cliente</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</select>
+							</div>
+							<div class="input-group input-group-sm mb-3 col-12">
+							  	<div class="input-group-prepend">
+							    	<label for="idTipoVenta" class="input-group-text">
+							    		Tipo Venta
+							    	</label>
+							  	</div>
+								<select id="idTipoVenta" class="form-control" name="idTipoVenta">
+									<option selected disabled>Elegir Tipo de Venta</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
 									<option value="4">4</option>
 									<option value="5">5</option>
 								</select>
 							</div>
-							<button class="btn btn-info col-md-auto h-100 mb-3">+</button>
+							<div class="input-group input-group-sm mb-3 col-12">
+							  	<div class="input-group-prepend">
+							    	<label for="precinto" class="input-group-text">
+							    		Precinto
+							    	</label>
+							  	</div>
+							  	<input type="text" name="precinto" id="precinto" class="form-control" placeholder='Número de precinto'>
 						</div>
-
-						<!-- TIPO DE VENTA -->
-
-						<div class="input-group mb-3 ">
-					  	<div class="input-group-prepend">
-					    	<label for="idTipoVenta" class="input-group-text">
-					    		Tipo Venta
-					    	</label>
-					  	</div>
-							<select id="idTipoVenta" class="form-control" name="idTipoVenta">
-								<option selected disabled>Elegir Tipo de Venta</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select>
-						</div>
-
-						<!-- PRECINTO -->
-
-						<div class="input-group mb-3 ">
-					  	<div class="input-group-prepend">
-					    	<label for="precinto" class="input-group-text">
-					    		Precinto
-					    	</label>
-					  	</div>
-					  	<input type="text" name="precinto" id="precinto" class="form-control">
-						</div>
-
-						<!-- FECHA DEL DESPACHO -->
-
-						<div class="input-group mb-3">
+						<div class="input-group input-group-sm mb-3 col-12">
 						  	<div class="input-group-prepend">
 						    	<label for="fechaDespacho" class="input-group-text">
 						    		Fecha Despacho
@@ -73,48 +58,33 @@
 						  	</div>
 						  	<input class="form-control" type="date" id="fechaDespacho" name="fechaDespacho"></input>
 						</div>
-
-						<hr>
-
-						<div class="row">
-
-							<!-- TIPO DE HUEVO -->
-
-							<div class="input-group mb-3 col-md-6">
-							  	<div class="input-group-prepend">
-							    	<label for="idTipoHuevo" class="input-group-text">
-							    		Tipo Huevo
-							    	</label>
-							  	</div>
-								<select id="idTipoHuevo" class="form-control" name="idTipoHuevo">
-									<option selected disabled>Elegir Tipo de Huevo</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-							</div>
-
-							<!-- CANTIDAD -->
-
-							<div class="input-group mb-3  col-md-5">
-							  	<div class="input-group-prepend">
-							    	<label for="cantidadHuevos" class="input-group-text">
-							    		Cantidad
-							    	</label>
-							  	</div>
-							  	<input class="form-control" type="number" id="cantidadHuevos" name="cantidadHuevos"></input>
-							</div>
-
-							<!-- BOTON AGREGAR A DETALLE DESPACHO -->
-
-							<button class="btn btn-info font-weight-bold  col-md-auto h-100">+</button>
+						<div class="row justify-content-center">
+						<p class="ml-4">Indique los productos vendidos y presione en el botón + para adicionarlo a la cola.</p>
+						<div class="input-group input-group-sm mb-3 col-md-10">
+						  	<div class="input-group-prepend">
+						    	<label for="idTipoHuevo" class="input-group-text">
+						    		Tipo Huevo
+						    	</label>
+						  	</div>
+							<select id="idTipoHuevo" class="form-control" name="idTipoHuevo">
+								<option selected disabled>Elegir Tipo de Huevo</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
 						</div>
-
-						<!-- TABLA DEL DETALLE DE LA COMPRA -->
-
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center">
-							<thead class="table-warning">
+						<div class="input-group input-group-sm mb-3 col-md-10">
+						  	<div class="input-group-prepend">
+						    	<label for="cantidadHuevos" class="input-group-text">
+						    		Cantidad
+						    	</label>
+						  	</div>
+						  	<input class="form-control" type="number" id="cantidadHuevos" name="cantidadHuevos"></input>
+						</div>
+						<!-- Adicionar a la cola los productos vendidos -->
+						<button class="btn btn-info btn-sm col-6 col-md-3 justify-content-center mb-2">+</button>
+						</div>
+						<table class="table table-striped table-lg p-0 tablas table-sm text-center col-12 ml-1">
+							<thead class="table-info">
 								<th>Tipo de Huevo</th>
 								<th>Cantidad</th>
 								<th>Borrar</th>
@@ -127,23 +97,20 @@
 								</tr>
 							</tbody>
 						</table>
-
-						<!-- BOTONES GUARDAR Y CANCELAR -->
-						<div class="row justify-content-center d-flex">
-							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 						</div>
-					</div>
-
-					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
-
+						<div class="row justify-content-between">
+							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-1 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
+						</div>
+						
+					</div><!-- col-lg-5 -->
 					<div class="col-lg-7">
 						<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
 							<thead class="table-info" >
 								<th>Fecha</th>
 								<th>precinto</th>
 								<th>Total Huevos</th>
-								<th>Editar</th>
+								<th>Acción</th>
 							</thead>
 							<tbody>
 
@@ -151,17 +118,14 @@
 									<td></td>
 									<td></td>
 									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
 									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
+										<button class="btn btn-info btn-sm rounded-circle"><i class="fas fa-pen-fancy"></i></button>
 									</td>
 								</tr>
 
 							</tbody>
 						</table>
-					</div>
+					</div> <!-- col-lg-7 -->
 				</div>
 			</div>
 		</div><!-- /.modal-content -->

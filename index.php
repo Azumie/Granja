@@ -26,7 +26,7 @@ function prepararRequire ($string){
 $menuItems = 
 [
 	'Inicio'=> 'Inicio',
-	'Gestion de Aves' => 
+	'Gestión de Aves' => 
 		[
 			'Alimentacion' => 'Alimentación',
 			'Mortalidad' => 'Mortalidad',
@@ -38,7 +38,7 @@ $menuItems =
 		'Compras' => 'Compras'
 	],
 	'Lote' => [
-		'LineaGenetica' => 'Lineas Geneticas',
+		'LineaGenetica' => 'Líneas Genéticas',
 		'Galponeros' => 'Galponeros',
 		'NuevoLote' => 'Nuevo Lote'
 	],

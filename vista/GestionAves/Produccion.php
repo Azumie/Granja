@@ -31,6 +31,7 @@
 							</div>
 							<input type="date" class="form-control" id="fechaProduccion" name="fechaProduccion">
 						</div>
+						<p>Clasificación de los huevos recolectados.</p>
 						<table class="table table-responsive p-0 table-sm text-center col-12">
 							<thead class="table-info" >
 								<th>Grandes</th>
@@ -42,7 +43,7 @@
 								<th>Rústicos</th>
 								<th>Pool</th>
 							</thead>
-							<tbody class="table-light">
+							<tbody>
 								<tr>
 									<td><input type="number" id="Grandes" name="Grandes"></td>
 									<td><input type="number" id="Medianos" name="Medianos"></td>
@@ -61,22 +62,32 @@
 						</div>
 					</div>
 					<div class="col-md-6">
+						<p>Recogidas llevadas a cabo con anterioridad</p>
 						<table class="table table-sm text-center">
 							<thead class="table-info">
 								<th>Fecha</th>
 								<th>Galpón</th>
 								<th>Producción</th>
+								<th>Acción</th>
 							</thead>
-							<tbody class="table-light">
+							<tbody>
 								<tr>
-									<td>h</td>
-									<td>a</td>
-									<td>s</td>
+									<td>11/06/2021</td>
+									<td>1</td>
+									<td>150</td>
+									<td><button class="btn btn-info rounded-circle btn-sm icono"><i class="fas fa-pen-fancy"></i></button></td>
 								</tr>
 								<tr>
-									<td>h</td>
-									<td>a</td>
-									<td>s</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
 								</tr>
 							</tbody>
 						</table>
