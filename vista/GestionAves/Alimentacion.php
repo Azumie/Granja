@@ -57,6 +57,7 @@
 						</div>
 					</div>
 					<div class="col-lg-7">
+						<p>Edite o busque mayor información acerca del alimento suministrado</p>
 						<table class="table table-striped table-responsive-sm p-0 tablas table-sm text-center">
 							<thead class="table-info" >
 								<th>Fecha</th>
@@ -67,11 +68,10 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
+									<td>11/06/2021</td>
+									<td>1</td>
+									<td>Concentrado A</td>
+									<td>10kg</td>
 									<td>
 										<button class="btn btn-info btn-sm rounded-circle botonesModales editarGalpon" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
 									</td>

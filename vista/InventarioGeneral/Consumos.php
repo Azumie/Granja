@@ -30,7 +30,7 @@
 
 						<!-- SELECT GALPON EN LOTE O GRANJA -->
 
-						<div class="input-group mb-3 ">
+						<div class="input-group input-group-sm mb-3 ">
 						  	<div class="input-group-prepend">
 						    	<label for="idGalponEnLote" class="input-group-text">
 						    		Granja - Galpón en Lote
@@ -47,7 +47,7 @@
 
 						<!-- FECHA DE LA COMPRA -->
 
-						<div class="input-group mb-3">
+						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
 						    	<label for="fechaCompra" class="input-group-text">
 						    		Fecha Compra
@@ -62,7 +62,7 @@
 
 							<!-- TIPO DE PRODUCTO -->
 
-							<div class="input-group mb-3 col-md-6">
+							<div class="input-group input-group-sm mb-3 col-md-6">
 							  	<div class="input-group-prepend">
 							    	<label for="idTipoProducto" class="input-group-text">
 							    		Tipo Producto
@@ -79,7 +79,7 @@
 
 							<!-- PRODUCTO -->
 
-							<div class="input-group mb-3  col-md-6">
+							<div class="input-group input-group-sm mb-3  col-md-6">
 							  	<div class="input-group-prepend">
 							    	<label for="idProducto" class="input-group-text">
 							    		Producto
@@ -96,7 +96,7 @@
 
 							<!-- CANTIDAD -->
 
-							<div class="input-group mb-3  col-md-11">
+							<div class="input-group input-group-sm mb-3  col-md-11">
 							  	<div class="input-group-prepend">
 							    	<label for="cantidadProducto" class="input-group-text">
 							    		Cantidad
@@ -160,103 +160,7 @@
 									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
 
 									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
+										<button class="btn btn-sm btn-info rounded-circle"><i class="fas fa-pen-fancy"></i></button>
 									</td>
 								</tr>
 							</tbody>
