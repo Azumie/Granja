@@ -199,7 +199,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `compraProductos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `compraProductos` (
+CREATE TABLE IF NOT EXISTS `compraproductos` (
   `idInventario` INT NOT NULL,
   `idProducto` INT NOT NULL,
   `idGranja` INT NOT NULL,
