@@ -35,7 +35,7 @@ if(elementoExiste('formularioAgregarGalpon')){
 						// 	console.log(res);
 						// 	formularioAgregarGalpon.reset();
 						// 	obtenerGranjas('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
-						// 	document.getElementsByName('fechaCreacionGalpon')[0].value= today;
+						document.getElementsByName('fechaCreacionGalpon')[0].value= fechaHoy();
 						// });
 					}else alert('Error al escoger el tipo de Confinamiento');
 				}else alert('Error al indicar Área Útil');

@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `personas` (
   PRIMARY KEY (`documento`),
   CONSTRAINT `fk_personas_tipopersona11`
     FOREIGN KEY (`idTipoPersona`)
-    REFERENCES `tipopersona` (`idTipoPersona`)
+    REFERENCES `tipospersona` (`idTipoPersona`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -336,3 +336,4 @@ CREATE TABLE IF NOT EXISTS `detalledespachos` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
+INSERT INTO `tipospersona` (`idTipoPersona`, `nombreTipoPersona`) VALUES (NULL, 'Galponero');

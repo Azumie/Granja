@@ -19,7 +19,7 @@
 
 						<!-- NOMBRE TIPO HUEVO -->
 
-						<div class="input-group mb-3">
+						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
 						    	<label for="nombreTipoHuevo" class="input-group-text">
 						    		Nombre
@@ -30,8 +30,8 @@
 
 						<!-- BOTONES - AGREGAR Y CANCELAR -->
 
-						<button class="btn btn-primary btn-block mt-4">Guardar</button>
-						<button type="button" class="btn btn-outline-danger btn-block" data-dismiss="modal">Cancelar</button>
+						<button class="btn btn-sm btn-primary btn-block mt-4">Guardar</button>
+						<button type="button" class="btn btn-outline-danger btn-sm btn-block" data-dismiss="modal">Cancelar</button>
 					</form>
 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->

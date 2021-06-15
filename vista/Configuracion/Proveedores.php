@@ -28,7 +28,7 @@
 						  		<option>V</option>
 						  		<option>R</option>
 						  	</select>
-								<input type="text" name="documentoProveedor" id="documentoProveedor" class="form-control">
+								<input type="text" name="documentoProveedor" id="documentoProveedor" placeholder='Número de cédula' class="form-control">
 							</div>
 							<div class="form-check col-md-2">
 				        <input class="form-check-input" type="checkbox" id="activoProveedor" name="activoProveedor" checked>
@@ -43,10 +43,10 @@
 						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
 					    	<label for="nombresProveedor" class="input-group-text">
-					    		Nombre Proveedor
+					    		Nombre
 					    	</label>
 					  	</div>
-							<input type="text" name="nombresProveedor" id="nombresProveedor" class="form-control">
+							<input type="text" placeholder='Nombres del proveedor' name="nombresProveedor" id="nombresProveedor" class="form-control">
 						</div>
 
 						<!-- APELLIDOS Proveedor -->
@@ -57,7 +57,7 @@
 					    		Apellidos
 					    	</label>
 					  	</div>
-							<input type="text" name="apellidosProveedor" id="apellidosProveedor" class="form-control">
+							<input type="text" placeholder='Apellidos del proveedor' name="apellidosProveedor" id="apellidosProveedor" class="form-control">
 						</div>
 
 						<!-- TELEFONO	 -->
@@ -80,7 +80,7 @@
 						    		Email
 						    	</label>
 						  	</div>
-						  	<input class="form-control" type="email" id="emailProveedor" name="emailProveedor"></input>
+						  	<input class="form-control" placeholder='Correo del proveedor' type="email" id="emailProveedor" name="emailProveedor"></input>
 						</div>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
@@ -93,6 +93,7 @@
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
+						<p>Proveedores agregados con anterioridad</p>
 						<table class="table table-striped table-responsive p-0 tablas table-sm" id="tablaProveedor">
 							<thead class="table-info" >
 								<th>Documento</th>

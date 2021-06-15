@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       console.log('cliks');
       let metodo;
-      if (elementoExiste('documentoProveedor')) {
-        let inputDocumento = document.getElementById('documentoProveedor');
+      if (elementoExiste('documentoCliente')) {
+        let inputDocumento = document.getElementById('documentoCliente');
 
         metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
         metodo += 'Proveedor';
@@ -47,6 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
   }
+    if (elementoExiste('formTiposHuevo')) {
+    const formTiposHuevo = document.getElementById('formTiposHuevo');
+    // url,elemento,valores, id, funcion = ''
+    obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo', llenarTabla);
+    formTiposHuevo.addEventListener('submit', (e) =>{
+      e.preventDefault();
+      agragarObjetoBD(formTiposHuevo, '?c=Configuracion&m=agregarTipoHuevo', '?c=Configuracion&m=obtenerTipoHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
+
+    })
+  }
+
+  // if (elementoExiste('formularioClientes')) {
+  //   const formularioClientes = document.getElementById('formularioClientes');
+  //   // url,elemento,valores, id, funcion = ''
+  //   obtenerObjeto('?c=Configuracion&m=obtenerCliente', '#tablaCliente', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla);
+  //   formularioClientes.addEventListener('submit', (e) =>{
+  //     e.preventDefault();
+  //     agragarObjetoBD(formularioClientes, '?c=Configuracion&m=agregarCliente', '?c=Configuracion&m=obtenerCliente', '#tablaCliente', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
+
+  //   })
+  // }
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
   // obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
