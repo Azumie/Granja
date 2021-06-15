@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `inventario` (
   PRIMARY KEY (`idInventario`),
   CONSTRAINT `fk_inventario_TiposOperacion1`
     FOREIGN KEY (`idTipoOperacion`)
-    REFERENCES `TiposOperacion` (`idTipoOperacion`)
+    REFERENCES `tiposoperacion` (`idTipoOperacion`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
