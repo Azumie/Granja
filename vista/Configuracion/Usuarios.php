@@ -19,80 +19,78 @@
 			
 				<div class="modal-body">
 					<div class="row">
-						<div class="col-md-5">
-							<div class="row">
+	<form id="formularioUsuario" class="col-md-5">
+		<div class="row">
 
-								<!-- DOCUMENTO -->
-								
-								<div class="col-10 input-group form-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text text-white">Documento</span>
-									</div>
-									<select class='form-control' name='DocumentoUsuario' id='DocumentoUsuario'>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-									</select>
-								</div>
+			<!-- DOCUMENTO -->
+			
+			<div class="col-10 input-group input-group-sm form-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text text-white">Documento</span>
+				</div>
+				<select class='form-control' name='DocumentoUsuario' id='DocumentoUsuario'>
+					<option value="V-29587834">29587834</option>
+					<option value="V-12688737">V-12688737</option>
+				</select>
+			</div>
 
-								<!-- ACTIVO -->
+			<!-- ACTIVO -->
 
-								<div class="col-md-auto mb-3">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="activoUsuario" name="activoUsuario" checked="" disabled>
-										<label class="custom-control-label" for="activoUsuario">Activo</label>
-									</div>
-								</div>
-							</div>
+			<div class="col-md-auto mb-3">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="activoUsuario" name="activoUsuario" checked="" disabled>
+					<label class="custom-control-label" for="activoUsuario">Activo</label>
+				</div>
+			</div>
+		</div>
 
-							<!-- USUARIOS -->
+		<!-- USUARIOS -->
 
-							<div class="input-group form-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text text-white">Usuario</span>
-								</div>
-								<input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control" required minlength="4" maxlength="20">
-							</div>
-							
-							<!-- CLAVE -->
+		<div class="input-group input-group-sm form-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text text-white">Usuario</span>
+			</div>
+			<input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control" required minlength="4" maxlength="20">
+		</div>
+		
+		<!-- CLAVE -->
 
-							<div class="input-group form-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text text-white ">Clave</span>
-								</div>
-								<input type="password" name="claveUsuario" id="claveUsuario" class="form-control" required minlength="4" maxlength="20">
-							</div>
-							<div class="input-group form-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text text-white">Pregunta</span>
-								</div>
-								<select class='form-control' name='preguntaUsuario' id='preguntaUsuario'>
-									<option value="Nombre de tu mejor amigo">Nombre de tu mejor amigo</option>
-									<option value="Nombre de tu mama">Nombre de tu mamá</option>
-									<option value="Fecha de nacimiento de tu abuela">Fecha de nacimiento de tu abuela</option>
-									<option value="Videojuego Favorito">Videojuego Favorito</option>
-								</select>
-								
-							</div>
-							<div class="input-group form-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text text-white">Respuesta</span>
-								</div>
-								<input type="text" name="resuspuestaUsuario" id="resuspuestaUsuario" class="form-control" required minlength="4" maxlength="20">
-							</div>
-							<!-- BOTONES - AGREGAR Y CANCELAR -->
+		<div class="input-group input-group-sm form-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text text-white ">Clave</span>
+			</div>
+			<input type="password" name="claveUsuario" id="claveUsuario" class="form-control" required minlength="4" maxlength="20">
+		</div>
+		<div class="input-group input-group-sm form-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text text-white">Pregunta</span>
+			</div>
+			<select class='form-control' name='preguntaUsuario' id='preguntaUsuario'>
+				<option value="Nombre de tu mejor amigo">Nombre de tu mejor amigo</option>
+				<option value="Nombre de tu mama">Nombre de tu mamá</option>
+				<option value="Fecha de nacimiento de tu abuela">Fecha de nacimiento de tu abuela</option>
+				<option value="Videojuego Favorito">Videojuego Favorito</option>
+			</select>
+			
+		</div>
+		<div class="input-group input-group-sm form-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text text-white">Respuesta</span>
+			</div>
+			<input type="text" name="respuestaUsuario" id="resuspuestaUsuario" class="form-control" required minlength="4" maxlength="20">
+		</div>
+		<!-- BOTONES - AGREGAR Y CANCELAR -->
 
-							<button type="button" class="btn btn-primary text-white  btn-block mt-4" data-dismiss="modal">Guardar</button>
-							<button type="button" class="btn btn-outline-danger btn-block">Cancelar</button>
+		<button type="submit" class="btn btn-primary text-white  btn-block mt-4">Guardar</button>
+		<button type="button" class="btn btn-outline-danger btn-block">Cancelar</button>
 
-						</div>
+	</form>
 
 
 						
 						
 						<div class="col-7">
-							<table class=" datatable table table-striped table-responsive table-sm">
+							<table class=" datatable table table-striped table-responsive table-sm" id='tablaUsuario'>
 								<thead class="table-info">
 									<th>Estado</th>
 									<th>Cédula</th>

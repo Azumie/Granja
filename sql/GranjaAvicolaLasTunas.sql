@@ -253,6 +253,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `nombreUsuario` VARCHAR(20) NOT NULL,
   `claveUsuario` VARCHAR(45) NOT NULL,
   `activoUsuario` TINYINT(1) NOT NULL DEFAULT 1,
+  `pregunta`VARCHAR(45) NOT NULL,
+  `respuesta`VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idUsuario`),
   CONSTRAINT `fk_usuarios_personas1`
     FOREIGN KEY (`documento`)

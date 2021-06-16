@@ -93,7 +93,7 @@
 
 					<div class="col-lg-7">
 						<p>Lista de clientes previamente agregados</p>
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm" id="tablaCliente">
+						<table class="table table-striped table-responsive p-0 tablas table-sm" id="tablaCliente">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>
