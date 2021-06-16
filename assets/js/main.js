@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if(elementoExiste('formularioUsuario')){
     const formularioUsuario = document.getElementById('formularioUsuario');
+    obtenerObjeto('?c=Configuracion&m=obtenerGalponero', document.getElementById('DocumentoUsuario'), ['documento', 'documento'], '', llenarSelect);
     obtenerObjeto('?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario', llenarTabla);
     formularioUsuario.addEventListener('submit',(e)=>{
       e.preventDefault();

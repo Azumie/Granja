@@ -29,8 +29,6 @@
 					<span class="input-group-text text-white">Documento</span>
 				</div>
 				<select class='form-control' name='DocumentoUsuario' id='DocumentoUsuario'>
-					<option value="V-29587834">29587834</option>
-					<option value="V-12688737">V-12688737</option>
 				</select>
 			</div>
 
