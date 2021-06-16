@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       console.log('cliks');
       let metodo;
-      if (elementoExiste('documentoCliente')) {
-        let inputDocumento = document.getElementById('documentoCliente');
+      if (elementoExiste('documentoProveedor')) {
+        let inputDocumento = document.getElementById('documentoProveedor');
 
         metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
         metodo += 'Proveedor';
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
   }
-    if (elementoExiste('formTiposHuevo')) {
+  if (elementoExiste('formTiposHuevo')) {
     const formTiposHuevo = document.getElementById('formTiposHuevo');
     // url,elemento,valores, id, funcion = ''
     obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo', llenarTabla);
@@ -58,6 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  if (elementoExiste('formularioUsuario')) {
+    obtenerObjeto('?c=Configuracion&m=obtenerGalponero', document.getElementById('DocumentoUsuario'), ['documento', 'documento'], '', llenarSelect);
+    document.getElementById('DocumentoUsuario');
+  }
+  
+  if (elementoExiste('formularioGalponeros')) {
+    const formularioGalponeros = document.getElementById('formularioGalponeros');
+    // url,elemento,valores, id, funcion = ''
+    obtenerObjeto('?c=Configuracion&m=obtenerGalponero', '#tablaGalponeros', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla);
+    formularioGalponeros.addEventListener('submit', (e) =>{
+    e.preventDefault();
+    agragarObjetoBD(formularioGalponeros, '?c=Configuracion&m=agregarGalponero', '?c=Configuracion&m=obtenerGalponero', '#tablaGalponeros', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
+    })
+  }
   // if (elementoExiste('formularioClientes')) {
   //   const formularioClientes = document.getElementById('formularioClientes');
   //   // url,elemento,valores, id, funcion = ''

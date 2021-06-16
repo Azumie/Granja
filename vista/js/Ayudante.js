@@ -45,11 +45,11 @@ function llenarSelect(resp, elemento,valores, id){
 	for (a in resp) {
 		let select = [];
 		for (propiedad in resp[a]) {
-			if (propiedad == valores[0] || propiedad == valores[1]) {
+			if (propiedad == valores[0]) {
 				select.push(resp[a][propiedad]);
 			}
 		}
-		agregarOption(elemento, select[0], select[1]);
+		agregarOption(elemento, select[0], select[0]);
 	}
 }
 

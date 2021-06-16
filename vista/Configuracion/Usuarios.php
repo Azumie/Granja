@@ -19,7 +19,7 @@
 			
 				<div class="modal-body">
 					<div class="row">
-						<div class="col-md-5">
+						<form id="formularioUsuario" class="col-md-5">
 							<div class="row">
 
 								<!-- DOCUMENTO -->
@@ -29,10 +29,6 @@
 										<span class="input-group-text text-white">Documento</span>
 									</div>
 									<select class='form-control' name='DocumentoUsuario' id='DocumentoUsuario'>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
 									</select>
 								</div>
 
@@ -86,7 +82,7 @@
 							<button type="button" class="btn btn-primary text-white  btn-block mt-4" data-dismiss="modal">Guardar</button>
 							<button type="button" class="btn btn-outline-danger btn-block">Cancelar</button>
 
-						</div>
+						</form>
 
 
 						

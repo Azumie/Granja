@@ -50,16 +50,6 @@ class ConfiguracionControlador
 		}
 	}
 
-
-	public function obtenerTiposHuevo () {
-		$this->constructorSQL->select('tiposhuevo');
-		if (isset($_GET['idTipoHuevo'])) {
-			$this->constructorSQL->where('idTipoHuevo', '=', $_GET['idTipoHuevo']);
-		}
-		$tiposhuevo = $this->constructorSQL->ejecutarSQL();
-		echo json_encode($tiposhuevo);
-	}
-
 	public function agregarTipoHuevo () {
 		if (isset($_POST['nombreTipoHuevo'])) {
 			try {
@@ -174,7 +164,7 @@ class ConfiguracionControlador
 			->where('idTipoPersona', '=', '2');
 			
 		if (isset($_GET['documentoCliente'])) {
-			$this->constructorSQL->where('documento', '=', $_GET['documentoProveedor']);
+			$this->constructorSQL->where('documento', '=', $_GET['documentoCliente']);
 		}
 		$persona = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($persona);
@@ -193,6 +183,31 @@ class ConfiguracionControlador
 		}else echo json_encode('No existe');
 	}
 
+	public function obtenerGalponero(){
+		$this->constructorSQL->select('personas')
+			->where('idTipoPersona', '=', '1');
+			
+		if (isset($_GET['idGalponero'])) {
+			$this->constructorSQL->where('documento', '=', $_GET['idGalponero']);
+		}
+		$persona = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($persona);
+	}
+
+	public function agregarGalponero(){
+		if (isset($_POST['idGalponero'], $_POST['nombresGalponero'], $_POST['apellidosGalponero'], $_POST['telefono'], $_POST['emal'])) {
+			try {
+				$documento =$_POST['nacionalidadGalponero'].'-'.$_POST['idGalponero'];
+				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 1, 'nombrePersona' => $_POST['nombresGalponero'], 'apellidosPersona' => $_POST['apellidosGalponero'], 'telefonoPersona' => $_POST['telefono'],'emailPersona' => $_POST['emal'], 'activoPersona' => 1]);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Eres una ganadora');
+			} catch (PDOException $e) {
+				echo json_encode('Fallida');
+			}
+		}else echo json_encode('No existe');
+	}
+
+
 	public function obtenerTipoHuevo(){
 		$this->constructorSQL->select('tiposhuevo');
 			
@@ -201,6 +216,15 @@ class ConfiguracionControlador
 		}
 		$tiposhuevo = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($tiposhuevo);
+	}
+
+	public function obtenerUsuario(){
+		$this->constructorSQL->select('usuarios');
+		if (isset($_GET['DocumentoUsuario'])) {
+			$this->constructorSQL->where('DocumentoUsuario', '=', $_GET['DocumentoUsuario']);
+		}
+		$usuario = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($usuario);
 	}
 
 }
