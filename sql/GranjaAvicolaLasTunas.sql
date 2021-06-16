@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `inventario` (
   PRIMARY KEY (`idInventario`),
   CONSTRAINT `fk_inventario_TiposOperacion1`
     FOREIGN KEY (`idTipoOperacion`)
-    REFERENCES `TiposOperacion` (`idTipoOperacion`)
+    REFERENCES `tiposoperacion` (`idTipoOperacion`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `personas` (
   PRIMARY KEY (`documento`),
   CONSTRAINT `fk_personas_tipopersona11`
     FOREIGN KEY (`idTipoPersona`)
-    REFERENCES `tipopersona` (`idTipoPersona`)
+    REFERENCES `tipospersona` (`idTipoPersona`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -199,7 +199,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `compraProductos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `compraProductos` (
+CREATE TABLE IF NOT EXISTS `compraproductos` (
   `idInventario` INT NOT NULL,
   `idProducto` INT NOT NULL,
   `idGranja` INT NOT NULL,
@@ -253,6 +253,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `nombreUsuario` VARCHAR(20) NOT NULL,
   `claveUsuario` VARCHAR(45) NOT NULL,
   `activoUsuario` TINYINT(1) NOT NULL DEFAULT 1,
+  `pregunta`VARCHAR(45) NOT NULL,
+  `respuesta`VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idUsuario`),
   CONSTRAINT `fk_usuarios_personas1`
     FOREIGN KEY (`documento`)
@@ -336,3 +338,4 @@ CREATE TABLE IF NOT EXISTS `detalledespachos` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
+INSERT INTO `tipospersona` (`idTipoPersona`, `nombreTipoPersona`) VALUES (NULL, 'Galponero');

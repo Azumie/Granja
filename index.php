@@ -49,7 +49,6 @@ $menuItems =
 	],
 	'Configuración' => [
 			'TiposHuevo' => 'Tipos de Huevo',
-			'TiposVenta' => 'Tipos de Venta',
 			'Usuarios' => 'Usuarios',
 			'Granjas' => 'Granjas',
 			'Clientes' => 'Clientes',

@@ -13,9 +13,10 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-lg-5 mb-3 mb-lg-0 ">
+					<form id='formularioClientes' class="col-lg-5 mb-3 mb-lg-0 ">
 						<div class="row">
-							<div class="input-group mb-3 col-md-10">
+							<h6>A continuación...<br>Proporcione la información referente al cliente </h6>
+							<div class="input-group input-group-sm mb-3 col-md-10">
 						  	<div class="input-group-prepend">
 						    	<label for="idClinete" class="input-group-text">
 						    		Documento
@@ -25,10 +26,10 @@
 						  		<option>V</option>
 						  		<option>R</option>
 						  	</select>
-								<input placeholder="28368737" type="text" name="documentoCliente" id="Cliente" class="form-control">
+								<input placeholder="Número de cédula" type="text" name="documentoCliente" id="Cliente" class="form-control">
 							</div>
 							<div class="form-check col-md-2">
-				        <input placeholder="" class="form-check-input" type="checkbox" id="activo" name="activo">
+				        <input placeholder="" class="form-check-input" type="checkbox" id="activo" name="activo" checked>
 				        <label class="form-check-label" for="activo">
 				          Activo
 				        </label>
@@ -37,47 +38,47 @@
 						</div>
 						<!-- NOMBRES CLIENTE -->
 
-						<div class="input-group mb-3 ">
+						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
 					    	<label for="nombresCliente" class="input-group-text">
-					    		Nombre Cliente
+					    		Nombre
 					    	</label>
 					  	</div>
-							<input placeholder="Antonella Alessandra Lourdes" type="text" name="nombresCliente" id="nombresCliente" class="form-control">
+							<input placeholder="Nombres del cliente" type="text" name="nombresCliente" id="nombresCliente" class="form-control">
 						</div>
 
 						<!-- APELLIDOS CLIENTE -->
 
-						<div class="input-group mb-3 ">
+						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
 					    	<label for="apellidosCliente" class="input-group-text">
-					    		Apellidos Cliente
+					    		Apellidos
 					    	</label>
 					  	</div>
-							<input placeholder="Mujica Navarro" type="text" name="apellidosCliente" id="apellidosCliente" class="form-control">
+							<input placeholder="Apellidos del cliente" type="text" name="apellidosCliente" id="apellidosCliente" class="form-control">
 						</div>
 
 						<!-- TELEFONO	 -->
 
-						<div class="input-group mb-3 ">
+						<div class="input-group input-group-sm mb-3 ">
 					  	<div class="input-group-prepend">
-					    	<label for="telefono" class="input-group-text">
+					    	<label for="telefonoCliente" class="input-group-text">
 					    		Teléfono
 					    	</label>
 					  	</div>
-							<input placeholder="04162244105" type="text" name="telefonoCliente" id="telefonoCliente" class="form-control">
+							<input placeholder="Número celular del cliente" type="text" name="telefonoCliente" id="telefonoCliente" class="form-control">
 						</div>
 
 
 						<!-- EMAIL -->
 
-						<div class="input-group mb-3">
+						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
 						    	<label for="emal" class="input-group-text">
 						    		Email
 						    	</label>
 						  	</div>
-						  	<input placeholder="ejemplo@gmail.com" class="form-control" type="email" id="emailCliente" name="emailCliente"></input>
+						  	<input placeholder="Correo del cliente" class="form-control" type="email" id="emailCliente" name="emailCliente"></input>
 						</div>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
@@ -86,12 +87,13 @@
 							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
 							<button type="button" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 						</div>
-					</div>
+					</form>
 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
+						<p>Lista de clientes previamente agregados</p>
+						<table class="table table-striped table-responsive p-0 tablas table-sm" id="tablaCliente">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>
