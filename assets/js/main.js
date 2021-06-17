@@ -88,6 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  if (elementoExiste('formularioLineaGenetica')) {
+    const formularioLineaGenetica = document.getElementById('formularioLineaGenetica');
+    obtenerObjeto('?c=Configuracion&m=obtenerLineaGenetica', '#tablaLineaGenetica', ['nombreLineaGenetica'], 'idLineaGenetica', llenarTabla);
+    formularioLineaGenetica.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      agragarObjetoBD(formularioLineaGenetica, '?c=Configuracion&m=agregarLineaGenetica', '?c=Configuracion&m=obtenerLineaGenetica', '#tablaLineaGenetica', ['nombreLineaGenetica'], 'idLineaGenetica');
+      
+    })
+  }
+
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
   // obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
