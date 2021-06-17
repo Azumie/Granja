@@ -169,14 +169,29 @@ class ConfiguracionControlador
 	public function agregarCliente(){
 		if (isset($_POST['documentoCliente'], $_POST['nombresCliente'], $_POST['apellidosCliente'], $_POST['telefonoCliente'], $_POST['emailCliente'])) {
 			try {
-				$documento =$_POST['nacionalidad'].'-'.$_POST['documentoCliente'];
+				$documento =$_POST['nacionalidadCliente'].'-'.$_POST['documentoCliente'];
 				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 2, 'nombrePersona' => $_POST['nombresCliente'], 'apellidosPersona' => $_POST['apellidosCliente'], 'telefonoPersona' => $_POST['telefonoCliente'],'emailPersona' => $_POST['emailCliente'], 'activoPersona' => 1]);
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Eres una ganadora');
 			} catch (PDOException $e) {
 				echo json_encode('Fallida');
+				echo json_encode($e->getMessage());
 			}
 		}else echo json_encode('No existe');
+	}
+
+	public function editarCliente () {
+		if (isset($_POST['documentoCliente'], $_POST['nombresCliente'], $_POST['apellidosCliente'], $_POST['telefonoCliente'], $_POST['emailCliente'])) {
+			try {
+				$documento =$_POST['nacionalidadCliente'].'-'.$_POST['documentoCliente'];
+				$this->constructorSQL->update('personas', ['nombrePersona' => $_POST['nombresCliente'], 'apellidosPersona' => $_POST['apellidosCliente'], 'telefonoPersona' => $_POST['telefonoCliente'],'emailPersona' => $_POST['emailCliente'], 'activoPersona' => 1]);
+				$this->constructorSQL->where('documento', '=', $documento);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Cliente editado correctamente');
+			} catch (PDOException $e) {
+				echo json_encode('No se pudo editar el Cliente');
+			}
+		}else echo json_encode('Pro favor introduzca todos los campos');
 	}
 
 	public function obtenerGalponero(){

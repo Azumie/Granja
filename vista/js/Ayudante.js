@@ -19,7 +19,6 @@ function obtenerObjeto (url,elemento,valores, id, funcion = '') {
 }
 
 function llenarTabla(resp, elemento,valores, id){
-	console.log('pasamos')
 	let tbody = '';
 	Object.entries(resp).forEach(([pos]) => {
 		tbody += `<tr>`
@@ -95,12 +94,8 @@ function editarObjetoBD(form, idTabla, controlador, metodo, nombreId, inputs){
       .then(resp => resp.json())
       .then(resp => {
         resp = resp[0];
-        // llenarForm(resp[0]);
-
-          console.log("nombreId", nombreId);
-          console.log("idElemento", idElemento);
+        
         if (elementoExiste(nombreId)) {
-          console.log('existe');
           let inputId = document.getElementById(nombreId);
         	if (nombreId.includes('documento')) {
         		idElemento = idElemento.split('-')[1];

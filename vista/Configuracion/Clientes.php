@@ -22,20 +22,21 @@
 						    		Documento
 						    	</label>
 						  	</div>
-						  	<select id='nacionalidad' name="nacionalidad" class="form-control" style="max-width: 25%">
+						  	<select id='nacionalidadCliente' name="nacionalidadCliente" class="form-control" style="max-width: 25%">
 						  		<option>V</option>
 						  		<option>R</option>
 						  	</select>
-								<input placeholder="Número de cédula" type="text" name="documentoCliente" id="Cliente" class="form-control">
+								<input placeholder="Número de cédula" type="text" name="documentoCliente" id="documentoCliente" class="form-control">
 							</div>
 							<div class="form-check col-md-2">
-				        <input placeholder="" class="form-check-input" type="checkbox" id="activo" name="activo" checked>
+				        <input class="form-check-input" type="checkbox" id="activoCliente" name="activoCliente" checked>
 				        <label class="form-check-label" for="activo">
 				          Activo
 				        </label>
 				      </div>
 
 						</div>
+
 						<!-- NOMBRES CLIENTE -->
 
 						<div class="input-group input-group-sm mb-3 ">
@@ -78,7 +79,7 @@
 						    		Email
 						    	</label>
 						  	</div>
-						  	<input placeholder="Correo del cliente" class="form-control" type="email" id="emailCliente" name="emailCliente"></input>
+						  	<input placeholder="Correo del cliente" class="form-control" type="emailCliente" id="emailCliente" name="emailCliente"></input>
 						</div>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
@@ -93,17 +94,21 @@
 
 					<div class="col-lg-7">
 						<p>Lista de clientes previamente agregados</p>
-						<table class="table table-striped table-responsive p-0 tablas table-sm" id="tablaCliente">
+						<table class="datatable table table-striped table-responsive p-0 tablas table-sm" id="tablaCliente">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>
 								<th>Apellidos</th>
+								<th>Telefono</th>
+								<th>Email</th>
 								<th>Activo</th>
 								<th>Editar</th>
 							</thead>
 							<tbody>
 
 								<tr>
+									<td></td>
+									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>

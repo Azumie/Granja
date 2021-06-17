@@ -122,8 +122,33 @@ document.addEventListener('DOMContentLoaded', () => {
     obtenerObjeto('?c=Configuracion&m=obtenerCliente', '#tablaCliente', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla);
     formularioClientes.addEventListener('submit', (e) =>{
       e.preventDefault();
-      agragarObjetoBD(formularioClientes, '?c=Configuracion&m=agregarCliente', '?c=Configuracion&m=obtenerCliente', '#tablaCliente', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
-    })
+      let metodo;
+      if (elementoExiste('documentoCliente')) {
+        let inputDocumento = document.getElementById('documentoCliente');
+
+        metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
+        metodo += 'Cliente';
+        console.log(metodo)
+      }
+      agragarObjetoBD(formularioClientes, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerCliente', '#tablaCliente', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
+    });
+
+    editarObjetoBD(
+      formularioClientes,
+      'tablaCliente',
+      'Configuracion',
+      'obtenerCliente',
+      'documentoCliente',
+      {
+        'nacionalidadCliente': 'nacionalidad',
+        'documentoCliente': 'documento',
+        'nombresCliente': 'nombrePersona',
+        'apellidosCliente': 'apellidosPersona',
+        'telefonoCliente': 'telefonoPersona',
+        'emailCliente': 'emailPersona', 
+        'activoCliente': 'activoPersona'
+      }
+    );
   }
 
   if(elementoExiste('formularioUsuario')){
