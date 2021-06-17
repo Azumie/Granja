@@ -66,7 +66,7 @@
 						    		Tipo Huevo
 						    	</label>
 						  	</div>
-							<select id="idTipoHuevo" class="form-control" name="idTipoHuevo">
+							<select id="idTipoHuevoDespacho" class="form-control" name="idTipoHuevo">
 								<option selected disabled>Elegir Tipo de Huevo</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
