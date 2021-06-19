@@ -91,6 +91,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `productos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `productos` (
+  `idProducto` INT NOT NULL AUTO_INCREMENT,
+  `idTipoProducto` INT NOT NULL,
+  `nombreProducto` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`idProducto`),
+  INDEX `fk_productos_tiposproducto1_idx` (`idTipoProducto`),
+  UNIQUE INDEX `nombreProducto_UNIQUE` (`nombreProducto`),
+  CONSTRAINT `fk_productos_tiposproducto1`
+    FOREIGN KEY (`idTipoProducto`)
+    REFERENCES `tiposproducto` (`idTipoProducto`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `tipopersona`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tipopersona` (
@@ -116,31 +134,6 @@ CREATE TABLE IF NOT EXISTS `personas` (
   CONSTRAINT `fk_personas_tipopersona1`
     FOREIGN KEY (`idTipoPersona`)
     REFERENCES `tipopersona` (`idTipoPersona`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `productos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `productos` (
-  `idProducto` INT NOT NULL AUTO_INCREMENT,
-  `documentoProveedor` VARCHAR(11) NOT NULL,
-  `idTipoProducto` INT NOT NULL,
-  `nombreProducto` VARCHAR(30) NOT NULL,
-  PRIMARY KEY (`idProducto`),
-  INDEX `fk_productos_tiposproducto1_idx` (`idTipoProducto`),
-  INDEX `fk_productos_personas1_idx` (`documentoProveedor`),
-  UNIQUE INDEX `nombreProducto_UNIQUE` (`nombreProducto`),
-  CONSTRAINT `fk_productos_tiposproducto1`
-    FOREIGN KEY (`idTipoProducto`)
-    REFERENCES `tiposproducto` (`idTipoProducto`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_productos_personas1`
-    FOREIGN KEY (`documentoProveedor`)
-    REFERENCES `personas` (`documento`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -297,18 +290,41 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `proveedoresproducto`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proveedoresproducto` (
+  `idProducto` INT NOT NULL,
+  `documentoProveedor` VARCHAR(11) NOT NULL,
+  PRIMARY KEY (`idProducto`, `documentoProveedor`),
+  INDEX `fk_productos_has_personas_personas1_idx` (`documentoProveedor`),
+  INDEX `fk_productos_has_personas_productos1_idx` (`idProducto`),
+  CONSTRAINT `fk_productos_has_personas_productos1`
+    FOREIGN KEY (`idProducto`)
+    REFERENCES `productos` (`idProducto`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_productos_has_personas_personas1`
+    FOREIGN KEY (`documentoProveedor`)
+    REFERENCES `personas` (`documento`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `operaciongalpon`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `operaciongalpon` (
-  `idProducto` INT NOT NULL,
   `idInventario` INT NOT NULL,
   `idGalpon` INT NOT NULL,
   `precioProducto` FLOAT NULL,
   `cantidadProducto` INT NOT NULL,
-  PRIMARY KEY (`idProducto`, `idInventario`, `idGalpon`),
+  `idProducto` INT NOT NULL,
+  `documentoProveedor` VARCHAR(11) NOT NULL,
+  PRIMARY KEY (`idInventario`, `idGalpon`),
   INDEX `fk_destinocompra_galpones1_idx` (`idGalpon`),
   INDEX `fk_operaciongalpon_inventario1_idx` (`idInventario`),
-  INDEX `fk_operaciongalpon_productos1_idx` (`idProducto`),
+  INDEX `fk_operaciongalpon_proveedoresproducto1_idx` (`idProducto` ASC, `documentoProveedor`),
   CONSTRAINT `fk_destinocompra_galpones1`
     FOREIGN KEY (`idGalpon`)
     REFERENCES `galpones` (`idGalpon`)
@@ -319,9 +335,9 @@ CREATE TABLE IF NOT EXISTS `operaciongalpon` (
     REFERENCES `inventario` (`idInventario`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_operaciongalpon_productos1`
-    FOREIGN KEY (`idProducto`)
-    REFERENCES `productos` (`idProducto`)
+  CONSTRAINT `fk_operaciongalpon_proveedoresproducto1`
+    FOREIGN KEY (`idProducto` , `documentoProveedor`)
+    REFERENCES `proveedoresproducto` (`idProducto` , `documentoProveedor`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -331,15 +347,16 @@ ENGINE = InnoDB;
 -- Table `compragranja`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `compragranja` (
-  `idProducto` INT NOT NULL,
   `idGranja` INT NOT NULL,
   `idInventario` INT NOT NULL,
   `precioProducto` FLOAT NULL,
   `CantidadProducto` FLOAT NOT NULL,
-  PRIMARY KEY (`idProducto`, `idGranja`, `idInventario`),
+  `idProducto` INT NOT NULL,
+  `documentoPo` VARCHAR(11) NOT NULL,
+  PRIMARY KEY (`idGranja`, `idInventario`),
   INDEX `fk_compragranja_granjas1_idx` (`idGranja`),
   INDEX `fk_operaciongranja_inventario1_idx` (`idInventario`),
-  INDEX `fk_operaciongranja_productos1_idx` (`idProducto`),
+  INDEX `fk_compragranja_proveedoresproducto1_idx` (`idProducto` ASC, `documentoPo`),
   CONSTRAINT `fk_compragranja_granjas1`
     FOREIGN KEY (`idGranja`)
     REFERENCES `granjas` (`idGranja`)
@@ -350,9 +367,9 @@ CREATE TABLE IF NOT EXISTS `compragranja` (
     REFERENCES `inventario` (`idInventario`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_operaciongranja_productos1`
-    FOREIGN KEY (`idProducto`)
-    REFERENCES `productos` (`idProducto`)
+  CONSTRAINT `fk_compragranja_proveedoresproducto1`
+    FOREIGN KEY (`idProducto` , `documentoPo`)
+    REFERENCES `proveedoresproducto` (`idProducto` , `documentoProveedor`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
