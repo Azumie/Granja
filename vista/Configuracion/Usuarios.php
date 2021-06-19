@@ -28,7 +28,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text text-white">Documento</span>
 				</div>
-				<select class='form-control' name='DocumentoUsuario' id='DocumentoUsuario'>
+				<select class='form-control' name='documentoUsuario' id='documentoUsuario'>
 				</select>
 			</div>
 
@@ -59,6 +59,9 @@
 			</div>
 			<input type="password" name="claveUsuario" id="claveUsuario" class="form-control" required minlength="4" maxlength="20">
 		</div>
+
+		<!-- PREGUNTA -->
+
 		<div class="input-group input-group-sm form-group">
 			<div class="input-group-prepend">
 				<span class="input-group-text text-white">Pregunta</span>
@@ -66,17 +69,21 @@
 			<select class='form-control' name='preguntaUsuario' id='preguntaUsuario'>
 				<option value="Nombre de tu mejor amigo">Nombre de tu mejor amigo</option>
 				<option value="Nombre de tu mama">Nombre de tu mamá</option>
-				<option value="Fecha de nacimiento de tu abuela">Fecha de nacimiento de tu abuela</option>
+				<option value="Fecha de naacimiento de tu abuela">Fecha de nacimiento de tu abuela</option>
 				<option value="Videojuego Favorito">Videojuego Favorito</option>
 			</select>
 			
 		</div>
+
+		<!-- RESPUESTAS -->
+
 		<div class="input-group input-group-sm form-group">
 			<div class="input-group-prepend">
 				<span class="input-group-text text-white">Respuesta</span>
 			</div>
-			<input type="text" name="respuestaUsuario" id="resuspuestaUsuario" class="form-control" required minlength="4" maxlength="20">
+			<input type="text" name="respuestaUsuario" id="respuestaUsuario" class="form-control" required minlength="4" maxlength="20">
 		</div>
+
 		<!-- BOTONES - AGREGAR Y CANCELAR -->
 
 		<button type="submit" class="btn btn-primary text-white  btn-block mt-4">Guardar</button>

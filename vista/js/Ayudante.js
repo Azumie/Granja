@@ -94,7 +94,7 @@ function editarObjetoBD(form, idTabla, controlador, metodo, nombreId, inputs){
       .then(resp => resp.json())
       .then(resp => {
         resp = resp[0];
-        
+
         if (elementoExiste(nombreId)) {
           let inputId = document.getElementById(nombreId);
         	if (nombreId.includes('documento')) {
@@ -112,7 +112,7 @@ function editarObjetoBD(form, idTabla, controlador, metodo, nombreId, inputs){
         }
         let inputDocumentoEncontrado = false;
         Object.entries(inputs).forEach(([nombreInput, nombreCampo]) => {
-          if ((nombreInput.includes('documento') || nombreInput.includes('nacionalidad')) && inputDocumentoEncontrado == false) {
+          if ((nombreInput.includes('documento') || nombreInput.includes('nacionalidad')) && inputDocumentoEncontrado == false && !nombreInput.includes('Usuario')) {
             resp['nacionalidad'] = resp['documento'].split('-')[0];
             resp['documento'] = resp['documento'].split('-')[1];
             inputDocumentoEncontrado = true;

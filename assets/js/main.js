@@ -151,15 +151,33 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
+  // FORMULARIO USUARIO
+
   if(elementoExiste('formularioUsuario')){
     const formularioUsuario = document.getElementById('formularioUsuario');
-    obtenerObjeto('?c=Configuracion&m=obtenerGalponero', document.getElementById('DocumentoUsuario'), ['documento', 'documento'], '', llenarSelect);
+    obtenerObjeto('?c=Configuracion&m=obtenerGalponero', document.getElementById('documentoUsuario'), ['documento', 'documento'], '', llenarSelect);
     obtenerObjeto('?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario', llenarTabla);
     formularioUsuario.addEventListener('submit',(e)=>{
       e.preventDefault();
-      agragarObjetoBD(formularioUsuario, '?c=Configuracion&m=agregarUsuario', '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
+      let metodo = elementoExiste('idUsuario') ? 'editarUsuario' : 'agregarUsuario';
+      agragarObjetoBD(formularioUsuario, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
       
-    })
+    });
+      editarObjetoBD(
+        formularioUsuario,
+        'tablaUsuario',
+        'Configuracion',
+        'obtenerUsuario',
+        'idUsuario',
+        {
+          'documentoUsuario': 'documento',
+          'activoUsuario': 'activoUsuario',
+          'nombreUsuario': 'nombreUsuario',
+          'claveUsuario': 'claveUsuario',
+          'preguntaUsuario': 'pregunta',
+          'respuestaUsuario': 'respuesta', 
+        }
+      );
   }
 
 });
