@@ -92,14 +92,12 @@ class ConfiguracionControlador
 		echo json_encode($tiposhuevo);
 	}
 
-	public function obtenerTipoProducto(){
+	public function obtenerTipoProducto () {
 		$this->constructorSQL->select('tiposproducto');
-		if (isset($_GET['idTipoProducto'])) {
-			$this->constructorSQL->where('idTipoProducto', '=', $_GET['idTipoProducto']);
-		}
-		$tiposproducto = $this->constructorSQL->ejecutarSQL();
-		echo json_encode($tiposproducto);
+		$tipoProducto = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($tipoProducto);
 	}
+
 
 	public function agregarProductos(){
 		if (isset($_POST['idProveedorProducto'], $_POST['idTipoProducto'], $_POST['nombreProducto'])) {
@@ -114,8 +112,20 @@ class ConfiguracionControlador
 	}
 
 	public function obtenerProducto(){
-		(isset($_GET['e'])) ? $productos = 'productos '.$_GET['e'] : $productos = 'productos';
-		$productos = $this->constructorSQL->select($productos)->ejecutarSQL();
+		$productos = 'j';
+		$this->constructorSQL->select('productos');
+		if (isset($_GET['documentoProveedor'])) {
+			$this->constructorSQL->where('documentoProveedor', '=', $_GET['documentoProveedor']);
+		}else {$productos.='Nop';}
+		if (isset($_GET['idProducto'])) {
+			$this->constructorSQL->where('idProducto', '=', $_GET['idProducto']);
+		}else{
+		$productos .= 'No existe';}
+		if (isset($_GET['tipoProducto'])) {
+			$this->constructorSQL->where('idTipoProducto', '=', $_GET['tipoProducto']);
+		}else{$productos .= 'No ta producto';}
+		$productos = $this->constructorSQL->ejecutarSQL();
+
 		echo json_encode($productos);
 	}
 
@@ -258,5 +268,27 @@ class ConfiguracionControlador
 		$lineaGenetica = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($lineaGenetica);
 	}
+
+	public function obtenerCompra(){
+		$this->constructorSQL->select('usuarios');
+			
+		if (isset($_GET['idUsuario'])) {
+			$this->constructorSQL->where('idUsuario', '=', $_GET['idUsuario']);
+		}
+		$usuario = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($usuario);
+	}
+
+	// public function agregarUsuario(){
+	// 	if (isset($_POST['preguntaUsuario'], $_POST['nombreUsuario'], $_POST['claveUsuario'], $_POST['respuestaUsuario'], $_POST['DocumentoUsuario'])) {
+	// 		try {
+	// 			$this->constructorSQL->insert('usuarios', ['documento' => $_POST['DocumentoUsuario'],'idGranja' => 1, 'nombreUsuario' => $_POST['nombreUsuario'], 'claveUsuario' => $_POST['claveUsuario'], 'pregunta' => $_POST['preguntaUsuario'],'respuesta' => $_POST['respuestaUsuario'], 'activoUsuario' => 1]);
+	// 			$this->constructorSQL->ejecutarSQL();
+	// 			echo json_encode('Eres una ganadora');
+	// 		} catch (PDOException $e) {
+	// 			echo json_encode('Fallida');
+	// 		}
+	// 	}else echo json_encode('No existe');
+	// }
 
 }

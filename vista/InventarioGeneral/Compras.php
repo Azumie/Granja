@@ -13,7 +13,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-lg-5 mb-3 mb-lg-0 ">
+					<form id="formularioCompra" class="col-lg-5 mb-3 mb-lg-0 ">
 						<p>A continuación...<br>Ingrese la información de la compra realizada.</p>
 						<!-- PROVEEDOR -->
 
@@ -23,12 +23,9 @@
 						    		Proveedor
 						    	</label>
 						  	</div>
-							<select id="idProveeor" class="form-control" name="idProveeor">
-								<option selected disabled>Elegir Proveedor</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
+							<select id="idProveedorProducto" class="form-control" name="idProveeor">
+								<option value='' selected disabled>Elegir Proveedor</option>
+								
 							</select>
 						</div>
 
@@ -36,11 +33,11 @@
 
 						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
-						    	<label for="fechaCompra" class="input-group-text">
+						    	<label for="fechaCompraProducto" class="input-group-text">
 						    		Fecha Compra
 						    	</label>
 						  	</div>
-						  	<input class="form-control" type="date" id="fechaCompra" name="fechaCompra"></input>
+						  	<input class="form-control" type="date" id="fechaCompraProducto" name="fechaCompraProducto"></input>
 						</div>
 
 						<div class="row justify-content-center">
@@ -48,16 +45,12 @@
 							<!-- TIPO DE PRODUCTO -->
 							<div class="input-group input-group-sm mb-3 col-12">
 							  	<div class="input-group-prepend">
-							    	<label for="idTipoProducto" class="input-group-text">
+							    	<label for="idTipoProductoCompra" class="input-group-text">
 							    		Tipo Producto
 							    	</label>
 							  	</div>
-								<select id="idTipoProducto" class="form-control" name="idTipoProducto">
-									<option selected disabled>Elegir Galpón en Lote</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
+								<select id="idTipoProductoCompra" class="form-control" name="idTipoProductoCompra">
+									<option value='' selected disabled>Elige el tipo de producto</option>
 								</select>
 							</div>
 
@@ -65,16 +58,12 @@
 
 							<div class="input-group input-group-sm mb-3 col-12">
 							  	<div class="input-group-prepend">
-							    	<label for="idProducto" class="input-group-text">
+							    	<label for="idProductoCompra" class="input-group-text">
 							    		Producto
 							    	</label>
 							  	</div>
-								<select id="idProducto" class="form-control" name="idProducto">
+								<select id="idProductoCompra" class="form-control" name="idProductoCompra">
 									<option selected disabled>Elegir Galpón en Lote</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
 								</select>
 							</div>
 
@@ -101,10 +90,7 @@
 							</div>
 							<button class="btn btn-info btn-sm col-5 col-md-3 justify-content-center mb-2">+</button>
 						</div>
-<!--https://www.youtube.com/watch?v=iq-CYBnGM-8&list=TLPQMTMwNjIwMjGOi0aUHBiflg&index=7 
-https://www.youtube.com/watch?v=THAldKSrw0U&list=TLPQMTMwNjIwMjGOi0aUHBiflg&index=8
-https://www.youtube.com/watch?v=1KPY1an0V4A&list=TLPQMTMwNjIwMjGOi0aUHBiflg&index=9 
-https://www.youtube.com/watch?v=Vf7N6ADsmKg-->
+
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
 						<table class="table table-striped table-responsive p-0 tablas table-sm text-center">
@@ -128,10 +114,10 @@ https://www.youtube.com/watch?v=Vf7N6ADsmKg-->
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
 						<div class="row justify-content-center d-flex">
-							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
 						</div>
-					</div>
+					</form>
 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 

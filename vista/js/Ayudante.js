@@ -19,7 +19,6 @@ function obtenerObjeto (url,elemento,valores, id, funcion = '') {
 }
 
 function llenarTabla(resp, elemento,valores, id){
-	console.log('pasamos')
 	let tbody = '';
 	Object.entries(resp).forEach(([pos]) => {
 		tbody += `<tr>`
@@ -42,6 +41,7 @@ function llenarTabla(resp, elemento,valores, id){
 }
 
 function llenarSelect(resp, elemento,valores, id){
+	console.log(resp);
 	for (a in resp) {
 		let select = [];
 		for (propiedad in resp[a]) {
@@ -131,9 +131,9 @@ function editarObjetoBD(idTabla, controlador, metodo, nombreId, inputs){
 
 function fechaHoy(){
 	let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let yyyy = today.getFullYear();
-    today = yyyy+'-'+mm+'-'+dd;
-    return today;
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy = today.getFullYear();
+  today = yyyy+'-'+mm+'-'+dd;
+  return today;
 }

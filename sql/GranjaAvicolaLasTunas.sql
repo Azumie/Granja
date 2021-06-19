@@ -338,4 +338,6 @@ CREATE TABLE IF NOT EXISTS `detalledespachos` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
-INSERT INTO `tipospersona` (`idTipoPersona`, `nombreTipoPersona`) VALUES (NULL, 'Galponero');
+INSERT INTO `tipospersona` (`idTipoPersona`, `nombreTipoPersona`) VALUES (NULL, 'Galponero')
+,(NULL, 'Cliente'), (NULL, 'Proveedor');
+INSERT INTO `tiposproducto` (`idTipoProducto`, `nombreTipoProducto`) VALUES (NULL, 'Alimento'), (NULL, 'Consumible');

@@ -98,6 +98,36 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  if (elementoExiste('formularioCompra')) {
+    document.getElementById('fechaCompraProducto').value = fechaHoy();
+    let proveedor = document.getElementById('idProveedorProducto');
+    let tipoProducto = document.getElementById('idTipoProductoCompra');
+    obtenerObjeto('?c=Configuracion&m=obtenerProveedor', proveedor, ['documento', 'documento'], '', llenarSelect);
+    obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', tipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
+    tipoProducto.addEventListener('change', (e)=>{
+      let url = '?c=Configuracion&m=obtenerProducto&documentoProveedor='+proveedor.value+'&tipoProducto='+tipoProducto.value;
+      obtenerObjeto(url, document.getElementById('idProductoCompra'), ['idProducto', 'nombreProducto'], '', llenarSelect);
+    })
+    const formularioCompra = document.getElementById('formularioCompra');
+    formularioCompra.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      agragarObjetoBD(formularioCompra, '?c=Configuracion&m=agregarUsuario', '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
+      agregarObje
+    })
+
+    // obtenerObjeto('?c=Configuracion&m=obtenerProducto&e=where documentoProveedor= ', document.getElementById('idProducto'), ['idTipoProducto', 'nombreTipoProducto','where'], '', llenarSelect);
+// let datos = new FormData(formularioCompra);
+            // fetch('?c=Configuracion&m=obtenerTipoProducto').then(res => res.json())
+            // .then(res => {
+            //  console.log(res);
+            //  console.log('sip')
+            //  })
+  }
+  if (elementoExiste('formularioNuevoLote')) {
+    console.log('xiste formularioNuevoLote');
+    obtenerObjeto('?c=Configuracion&m=obtenerLineaGenetica', document.getElementById('idLineaNuevoLote'), ['idLineaGenetica', 'nombreLineaGenetica'], '', llenarSelect);
+
+  }
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
   // obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
