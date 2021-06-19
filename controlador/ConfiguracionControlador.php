@@ -206,16 +206,16 @@ class ConfiguracionControlador
 	}
 
 	public function agregarGalponero(){
-		if (isset($_POST['documentoGalponero'], $_POST['nombresGalponero'], $_POST['apellidosGalponero'], $_POST['telefono'], $_POST['emal'])) {
+		if (isset($_POST['documentoGalponero'], $_POST['nombresGalponero'], $_POST['apellidosGalponero'], $_POST['telefonoGalponero'], $_POST['emailGalponero'])) {
 			try {
 				$documento =$_POST['nacionalidadGalponero'].'-'.$_POST['documentoGalponero'];
-				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 1, 'nombrePersona' => $_POST['nombresGalponero'], 'apellidosPersona' => $_POST['apellidosGalponero'], 'telefonoPersona' => $_POST['telefono'],'emailPersona' => $_POST['emal'], 'activoPersona' => 1]);
+				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 1, 'nombrePersona' => $_POST['nombresGalponero'], 'apellidosPersona' => $_POST['apellidosGalponero'], 'telefonoPersona' => $_POST['telefonoGalponero'],'emailPersona' => $_POST['emailGalponero'], 'activoPersona' => 1]);
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Eres una ganadora');
 			} catch (PDOException $e) {
 				echo json_encode($e->getMessage());
 			}
-		}else echo json_encode('No estan completos los datos para agregarGalponero');
+		}else echo json_encode($_POST);
 	}
 
 	public function editarGalponero () {

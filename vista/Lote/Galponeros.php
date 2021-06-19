@@ -80,7 +80,7 @@
 					</form> 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaGalponeros">
+						<table class="datatable table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaGalponeros">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>
@@ -91,18 +91,6 @@
 								<th>Acción</th>
 							</thead>
 							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td>
-										<span class="badge badge-info">Activo</span>
-									</td>
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-									<td>
-										<button class="btn btn-info btn-sm editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
