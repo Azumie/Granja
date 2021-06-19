@@ -13,52 +13,25 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-6">
+					<form id="formularioLineaGenetica" class="col-md-6">
 						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
 								<label class="input-group-text">Nombre</label>
 							</div>
-							<input type="text" class="form-control" placeholder="Nombre de la Línea Genética">
+							<input type="text" class="form-control" placeholder="Nombre de la Línea Genética" name="nombreLineaGenetica" id="nombreLineaGenetica">
 						</div>
-						<p>Características de la línea genética</p>
-						<table class="table table-responsive p-0 table-sm text-center col-12">
-							<thead class="table-info" >
-								<th>Mortalidad</th>
-								<th>%Mortalidad</th>
-								<th>Producción</th>
-								<th>%Producción</th>
-								<th>Alimentación</th>
-							</thead>
-							<tbody class="table-light">
-								<tr>
-									<td><input type="number" id="Mortalidad" name="Mortalidad"></td>
-									<td><input type="number" id="pMortalidad" name="pMortalidad"></td>
-									<td><input type="number" id="Produccion" name="Produccion"></td>
-									<td><input type="number" id="pProduccion" name="pProduccion"></td>
-									<td><input type="number" id="Alimentacion" name="Alimentacion"></td>
-									</tr>
-							</tbody>
-						</table>
 						<div class="row justify-content-center d-flex">
-							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
+							<button type="button" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
 						</div>
-					</div>
+					</form>
 					<div class="col-md-6">
-						<table class="table table-sm text-center">
+						<table class="datatable table table-sm text-center table-sm table-striped" id="tablaLineaGenetica">
 							<thead class="table-info">
 								<th>Nombre</th>
 								<th>Acción</th>
 							</thead>
-							<tbody class="table-light">
-								<tr>
-									<td>h</td>
-									<td><button class="btn btn-info btn-sm rounded-circle botonesModales" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button></td>
-								</tr>
-								<tr>
-									<td>a</td>
-									<td><button class="btn btn-info btn-sm rounded-circle botonesModales" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button></td>
-								</tr>
+							<tbody>
 							</tbody>
 						</table>
 					</div>

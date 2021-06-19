@@ -277,4 +277,26 @@ class ConfiguracionControlador
 		}else echo json_encode('Por favor introduzca todos los datos');
 	}
 
+	public function agregarLineaGenetica(){
+		if (isset($_POST['nombreLineaGenetica'])) {
+			try {
+				$this->constructorSQL->insert('lineagenetica', ['nombreLineaGenetica' => $_POST['nombreLineaGenetica']]);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Eres una ganadora');
+			} catch (PDOException $e) {
+				echo json_encode('Fallida');
+			}
+		}else echo json_encode('No existe');
+	}
+
+	public function obtenerLineaGenetica(){
+		$this->constructorSQL->select('lineagenetica');
+			
+		if (isset($_GET['idLineaGenetica'])) {
+			$this->constructorSQL->where('idLineaGenetica', '=', $_GET['idLineaGenetica']);
+		}
+		$lineaGenetica = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($lineaGenetica);
+	}
+
 }
