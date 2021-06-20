@@ -20,11 +20,11 @@
 
 						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
-						    	<label for="fechaCompra" class="input-group-text">
+						    	<label for="fechaCompraProducto" class="input-group-text">
 						    		Fecha Compra
 						    	</label>
 						  	</div>
-						  	<input class="form-control" type="date" id="fechaCompra" name="fechaCompra"></input>
+						  	<input class="form-control" type="date" id="fechaCompraProducto" name="fechaCompraProducto"></input>
 						</div>
 						<button type="button" class="my-3 btn btn-info btn-block btn-sm" id="agregarProducto">Agregar producto</button>
 
@@ -44,10 +44,6 @@
 									<td>
 										<select id="idProveeor" class="form-control" name="idProveeor">
 											<option selected disabled>Elegir Proveedor</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
 										</select>
 									</td>
 									<td>
@@ -75,14 +71,13 @@
 										<input id="precioProducto" class="form-control" name="precioProducto">
 									</td>
 									<td class="borrar"><i class="fa fa-trash btn btn-danger borrar"></i></td>
-								</tr>
 							</tbody>
 						</table>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
 						<div class="row justify-content-center d-flex">
-							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
 						</div>
 					</form>
 

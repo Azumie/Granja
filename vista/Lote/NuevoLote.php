@@ -13,13 +13,13 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-6">
+					<form id="formularioNuevoLote" class="col-md-6">
 						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
 								<label class="input-group-text">Línea Genética</label>
 							</div>
-							<select class="form-control">
-								<option disabled selected>Escoge la Línea Genética</option>
+							<select id="idLineaNuevoLote" name="idLineaNuevoLote" class="form-control">
+								<option disabled selected value=''>Escoge la Línea Genética</option>
 							</select>
 						</div>
 						<div class="row">
@@ -71,7 +71,7 @@
 							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
 							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 						</div>
-					</div>
+					</form>
 					<div class="col-md-6">
 						<table class="table table-sm table-striped">
 							<thead>

@@ -196,12 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let tr = document.createElement('tr');
       tr.innerHTML = `
           <td>
-            <select id="idProveeor" class="form-control" name="idProveeor">
-              <option selected disabled>Elegir Proveedor</option>
-              <option value="2">2</option>
-              <option value="3">3</option
-              <option value="4">4</option>
-              <option value="5">5</option>
+            <select id="idProveedor" class="form-control" name="idProveedor">
             </select>
           </td>
           <td>
@@ -239,8 +234,31 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(hola)
       }
     });
+    let selectProveedor = document.getElementById('idProveeor');
+    // selectProveedor.setAttribute('name', 'documentoProveedor[]')
+    // fetch(`?c=Configuracion&m=obtenerProveedor`);
+    const promesa = (x) => {
+      return new Promise((resolve, reject) => {
+        x.forEach( proveedor => {
+          console.log(proveedor);
+          let option = document.createElement('option');
+          option.value = proveedor.documento;
+          option.innerText = proveedor.documento;
+          selectProveedor.appendChild(option);
+        });
+        console.log(selectProveedor);
+      });
+    }
+    llenarSelection();
+
   }
 
+
+    async function llenarSelection () {
+      let respuesta = await fetch(`?c=Configuracion&m=obtenerProveedor`);
+      console.log(respuesta);
+
+    }
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
   // obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');

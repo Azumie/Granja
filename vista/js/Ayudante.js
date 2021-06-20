@@ -14,21 +14,29 @@ function obtenerObjeto (url,elemento,valores, id, funcion = '') {
     .then(resp => {
     	if (funcion != '') {
     		funcion(resp, elemento,valores, id);
+    	}else {
+    		return resp;
     	}
     });
 }
 
-function llenarTabla(resp, elemento,valores, id){
+function llenarTabla(resp, elemento,valores, id = ''){
 	let tbody = '';
 	Object.entries(resp).forEach(([pos]) => {
 		tbody += `<tr>`
 		for (let e = 0; e < valores.length; e++) {
 			tbody += `<td>${resp[pos][valores[e]]}</td>`;
 		}
+		if (id != '') {
 		tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
                     <i class="fas fa-pen-fancy"></i></button></td>`
+		}else {
+			tbody += `<td><button id="${valores[1]}" type="button"class="btn btn-sm btn-danger rounded-circle editarGranja">
+                    <i class="fa fa-trash"></i></button></td>`
+		}
 		tbody += `</tr>`
 	});
+	if (id!= '') {
 	for (var i = 0; i < 4; i++) {
 		tbody += `<tr>`
 		for (var e = 0; e <= valores.length; e++) {
@@ -36,11 +44,15 @@ function llenarTabla(resp, elemento,valores, id){
 		}
 		tbody += `</tr>`
 	}
+	}
     tabla = resp;
-    document.querySelector(elemento+' tbody').innerHTML = tbody;
+    if (id != '') {
+    	document.querySelector(elemento+' tbody').innerHTML = tbody;
+    } else document.querySelector(elemento+' tbody').innerHTML += tbody;
 }
 
 function llenarSelect(resp, elemento,valores, id){
+	// console.log(resp);
 	for (a in resp) {
 		let select = [];
 		for (propiedad in resp[a]) {
@@ -131,9 +143,9 @@ function editarObjetoBD(form, idTabla, controlador, metodo, nombreId, inputs){
 
 function fechaHoy(){
 	let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let yyyy = today.getFullYear();
-    today = yyyy+'-'+mm+'-'+dd;
-    return today;
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy = today.getFullYear();
+  today = yyyy+'-'+mm+'-'+dd;
+  return today;
 }
