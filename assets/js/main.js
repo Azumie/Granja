@@ -190,6 +190,57 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  if (elementoExiste('formularioCompras')){
+    let hola = 'hola como estas';
+    document.getElementById('agregarProducto').addEventListener('click', (e) => {
+      let tr = document.createElement('tr');
+      tr.innerHTML = `
+          <td>
+            <select id="idProveeor" class="form-control" name="idProveeor">
+              <option selected disabled>Elegir Proveedor</option>
+              <option value="2">2</option>
+              <option value="3">3</option
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </td>
+          <td>
+            <select id="idTipoProducto" class="form-control" name="idTipoProducto">
+              <option selected disabled>Elegir Galpón en Lote</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </td>
+          <td>
+            <select id="idProducto" class="form-control" name="idProducto">
+              <option selected disabled>Elegir Galpón en Lote</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </td>
+          <td>
+            <input class="form-control" type="number" id="cantidadProducto" name="cantidadProducto"></input>
+          </td>
+          <td> 
+            <input id="precioProducto" class="form-control" name="precioProducto">
+          </td>
+          <td class="borrar"><i class="fa fa-trash btn btn-danger"></i></td>
+      `;
+      document.querySelector('#tablaAgregarProductos tbody').appendChild(tr);
+    });
+    document.getElementById('tablaAgregarProductos').addEventListener('click', e => {
+      let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
+      if (target.classList.contains('borrar')){
+        target.parentElement.remove();
+        console.log(hola)
+      }
+    });
+  }
+
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
   // obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');

@@ -3,28 +3,32 @@
 /**
  * 
  */
-class Valicion {
+class Validacion {
 	
-	private $campos = [
-		'documentoProveedor' => 
-			[
-				'documento',
-				'mayorQue' => '12'
-			],
-		'numeroProveedor' => 'entero'
-	];
+	private $campos = [];
+	private $metodo = '';
 	private $errores = [];
 
-	function __construct() {}
+	function __construct($campos) {
+		$this->campos = $campos;
+	}
 
 	public function validar(){
-		$error = false;
-		foreach ($this->campos as $clave => $tipoValidacion) {
-			if (call_user_func([$this, $tipoValidacion], $_POST[$clave])) {
-				$error = true;
+		foreach ($this->campos as $campo => $tiposValidacion) {
+
+			foreach ($tiposValidacion as $clave => $valor) {
+				$val = true;
+				if ($this->entero($clave)) {
+					$clave = $valor;
+					$val = call_user_func([$this, $clave], $_REQUEST[$campo]);
+				}else {
+					$val = call_user_func([$this, $clave], $_REQUEST[$campo], $valor);
+				}
+				if ($val == false) {
+					return false;
+				}
 			}
 		}
-		return $error;
 	}
 
 	public function entero($variable){
@@ -43,13 +47,16 @@ class Valicion {
 		return preg_match('/^\d{4}(-)(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/', $variable);
 	}
 
-	public function mayorQue ($variable) {
-
+	public function mayorQue ($variable, $valorRef) {
+		return $variable > $valorRef;
 	}
 
-	public function menorQue ($variable) {
-		
+	public function menorQue ($variable, $valorRef) {
+		return $variable < $valorRef;
+	}
+
+	public function confinamiento ($variable) {
+		return preg_match('/^(p|P|j|J)$/', $variable);
 	}
 
 }
-// echo '<pre>'; var_dump(preg_match('/^(V|J|E)-[0-9]{8,10}$/', 'v-12688737')); echo '</pre>';
