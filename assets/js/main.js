@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
       agragarObjetoBD(formularioAgregarProducto, '?c=Configuracion&m=agregarProductos', '?c=Configuracion&m=obtenerProducto', '#tablaProducto', ['nombreProducto', 'documentoProveedor'], 'documento');
     })
   }
+
+  // FORMULARIO PROVEEDORES
+
   if (elementoExiste('formularioProveedores')) {
     // console.log(document.getElementById('Proveedores').classList.contains('show'))
     const formularioProveedores = document.getElementById('formularioProveedores');
@@ -32,9 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     editarObjetoBD(
-      'tablaProveedor', 
-      'Configuracion', 
-      'obtenerProveedor', 
+      formularioProveedores,
+      'tablaProveedor',
+      'Configuracion',
+      'obtenerProveedor',
       'documentoProveedor',
       {
         'nacionalidadProveedor': 'nacionalidad',
@@ -43,49 +47,137 @@ document.addEventListener('DOMContentLoaded', () => {
         'apellidosProveedor': 'apellidosPersona',
         'telefonoProveedor': 'telefonoPersona',
         'emailProveedor': 'emailPersona', 
-        'activoProveedor': 'activoPersona'}
+        'activoProveedor': 'activoPersona'
+      }
     );
 
   }
+
+  // FORMULARIO TIPOS DE HUEVO
+
   if (elementoExiste('formTiposHuevo')) {
     const formTiposHuevo = document.getElementById('formTiposHuevo');
     // url,elemento,valores, id, funcion = ''
     obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo', llenarTabla);
+    // console.log(metodo);
     formTiposHuevo.addEventListener('submit', (e) =>{
+      let metodo = elementoExiste('idTipoHuevo') ? 'editarTipoHuevo' : 'agregarTipoHuevo';
       e.preventDefault();
-      agragarObjetoBD(formTiposHuevo, '?c=Configuracion&m=agregarTipoHuevo', '?c=Configuracion&m=obtenerTipoHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
+      agragarObjetoBD(formTiposHuevo, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerTipoHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
+    });
 
-    })
+    editarObjetoBD(
+      formTiposHuevo,
+      'tablaTiposHuevo',
+      'Configuracion',
+      'obtenerTipoHuevo',
+      'idTipoHuevo',
+      {
+        'nombreTipoHuevo': 'nombreTipoHuevo'
+      });
   }
 
+  // FORMULARIO GALPONEROS
   
   if (elementoExiste('formularioGalponeros')) {
     const formularioGalponeros = document.getElementById('formularioGalponeros');
     // url,elemento,valores, id, funcion = ''
     obtenerObjeto('?c=Configuracion&m=obtenerGalponero', '#tablaGalponeros', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla);
     formularioGalponeros.addEventListener('submit', (e) =>{
-    e.preventDefault();
-    agragarObjetoBD(formularioGalponeros, '?c=Configuracion&m=agregarGalponero', '?c=Configuracion&m=obtenerGalponero', '#tablaGalponeros', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
-    })
+      let metodo;
+      if (elementoExiste('documentoGalponero')) {
+        let inputDocumento = document.getElementById('documentoGalponero');
+
+        metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
+        metodo += 'Galponero';
+        console.log(metodo)
+      }
+      console.log("metodo", metodo);
+      e.preventDefault();
+      agragarObjetoBD(formularioGalponeros, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerGalponero', '#tablaGalponeros', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
+    });
+
+    editarObjetoBD(
+      formularioGalponeros,
+      'tablaGalponeros',
+      'Configuracion',
+      'obtenerGalponero',
+      'documentoGalponero',
+      {
+        'nacionalidadGalponero': 'nacionalidad',
+        'documentoGalponero': 'documento',
+        'nombresGalponero': 'nombrePersona',
+        'apellidosGalponero': 'apellidosPersona',
+        'telefonoGalponero': 'telefonoPersona',
+        'emailGalponero': 'emailPersona', 
+        'activoGalponero': 'activoPersona'
+      }
+    );
   }
+
+  // FORMULARIO CLIENTES
+
   if (elementoExiste('formularioClientes')) {
     const formularioClientes = document.getElementById('formularioClientes');
     obtenerObjeto('?c=Configuracion&m=obtenerCliente', '#tablaCliente', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla);
     formularioClientes.addEventListener('submit', (e) =>{
       e.preventDefault();
-      agragarObjetoBD(formularioClientes, '?c=Configuracion&m=agregarCliente', '?c=Configuracion&m=obtenerCliente', '#tablaCliente', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
-    })
+      let metodo;
+      if (elementoExiste('documentoCliente')) {
+        let inputDocumento = document.getElementById('documentoCliente');
+
+        metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
+        metodo += 'Cliente';
+        console.log(metodo)
+      }
+      agragarObjetoBD(formularioClientes, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerCliente', '#tablaCliente', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
+    });
+
+    editarObjetoBD(
+      formularioClientes,
+      'tablaCliente',
+      'Configuracion',
+      'obtenerCliente',
+      'documentoCliente',
+      {
+        'nacionalidadCliente': 'nacionalidad',
+        'documentoCliente': 'documento',
+        'nombresCliente': 'nombrePersona',
+        'apellidosCliente': 'apellidosPersona',
+        'telefonoCliente': 'telefonoPersona',
+        'emailCliente': 'emailPersona', 
+        'activoCliente': 'activoPersona'
+      }
+    );
   }
+
+  // FORMULARIO USUARIO
 
   if(elementoExiste('formularioUsuario')){
     const formularioUsuario = document.getElementById('formularioUsuario');
-    obtenerObjeto('?c=Configuracion&m=obtenerGalponero', document.getElementById('DocumentoUsuario'), ['documento', 'documento'], '', llenarSelect);
+    obtenerObjeto('?c=Configuracion&m=obtenerGalponero', document.getElementById('documentoUsuario'), ['documento', 'documento'], '', llenarSelect);
     obtenerObjeto('?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario', llenarTabla);
     formularioUsuario.addEventListener('submit',(e)=>{
       e.preventDefault();
-      agragarObjetoBD(formularioUsuario, '?c=Configuracion&m=agregarUsuario', '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
+      let metodo = elementoExiste('idUsuario') ? 'editarUsuario' : 'agregarUsuario';
+      agragarObjetoBD(formularioUsuario, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
       
-    })
+    });
+      editarObjetoBD(
+        formularioUsuario,
+        'tablaUsuario',
+        'Configuracion',
+        'obtenerUsuario',
+        'idUsuario',
+        {
+          'documentoUsuario': 'documento',
+          'activoUsuario': 'activoUsuario',
+          'nombreUsuario': 'nombreUsuario',
+          'claveUsuario': 'claveUsuario',
+          'preguntaUsuario': 'pregunta',
+          'respuestaUsuario': 'respuesta', 
+        }
+      );
   }
 
   if (elementoExiste('formularioLineaGenetica')) {
@@ -108,11 +200,25 @@ document.addEventListener('DOMContentLoaded', () => {
       let url = '?c=Configuracion&m=obtenerProducto&documentoProveedor='+proveedor.value+'&tipoProducto='+tipoProducto.value;
       obtenerObjeto(url, document.getElementById('idProductoCompra'), ['idProducto', 'nombreProducto'], '', llenarSelect);
     })
+    document.getElementById('btnAgregarProducto').addEventListener('click', (e)=>{
+      let inputs = document.getElementById('idProductoCompra');
+      let varTabla = {'Tipo': tipoProducto.options[tipoProducto.selectedIndex].text};
+      varTabla['Producto'] = inputs.options[inputs.selectedIndex].text;
+      varTabla['Cantidad'] = document.getElementById('cantidadCompra').value;
+      varTabla['Precio'] = document.getElementById('precioProducto').value;
+      console.log(varTabla);
+      llenarTabla([varTabla], '#tablaProductos', ['Tipo','Producto', 'Cantidad', 'Precio']);
+      console.log(document.getElementById('tablaProductos').text);
+      for (var i = 0; i < document.getElementById('tablaProductos').rows.length-1; i++) {
+        Things[i]
+      }
+    })
+
     const formularioCompra = document.getElementById('formularioCompra');
     formularioCompra.addEventListener('submit', (e)=>{
       e.preventDefault();
-      agragarObjetoBD(formularioCompra, '?c=Configuracion&m=agregarUsuario', '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
-      agregarObje
+      // document.getElementById('tablaProductos');
+      // agragarObjetoBD(formularioCompra, '?c=Configuracion&m=agregarUsuario', '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
     })
 
     // obtenerObjeto('?c=Configuracion&m=obtenerProducto&e=where documentoProveedor= ', document.getElementById('idProducto'), ['idTipoProducto', 'nombreTipoProducto','where'], '', llenarSelect);

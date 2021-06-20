@@ -23,7 +23,7 @@
 						    		Proveedor
 						    	</label>
 						  	</div>
-							<select id="idProveedorProducto" class="form-control" name="idProveeor">
+							<select id="idProveedorProducto" class="form-control" name="idProveedorProducto">
 								<option value='' selected disabled>Elegir Proveedor</option>
 								
 							</select>
@@ -71,11 +71,11 @@
 
 							<div class="input-group input-group-sm mb-3 col-6">
 							  	<div class="input-group-prepend">
-							    	<label for="cantidadProducto" class="input-group-text">
+							    	<label for="cantidadCompra" class="input-group-text">
 							    		Cantidad
 							    	</label>
 							  	</div>
-							  	<input class="form-control" type="number" id="cantidadProducto" name="cantidadProducto"></input>
+							  	<input class="form-control" type="number" id="cantidadCompra" name="cantidadCompra"></input>
 							</div>
 
 							<!-- PRECIO -->
@@ -88,12 +88,12 @@
 							  	</div>
 								<input id="precioProducto" class="form-control" name="precioProducto">
 							</div>
-							<button class="btn btn-info btn-sm col-5 col-md-3 justify-content-center mb-2">+</button>
+							<button type="button" id="btnAgregarProducto" class="btn btn-info btn-sm col-5 col-md-3 justify-content-center mb-2">+</button>
 						</div>
 
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
-						<table class="table table-striped table-responsive p-0 tablas table-sm text-center">
+						<table class="table table-striped table-responsive p-0 tablas table-sm text-center" id="tablaProductos">
 							<thead class="table-info">
 								<th>Tipo</th>
 								<th>Producto</th>
@@ -102,13 +102,6 @@
 								<th>Borrar</th>
 							</thead>
 							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><i class="fa fa-trash"></i></td>
-								</tr>
 							</tbody>
 						</table>
 

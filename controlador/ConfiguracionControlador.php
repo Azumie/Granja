@@ -179,41 +179,68 @@ class ConfiguracionControlador
 	public function agregarCliente(){
 		if (isset($_POST['documentoCliente'], $_POST['nombresCliente'], $_POST['apellidosCliente'], $_POST['telefonoCliente'], $_POST['emailCliente'])) {
 			try {
-				$documento =$_POST['nacionalidad'].'-'.$_POST['documentoCliente'];
+				$documento =$_POST['nacionalidadCliente'].'-'.$_POST['documentoCliente'];
 				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 2, 'nombrePersona' => $_POST['nombresCliente'], 'apellidosPersona' => $_POST['apellidosCliente'], 'telefonoPersona' => $_POST['telefonoCliente'],'emailPersona' => $_POST['emailCliente'], 'activoPersona' => 1]);
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Eres una ganadora');
 			} catch (PDOException $e) {
 				echo json_encode('Fallida');
+				echo json_encode($e->getMessage());
 			}
 		}else echo json_encode('No existe');
+	}
+
+	public function editarCliente () {
+		if (isset($_POST['documentoCliente'], $_POST['nombresCliente'], $_POST['apellidosCliente'], $_POST['telefonoCliente'], $_POST['emailCliente'])) {
+			try {
+				$documento =$_POST['nacionalidadCliente'].'-'.$_POST['documentoCliente'];
+				$this->constructorSQL->update('personas', ['nombrePersona' => $_POST['nombresCliente'], 'apellidosPersona' => $_POST['apellidosCliente'], 'telefonoPersona' => $_POST['telefonoCliente'],'emailPersona' => $_POST['emailCliente'], 'activoPersona' => 1]);
+				$this->constructorSQL->where('documento', '=', $documento);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Cliente editado correctamente');
+			} catch (PDOException $e) {
+				echo json_encode('No se pudo editar el Cliente');
+			}
+		}else echo json_encode('Pro favor introduzca todos los campos');
 	}
 
 	public function obtenerGalponero(){
 		$this->constructorSQL->select('personas')
 			->where('idTipoPersona', '=', '1');
 			
-		if (isset($_GET['idGalponero'])) {
-			$this->constructorSQL->where('documento', '=', $_GET['idGalponero']);
+		if (isset($_GET['documentoGalponero'])) {
+			$this->constructorSQL->where('documento', '=', $_GET['documentoGalponero']);
 		}
 		$persona = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($persona);
 	}
 
 	public function agregarGalponero(){
-		if (isset($_POST['idGalponero'], $_POST['nombresGalponero'], $_POST['apellidosGalponero'], $_POST['telefono'], $_POST['emal'])) {
+		if (isset($_POST['documentoGalponero'], $_POST['nombresGalponero'], $_POST['apellidosGalponero'], $_POST['telefonoGalponero'], $_POST['emailGalponero'])) {
 			try {
-				$documento =$_POST['nacionalidadGalponero'].'-'.$_POST['idGalponero'];
-				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 1, 'nombrePersona' => $_POST['nombresGalponero'], 'apellidosPersona' => $_POST['apellidosGalponero'], 'telefonoPersona' => $_POST['telefono'],'emailPersona' => $_POST['emal'], 'activoPersona' => 1]);
+				$documento =$_POST['nacionalidadGalponero'].'-'.$_POST['documentoGalponero'];
+				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 1, 'nombrePersona' => $_POST['nombresGalponero'], 'apellidosPersona' => $_POST['apellidosGalponero'], 'telefonoPersona' => $_POST['telefonoGalponero'],'emailPersona' => $_POST['emailGalponero'], 'activoPersona' => 1]);
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Eres una ganadora');
 			} catch (PDOException $e) {
-				echo json_encode('Fallida');
+				echo json_encode($e->getMessage());
 			}
-		}else echo json_encode('No existe');
+		}else echo json_encode($_POST);
 	}
 
-	
+	public function editarGalponero () {
+		if (isset($_POST['documentoGalponero'], $_POST['nombresGalponero'], $_POST['apellidosGalponero'], $_POST['telefonoGalponero'], $_POST['emailGalponero'])) {
+			try {
+				$documento =$_POST['nacionalidadGalponero'].'-'.$_POST['documentoGalponero'];
+				$this->constructorSQL->update('personas', ['nombrePersona' => $_POST['nombresGalponero'], 'apellidosPersona' => $_POST['apellidosGalponero'], 'telefonoPersona' => $_POST['telefonoGalponero'],'emailPersona' => $_POST['emailGalponero'], 'activoPersona' => 1]);
+				$this->constructorSQL->where('documento', '=', $documento);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Galponero editado correctamente');
+			} catch (PDOException $e) {
+				echo json_encode('No se pudo editar el Galponero');
+			}
+		}else echo json_encode('Pro favor introduzca todos los campos');
+	}
 
 	public function obtenerTipoHuevo(){
 		$this->constructorSQL->select('tiposhuevo');
@@ -236,15 +263,28 @@ class ConfiguracionControlador
 	}
 
 	public function agregarUsuario(){
-		if (isset($_POST['preguntaUsuario'], $_POST['nombreUsuario'], $_POST['claveUsuario'], $_POST['respuestaUsuario'], $_POST['DocumentoUsuario'])) {
+		if (isset($_POST['preguntaUsuario'], $_POST['nombreUsuario'], $_POST['claveUsuario'], $_POST['respuestaUsuario'], $_POST['documentoUsuario'])) {
 			try {
-				$this->constructorSQL->insert('usuarios', ['documento' => $_POST['DocumentoUsuario'],'idGranja' => 1, 'nombreUsuario' => $_POST['nombreUsuario'], 'claveUsuario' => $_POST['claveUsuario'], 'pregunta' => $_POST['preguntaUsuario'],'respuesta' => $_POST['respuestaUsuario'], 'activoUsuario' => 1]);
+				$this->constructorSQL->insert('usuarios', ['documento' => $_POST['documentoUsuario'],'idGranja' => 1, 'nombreUsuario' => $_POST['nombreUsuario'], 'claveUsuario' => $_POST['claveUsuario'], 'pregunta' => $_POST['preguntaUsuario'],'respuesta' => $_POST['respuestaUsuario'], 'activoUsuario' => 1]);
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Eres una ganadora');
 			} catch (PDOException $e) {
-				echo json_encode('Fallida');
+				echo json_encode('No se agrego el usuario correctamente');
 			}
 		}else echo json_encode('No existe');
+	}
+
+	public function editarUsuario(){
+		if (isset($_POST['preguntaUsuario'], $_POST['nombreUsuario'], $_POST['claveUsuario'], $_POST['respuestaUsuario'], $_POST['documentoUsuario'], $_POST['idUsuario'])) {
+			try {
+				$this->constructorSQL->update('usuarios', ['nombreUsuario' => $_POST['nombreUsuario'], 'claveUsuario' => $_POST['claveUsuario'], 'pregunta' => $_POST['preguntaUsuario'],'respuesta' => $_POST['respuestaUsuario'], 'activoUsuario' => 1]);
+				$this->constructorSQL->where('idUsuario', '=', $_POST['idUsuario']);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Usuario editado correctamente');
+			} catch (PDOException $e) {
+				echo json_encode('No se editado el usuario correctamente');
+			}
+		}else echo json_encode('Por favor introduzca todos los datos');
 	}
 
 	public function agregarLineaGenetica(){

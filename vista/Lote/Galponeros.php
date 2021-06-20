@@ -27,11 +27,11 @@
 									<option>V</option>
 									<option>R</option>
 								</select>
-								<input type="text" name="idGalponero" id="idGalponero" class="form-control">
+								<input type="text" name="documentoGalponero" id="documentoGalponero" class="form-control">
 							</div>
 							<div class="form-check col-md-2 mt-1">
-								<input class="form-check-input" type="checkbox" id="activo" name="activo" disabled checked>
-								<label class="form-check-label mb-1" for="activo">
+								<input class="form-check-input" type="checkbox" id="activoGalponero" name="activoGalponero" disabled checked>
+								<label class="form-check-label mb-1" for="activoGalponero">
 									Activo
 								</label>
 							</div>
@@ -61,7 +61,7 @@
 									Teléfono
 								</label>
 							</div>
-							<input type="text" name="telefono" id="telefono" class="form-control" placeholder="04162244105">
+							<input type="text" name="telefonoGalponero" id="telefonoGalponero" class="form-control" placeholder="04162244105">
 						</div>
 						<!-- EMAIL -->
 						<div class="input-group input-group-sm mb-3">
@@ -70,7 +70,7 @@
 									Email
 								</label>
 							</div>
-							<input class="form-control" type="email" id="emal" name="emal" placeholder="ejemplo@gmail.com"></input>
+							<input class="form-control" type="email" id="emailGalponero" name="emailGalponero" placeholder="ejemplo@gmail.com"></input>
 						</div>
 						<!-- BOTONES GUARDAR Y CANCELAR -->
 						<div class="row justify-content-center d-flex">
@@ -80,27 +80,17 @@
 					</form> 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaGalponeros">
+						<table class="datatable table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaGalponeros">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>
 								<th>Apellidos</th>
+								<th>Telefono</th>
+								<th>Email</th>
 								<th>Activo</th>
 								<th>Acción</th>
 							</thead>
 							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td>
-										<span class="badge badge-info">Activo</span>
-									</td>
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-									<td>
-										<button class="btn btn-info btn-sm editarGalpon rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>

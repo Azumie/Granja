@@ -14,21 +14,29 @@ function obtenerObjeto (url,elemento,valores, id, funcion = '') {
     .then(resp => {
     	if (funcion != '') {
     		funcion(resp, elemento,valores, id);
+    	}else {
+    		return resp;
     	}
     });
 }
 
-function llenarTabla(resp, elemento,valores, id){
+function llenarTabla(resp, elemento,valores, id = ''){
 	let tbody = '';
 	Object.entries(resp).forEach(([pos]) => {
 		tbody += `<tr>`
 		for (let e = 0; e < valores.length; e++) {
 			tbody += `<td>${resp[pos][valores[e]]}</td>`;
 		}
+		if (id != '') {
 		tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
                     <i class="fas fa-pen-fancy"></i></button></td>`
+		}else {
+			tbody += `<td><button id="${valores[1]}" type="button"class="btn btn-sm btn-danger rounded-circle editarGranja">
+                    <i class="fa fa-trash"></i></button></td>`
+		}
 		tbody += `</tr>`
 	});
+	if (id!= '') {
 	for (var i = 0; i < 4; i++) {
 		tbody += `<tr>`
 		for (var e = 0; e <= valores.length; e++) {
@@ -36,8 +44,11 @@ function llenarTabla(resp, elemento,valores, id){
 		}
 		tbody += `</tr>`
 	}
+	}
     tabla = resp;
-    document.querySelector(elemento+' tbody').innerHTML = tbody;
+    if (id != '') {
+    	document.querySelector(elemento+' tbody').innerHTML = tbody;
+    } else document.querySelector(elemento+' tbody').innerHTML += tbody;
 }
 
 function llenarSelect(resp, elemento,valores, id){
@@ -83,7 +94,7 @@ function agragarObjetoBD(formulario, url, funcion = '', tabla, infotabla, id){
 	});
 }
 
-function editarObjetoBD(idTabla, controlador, metodo, nombreId, inputs){
+function editarObjetoBD(form, idTabla, controlador, metodo, nombreId, inputs){
 
   let elemento = document.getElementById(idTabla);
 
@@ -94,11 +105,12 @@ function editarObjetoBD(idTabla, controlador, metodo, nombreId, inputs){
       // target.attributes
       let idElemento = target.getAttribute('id');
       
+      console.log(`?c=${controlador}&m=${metodo}&${nombreId}=${idElemento}`);
       fetch(`?c=${controlador}&m=${metodo}&${nombreId}=${idElemento}`)
       .then(resp => resp.json())
       .then(resp => {
         resp = resp[0];
-        // llenarForm(resp[0]);
+
         if (elementoExiste(nombreId)) {
           let inputId = document.getElementById(nombreId);
         	if (nombreId.includes('documento')) {
@@ -112,11 +124,11 @@ function editarObjetoBD(idTabla, controlador, metodo, nombreId, inputs){
           input.name = nombreId;
           input.type = 'hidden';
           input.value = idElemento;
-          formGranja.appendChild(input);
+          form.appendChild(input);
         }
         let inputDocumentoEncontrado = false;
         Object.entries(inputs).forEach(([nombreInput, nombreCampo]) => {
-          if ((nombreInput.includes('documento') || nombreInput.includes('nacionalidad')) && inputDocumentoEncontrado == false) {
+          if ((nombreInput.includes('documento') || nombreInput.includes('nacionalidad')) && inputDocumentoEncontrado == false && !nombreInput.includes('Usuario')) {
             resp['nacionalidad'] = resp['documento'].split('-')[0];
             resp['documento'] = resp['documento'].split('-')[1];
             inputDocumentoEncontrado = true;
