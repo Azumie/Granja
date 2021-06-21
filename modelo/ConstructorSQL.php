@@ -32,8 +32,10 @@ class ConstructorSQL {
 		return $this;
 	}
 
-	public function innerJoin ($tabla, $campoTablaUno, $signo, $campoTablaDos){
-		$inner = "INNER JOIN $tabla ON $campoTablaUno $signo $campoTablaDos";
+	public function innerJoin ($tabla, $campoT1, $signo, $campoT2){
+		$this->inner = " INNER JOIN $tabla ON $campoT1 $signo $campoT2";
+		$this->sql .= $this->inner;
+		return $this;
 	}
 
 	public function where($campo , $signo, $valor){

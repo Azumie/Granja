@@ -26,6 +26,67 @@
 						  	</div>
 						  	<input class="form-control" type="date" id="fechaCompraProducto" name="fechaCompraProducto"></input>
 						</div>
+
+						<!-- TIPO DE PRODUCTO -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="idTipoProductoCompra" class="input-group-text">
+						    		Tipo
+						    	</label>
+						  	</div>
+						  	<select id="idTipoProductoCompra" class="form-control" name="idTipoProductoCompra">
+									<option selected disabled>Elegir tipo de Producto</option>
+								</select>
+						</div>
+
+						<!-- PRODUCTO -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="idProductoCompra" class="input-group-text">
+						    		Producto
+						    	</label>
+						  	</div>
+						  	<select id="idProductoCompra" class="form-control" name="idProductoCompra">
+						  		<option selected disabled>Elegir Galpón en Lote</option>
+						  	</select>
+						</div>
+
+						<!-- PROVEEDOR DEL PRODUCTO -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="documentoProveedorCompra" class="input-group-text">
+						    		Proveedor
+						    	</label>
+						  	</div>
+						  	<select id="documentoProveedorCompra" class="form-control" name="documentoProveedorCompra">
+									<option selected disabled>Elegir Proveedor</option>
+								</select>
+						</div>
+
+						<!-- Cantidad -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="cantidadProducto" class="input-group-text">
+						    		Cantidad
+						    	</label>
+						  	</div>
+						  	<input class="form-control" type="number" id="cantidadProducto" name="cantidadProducto"></input>
+						</div>
+
+						<!-- PRECIO PRODUCTO -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="precioProducto" class="input-group-text">
+						    		Precio
+						    	</label>
+						  	</div>
+						  	<input id="precioProducto" class="form-control" name="precioProducto">
+						</div>
 						<button type="button" class="my-3 btn btn-info btn-block btn-sm" id="agregarProducto">Agregar producto</button>
 
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
@@ -41,35 +102,11 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>
-										<select id="idProveeor" class="form-control" name="idProveeor">
-											<option selected disabled>Elegir Proveedor</option>
-										</select>
-									</td>
-									<td>
-										<select id="idTipoProducto" class="form-control" name="idTipoProducto">
-											<option selected disabled>Elegir Galpón en Lote</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-										</select>
-									</td>
-									<td>
-										<select id="idProducto" class="form-control" name="idProducto">
-											<option selected disabled>Elegir Galpón en Lote</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-										</select>
-									</td>
-									<td>
-							  		<input class="form-control" type="number" id="cantidadProducto" name="cantidadProducto"></input>
-									</td>
-									<td> 
-										<input id="precioProducto" class="form-control" name="precioProducto">
-									</td>
+									<td></td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
 									<td class="borrar"><i class="fa fa-trash btn btn-danger borrar"></i></td>
 							</tbody>
 						</table>

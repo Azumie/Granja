@@ -94,7 +94,7 @@
 
 					<div class="col-lg-7">
 						<p>Proveedores agregados con anterioridad</p>
-						<table class="table table-striped table-responsive p-0 tablas table-sm" id="tablaProveedor">
+						<table class="datatable table table-striped table-responsive p-0 tablas table-sm" id="tablaProveedor">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>
@@ -106,20 +106,6 @@
 							</thead>
 							<tbody>
 
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td>
-										<span class="badge badge-info">Activo</span>
-									</td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button type="button" class="btn btn-info btn-sm rounded-circle"><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
 
 							</tbody>
 						</table>

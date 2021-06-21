@@ -52,7 +52,7 @@ function llenarTabla(resp, elemento,valores, id = ''){
 }
 
 function llenarSelect(resp, elemento,valores, id){
-	// console.log(resp);
+	console.log(resp);
 	for (a in resp) {
 		let select = [];
 		for (propiedad in resp[a]) {

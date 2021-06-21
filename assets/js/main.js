@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   //&& class === modal fade
+ 
   if (elementoExiste('formularioAgregarProducto')) {
     const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
@@ -191,74 +192,55 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (elementoExiste('formularioCompras')){
-    let hola = 'hola como estas';
+    let selectTipoProducto = document.getElementById('idTipoProductoCompra');
+    let selectProducto = document.getElementById('idProductoCompra');
+    let selectProveedor = document.getElementById('documentoProveedorCompra');
+
+    obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', selectTipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
+    selectTipoProducto.addEventListener('change', e => {
+      let idTipoProducto = selectTipoProducto.value;
+      selectProducto.innerHTML= '<option selected disabled>Elija el Tipo de Producto</option>';
+      obtenerObjeto('?c=Configuracion&m=obtenerProducto&idTipoProducto='+idTipoProducto,
+        selectProducto,
+        ['idProducto', 'nombreProducto'], '',
+        llenarSelect);
+      console.log(selectTipoProducto.value);
+    });
+    selectProducto.addEventListener('change', e => {
+      let idProducto = selectProducto.value;
+      selectProveedor.innerHTML= '<option selected disabled>Elija el proveedor</option>';
+      obtenerObjeto('?c=InventarioGeneral&m=obtenerProveedoresProducto&idProducto='+idProducto,
+        selectProveedor,
+        ['documento', 'nombrePersona'], '',
+        llenarSelect);
+    });
+
     document.getElementById('agregarProducto').addEventListener('click', (e) => {
       let tr = document.createElement('tr');
-      tr.innerHTML = `
-          <td>
-            <select id="idProveedor" class="form-control" name="idProveedor">
-            </select>
-          </td>
-          <td>
-            <select id="idTipoProducto" class="form-control" name="idTipoProducto">
-              <option selected disabled>Elegir Galpón en Lote</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </td>
-          <td>
-            <select id="idProducto" class="form-control" name="idProducto">
-              <option selected disabled>Elegir Galpón en Lote</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </td>
-          <td>
-            <input class="form-control" type="number" id="cantidadProducto" name="cantidadProducto"></input>
-          </td>
-          <td> 
-            <input id="precioProducto" class="form-control" name="precioProducto">
-          </td>
-          <td class="borrar"><i class="fa fa-trash btn btn-danger"></i></td>
-      `;
-      document.querySelector('#tablaAgregarProductos tbody').appendChild(tr);
     });
     document.getElementById('tablaAgregarProductos').addEventListener('click', e => {
       let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
       if (target.classList.contains('borrar')){
         target.parentElement.remove();
-        console.log(hola)
       }
     });
-    let selectProveedor = document.getElementById('idProveeor');
     // selectProveedor.setAttribute('name', 'documentoProveedor[]')
     // fetch(`?c=Configuracion&m=obtenerProveedor`);
-    const promesa = (x) => {
-      return new Promise((resolve, reject) => {
-        x.forEach( proveedor => {
-          console.log(proveedor);
-          let option = document.createElement('option');
-          option.value = proveedor.documento;
-          option.innerText = proveedor.documento;
-          selectProveedor.appendChild(option);
-        });
-        console.log(selectProveedor);
-      });
-    }
-    llenarSelection();
+    // const promesa = (x) => {
+    //   return new Promise((resolve, reject) => {
+    //     x.forEach( proveedor => {
+    //       console.log(proveedor);
+    //       let option = document.createElement('option');
+    //       option.value = proveedor.documento;
+    //       option.innerText = proveedor.documento;
+    //       selectProveedor.appendChild(option);
+    //     });
+    //     console.log(selectProveedor);
+    //   });
+    // }
 
   }
 
-
-    async function llenarSelection () {
-      let respuesta = await fetch(`?c=Configuracion&m=obtenerProveedor`);
-      console.log(respuesta);
-
-    }
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
   // obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
