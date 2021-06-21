@@ -192,9 +192,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (elementoExiste('formularioCompras')){
+    let formularioCompras = document.getElementById('formularioCompras')
     let selectTipoProducto = document.getElementById('idTipoProductoCompra');
     let selectProducto = document.getElementById('idProductoCompra');
     let selectProveedor = document.getElementById('documentoProveedorCompra');
+    let inputCantidadProducto = document.getElementById('cantidadProducto')
+    let inputPrecioProducto = document.getElementById('precioProducto')
 
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', selectTipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
     selectTipoProducto.addEventListener('change', e => {
@@ -217,6 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('agregarProducto').addEventListener('click', (e) => {
       let tr = document.createElement('tr');
+      let data = new FormData(formularioCompras);
+      console.log(data);
     });
     document.getElementById('tablaAgregarProductos').addEventListener('click', e => {
       let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
