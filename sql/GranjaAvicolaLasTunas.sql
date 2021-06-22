@@ -325,11 +325,9 @@ CREATE TABLE IF NOT EXISTS operaciongalpon (
   precioProducto FLOAT NULL,
   cantidadProducto INT NOT NULL,
   idProducto INT NOT NULL,
-  documentoProveedor VARCHAR(11) NOT NULL,
   PRIMARY KEY (idInventario, idGalpon, idLote),
   INDEX fk_destinocompra_galponeslotes1_idx (idGalpon),
   INDEX fk_destinocompra_galponeslotes2_idx (idLote),
-  INDEX fk_operaciongalpon_proveedoresproducto1_idx (idProducto ASC, documentoProveedor),
   CONSTRAINT fk_destinocompra_galponeslotes1_idx
     FOREIGN KEY (idGalpon)
     REFERENCES galponeslotes (idGalpon)
@@ -340,14 +338,14 @@ CREATE TABLE IF NOT EXISTS operaciongalpon (
     REFERENCES galponeslotes (idLote)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
+  CONSTRAINT fk_destinocompra_productos1_idx
+    FOREIGN KEY (idProducto)
+    REFERENCES productos (idProducto)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT fk_operaciongalpon_inventario1
     FOREIGN KEY (idInventario)
     REFERENCES inventario (idInventario)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT fk_operaciongalpon_proveedoresproducto1
-    FOREIGN KEY (idProducto , documentoProveedor)
-    REFERENCES proveedoresproducto (idProducto , documentoProveedor)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
