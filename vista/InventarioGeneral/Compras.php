@@ -13,22 +13,9 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<form id="formularioCompra" class="col-lg-5 mb-3 mb-lg-0 ">
+					<form id="formularioCompras" class="col-lg-5 mb-3 mb-lg-0 ">
 						<p>A continuación...<br>Ingrese la información de la compra realizada.</p>
-						<!-- PROVEEDOR -->
-
-						<div class="input-group input-group-sm mb-3 ">
-						  	<div class="input-group-prepend">
-						    	<label for="idProveeor" class="input-group-text">
-						    		Proveedor
-						    	</label>
-						  	</div>
-							<select id="idProveedorProducto" class="form-control" name="idProveedorProducto">
-								<option value='' selected disabled>Elegir Proveedor</option>
-								
-							</select>
-						</div>
-
+					
 						<!-- FECHA DE LA COMPRA -->
 
 						<div class="input-group input-group-sm mb-3">
@@ -40,61 +27,73 @@
 						  	<input class="form-control" type="date" id="fechaCompraProducto" name="fechaCompraProducto"></input>
 						</div>
 
-						<div class="row justify-content-center">
-							<p class="ml-3">Indique los productos comprados y presione en el botón + para adicionarlo a la cola.</p>
-							<!-- TIPO DE PRODUCTO -->
-							<div class="input-group input-group-sm mb-3 col-12">
-							  	<div class="input-group-prepend">
-							    	<label for="idTipoProductoCompra" class="input-group-text">
-							    		Tipo Producto
-							    	</label>
-							  	</div>
-								<select id="idTipoProductoCompra" class="form-control" name="idTipoProductoCompra">
-									<option value='' selected disabled>Elige el tipo de producto</option>
+						<!-- TIPO DE PRODUCTO -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="idTipoProductoCompra" class="input-group-text">
+						    		Tipo
+						    	</label>
+						  	</div>
+						  	<select id="idTipoProductoCompra" class="form-control" name="idTipoProductoCompra">
+									<option selected disabled>Elegir tipo de Producto</option>
 								</select>
-							</div>
-
-							<!-- PRODUCTO -->
-
-							<div class="input-group input-group-sm mb-3 col-12">
-							  	<div class="input-group-prepend">
-							    	<label for="idProductoCompra" class="input-group-text">
-							    		Producto
-							    	</label>
-							  	</div>
-								<select id="idProductoCompra" class="form-control" name="idProductoCompra">
-									<option selected disabled>Elegir Galpón en Lote</option>
-								</select>
-							</div>
-
-							<!-- CANTIDAD -->
-
-							<div class="input-group input-group-sm mb-3 col-6">
-							  	<div class="input-group-prepend">
-							    	<label for="cantidadCompra" class="input-group-text">
-							    		Cantidad
-							    	</label>
-							  	</div>
-							  	<input class="form-control" type="number" id="cantidadCompra" name="cantidadCompra"></input>
-							</div>
-
-							<!-- PRECIO -->
-
-							<div class="input-group input-group-sm mb-3 col-6">
-							  	<div class="input-group-prepend">
-							    	<label for="precioProducto" class="input-group-text">
-							    		Precio
-							    	</label>
-							  	</div>
-								<input id="precioProducto" class="form-control" name="precioProducto">
-							</div>
-							<button type="button" id="btnAgregarProducto" class="btn btn-info btn-sm col-5 col-md-3 justify-content-center mb-2">+</button>
 						</div>
+
+						<!-- PRODUCTO -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="idProductoCompra" class="input-group-text">
+						    		Producto
+						    	</label>
+						  	</div>
+						  	<select id="idProductoCompra" class="form-control" name="idProductoCompra">
+						  		<option selected disabled>Elegir Galpón en Lote</option>
+						  	</select>
+						</div>
+
+						<!-- PROVEEDOR DEL PRODUCTO -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="documentoProveedorCompra" class="input-group-text">
+						    		Proveedor
+						    	</label>
+						  	</div>
+						  	<select id="documentoProveedorCompra" class="form-control" name="documentoProveedorCompra">
+									<option selected disabled>Elegir Proveedor</option>
+								</select>
+						</div>
+
+						<!-- Cantidad -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="cantidadProducto" class="input-group-text">
+						    		Cantidad
+						    	</label>
+						  	</div>
+						  	<input class="form-control" type="number" id="cantidadProducto" name="cantidadProducto"></input>
+						</div>
+
+						<!-- PRECIO PRODUCTO -->
+
+						<div class="input-group input-group-sm mb-3">
+						  	<div class="input-group-prepend">
+						    	<label for="precioProducto" class="input-group-text">
+						    		Precio
+						    	</label>
+						  	</div>
+						  	<input id="precioProducto" class="form-control" name="precioProducto">
+						</div>
+						<button type="button" class="my-3 btn btn-info btn-block btn-sm" id="agregarProducto">Agregar producto</button>
 
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
-						<table class="table table-striped table-responsive p-0 tablas table-sm text-center" id="tablaProductos">
+						<table id='tablaAgregarProductos' class="table table-striped table-responsive p-0 tablas table-sm text-center">
 							<thead class="table-info">
+								<th>Proveedor</th>
 								<th>Tipo</th>
 								<th>Producto</th>
 								<th>Cantidad</th>
@@ -102,13 +101,20 @@
 								<th>Borrar</th>
 							</thead>
 							<tbody>
+								<tr>
+									<td></td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td class="borrar"><i class="fa fa-trash btn btn-danger borrar"></i></td>
 							</tbody>
 						</table>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
 						<div class="row justify-content-center d-flex">
-							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
+							<button class="btn btn-primary btn-sm col-md-5 text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
 						</div>
 					</form>
 

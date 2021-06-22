@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   //&& class === modal fade
+ 
   if (elementoExiste('formularioAgregarProducto')) {
     const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
@@ -190,69 +191,109 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  if (elementoExiste('formularioCompra')) {
-    document.getElementById('fechaCompraProducto').value = fechaHoy();
-    let proveedor = document.getElementById('idProveedorProducto');
-    let tipoProducto = document.getElementById('idTipoProductoCompra');
-    obtenerObjeto('?c=Configuracion&m=obtenerProveedor', proveedor, ['documento', 'documento'], '', llenarSelect);
-    obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', tipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
-    tipoProducto.addEventListener('change', (e)=>{
-      let url = '?c=Configuracion&m=obtenerProducto&documentoProveedor='+proveedor.value+'&tipoProducto='+tipoProducto.value;
-      obtenerObjeto(url, document.getElementById('idProductoCompra'), ['idProducto', 'nombreProducto'], '', llenarSelect);
-    })
-    document.getElementById('btnAgregarProducto').addEventListener('click', (e)=>{
-      let inputs = document.getElementById('idProductoCompra');
-      let varTabla = {'Tipo': tipoProducto.options[tipoProducto.selectedIndex].text};
-      varTabla['Producto'] = inputs.options[inputs.selectedIndex].text;
-      varTabla['Cantidad'] = document.getElementById('cantidadCompra').value;
-      varTabla['Precio'] = document.getElementById('precioProducto').value;
-      console.log(varTabla);
-      llenarTabla([varTabla], '#tablaProductos', ['Tipo','Producto', 'Cantidad', 'Precio']);
-      console.log(document.getElementById('tablaProductos').text);
-    })
+// <<<<<<< HEAD
+//   if (elementoExiste('formularioCompra')) {
+//     document.getElementById('fechaCompraProducto').value = fechaHoy();
+//     let proveedor = document.getElementById('idProveedorProducto');
+//     let tipoProducto = document.getElementById('idTipoProductoCompra');
+//     obtenerObjeto('?c=Configuracion&m=obtenerProveedor', proveedor, ['documento', 'documento'], '', llenarSelect);
+//     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', tipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
+//     tipoProducto.addEventListener('change', (e)=>{
+//       let url = '?c=Configuracion&m=obtenerProducto&documentoProveedor='+proveedor.value+'&tipoProducto='+tipoProducto.value;
+//       obtenerObjeto(url, document.getElementById('idProductoCompra'), ['idProducto', 'nombreProducto'], '', llenarSelect);
+//     })
+//     document.getElementById('btnAgregarProducto').addEventListener('click', (e)=>{
+//       let inputs = document.getElementById('idProductoCompra');
+//       let varTabla = {'Tipo': tipoProducto.options[tipoProducto.selectedIndex].text};
+//       varTabla['Producto'] = inputs.options[inputs.selectedIndex].text;
+//       varTabla['Cantidad'] = document.getElementById('cantidadCompra').value;
+//       varTabla['Precio'] = document.getElementById('precioProducto').value;
+//       console.log(varTabla);
+//       llenarTabla([varTabla], '#tablaProductos', ['Tipo','Producto', 'Cantidad', 'Precio']);
+//       console.log(document.getElementById('tablaProductos').text);
+//     })
 
-    const formularioCompra = document.getElementById('formularioCompra');
-    formularioCompra.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      for (var i = 0; i < document.getElementById('tablaProductos').rows.length-1; i++) {
-        for (var e = 0; e < 0; i++) {
+//     const formularioCompra = document.getElementById('formularioCompra');
+//     formularioCompra.addEventListener('submit', (e)=>{
+//       e.preventDefault();
+//       for (var i = 0; i < document.getElementById('tablaProductos').rows.length-1; i++) {
+//         for (var e = 0; e < 0; i++) {
           
-        }
+//         }
+//       }
+//       // document.getElementById('tablaProductos');
+//       // agragarObjetoBD(formularioCompra, '?c=Configuracion&m=agregarUsuario', '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
+//     })
+// =======
+//   if (elementoExiste('formularioCompras')){
+//     let formularioCompras = document.getElementById('formularioCompras')
+//     let selectTipoProducto = document.getElementById('idTipoProductoCompra');
+//     let selectProducto = document.getElementById('idProductoCompra');
+//     let selectProveedor = document.getElementById('documentoProveedorCompra');
+//     let inputCantidadProducto = document.getElementById('cantidadProducto')
+//     let inputPrecioProducto = document.getElementById('precioProducto')
+
+//     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', selectTipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
+//     selectTipoProducto.addEventListener('change', e => {
+//       let idTipoProducto = selectTipoProducto.value;
+//       selectProducto.innerHTML= '<option selected disabled>Elija el Tipo de Producto</option>';
+//       obtenerObjeto('?c=Configuracion&m=obtenerProducto&idTipoProducto='+idTipoProducto,
+//         selectProducto,
+//         ['idProducto', 'nombreProducto'], '',
+//         llenarSelect);
+//       console.log(selectTipoProducto.value);
+//     });
+//     selectProducto.addEventListener('change', e => {
+//       let idProducto = selectProducto.value;
+//       selectProveedor.innerHTML= '<option selected disabled>Elija el proveedor</option>';
+//       obtenerObjeto('?c=InventarioGeneral&m=obtenerProveedoresProducto&idProducto='+idProducto,
+//         selectProveedor,
+//         ['documento', 'nombrePersona'], '',
+//         llenarSelect);
+//     });
+
+    document.getElementById('agregarProducto').addEventListener('click', (e) => {
+      let tr = document.createElement('tr');
+      let data = new FormData(formularioCompras);
+      console.log(data);
+    });
+    document.getElementById('tablaAgregarProductos').addEventListener('click', e => {
+      let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
+      if (target.classList.contains('borrar')){
+        target.parentElement.remove();
       }
-      // document.getElementById('tablaProductos');
-      // agragarObjetoBD(formularioCompra, '?c=Configuracion&m=agregarUsuario', '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
-    })
-
-    // obtenerObjeto('?c=Configuracion&m=obtenerProducto&e=where documentoProveedor= ', document.getElementById('idProducto'), ['idTipoProducto', 'nombreTipoProducto','where'], '', llenarSelect);
-// let datos = new FormData(formularioCompra);
-            // fetch('?c=Configuracion&m=obtenerTipoProducto').then(res => res.json())
-            // .then(res => {
-            //  console.log(res);
-            //  console.log('sip')
-            //  })
-  }
-  if (elementoExiste('formularioNuevoLote')) {
-    console.log('xiste formularioNuevoLote');
-    obtenerObjeto('?c=Configuracion&m=obtenerLineaGenetica', document.getElementById('idLineaNuevoLote'), ['idLineaGenetica', 'nombreLineaGenetica'], '', llenarSelect);
-
-  }
-  if (elementoExiste('formularioProduccionHuevos')) {
-    const formularioProduccionHuevos = document.getElementById('formularioProduccionHuevos');
-    obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('gProduccion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
-    document.getElementById(`fechaProduccion`).value = fechaHoy();
-    obtenerObjeto('?c=GestionAves&m=obtenerRecogidas','#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion', llenarTabla);
-    document.getElementById('gProduccion').addEventListener('change', (e)=>{
-      let select = document.getElementById('gProduccion');
-      obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes&idGalpon='+select.options[select.selectedIndex].text, document.getElementById('loteActivo'), ['idLote', 'idLote'], '', llenarSelect);
-    })
-    formularioProduccionHuevos.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      agragarObjetoBD(formularioProduccionHuevos, '?c=GestionAves&m=agregarRecogidas', '?c=GestionAves&m=obtenerRecogidas', '#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion');
+    });
+    // selectProveedor.setAttribute('name', 'documentoProveedor[]')
+    // fetch(`?c=Configuracion&m=obtenerProveedor`);
+    // const promesa = (x) => {
+    //   return new Promise((resolve, reject) => {
+    //     x.forEach( proveedor => {
+    //       console.log(proveedor);
+    //       let option = document.createElement('option');
+    //       option.value = proveedor.documento;
+    //       option.innerText = proveedor.documento;
+    //       selectProveedor.appendChild(option);
+    //     });
+    //     console.log(selectProveedor);
+    //   });
+    // }
+//   if (elementoExiste('formularioProduccionHuevos')) {
+//     const formularioProduccionHuevos = document.getElementById('formularioProduccionHuevos');
+//     obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('gProduccion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+//     document.getElementById(`fechaProduccion`).value = fechaHoy();
+//     obtenerObjeto('?c=GestionAves&m=obtenerRecogidas','#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion', llenarTabla);
+//     document.getElementById('gProduccion').addEventListener('change', (e)=>{
+//       let select = document.getElementById('gProduccion');
+//       obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes&idGalpon='+select.options[select.selectedIndex].text, document.getElementById('loteActivo'), ['idLote', 'idLote'], '', llenarSelect);
+//     })
+//     formularioProduccionHuevos.addEventListener('submit', (e)=>{
+//       e.preventDefault();
+//       agragarObjetoBD(formularioProduccionHuevos, '?c=GestionAves&m=agregarRecogidas', '?c=GestionAves&m=obtenerRecogidas', '#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion');
     
-    })
+//     })
     
-  }
-});
+//   }
+// });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
   // obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
 

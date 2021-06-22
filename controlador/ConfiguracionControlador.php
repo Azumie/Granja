@@ -121,11 +121,13 @@ class ConfiguracionControlador
 			$this->constructorSQL->where('idProducto', '=', $_GET['idProducto']);
 		}else{
 		$productos .= 'No existe';}
+		if (isset($_GET['idTipoProducto'])) {
+			$this->constructorSQL->where('idTipoProducto', '=', $_GET['idTipoProducto']);
+		}
 		if (isset($_GET['tipoProducto'])) {
 			$this->constructorSQL->where('idTipoProducto', '=', $_GET['tipoProducto']);
 		}else{$productos .= 'No ta producto';}
 		$productos = $this->constructorSQL->ejecutarSQL();
-
 		echo json_encode($productos);
 	}
 
