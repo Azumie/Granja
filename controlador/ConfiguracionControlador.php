@@ -247,8 +247,8 @@ class ConfiguracionControlador
 	public function obtenerTipoHuevo(){
 		$this->constructorSQL->select('tiposhuevo');
 			
-		if (isset($_GET['idTipoHuevo'])) {
-			$this->constructorSQL->where('idTipoHuevo', '=', $_GET['idTipoHuevo']);
+		if (isset($_GET['where'])) {
+			$this->constructorSQL->where('activoHuevo', '=', 1);
 		}
 		$tiposhuevo = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($tiposhuevo);

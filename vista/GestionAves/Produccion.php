@@ -53,13 +53,13 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><input type="number" id="Grandes" name="Grandes" min="0" max="50000"></td>
-									<td><input type="number" id="Medianos" min="0" max="50000" name="Medianos"></td>
-									<td><input type="number" id="Pequeños" min="0" max="50000" name="Pequeños"></td>
-									<td><input type="number" id="Picados" min="0" max="50000" name="Picados"></td>
+									<td><input type="number" id="Grande" name="Grande" min="0" max="50000"></td>
+									<td><input type="number" id="Mediano" min="0" max="50000" name="Mediano"></td>
+									<td><input type="number" id="Pequeno" min="0" max="50000" name="Pequeno"></td>
+									<td><input type="number" id="Picado" min="0" max="50000" name="Picado"></td>
 									<td><input type="number" id="Debil" min="0" max="50000" name="Debil"></td>
-									<td><input type="number" id="Derramados" min="0" max="50000" name="Derramados"></td>
-									<td><input type="number" id="Rusticos" min="0" max="50000" name="Rusticos"></td>
+									<td><input type="number" id="Derramado" min="0" max="50000" name="Derramado"></td>
+									<td><input type="number" id="Rustico" min="0" max="50000" name="Rustico"></td>
 									<td><input type="number" id="Pool" min="0" max="50000" name="Pool"></td>
 								</tr>
 							</tbody>

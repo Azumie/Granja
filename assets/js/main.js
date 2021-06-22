@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   //&& class === modal fade
- 
   if (elementoExiste('formularioAgregarProducto')) {
     const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
@@ -23,14 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     obtenerObjeto('?c=Configuracion&m=obtenerProveedor','#tablaProveedor',['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla);
     formularioProveedores.addEventListener('submit', (e) =>{
       e.preventDefault();
-      console.log('cliks');
       let metodo;
       if (elementoExiste('documentoProveedor')) {
         let inputDocumento = document.getElementById('documentoProveedor');
 
         metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
         metodo += 'Proveedor';
-        console.log(metodo)
       }
       agragarObjetoBD(formularioProveedores, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
     });
@@ -58,9 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (elementoExiste('formTiposHuevo')) {
     const formTiposHuevo = document.getElementById('formTiposHuevo');
-    // url,elemento,valores, id, funcion = ''
     obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo', llenarTabla);
-    // console.log(metodo);
     formTiposHuevo.addEventListener('submit', (e) =>{
       let metodo = elementoExiste('idTipoHuevo') ? 'editarTipoHuevo' : 'agregarTipoHuevo';
       e.preventDefault();
@@ -77,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'nombreTipoHuevo': 'nombreTipoHuevo'
       });
   }
-
   // FORMULARIO GALPONEROS
   
   if (elementoExiste('formularioGalponeros')) {
@@ -252,17 +246,17 @@ document.addEventListener('DOMContentLoaded', () => {
 //         llenarSelect);
 //     });
 
-    document.getElementById('agregarProducto').addEventListener('click', (e) => {
-      let tr = document.createElement('tr');
-      let data = new FormData(formularioCompras);
-      console.log(data);
-    });
-    document.getElementById('tablaAgregarProductos').addEventListener('click', e => {
-      let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
-      if (target.classList.contains('borrar')){
-        target.parentElement.remove();
-      }
-    });
+    // document.getElementById('agregarProducto').addEventListener('click', (e) => {
+    //   let tr = document.createElement('tr');
+    //   let data = new FormData(formularioCompras);
+    //   console.log(data);
+    // });
+    // document.getElementById('tablaAgregarProductos').addEventListener('click', e => {
+    //   let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
+    //   if (target.classList.contains('borrar')){
+    //     target.parentElement.remove();
+    //   }
+    // });
     // selectProveedor.setAttribute('name', 'documentoProveedor[]')
     // fetch(`?c=Configuracion&m=obtenerProveedor`);
     // const promesa = (x) => {
@@ -277,39 +271,24 @@ document.addEventListener('DOMContentLoaded', () => {
     //     console.log(selectProveedor);
     //   });
     // }
-//   if (elementoExiste('formularioProduccionHuevos')) {
-//     const formularioProduccionHuevos = document.getElementById('formularioProduccionHuevos');
-//     obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('gProduccion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
-//     document.getElementById(`fechaProduccion`).value = fechaHoy();
-//     obtenerObjeto('?c=GestionAves&m=obtenerRecogidas','#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion', llenarTabla);
-//     document.getElementById('gProduccion').addEventListener('change', (e)=>{
-//       let select = document.getElementById('gProduccion');
-//       obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes&idGalpon='+select.options[select.selectedIndex].text, document.getElementById('loteActivo'), ['idLote', 'idLote'], '', llenarSelect);
-//     })
-//     formularioProduccionHuevos.addEventListener('submit', (e)=>{
-//       e.preventDefault();
-//       agragarObjetoBD(formularioProduccionHuevos, '?c=GestionAves&m=agregarRecogidas', '?c=GestionAves&m=obtenerRecogidas', '#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion');
+  if (elementoExiste('formularioProduccionHuevos')) {
+    const formularioProduccionHuevos = document.getElementById('formularioProduccionHuevos');
+    obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('gProduccion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+    document.getElementById(`fechaProduccion`).value = fechaHoy();
+    obtenerObjeto('?c=GestionAves&m=obtenerRecogidas','#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion', llenarTabla);
+    document.getElementById('gProduccion').addEventListener('change', (e)=>{
+      let select = document.getElementById('gProduccion');
+      obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes&idGalpon='+select.options[select.selectedIndex].text, document.getElementById('loteActivo'), ['idLote', 'idLote'], '', llenarSelect);
+    })
+    formularioProduccionHuevos.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      agragarObjetoBD(formularioProduccionHuevos, '?c=GestionAves&m=agregarRecogidas', '?c=GestionAves&m=obtenerRecogidas', '#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion');
+      
+    })
     
-//     })
-    
-//   }
-// });
-  // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
-  // obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
+  }
 
-  // new Chartist.Line('.contenedor-grafico', {
-  //   labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-  //   series: [
-  //     [12, 9, 7, 8, 5],
-  //     [2, 1, 3.5, 7, 3],
-  //     [1, 3, 4, 5, 6]
-  //   ]
-  // }, {
-  //   fullWidth: true,
-  //   chartPadding: {
-  //     right: 40
-  //   }
-  // });
+});
   // VAMOS A LEER LA URL
 
   // let url = window.location.href;

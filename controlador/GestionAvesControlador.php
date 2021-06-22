@@ -19,38 +19,16 @@ class GestionAvesControlador {
 	public function agregarRecogidas () {
 		if (isset($_POST['gProduccion'], $_POST['fechaProduccion'])) {
 			try {
-				$loteActivo = obtenerGalponesLotes();
-				for ($i=0; $i < 8; $i++) { 
-					if ($_POST[$i] =! '') {
-					$this->constructorSQL->insert('inventarioproduccion', ['idLote' => $_POST['nombreTipoPersona']]);
-					$this->constructorSQL->ejecutarSQL();
-					echo json_encode($this->constructorSQL->getDatos());
-					}
+				$this->constructorSQL->select('tiposhuevo')->where('activoHuevo', '=', '1');
+				$tipoHuevo = $this->constructorSQL->ejecutarSQL();
+				for ($i=0; $i < count($tipoHuevo); $i++) {
+					foreach($_POST as $campo => $valor){
+						if ($campo == $tipoHuevo[$i]->nombreTipoHuevo && $valor != "") {
+							$this->constructorSQL->insert('inventarioproduccion', ['idLote' => $_POST['loteActivo'], 'idGalpon' => $_POST['gProduccion'], 'idTipoHuevo' => $tipoHuevo[$i]->idTipoHuevo, 'fechaInventarioProduccion' => $_POST['fechaProduccion'], 'cantidadProduccion' => $valor]);
+							$this->constructorSQL->ejecutarSQL();
+						}
+					} 
 				}
-				// if ($_POST['Grandes'] != '') {
-				// 	// code...
-				// }
-				// if ($_POST['Medianos'] != '') {
-				// 	// code...
-				// }
-				// if ($_POST['Pequeños'] != '') {
-				// 	// code...
-				// }
-				// if ($_POST['Picados'] != '') {
-				// 	// code...
-				// }
-				// if ($_POST['Debil'] != '') {
-				// 	// code...
-				// }
-				// if ($_POST['Derramados'] != '') {
-				// 	// code...
-				// }
-				// if ($_POST['Rusticos'] != '') {
-				// 	// code...
-				// }
-				// if ($_POST['Rusticos'] != '') {
-				// 	// code...
-				// }
 			} catch (PDOException $e) {
 				echo json_encode($e->getMessage());
 			}
@@ -58,7 +36,8 @@ class GestionAvesControlador {
 	}
 
 	public function obtenerGalponesLotes(){
-		$galponLote = $this->constructorSQL->select('galponeslotes')->where('activo', '=', '1')->where('idGalpon','=',$_GET['idGalpon'])->ejecutarSQL();
-		echo json_encode($_GET['idGalpon']);
+		$this->constructorSQL->select('galponeslotes')->where('activo', '=', '1');
+		$galponLote = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($galponLote);
 	}
 }

@@ -9,7 +9,7 @@ function elementoExiste (elemento) {
 	elemento.innerHTML += `<option value="${valor}">${texto}</option>`;
 }
  // OBTENER GRANJAS 
-function obtenerObjeto (url,elemento,valores, id, funcion = '') {
+function obtenerObjeto (url,elemento,valores = '', id= '', funcion = '') {
 	fetch(url).then(resp => resp.json())
     .then(resp => {
     	if (funcion != '') {
@@ -17,8 +17,27 @@ function obtenerObjeto (url,elemento,valores, id, funcion = '') {
     	}else {
     		return resp;
     	}
+    	if (id == '' && valores == '') {
+    		console.log('lla')
+    	}
     });
 }
+
+// function inputsTabla(resp, elemento, id = ''){
+// 	let tbody = '';
+// 	Object.entries(resp).forEach(([pos]) => {
+// 		tbody += `<td id=${resp[pos][id[pos]]} name=${resp[pos][id]}>${resp[pos][valores[e]]}</td>`;
+// 	});
+// 	for (var i = 0; i < 4; i++) {
+// 		tbody += `<tr>`
+// 		for (var e = 0; e <= id.length; e++) {
+// 			tbody += `<td></td>`;
+// 		}
+// 		tbody += `</tr>`
+// 	}
+// 	tabla = resp;
+// 	document.querySelector(elemento+' tbody').innerHTML = tbody;
+// }
 
 function llenarTabla(resp, elemento,valores, id = ''){
 	let tbody = '';console.log(resp);
