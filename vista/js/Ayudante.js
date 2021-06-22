@@ -21,7 +21,7 @@ function obtenerObjeto (url,elemento,valores, id, funcion = '') {
 }
 
 function llenarTabla(resp, elemento,valores, id = ''){
-	let tbody = '';
+	let tbody = '';console.log(resp);
 	Object.entries(resp).forEach(([pos]) => {
 		tbody += `<tr>`
 		for (let e = 0; e < valores.length; e++) {

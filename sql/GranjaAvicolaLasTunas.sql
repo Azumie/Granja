@@ -207,6 +207,7 @@ CREATE TABLE IF NOT EXISTS `galponeslotes` (
   `idGalpon` INT NOT NULL,
   `idLote` INT NOT NULL,
   `cantidadGallinas` INT NOT NULL,
+  `activogalponLote` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`idGalpon`, `idLote`),
   INDEX `fk_galponeslotes_galpones1_idx` (`idGalpon`),
   INDEX `fk_galponeslotes_lotes1_idx` (`idLote`),

@@ -209,14 +209,16 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(varTabla);
       llenarTabla([varTabla], '#tablaProductos', ['Tipo','Producto', 'Cantidad', 'Precio']);
       console.log(document.getElementById('tablaProductos').text);
-      for (var i = 0; i < document.getElementById('tablaProductos').rows.length-1; i++) {
-        Things[i]
-      }
     })
 
     const formularioCompra = document.getElementById('formularioCompra');
     formularioCompra.addEventListener('submit', (e)=>{
       e.preventDefault();
+      for (var i = 0; i < document.getElementById('tablaProductos').rows.length-1; i++) {
+        for (var e = 0; e < 0; i++) {
+          
+        }
+      }
       // document.getElementById('tablaProductos');
       // agragarObjetoBD(formularioCompra, '?c=Configuracion&m=agregarUsuario', '?c=Configuracion&m=obtenerUsuario', '#tablaUsuario', ['activoUsuario', 'documento', 'nombreUsuario','claveUsuario', 'pregunta', 'respuesta'], 'idUsuario');
     })
@@ -233,6 +235,22 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('xiste formularioNuevoLote');
     obtenerObjeto('?c=Configuracion&m=obtenerLineaGenetica', document.getElementById('idLineaNuevoLote'), ['idLineaGenetica', 'nombreLineaGenetica'], '', llenarSelect);
 
+  }
+  if (elementoExiste('formularioProduccionHuevos')) {
+    const formularioProduccionHuevos = document.getElementById('formularioProduccionHuevos');
+    obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('gProduccion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+    document.getElementById(`fechaProduccion`).value = fechaHoy();
+    obtenerObjeto('?c=GestionAves&m=obtenerRecogidas','#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion', llenarTabla);
+    document.getElementById('gProduccion').addEventListener('change', (e)=>{
+      let select = document.getElementById('gProduccion');
+      obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes&idGalpon='+select.options[select.selectedIndex].text, document.getElementById('loteActivo'), ['idLote', 'idLote'], '', llenarSelect);
+    })
+    formularioProduccionHuevos.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      agragarObjetoBD(formularioProduccionHuevos, '?c=GestionAves&m=agregarRecogidas', '?c=GestionAves&m=obtenerRecogidas', '#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion');
+    
+    })
+    
   }
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');

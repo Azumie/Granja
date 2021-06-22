@@ -10,7 +10,8 @@ class LoteControlador
 		$vistas = ['InicioLote', 'LineaGenetica', 'NuevoLote', 'Galponeros'];
 		require_once 'vista/includes/layout.php';
 	}
-	public function obtenerLote(){
-		
-	}
+	// public function obtenerLote(){
+	// 	$lote = $this->ConstructorSQL->select('lotes')->where('activogalponLote', '=', '1')->ejecutarSQL();
+	// 	echo json_encode($lote);
+	// }
 }
