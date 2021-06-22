@@ -198,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectProveedor = document.getElementById('documentoProveedorCompra');
     let inputCantidadProducto = document.getElementById('cantidadProducto')
     let inputPrecioProducto = document.getElementById('precioProducto')
+    const tablaAgregarProductos = document.getElementById('tablaAgregarProductos');
 
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', selectTipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
     selectTipoProducto.addEventListener('change', e => {
@@ -216,14 +217,39 @@ document.addEventListener('DOMContentLoaded', () => {
         selectProveedor,
         ['documento', 'nombrePersona'], '',
         llenarSelect);
-    });
 
-    document.getElementById('agregarProducto').addEventListener('click', (e) => {
-      let tr = document.createElement('tr');
-      let data = new FormData(formularioCompras);
-      console.log(data);
     });
-    document.getElementById('tablaAgregarProductos').addEventListener('click', e => {
+    formularioCompras.addEventListener('submit', e => {
+      e.preventDefault();
+      
+      // agragarObjetoBD(formularioCompras, '?c=InventarioGeneral&m=agregarCompra', '', '#tablaAgregarProductos', ['nombreProveedor', 'nombreTipoProducto', 'nombreProducto', 'cantidadProducto', 'precioProducto'], 'idCompra');
+      (async () => {
+        const idInventario = await insertBD(formularioCompras, '?c=InventarioGeneral&m=agregarCompra');
+        const compras = await selectBD(`?c=InventarioGeneral&m=obtenerCompras&idInventario=${idInventario}`);
+        document.getElementById('idInventario').value = idInventario;
+        document.getElementById('fechaOperacion').value = compras[0].fechaOperacion;
+        llenarTabla(compras, '#tablaAgregarProductos', ['documentoProveedor', 'nombreTipoProducto', 'nombreProducto', 'cantidadProducto', 'precioProducto'], 'idCompraGranja');
+        console.log(compras);
+
+      })();
+    });
+    // document.getElementById('agregarProducto').addEventListener('click', (e) => {
+    //   let tr = document.createElement('tr');
+    //   let inputs = formularioCompras.querySelectorAll('.form-control');
+    //   inputs.forEach((e, index) => {
+    //     let td = document.createElement('td');
+    //       td.setAttribute(e.id, e.value);
+    //       if (e.tagName == 'SELECT') {
+    //         td.innerText = e.selectedOptions[0].innerText;
+    //       }else {
+    //         td.innerText = e.value;
+    //       }
+    //       console.log(e.tagName)
+    //     tr.appendChild(td);
+    //   });
+    //   tablaAgregarProductos.appendChild(tr);
+    // });
+    tablaAgregarProductos.addEventListener('click', e => {
       let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
       if (target.classList.contains('borrar')){
         target.parentElement.remove();
