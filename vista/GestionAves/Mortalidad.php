@@ -13,33 +13,29 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<form method="POST" action="#" class="col-lg-5 mb-3 mb-lg-0 align-self-center h-50">
+					<form id="formularioMortalidad" class="col-lg-5 mb-3 mb-lg-0 align-self-center h-50">
 						<h6>A continuación... <br> Ingrese la información de la <em>mortalidad</em> de las gallinas:</h6>
 						<div class="input-group input-group-sm mb-2 ">
 							<div class="input-group-prepend">
-								<label for="idGalponEnLote" class="input-group-text">
-									Galpón en Lote
+								<label for="idGalponEnLoteMortalidad" class="input-group-text">
+									Galpón
 								</label>
 							</div>
-							<select id="idGalponEnLote" class="form-control">
+							<select id="idGalponEnLoteMortalidad" name="idGalponEnLote" class="form-control">
 								<option selected disabled>Elegir Galpón en Lote</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
 							</select>
 						</div>
 						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
 								<label for="fechaMortalidad" class="input-group-text">Fecha</label>
 							</div>
-							<input type="date" class="form-control" id="fechaMortalidad" name="fechaMortalidad">
+							<input type="date" class="form-control" id="fechaMortalidad" name="fechaOperacion">
 						</div>
 						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
-								<label for="fechaMortalidad" class="input-group-text">Gallinas</label>
+								<label for="GallinaMortalidad" class="input-group-text">Gallinas</label>
 							</div>
-							<input type="number" class="form-control" id="GallinaMortalidad" name="GallinaMortalidad" placeholder="Cant. de Gallinas">
+							<input type="number" class="form-control" id="GallinaMortalidad" name="cantidadProducto" placeholder="Cant. de Gallinas">
 						</div>
 						<div class="row justify-content-center d-flex">
 							<button class="btn btn-primary btn-sm col-5 form-control text-white"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
@@ -48,7 +44,7 @@
 					</form>
 					<div class="col-lg-7 table-scrolly">
 						<p>Cantidad de gallinas que han perecido a lo largo del tiempo.</p>
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center">
+						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaMortalidad">
 							<thead class="table-info" >
 								<th>Fecha</th>
 								<th>Galpón</th>

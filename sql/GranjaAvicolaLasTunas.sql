@@ -324,7 +324,6 @@ CREATE TABLE IF NOT EXISTS `operaciongalpon` (
   `idInventario` INT NOT NULL,
   `idGalpon` INT NOT NULL,
   `idLote` INT NOT NULL,
-  `precioProducto` FLOAT NULL,
   `cantidadProducto` INT NOT NULL,
   `idProducto` INT NOT NULL,
   PRIMARY KEY (`idInventario`, `idGalpon`, `idLote`),

@@ -276,9 +276,10 @@ document.addEventListener('DOMContentLoaded', () => {
     obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('gProduccion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
     document.getElementById(`fechaProduccion`).value = fechaHoy();
     obtenerObjeto('?c=GestionAves&m=obtenerRecogidas','#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion', llenarTabla);
+    // Rellenar select del idLote al seleccionar un galpon
     document.getElementById('gProduccion').addEventListener('change', (e)=>{
       let select = document.getElementById('gProduccion');
-      obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes&idGalpon='+select.options[select.selectedIndex].text, document.getElementById('loteActivo'), ['idLote', 'idLote'], '', llenarSelect);
+      obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes&idGalpon='+select.options[select.selectedIndex].value, document.getElementById('loteActivo'), ['idLote', 'idLote'], '', llenarSelect);
     })
     formularioProduccionHuevos.addEventListener('submit', (e)=>{
       e.preventDefault();
@@ -292,17 +293,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const formularioAgregarAlimentacion = document.getElementById('formularioAgregarAlimentacion');
     obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idAlimentandoGalpon'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
     obtenerObjeto('?c=Configuracion&m=obtenerProducto&tipoProducto=1', document.getElementById('alimentoAUsar'), ['idProducto', 'nombreProducto'], '', llenarSelect);    
-    document.getElementsByName(`fechaDeAlimentacion`)[0].value = fechaHoy();
+    document.getElementById(`fechaDeAlimentacion`).value = fechaHoy();
     console.log('resp')
-    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion','#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
+    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1','#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
     // tablaAlimentacion
     formularioAgregarAlimentacion.addEventListener('submit', (e)=>{
       e.preventDefault();
-      agragarObjetoBD(formularioAgregarAlimentacion, '?c=GestionAves&m=agregarAlimentacion', '?c=GestionAves&m=obtenerAlimentacion', '#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
+      agragarObjetoBD(formularioAgregarAlimentacion, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1', '#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
     })
   }
 
 });
+
+if (elementoExiste('formularioMortalidad')) {
+  const formularioMortalidad = document.getElementById('formularioMortalidad');
+    obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponEnLoteMortalidad'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+    document.getElementById('fechaMortalidad').value = fechaHoy();
+    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario', llenarTabla);
+    
+    formularioMortalidad.addEventListener('submit', (e) =>{
+      e.preventDefault();
+      agragarObjetoBD(formularioMortalidad, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario');
+    });
+}
+
+if (elementoExiste('formularioDespachos')) {
+  // const formularioDespachos = document.getElementById('formularioDespachos');
+  // obtenerObjeto('?c=Configuracion&m=obtenerCliente', document.getElementById('idCliente'), ['documento', 'documento'], '', llenarSelect);
+  // document.getElementById('fechaDespacho').value = fechaHoy();
+  // obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', document.getElementById('idTipoHuevoDespacho'), ['idTipoHuevo', 'nombreTipoHuevo'], '', llenarSelect);
+
+}
   // VAMOS A LEER LA URL
 
   // let url = window.location.href;
