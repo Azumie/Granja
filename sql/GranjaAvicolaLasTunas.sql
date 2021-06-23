@@ -37,7 +37,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `inventario` (
   `idInventario` INT NOT NULL AUTO_INCREMENT,
-  `fechaOperacion` VARCHAR(45) NOT NULL,
+  `fechaOperacion` date NOT NULL,
   `entrada` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`idInventario`))
 ENGINE = InnoDB;
@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `galponeslotes` (
   `idGalpon` INT NOT NULL,
   `idLote` INT NOT NULL,
   `cantidadGallinas` INT NOT NULL,
-  `activogalponLote` TINYINT(1) NOT NULL DEFAULT 1,
+  `activo` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`idGalpon`, `idLote`),
   INDEX `fk_galponeslotes_galpones1_idx` (`idGalpon`),
   INDEX `fk_galponeslotes_lotes1_idx` (`idLote`),
@@ -323,27 +323,31 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `operaciongalpon` (
   `idInventario` INT NOT NULL,
   `idGalpon` INT NOT NULL,
+  `idLote` INT NOT NULL,
   `precioProducto` FLOAT NULL,
   `cantidadProducto` INT NOT NULL,
   `idProducto` INT NOT NULL,
-  `documentoProveedor` VARCHAR(11) NOT NULL,
-  PRIMARY KEY (`idInventario`, `idGalpon`),
-  INDEX `fk_destinocompra_galpones1_idx` (`idGalpon`),
-  INDEX `fk_operaciongalpon_inventario1_idx` (`idInventario`),
-  INDEX `fk_operaciongalpon_proveedoresproducto1_idx` (`idProducto` ASC, `documentoProveedor`),
-  CONSTRAINT `fk_destinocompra_galpones1`
+  PRIMARY KEY (`idInventario`, `idGalpon`, `idLote`),
+  INDEX `fk_destinocompra_galponeslotes1_idx` (`idGalpon`),
+  INDEX `fk_destinocompra_galponeslotes2_idx` (`idLote`),
+  CONSTRAINT `fk_destinocompra_galponeslotes1_idx`
     FOREIGN KEY (`idGalpon`)
-    REFERENCES `galpones` (`idGalpon`)
+    REFERENCES `galponeslotes` (`idGalpon`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_destinocompra_galponeslotes2_idx`
+    FOREIGN KEY (`idLote`)
+    REFERENCES `galponeslotes` (`idLote`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_destinocompra_productos1_idx`
+    FOREIGN KEY (`idProducto`)
+    REFERENCES `productos` (`idProducto`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_operaciongalpon_inventario1`
     FOREIGN KEY (`idInventario`)
     REFERENCES `inventario` (`idInventario`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_operaciongalpon_proveedoresproducto1`
-    FOREIGN KEY (`idProducto` , `documentoProveedor`)
-    REFERENCES `proveedoresproducto` (`idProducto` , `documentoProveedor`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;

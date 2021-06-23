@@ -288,6 +288,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
   }
 
+  if(elementoExiste('formularioAgregarAlimentacion')){
+    const formularioAgregarAlimentacion = document.getElementById('formularioAgregarAlimentacion');
+    obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idAlimentandoGalpon'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+    obtenerObjeto('?c=Configuracion&m=obtenerProducto&tipoProducto=1', document.getElementById('alimentoAUsar'), ['idProducto', 'nombreProducto'], '', llenarSelect);    
+    document.getElementsByName(`fechaDeAlimentacion`)[0].value = fechaHoy();
+    console.log('resp')
+    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion','#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
+    // tablaAlimentacion
+    formularioAgregarAlimentacion.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      agragarObjetoBD(formularioAgregarAlimentacion, '?c=GestionAves&m=agregarAlimentacion', '?c=GestionAves&m=obtenerAlimentacion', '#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
+    })
+  }
+
 });
   // VAMOS A LEER LA URL
 

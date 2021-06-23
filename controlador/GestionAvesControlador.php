@@ -35,9 +35,42 @@ class GestionAvesControlador {
 		}
 	}
 
-	public function obtenerGalponesLotes(){
-		$this->constructorSQL->select('galponeslotes')->where('activo', '=', '1');
+	public function obtenerGalponesLotes($where = ''){
+		if ($where == '') {
+		$this->constructorSQL->select('galponeslotes')->where('activo', '=', '1')->where('idGalpon', '=', $_GET['idGalpon']);
+		} else {
+			$this->constructorSQL->select('galponeslotes')->where('activo', '=', '1')->where('idGalpon', '=', $where);
+		}
 		$galponLote = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($galponLote);
+	}
+// select * from operaciongalpon inner join inventario on operaciongalpon.idInventario = inventario.idInventario
+	public function obtenerAlimentacion(){
+		$this->constructorSQL->select('operaciongalpon', 'operaciongalpon.*, inventario.*, galpones.numeroGalpon, productos.nombreProducto')->innerJoin('inventario', 'operaciongalpon.idInventario', '=', 'inventario.idInventario')->innerJoin('galpones', 'galpones.idGalpon', '=', 'operaciongalpon.idGalpon')->innerJoin('productos', 'productos.idProducto','=', 'operaciongalpon.idProducto');
+		$galponLote = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($galponLote);
+	}
+	public function agregarAlimentacion(){
+		if(isset($_POST['idAlimentandoGalpon'], $_POST['alimentoAUsar'], $_POST['cantidadAlimento'], $_POST['fechaDeAlimentacion'])){
+			try {
+			// Agregando en la BD el inventario que se manejará
+			$this->constructorSQL->insert('inventario',['fechaOperacion' => $_POST['fechaDeAlimentacion'], 'entrada' => 0]);
+			// Ejecutando
+			$ultID = $this->constructorSQL->ejecutarSQL();
+			// Obteniendo lote activo
+			$this->constructorSQL = new ConstructorSQL();
+			$this->constructorSQL->select('galponeslotes')->where('activo', '=', '1')->where('idGalpon', '=', $_POST['idAlimentandoGalpon']);
+			$galponLote = $this->constructorSQL->ejecutarSQL();
+			if (($ultID != '' ||  !is_null($ultID)) && ($galponLote != '' || !is_null($galponLote))) {
+			// 	// Insertando en operación galpón
+				$this->constructorSQL->insert('operaciongalpon', ['idInventario' => $ultID, 'idGalpon' => $_POST['idAlimentandoGalpon'], 'idLote' => $galponLote[0]->idLote, 'cantidadProducto' => $_POST['cantidadAlimento'], 'idProducto' => $_POST['alimentoAUsar']]);
+				$this->constructorSQL->ejecutarSQL();
+			}
+			echo json_encode('Agregado');
+			} catch (Exception $e) {
+				echo json_encode($e);
+			}
+			
+		}
 	}
 }

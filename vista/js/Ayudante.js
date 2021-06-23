@@ -13,6 +13,7 @@ function obtenerObjeto (url,elemento,valores = '', id= '', funcion = '') {
 	fetch(url).then(resp => resp.json())
     .then(resp => {
     	if (funcion != '') {
+
     		funcion(resp, elemento,valores, id);
     	}else {
     		return resp;
@@ -40,10 +41,15 @@ function obtenerObjeto (url,elemento,valores = '', id= '', funcion = '') {
 // }
 
 function llenarTabla(resp, elemento,valores, id = ''){
-	let tbody = '';console.log(resp);
+	let tbody = '';
+		if (valores[0] == 'fechaOperacion') {
+			console.log('holaaaa')
+		}
 	Object.entries(resp).forEach(([pos]) => {
+
 		tbody += `<tr>`
 		for (let e = 0; e < valores.length; e++) {
+			
 			tbody += `<td>${resp[pos][valores[e]]}</td>`;
 		}
 		if (id != '') {
@@ -68,6 +74,17 @@ function llenarTabla(resp, elemento,valores, id = ''){
     if (id != '') {
     	document.querySelector(elemento+' tbody').innerHTML = tbody;
     } else document.querySelector(elemento+' tbody').innerHTML += tbody;
+}
+function tabla(resp, elemento,valores, id = ''){
+	let tbody = '';
+		console.log('hola')
+		console.log(resp)
+	Object.entries(resp).forEach(([pos]) => {
+		console.log(resp[pos]);
+		for (let e = 0; e < valores.length; e++) {
+			console.log(resp[pos][valores[e]]);
+		}
+	});
 }
 
 function llenarSelect(resp, elemento,valores, id){
