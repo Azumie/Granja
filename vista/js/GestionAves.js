@@ -14,7 +14,7 @@ if(elementoExiste('formularioAgregarAlimentacion')){
 	// const select = document.getElementById('ConfinamientoGalpon');
 	// agregarOption(select, 'P','Piso'); agregarOption(select,'J','Jaula');
 	// Obteniendo formulario del Módulo Galpón
-	let datos =  '?c=Galpon&m=obtenerGalpones&e=where activoGalpon = 1';
+	let datos =  '?c=Galpon&m=obtenerGalpones';
 	fetch(datos)
 	.then(res => res.json())
 	.then(res => {

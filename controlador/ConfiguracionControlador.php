@@ -93,7 +93,7 @@ class ConfiguracionControlador
 	}
 
 	public function obtenerTipoProducto () {
-		$this->constructorSQL->select('tiposproducto');
+		$this->constructorSQL->select('tiposproducto')->where('nombreTipoProducto', '!=', 'Gallina');
 		$tipoProducto = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($tipoProducto);
 	}

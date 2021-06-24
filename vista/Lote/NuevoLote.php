@@ -14,62 +14,123 @@
 			<div class="modal-body">
 				<div class="row">
 					<form id="formularioNuevoLote" class="col-md-6">
+
+						<!-- el id de la granja esta en la session del usuario -->
+
+							<!-- FECHA DE COMPRA -->
+
+							<div class="input-group input-group-sm mb-2">
+								<div class="input-group-prepend">
+									<label for='fechaCompraGallinas' class="input-group-text">Fecha Compra</label>
+								</div>
+								<input type="date" name="fechaOperacion" id="fechaCompraGallinas" class="form-control">
+							</div>
+
+						<!-- PROVEEDOR DE LAS GALLINAS -->
+
+						<div class="input-group input-group-sm mb-2">
+							<div class="input-group-prepend">
+								<label for="documentoProveedorLote" class="input-group-text">Proveedor</label>
+							</div>
+							<select id="documentoProveedorLote" name="documentoProveedor" class="form-control">
+								<option disabled selected>Escoge al proveedor</option>
+							</select>
+						</div>
+
+							<!-- PRECIO DE LAS GALLIANS -->
+
+							<div class="input-group input-group-sm mb-2">
+								<div class="input-group-prepend">
+									<label class="input-group-text">Precio</label>
+								</div>
+								<input type="number" name="precioProducto" id="precioGallinas" class="form-control" placeholder="">
+							</div>
+						
+							<!-- CANTIDAD TOTAL DE GALLINAS -->
+
+							<div class="input-group input-group-sm mb-2">
+								<div class="input-group-prepend">
+									<label class="input-group-text">Gallinas totales</label>
+								</div>
+								<input type="number" name="cantidadProducto" id="cantidadGallinas Total" class="form-control" placeholder="">
+							</div>
+
+							<!-- FECHA DE INICIO DEL LOTE -->
+
+							<div class="input-group input-group-sm mb-2">
+								<div class="input-group-prepend">
+									<label class="input-group-text">Fecha Inicio</label>
+								</div>
+								<input type="date" id="fechaInicioNuevoLote" name="fechaInicio" class="form-control">
+							</div>
+
+						<!-- LINEA GENETICA -->
+
 						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
 								<label class="input-group-text">Línea Genética</label>
 							</div>
-							<select id="idLineaNuevoLote" name="idLineaNuevoLote" class="form-control">
+							<select id="idLineaNuevoLote" name="idLineaGenetica" class="form-control">
 								<option disabled selected value=''>Escoge la Línea Genética</option>
 							</select>
 						</div>
-						<div class="row">
-							<div class="input-group input-group-sm mb-2 col-md-6">
+
+
+						<!-- lOTE -->
+
+							<div class="input-group input-group-sm mb-2">
 								<div class="input-group-prepend">
-									<label class="input-group-text">Lote</label>
+									<label class="input-group-text">Numero de Lote</label>
 								</div>
-								<input type="number" name="loteNuevoLote" placeholder="Número del lote" class="form-control">
+								<input type="number" name="numeroLote" id="numeroLote" placeholder="Número del lote" class="form-control">
 							</div>
-							<div class="input-group input-group-sm mb-2 col-md-6">
+
+							<p>Asignar gallinas a los galpones</p>
+
+							<!-- ID LOTET -->
+
+							<input type="hidden" name="idLote" id="idLote">
+
+							<!-- IDGALPON -->
+
+							<div class="input-group input-group-sm mb-2">
+								<div class="input-group-prepend">
+									<label for="idGalponLote" class="input-group-text">Galpon</label>
+								</div>
+								<select id="idGalponLote" name="idGalpon" class="form-control">
+									<option disabled selected value=''>Escoge un galpon</option>
+								</select>
+							</div>
+
+							<!-- NUMERO DE GALLINAS POR GALPON -->
+
+							<div class="input-group input-group-sm mb-2">
 								<div class="input-group-prepend">
 									<label class="input-group-text">N° Gallinas</label>
 								</div>
-								<input type="number" name="GallinasNuevoLote" class="form-control" placeholder="">
+								<input type="number" name="cantidadGallinas" id="cantidadGallinas" class="form-control" placeholder="">
 							</div>
-						</div>
-						<div class="row">
-							<div class="input-group input-group-sm mb-2 col-md-5">
-								<div class="input-group-prepend">
-									<label class="input-group-text">Galpón</label>
-								</div>
-								<select class="form-control">
-									<option disabled selected>Escoge el galpón deseado</option>
-								</select>
-							</div>
-							<div class="input-group input-group-sm mb-2 col-md-7">
-								<div class="input-group-prepend">
-									<label class="input-group-text">Fecha Inicio</label>
-								</div>
-								<input type="date" name="fechaInicioNuevoLote" class="form-control">
-							</div>
-						</div>
-						<h5>Características de la línea genética</h5>
-						<table class="table table-responsive p-0 table-sm text-center col-12">
-							<thead class="table-info" >
-								<th>N° Galpón</th>
-								<th>N° Gallinas</th>
-								<th>Borrar</th>
-							</thead>
-							<tbody class="table-light">
-								<tr>
-									<td><input type="number" id="Mortalidad" name="Mortalidad"></td>
-									<td><input type="number" id="pMortalidad" name="pMortalidad"></td>
-									<td><input type="number" id="Produccion" name="Produccion"></td>
-								</tr>
-							</tbody>
-						</table>
+
+							<!-- AGREGAR GALPON EN LOTE -->
+
+							<button id="agregarGalonLote" type="button" class="btn btn-info btn-block btn-sm mb-2">Agregar Galpon Al lote</button>
+
+							<table id="tablaGalponesLotes" class="table table-responsive-sm table-sm table-striped mb-3">
+								<thead class="table-info">
+									<th>Galpon</th>
+									<th>Numero de Gallinas</th>
+									<th>borrar</th>
+								</thead>
+								<tbody>
+									
+								</tbody>
+							</table>
+
+						<!-- BOTONES GUARDAR Y CANCELAR -->
+	
 						<div class="row justify-content-center d-flex">
-							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button class="btn btn-primary btn-sm col-md-5 ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 						</div>
 					</form>
 					<div class="col-md-6">

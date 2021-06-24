@@ -272,6 +272,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
 
+  if (elementoExiste('formularioNuevoLote')) {
+
+    const documentoProveedorLote = document.getElementById('documentoProveedorLote');
+    const lineaNuevo = document.getElementById('idLineaNuevoLote');
+    const idGalponLote = document.getElementById('idGalponLote');
+    const formularioNuevoLote = document.getElementById('formularioNuevoLote');
+    const idLote = document.getElementById('idLote');
+    let galponesLotes = [];
+
+    (async () => {
+      const proveedoresGallinas = await selectBD('?c=lote&m=obtenerProveedoresGallina');
+      const galpones = await selectBD('?c=lote&m=obtenerGalpones');
+      const lineaGenerica = await selectBD('?c=lote&m=obtenerLineagenetica');
+      llenarSelect(proveedoresGallinas, documentoProveedorLote, ['documento', 'nombrePersona'], 'documento');
+      llenarSelect(lineaGenerica, lineaNuevo, ['idLineaGenetica', 'nombreLineaGenetica'], 'idLineaGenetica');
+      llenarSelect(galpones, idGalponLote, ['idGalpon', 'numeroGalpon'], 'idGalpon');
+    })();
+
+    document.getElementById('agregarGalonLote').addEventListener('click', e => {
+      if (idGalponLote.selectedOptions[0] != undefined) {
+        let galpon = {
+          idGalpon: idGalponLote.value,
+          cantidadGallinas: document.getElementById('cantidadGallinas').value
+        };
+        idGalponLote.selectedOptions[0].remove();
+        galponesLotes.push(galpon);
+        llenarTabla(galponesLotes, '#tablaGalponesLotes', ['idGalpon', 'cantidadGallinas'], 'idGalpon');
+      } else 
+        alerta('No hay mas Galpones Disponibles', 'danger');
+
+    });
+
+    formularioNuevoLote.addEventListener('submit', e => {
+      e.preventDefault();
+      let formdataNuevoLote = new FormData(formularioNuevoLote);
+      // galponesLotes.forEach( e => {
+      // });
+        galponesLotes.forEach( (e, i) => {
+          console.log("i", i);
+          console.log("e", e);
+          formdataNuevoLote.append(`galpones[${i}][cantidadGallinas]`, e.cantidadGallinas);
+          formdataNuevoLote.append(`galpones[${i}][idGalpon]`, e.idGalpon);
+        });
+      (async () => {
+        const respuesta = await insertBD(formdataNuevoLote, '?c=lote&m=agregarNuevoLote', false);
+        console.log(respuesta);
+      })();
+    });
+  }
+
 });
   // obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
   // obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');

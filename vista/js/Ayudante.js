@@ -77,6 +77,9 @@ function alerta (mensaje, color = 'info') {
 					<span aria-hidden="true">&times;</span>
 				</button>`;
 	alertBox.appendChild(alerta);
+	setTimeout(() => {
+		alerta.remove();
+	}, 3000);
 }
 
 function agragarObjetoBD(formulario, url, funcion = '', tabla, infotabla, id){
@@ -93,11 +96,17 @@ function agragarObjetoBD(formulario, url, funcion = '', tabla, infotabla, id){
 	});
 }
 
-async function insertBD(formulario, url){
-	let datos = new FormData(formulario);
+async function insertBD(formulario, url, reset = true){
+	let datos;
+	if (formulario instanceof FormData) datos = formulario;
+	else datos = new FormData(formulario);
+	// let datos = (formulario instanceof FormData) ? formulario : new FormData(formulario);
+	// let datos = new FormData(formulario);
 	let respuesta = await fetch(url,{method: 'POST', body: datos });
 	respuesta = await respuesta.json();
-	formulario.reset();
+	if (reset == true) {
+		formulario.reset();
+	}
 	return respuesta;
 }
 
