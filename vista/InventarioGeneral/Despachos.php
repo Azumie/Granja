@@ -14,8 +14,8 @@
 			<div class="modal-body">
 				<div class="row">
 					<form id="formularioDespachos" class="col-lg-5 mb-3 mb-lg-0">
-						<div class="row">
-							<p class="ml-3">A continuación...<br>Ingresa la información pertinente a los despachos realizados.</p>
+						<div class="row justify-content-center">
+							<p class="col-12">A continuación...<br>Ingresa la información pertinente a los despachos realizados.</p>
 							<div class="input-group input-group-sm mb-3 col-12">
 								<div class="input-group-prepend">
 									<label for="fechaDespacho" class="input-group-text">
@@ -32,8 +32,6 @@
 								</div>
 								<select id="idCliente" name="idCliente" class="form-control" name="idCliente">
 									<option selected disabled>Elegir Cliente</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
 								</select>
 							</div>
 							<div class="input-group input-group-sm mb-3 col-12">
@@ -64,12 +62,10 @@
 								</div>
 								<input class="form-control" type="number" id="cantidadHuevos" name="cantidadHuevos"></input>
 							</div>
-							<div class="col-6" >
-								<div class="row justify-content-center">
-									<button class="btn btn-info btn-sm  justify-content-center mb-2">+</button>
-								</div>
-							</div>
-							<table class="table table-striped table-lg p-0 tablas table-sm text-center col-12 ml-1">
+							<button id="botonAgregarDespacho" class="btn form-control btn-primary btn-sm mb-2 col-4">+</button>
+							<div class="col-12">
+								
+							<table class="table table-striped p-0 tablas table-sm text-center">
 								<thead class="table-info">
 									<th>Tipo de Huevo</th>
 									<th>Cantidad</th>
@@ -83,15 +79,15 @@
 									</tr>
 								</tbody>
 							</table>
+							</div>
 						</div>
-						<div class="row justify-content-center">
-							<button class="btn btn-primary btn-sm col-md-5 form-control text-white mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
+						<div class="col-12 justify-content-center">
+							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-md-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
 						</div>
 						
 						</form><!-- col-lg-5 -->
 						<div class="col-lg-7">
-							<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
+							<table class="table table-striped table-responsive-lg p-0 tablas table-sm" id="tablaDespachos">
 								<thead class="table-info" >
 									<th>Fecha</th>
 									<th>precinto</th>

@@ -48,30 +48,6 @@ class GestionAvesControlador {
 		echo json_encode($galponLote);
 	}
 
-	public function agregarAlimentacion(){
-		if(isset($_POST['idAlimentandoGalpon'], $_POST['alimentoAUsar'], $_POST['cantidadAlimento'], $_POST['fechaDeAlimentacion'])){
-			try {
-			// Agregando en la BD el inventario que se manejará
-			$this->constructorSQL->insert('inventario',['fechaOperacion' => $_POST['fechaDeAlimentacion'], 'entrada' => 0]);
-			// Ejecutando
-			$ultID = $this->constructorSQL->ejecutarSQL();
-			// Obteniendo lote activo
-			$this->constructorSQL = new ConstructorSQL();
-			$this->constructorSQL->select('galponeslotes')->where('activo', '=', '1')->where('idGalpon', '=', $_POST['idAlimentandoGalpon']);
-			$galponLote = $this->constructorSQL->ejecutarSQL();
-			if (($ultID != '' ||  !is_null($ultID)) && ($galponLote != '' || !is_null($galponLote))) {
-			// 	// Insertando en operación galpón
-				$this->constructorSQL->insert('operaciongalpon', ['idInventario' => $ultID, 'idGalpon' => $_POST['idAlimentandoGalpon'], 'idLote' => $galponLote[0]->idLote, 'cantidadProducto' => $_POST['cantidadAlimento'], 'idProducto' => $_POST['alimentoAUsar']]);
-				$this->constructorSQL->ejecutarSQL();
-			}
-			echo json_encode('Agregado');
-			} catch (PDOException $e) {
-				echo json_encode($e);
-			}
-			
-		}
-	}
-
 	public function agregarOperacionGalpon(){
 		if ((isset($_POST['idGalponEnLote'], $_POST['fechaOperacion'], $_POST['cantidadProducto']))) {
 			try {

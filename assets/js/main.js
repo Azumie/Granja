@@ -318,10 +318,14 @@ if (elementoExiste('formularioMortalidad')) {
 }
 
 if (elementoExiste('formularioDespachos')) {
-  // const formularioDespachos = document.getElementById('formularioDespachos');
-  // obtenerObjeto('?c=Configuracion&m=obtenerCliente', document.getElementById('idCliente'), ['documento', 'documento'], '', llenarSelect);
-  // document.getElementById('fechaDespacho').value = fechaHoy();
-  // obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', document.getElementById('idTipoHuevoDespacho'), ['idTipoHuevo', 'nombreTipoHuevo'], '', llenarSelect);
+  const formularioDespachos = document.getElementById('formularioDespachos');
+  obtenerObjeto('?c=Configuracion&m=obtenerCliente', document.getElementById('idCliente'), ['documento', 'documento'], '', llenarSelect);
+  document.getElementById('fechaDespacho').value = fechaHoy();
+  obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', document.getElementById('idTipoHuevoDespacho'), ['idTipoHuevo', 'nombreTipoHuevo'], '', llenarSelect);
+  formularioDespachos.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    agragarObjetoBD(formularioDespachos, '?c=Inventario&m=agregarInventario', '?c=GestionAves&m=obtenerRecogidas','#tablaDespachos', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario');
+  });
 
 }
   // VAMOS A LEER LA URL
