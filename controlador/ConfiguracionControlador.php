@@ -247,8 +247,8 @@ class ConfiguracionControlador
 	public function obtenerTipoHuevo(){
 		$this->constructorSQL->select('tiposhuevo');
 			
-		if (isset($_GET['idTipoHuevo'])) {
-			$this->constructorSQL->where('idTipoHuevo', '=', $_GET['idTipoHuevo']);
+		if (isset($_GET['where'])) {
+			$this->constructorSQL->where('activoHuevo', '=', 1);
 		}
 		$tiposhuevo = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($tiposhuevo);
@@ -321,16 +321,16 @@ class ConfiguracionControlador
 		echo json_encode($usuario);
 	}
 
-	// public function agregarUsuario(){
-	// 	if (isset($_POST['preguntaUsuario'], $_POST['nombreUsuario'], $_POST['claveUsuario'], $_POST['respuestaUsuario'], $_POST['DocumentoUsuario'])) {
-	// 		try {
-	// 			$this->constructorSQL->insert('usuarios', ['documento' => $_POST['DocumentoUsuario'],'idGranja' => 1, 'nombreUsuario' => $_POST['nombreUsuario'], 'claveUsuario' => $_POST['claveUsuario'], 'pregunta' => $_POST['preguntaUsuario'],'respuesta' => $_POST['respuestaUsuario'], 'activoUsuario' => 1]);
-	// 			$this->constructorSQL->ejecutarSQL();
-	// 			echo json_encode('Eres una ganadora');
-	// 		} catch (PDOException $e) {
-	// 			echo json_encode('Fallida');
-	// 		}
-	// 	}else echo json_encode('No existe');
-	// }
+	public function agregarCompra(){
+		if (isset($_POST['idProveedorProducto'], $_POST['fechaCompraProducto'], $_POST['claveUsuario'], $_POST['respuestaUsuario'], $_POST['DocumentoUsuario'])) {
+			try {
+				$this->constructorSQL->insert('usuarios', ['documento' => $_POST['DocumentoUsuario'],'idGranja' => 1, 'nombreUsuario' => $_POST['nombreUsuario'], 'claveUsuario' => $_POST['claveUsuario'], 'pregunta' => $_POST['preguntaUsuario'],'respuesta' => $_POST['respuestaUsuario'], 'activoUsuario' => 1]);
+				$this->constructorSQL->ejecutarSQL();
+				echo json_encode('Eres una ganadora');
+			} catch (PDOException $e) {
+				echo json_encode('Fallida');
+			}
+		}else echo json_encode('No existe');
+	}
 
 }

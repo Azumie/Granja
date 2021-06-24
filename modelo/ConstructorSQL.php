@@ -25,8 +25,8 @@ class ConstructorSQL {
 		return $this;
 	}
 
-	public function select($tabla, $todos = true){
-		$this->sql = "SELECT * FROM $tabla";
+	public function select($tabla, $datos = "*", $todos = true){
+		$this->sql = "SELECT $datos FROM $tabla";
 		$this->tipo = ($todos === true) ? 'obtenerTodos' : 'obtener' ;
 		$this->tablas = [$tabla];
 		return $this;

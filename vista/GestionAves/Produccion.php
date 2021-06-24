@@ -13,17 +13,25 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-md-6">
+					<form id="formularioProduccionHuevos" class="col-md-6">
 						<h6>A continuación... <br> Ingrese la información de la <em>producción</em> del día:</h6>
 						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
-								<label for="GProduccion" class="input-group-text">
-									Galpón en Lote
+								<label for="gProduccion" class="input-group-text">
+									Galpón
 								</label>
 							</div>
-							<select id="GProduccion" class="form-control">
+							<select id="gProduccion" name="gProduccion" class="form-control">
 								<option selected disabled>Elegir Galpón en Lote</option>
 							</select>
+						</div>
+						<div class="input-group input-group-sm mb-2">
+							<div class="input-group-prepend">
+								<label for="loteActivo" class="input-group-text">
+									Lote
+								</label>
+							</div>
+							<select name="loteActivo" id="loteActivo" class="form-control"></select>
 						</div>
 						<div class="input-group input-group-sm mb-2">
 							<div class="input-group-prepend">
@@ -45,50 +53,32 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><input type="number" id="Grandes" name="Grandes"></td>
-									<td><input type="number" id="Medianos" name="Medianos"></td>
-									<td><input type="number" id="Pequeños" name="Pequeños"></td>
-									<td><input type="number" id="Picados" name="Picados"></td>
-									<td><input type="number" id="Debil" name="Debil"></td>
-									<td><input type="number" id="Derramados" name="Derramados"></td>
-									<td><input type="number" id="Rusticos" name="Rusticos"></td>
-									<td><input type="number" id="Pool" name="Pool"></td>
+									<td><input type="number" id="Grande" name="Grande" min="0" max="50000"></td>
+									<td><input type="number" id="Mediano" min="0" max="50000" name="Mediano"></td>
+									<td><input type="number" id="Pequeno" min="0" max="50000" name="Pequeno"></td>
+									<td><input type="number" id="Picado" min="0" max="50000" name="Picado"></td>
+									<td><input type="number" id="Debil" min="0" max="50000" name="Debil"></td>
+									<td><input type="number" id="Derramado" min="0" max="50000" name="Derramado"></td>
+									<td><input type="number" id="Rustico" min="0" max="50000" name="Rustico"></td>
+									<td><input type="number" id="Pool" min="0" max="50000" name="Pool"></td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="row justify-content-center d-flex">
 							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button type="button" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 						</div>
-					</div>
+					</form>
 					<div class="col-md-6">
 						<p>Recogidas llevadas a cabo con anterioridad</p>
-						<table class="table table-sm text-center">
+						<table class="table table-sm text-center" id="tablaProduccionHuevos">
 							<thead class="table-info">
 								<th>Fecha</th>
-								<th>Galpón</th>
 								<th>Producción</th>
+								<th>Galpón</th>
 								<th>Acción</th>
 							</thead>
 							<tbody>
-								<tr>
-									<td>11/06/2021</td>
-									<td>1</td>
-									<td>150</td>
-									<td><button class="btn btn-info rounded-circle btn-sm icono"><i class="fas fa-pen-fancy"></i></button></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
