@@ -13,35 +13,18 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-lg-5 mb-3 mb-lg-0 ">
-
-						<!-- RADIO BUTTON - GRANJA O GALPON -->
-
-						<div class="form-check mb-3">
-							<label class="form-check-label mr-5">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-								Granja
-							</label>
-							<label class="form-check-label">
-								<input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-								Galpon en Lote
-							</label>
-						</div>
+					<form id="formularioConsumos" class="col-lg-5 mb-3 mb-lg-0 ">
 
 						<!-- SELECT GALPON EN LOTE O GRANJA -->
 
 						<div class="input-group input-group-sm mb-3 ">
 						  	<div class="input-group-prepend">
-						    	<label for="idGalponEnLote" class="input-group-text">
-						    		Granja - Galpón en Lote
+						    	<label for="idGalponConsumo" class="input-group-text">
+						    		Galpón en Lote
 						    	</label>
 						  	</div>
-							<select id="idGalponEnLote" class="form-control" name="idGalponEnLote">
+							<select id="idGalponConsumo" name="idGalponEnLote" class="form-control">
 								<option selected disabled>Elegir Galpón en Lote</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
 							</select>
 						</div>
 
@@ -49,33 +32,16 @@
 
 						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
-						    	<label for="fechaCompra" class="input-group-text">
+						    	<label for="fechaConsumo" class="input-group-text">
 						    		Fecha Compra
 						    	</label>
 						  	</div>
-						  	<input class="form-control" type="date" id="fechaCompra" name="fechaCompra"></input>
+						  	<input class="form-control" type="date" id="fechaConsumo" name="fechaOperacion"></input>
 						</div>
 
 						<hr>
 
 						<div class="row">
-
-							<!-- TIPO DE PRODUCTO -->
-
-							<div class="input-group input-group-sm mb-3 col-md-6">
-							  	<div class="input-group-prepend">
-							    	<label for="idTipoProducto" class="input-group-text">
-							    		Tipo Producto
-							    	</label>
-							  	</div>
-								<select id="idTipoProducto" class="form-control" name="idTipoProducto">
-									<option selected disabled>Elegir Galpón en Lote</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-							</div>
 
 							<!-- PRODUCTO -->
 
@@ -85,12 +51,8 @@
 							    		Producto
 							    	</label>
 							  	</div>
-								<select id="idProducto" class="form-control" name="idProducto">
+								<select id="idProducto" class="form-control" name="alimentoAUsar">
 									<option selected disabled>Elegir Galpón en Lote</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
 								</select>
 							</div>
 
@@ -98,21 +60,21 @@
 
 							<div class="input-group input-group-sm mb-3  col-md-11">
 							  	<div class="input-group-prepend">
-							    	<label for="cantidadProducto" class="input-group-text">
+							    	<label for="cantidadProductoConsumido" class="input-group-text">
 							    		Cantidad
 							    	</label>
 							  	</div>
-							  	<input class="form-control" type="number" id="cantidadProducto" name="cantidadProducto"></input>
+							  	<input class="form-control" type="number" id="cantidadProductoConsumido" name="cantidadProducto"></input>
 							</div>
 
 							<!-- BOTON AGREGAR A DETALLE CONSUMO -->
 
-							<button class="btn btn-info font-weight-bold  col-md-auto h-100">+</button>
+							<button class="btn btn-info font-weight-bold btn-sm  col-md-auto h-100">+</button>
 						</div>
 
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center">
+						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaDetalleCompra">
 							<thead class="table-warning">
 								<th>Tipo</th>
 								<th>Producto</th>
@@ -136,7 +98,7 @@
 							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
 							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 						</div>
-					</div>
+					</form>
 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
@@ -150,19 +112,6 @@
 								<th>Editar</th>
 							</thead>
 							<tbody>
-
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-sm btn-info rounded-circle"><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>

@@ -53,6 +53,14 @@ class ConstructorSQL {
 		return $this;
 	}
 
+	public function groupBy($campo){
+		if ($this->group == '') {
+			$this->group = " GROUP BY $campo";
+			$this->sql  .= $this->group;
+		}
+		return $this;
+	}
+
 	public function orWhere($campo , $signo, $valor){
 		if ($this->where != '') {
 			$where        = " OR $campo $signo ?";

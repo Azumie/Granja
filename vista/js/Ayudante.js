@@ -42,8 +42,9 @@ function obtenerObjeto (url,elemento,valores = '', id= '', funcion = '') {
 
 function llenarTabla(resp, elemento,valores, id = ''){
 	let tbody = '';
-		if (valores[0] == 'fechaOperacion') {
+		if (valores[1] == 'cantidadProducto') {
 			console.log('holaaaa')
+			console.log(resp)
 		}
 	Object.entries(resp).forEach(([pos]) => {
 
