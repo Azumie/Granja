@@ -215,41 +215,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     formularioCompras.addEventListener('submit', e => {
       e.preventDefault();
-      
-      // agragarObjetoBD(formularioCompras, '?c=InventarioGeneral&m=agregarCompra', '', '#tablaAgregarProductos', ['nombreProveedor', 'nombreTipoProducto', 'nombreProducto', 'cantidadProducto', 'precioProducto'], 'idCompra');
       (async () => {
         const idInventario = await insertBD(formularioCompras, '?c=InventarioGeneral&m=agregarCompra');
+        console.log("idInventario", idInventario);
         const compras = await selectBD(`?c=InventarioGeneral&m=obtenerCompras&idInventario=${idInventario}`);
+        console.log("compras", compras);
         document.getElementById('idInventario').value = idInventario;
-        document.getElementById('fechaOperacion').value = compras[0].fechaOperacion;
+        // document.getElementById('fechaOperacion').value = compras[0].fechaOperacion;
         llenarTabla(compras, '#tablaAgregarProductos', ['documentoProveedor', 'nombreTipoProducto', 'nombreProducto', 'cantidadProducto', 'precioProducto'], 'idCompraGranja');
         console.log(compras);
 
       })();
     });
-    // document.getElementById('agregarProducto').addEventListener('click', (e) => {
-    //   let tr = document.createElement('tr');
-    //   let inputs = formularioCompras.querySelectorAll('.form-control');
-    //   inputs.forEach((e, index) => {
-    //     let td = document.createElement('td');
-    //       td.setAttribute(e.id, e.value);
-    //       if (e.tagName == 'SELECT') {
-    //         td.innerText = e.selectedOptions[0].innerText;
-    //       }else {
-    //         td.innerText = e.value;
-    //       }
-    //       console.log(e.tagName)
-    //     tr.appendChild(td);
-    //   });
-    //   tablaAgregarProductos.appendChild(tr);
-    // });
     tablaAgregarProductos.addEventListener('click', e => {
       let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
       if (target.classList.contains('borrar')){
         target.parentElement.remove();
       }
     });
-
+  }
     // selectProveedor.setAttribute('name', 'documentoProveedor[]')
     // fetch(`?c=Configuracion&m=obtenerProveedor`);
     // const promesa = (x) => {
