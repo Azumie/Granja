@@ -18,13 +18,17 @@
 					
 						<!-- FECHA DE LA COMPRA -->
 
+						<input type="hidden" name="idInventario" id="idInventario">
+
+						<!-- FECHA DE LA COMPRA -->
+
 						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
-						    	<label for="fechaCompraProducto" class="input-group-text">
+						    	<label for="fechaOperacion" class="input-group-text">
 						    		Fecha Compra
 						    	</label>
 						  	</div>
-						  	<input class="form-control" type="date" id="fechaCompraProducto" name="fechaCompraProducto"></input>
+						  	<input class="form-control" type="date" id="fechaOperacion" name="fechaOperacion"></input>
 						</div>
 
 						<!-- TIPO DE PRODUCTO -->
@@ -35,7 +39,7 @@
 						    		Tipo
 						    	</label>
 						  	</div>
-						  	<select id="idTipoProductoCompra" class="form-control" name="idTipoProductoCompra">
+						  	<select id="idTipoProductoCompra" class="form-control" name="idTipoProducto">
 									<option selected disabled>Elegir tipo de Producto</option>
 								</select>
 						</div>
@@ -48,7 +52,7 @@
 						    		Producto
 						    	</label>
 						  	</div>
-						  	<select id="idProductoCompra" class="form-control" name="idProductoCompra">
+						  	<select id="idProductoCompra" class="form-control" name="idProducto">
 						  		<option selected disabled>Elegir Galpón en Lote</option>
 						  	</select>
 						</div>
@@ -61,7 +65,7 @@
 						    		Proveedor
 						    	</label>
 						  	</div>
-						  	<select id="documentoProveedorCompra" class="form-control" name="documentoProveedorCompra">
+						  	<select id="documentoProveedorCompra" class="form-control" name="documentoProveedor">
 									<option selected disabled>Elegir Proveedor</option>
 								</select>
 						</div>
@@ -87,7 +91,7 @@
 						  	</div>
 						  	<input id="precioProducto" class="form-control" name="precioProducto">
 						</div>
-						<button type="button" class="my-3 btn btn-info btn-block btn-sm" id="agregarProducto">Agregar producto</button>
+						<button  class="my-3 btn btn-info btn-block btn-sm" id="agregarProducto">Agregar producto</button>
 
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
@@ -101,13 +105,6 @@
 								<th>Borrar</th>
 							</thead>
 							<tbody>
-								<tr>
-									<td></td>
-									<td> </td>
-									<td> </td>
-									<td> </td>
-									<td> </td>
-									<td class="borrar"><i class="fa fa-trash btn btn-danger borrar"></i></td>
 							</tbody>
 						</table>
 

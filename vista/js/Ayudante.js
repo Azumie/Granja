@@ -89,7 +89,6 @@ function tabla(resp, elemento,valores, id = ''){
 }
 
 function llenarSelect(resp, elemento,valores, id){
-	console.log(resp);
 	for (a in resp) {
 		let select = [];
 		for (propiedad in resp[a]) {
@@ -115,6 +114,9 @@ function alerta (mensaje, color = 'info') {
 					<span aria-hidden="true">&times;</span>
 				</button>`;
 	alertBox.appendChild(alerta);
+	setTimeout(() => {
+		alerta.remove();
+	}, 3000);
 }
 
 function agragarObjetoBD(formulario, url, funcion = '', tabla, infotabla, id){
@@ -129,6 +131,26 @@ function agragarObjetoBD(formulario, url, funcion = '', tabla, infotabla, id){
 		formulario.reset();
 		obtenerObjeto(funcion, tabla,infotabla, id, llenarTabla);
 	});
+}
+
+async function insertBD(formulario, url, reset = true){
+	let datos;
+	if (formulario instanceof FormData) datos = formulario;
+	else datos = new FormData(formulario);
+	// let datos = (formulario instanceof FormData) ? formulario : new FormData(formulario);
+	// let datos = new FormData(formulario);
+	let respuesta = await fetch(url,{method: 'POST', body: datos });
+	respuesta = await respuesta.json();
+	if (reset == true) {
+		formulario.reset();
+	}
+	return respuesta;
+}
+
+async function selectBD(url){
+	let respuesta = await fetch(url);
+	respuesta = await respuesta.json();
+	return respuesta;
 }
 
 function editarObjetoBD(form, idTabla, controlador, metodo, nombreId, inputs){

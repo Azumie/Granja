@@ -66,8 +66,14 @@ class GalponControlador{
 	}
 	
 	public function obtenerGalpones(){
-		(isset($_GET['e'])) ? $galpon = 'galpones '.$_GET['e'] : $galpon = 'galpones';
-		$galpon = $this->ConstructorSQL->select($galpon)->ejecutarSQL();
-		echo json_encode($galpon);
+		try {
+			(isset($_GET['e'])) ? $galpon = 'galpones '.$_GET['e'] : $galpon = 'galpones';
+			$galpon = $this->ConstructorSQL->select($galpon)
+				->where('idGranja', '=', 1)
+				->ejecutarSQL();
+			echo json_encode($galpon);
+		} catch (PDOException $e) {
+			echo json_encode($e->getMessage());
+		}
 	}
 }
