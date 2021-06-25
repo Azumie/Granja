@@ -349,11 +349,25 @@ if (elementoExiste('formularioDespachos')) {
   obtenerObjeto('?c=Configuracion&m=obtenerCliente', document.getElementById('idCliente'), ['documento', 'documento'], '', llenarSelect);
   document.getElementById('fechaDespacho').value = fechaHoy();
   obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', document.getElementById('idTipoHuevoDespacho'), ['idTipoHuevo', 'nombreTipoHuevo'], '', llenarSelect);
+  obtenerObjeto('?c=Inventario&m=obtenerDespachos','#tablaDespachos', ['fechaInventarioProduccion', 'produccion','produccion'], 'idInventario', llenarTabla);
   formularioDespachos.addEventListener('submit', (e)=>{
     e.preventDefault();
-    agragarObjetoBD(formularioDespachos, '?c=Inventario&m=agregarInventario', '?c=GestionAves&m=obtenerRecogidas','#tablaDespachos', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario');
+    agragarObjetoBD(formularioDespachos, '?c=Inventario&m=agregarInventario', '?c=Inventario&m=obtenerDespachos','#tablaDespachos', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario');
   });
 
+}
+
+if (elementoExiste('formularioConsumos')) {
+  const formularioConsumos = document.getElementById('formularioConsumos');
+  obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponConsumo'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+  obtenerObjeto('?c=Configuracion&m=obtenerProducto&idTipoProducto=2', document.getElementById('idProducto'), ['idProducto', 'nombreProducto'], '', llenarSelect);
+  document.getElementById('fechaConsumo').value = fechaHoy();
+  obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=2','#tablaDetalleCompra', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
+  formularioConsumos.addEventListener('submit', (e) =>{
+    e.preventDefault();
+    agragarObjetoBD(formularioConsumos, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=2','#tablaDetalleCompra', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
+
+  })
 }
   // VAMOS A LEER LA URL
 
