@@ -42,7 +42,7 @@ class InventarioGeneralControlador {
 					])
 					->ejecutarSQL();
 			} catch (PDOException $e) {
-				echo json_encode('No podemos agregar el inventario');
+				echo json_encode($e->getMessage());
 				die();
 			}
 		}
@@ -50,30 +50,31 @@ class InventarioGeneralControlador {
 
 	public function agregarCompra (){
 
-		// $idInventario = $this->agregarInventario();
-		// echo json_encode($idInventario);
-		// if (isset($_POST['idTipoProducto'], $_POST['idProducto'], $_POST['documentoProveedor'], $_POST['cantidadProducto'], $_POST['precioProducto'])) {
-		// 	try {
-		// 		$this->constructorSQL->insert('compragranja',
-		// 			[
-		// 				'idInventario' => $idInventario,
-		// 				// TOMAR GRANJA DEL SESSION DEL USUARIO
-		// 				'idGranja' => 1,
-		// 				'idProducto' => $_POST['idProducto'],
-		// 				'precioProducto' => $_POST['precioProducto'],
-		// 				'cantidadProducto' => $_POST['cantidadProducto'],
-		// 				'documentoProveedor' => $_POST['documentoProveedor']
-		// 			]
-		// 		)->ejecutarSQL();
-		// 		echo json_encode($idInventario);
-		// 	} catch (PDOException $e) {
-		// 		echo json_encode('No se pudo agregar la compra correctamente');
-		// 	}
-		// }else {
-		// 	echo json_encode('Por favor introduzca los datos necesarios');
-		// 	// echo json_encode($_POST);
-		// }
-		var_dump($_POST);
+		$idInventario = $this->agregarInventario();
+
+		if (isset($_POST['productos'])) {
+			try {
+
+				foreach ($_POST['productos'] as $pos => $producto) {
+					$this->constructorSQL->insert('compragranja',
+						[
+							'idInventario' => $idInventario,
+							// TOMAR GRANJA DEL SESSION DEL USUARIO
+							'idGranja' => 1,
+							'idProducto' => $producto['idProducto'],
+							'precioProducto' => $producto['precioProducto'],
+							'cantidadProducto' => $producto['cantidadProducto'],
+							'documentoProveedor' => $producto['documentoProveedor']
+						])->ejecutarSQL();
+				}
+				echo json_encode($idInventario);
+			} catch (PDOException $e) {
+				echo json_encode('No se pudo agregar la compra correctamente');
+			}
+		}else {
+			echo json_encode('Por favor introduzca los datos necesarios');
+			// echo json_encode($_POST);
+		}
 	}
 
 	public function obtenerCompras () {

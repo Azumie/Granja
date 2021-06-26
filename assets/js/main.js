@@ -215,15 +215,16 @@ document.addEventListener('DOMContentLoaded', () => {
     formularioCompras.addEventListener('submit', e => {
       e.preventDefault();
       (async () => {
-        const idInventario = await insertBD(formularioCompras, '?c=InventarioGeneral&m=agregarCompra');
-        console.log("idInventario", idInventario);
-        let formdataCompras = new new FormData(formularioCompras);
+        // const idInventario = await insertBD(formularioCompras, '?c=InventarioGeneral&m=agregarCompra');
+        // console.log("idInventario", idInventario);
+        let formdataCompras = new FormData(formularioCompras);
         productos.forEach( function(producto, i) {
           Object.entries(producto).forEach(([nombre, valor]) => {
             formdataCompras.append(`productos[${i}][${nombre}]`, valor);
           })
         });
-        insertBD(formdataCompras, '?c=InventarioGeneral&m=agregarCompra');
+        const respuesta = await insertBD(formdataCompras, '?c=InventarioGeneral&m=agregarCompra', false);
+        console.log("respuesta", respuesta);
         // const compras = await selectBD(`?c=InventarioGeneral&m=obtenerCompras&idInventario=${idInventario}`);
         // console.log("compras", compras);
         // document.getElementById('idInventario').value = idInventario;
