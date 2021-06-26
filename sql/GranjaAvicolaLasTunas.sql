@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `galpones` (
   `areaUtil` FLOAT NOT NULL,
   PRIMARY KEY (`idGalpon`),
   INDEX `fk_galpones_granjas_idx` (`idGranja`),
-  UNIQUE INDEX `numeroGalpon_idGranja_UNIQUE` (`numeroGalpon`, `ìdGranja`),
+  UNIQUE INDEX `numeroGalpon_idGranja_UNIQUE` (`numeroGalpon`),
   CONSTRAINT `fk_galpones_granjas`
     FOREIGN KEY (`idGranja`)
     REFERENCES `granjas` (`idGranja`)
@@ -356,7 +356,7 @@ ENGINE = InnoDB;
 -- Table `compragranja`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `compragranja` (
-  'idCompraGranja' INT NOT NULL,
+  `idCompraGranja` INT NOT NULL,
   `idGranja` INT NOT NULL,
   `idInventario` INT NOT NULL,
   `cantidadProducto` FLOAT NOT NULL,
