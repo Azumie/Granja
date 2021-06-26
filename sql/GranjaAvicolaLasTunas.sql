@@ -320,21 +320,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `operaciongalpon`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS operaciongalpon (
-  idInventario INT NOT NULL,
-  idGalpon INT NOT NULL,
-  idLote INT NOT NULL,
-  precioProducto FLOAT NULL,
-  cantidadProducto INT NOT NULL,
-  idProducto INT NOT NULL,
-  PRIMARY KEY (idInventario, idGalpon, idLote),
-  INDEX fk_destinocompra_galponeslotes1_idx (idGalpon),
-  INDEX fk_destinocompra_galponeslotes2_idx (idLote),
-  CONSTRAINT fk_destinocompra_galponeslotes1_idx
-    FOREIGN KEY (idGalpon)
-    REFERENCES galponeslotes (idGalpon)
-=======
 CREATE TABLE IF NOT EXISTS `operaciongalpon` (
   `idInventario` INT NOT NULL,
   `idGalpon` INT NOT NULL,
@@ -357,26 +342,12 @@ CREATE TABLE IF NOT EXISTS `operaciongalpon` (
   CONSTRAINT `fk_destinocompra_productos1_idx`
     FOREIGN KEY (`idProducto`)
     REFERENCES `productos` (`idProducto`)
->>>>>>> 20a642fb44cd49fde895fd36a6640112f70ecb5d
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT fk_destinocompra_galponeslotes2_idx
-    FOREIGN KEY (idLote)
-    REFERENCES galponeslotes (idLote)
+  CONSTRAINT `fk_operaciongalpon_inventario1`
+    FOREIGN KEY (`idInventario`)
+    REFERENCES `inventario` (`idInventario`)
     ON DELETE CASCADE
-<<<<<<< HEAD
-    ON UPDATE CASCADE,
-  CONSTRAINT fk_destinocompra_productos1_idx
-    FOREIGN KEY (idProducto)
-    REFERENCES productos (idProducto)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT fk_operaciongalpon_inventario1
-    FOREIGN KEY (idInventario)
-    REFERENCES inventario (idInventario)
-    ON DELETE CASCADE
-=======
->>>>>>> 20a642fb44cd49fde895fd36a6640112f70ecb5d
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
@@ -388,7 +359,6 @@ CREATE TABLE IF NOT EXISTS `compragranja` (
   'idCompraGranja' INT NOT NULL,
   `idGranja` INT NOT NULL,
   `idInventario` INT NOT NULL,
-  `precioProducto` FLOAT NULL,
   `cantidadProducto` FLOAT NOT NULL,
   `idProducto` INT NOT NULL,
   `documentoProveedor` VARCHAR(11) NOT NULL,
