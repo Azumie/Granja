@@ -15,10 +15,6 @@
 				<div class="row">
 					<form id="formularioCompras" class="col-lg-5 mb-3 mb-lg-0 ">
 						<p>A continuación...<br>Ingrese la información de la compra realizada.</p>
-					
-						<!-- FECHA DE LA COMPRA -->
-
-						<input type="hidden" name="idInventario" id="idInventario">
 
 						<!-- FECHA DE LA COMPRA -->
 
@@ -31,6 +27,7 @@
 						  	<input class="form-control" type="date" id="fechaOperacion" name="fechaOperacion"></input>
 						</div>
 
+						<p>Agrege un producto a la compra</p>
 						<!-- TIPO DE PRODUCTO -->
 
 						<div class="input-group input-group-sm mb-3">
@@ -91,15 +88,15 @@
 						  	</div>
 						  	<input id="precioProducto" class="form-control" name="precioProducto">
 						</div>
-						<button  class="my-3 btn btn-info btn-block btn-sm" id="agregarProducto">Agregar producto</button>
+						<button type="button" class="my-3 btn btn-info btn-block btn-sm" id="agregarProducto">Agregar producto</button>
 
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
 						<table id='tablaAgregarProductos' class="table table-striped table-responsive p-0 tablas table-sm text-center">
 							<thead class="table-info">
-								<th>Proveedor</th>
 								<th>Tipo</th>
 								<th>Producto</th>
+								<th>Proveedor</th>
 								<th>Cantidad</th>
 								<th>Precio</th>
 								<th>Borrar</th>

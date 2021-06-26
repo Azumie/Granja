@@ -19,11 +19,11 @@ CREATE TABLE IF NOT EXISTS `galpones` (
   `numeroGalpon` INT NOT NULL,
   `fechaCreacionGalpon` DATE NOT NULL,
   `confinameiento` CHAR NOT NULL,
-  `activoGalpon` TINYINT(1) NOT NULL DEFAULT 1,
+  `activoGalpon` TINYINT(1) NOT NULL DEFAULT 0,
   `areaUtil` FLOAT NOT NULL,
   PRIMARY KEY (`idGalpon`),
   INDEX `fk_galpones_granjas_idx` (`idGranja`),
-  UNIQUE INDEX `numeroGalpon_UNIQUE` (`numeroGalpon`),
+  UNIQUE INDEX `numeroGalpon_idGranja_UNIQUE` (`numeroGalpon`, `ìdGranja`),
   CONSTRAINT `fk_galpones_granjas`
     FOREIGN KEY (`idGranja`)
     REFERENCES `granjas` (`idGranja`)
@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `galponeslotes` (
   `idGalpon` INT NOT NULL,
   `idLote` INT NOT NULL,
   `cantidadGallinas` INT NOT NULL,
-  `activo` TINYINT(1) NOT NULL DEFAULT 1,
+  `activoGalponeLote` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`idGalpon`, `idLote`),
   INDEX `fk_galponeslotes_galpones1_idx` (`idGalpon`),
   INDEX `fk_galponeslotes_lotes1_idx` (`idLote`),

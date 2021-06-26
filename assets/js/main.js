@@ -190,14 +190,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectTipoProducto = document.getElementById('idTipoProductoCompra');
     let selectProducto = document.getElementById('idProductoCompra');
     let selectProveedor = document.getElementById('documentoProveedorCompra');
-    let inputCantidadProducto = document.getElementById('cantidadProducto')
-    let inputPrecioProducto = document.getElementById('precioProducto')
     const tablaAgregarProductos = document.getElementById('tablaAgregarProductos');
+    let productos = [];
 
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', selectTipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
     selectTipoProducto.addEventListener('change', e => {
       let idTipoProducto = selectTipoProducto.value;
-      selectProducto.innerHTML= '<option selected disabled>Elija el Tipo de Producto</option>';
+      selectProducto.innerHTML= '<option selected disabled>Elija el Producto</option>';
       obtenerObjeto('?c=Configuracion&m=obtenerProducto&idTipoProducto='+idTipoProducto,
         selectProducto,
         ['idProducto', 'nombreProducto'], '',
@@ -211,27 +210,41 @@ document.addEventListener('DOMContentLoaded', () => {
         selectProveedor,
         ['documento', 'nombrePersona'], '',
         llenarSelect);
-
     });
+
     formularioCompras.addEventListener('submit', e => {
       e.preventDefault();
       (async () => {
         const idInventario = await insertBD(formularioCompras, '?c=InventarioGeneral&m=agregarCompra');
         console.log("idInventario", idInventario);
-        const compras = await selectBD(`?c=InventarioGeneral&m=obtenerCompras&idInventario=${idInventario}`);
-        console.log("compras", compras);
-        document.getElementById('idInventario').value = idInventario;
+        let formdataCompras = new new FormData(formularioCompras);
+        productos.forEach( function(producto, i) {
+          Object.entries(producto).forEach(([nombre, valor]) => {
+            formdataCompras.append(`productos[${i}][${nombre}]`, valor);
+          })
+        });
+        insertBD(formdataCompras, '?c=InventarioGeneral&m=agregarCompra');
+        // const compras = await selectBD(`?c=InventarioGeneral&m=obtenerCompras&idInventario=${idInventario}`);
+        // console.log("compras", compras);
+        // document.getElementById('idInventario').value = idInventario;
         // document.getElementById('fechaOperacion').value = compras[0].fechaOperacion;
-        llenarTabla(compras, '#tablaAgregarProductos', ['documentoProveedor', 'nombreTipoProducto', 'nombreProducto', 'cantidadProducto', 'precioProducto'], 'idCompraGranja');
-        console.log(compras);
-
+        // llenarTabla(compras, '#tablaAgregarProductos', ['documentoProveedor', 'nombreTipoProducto', 'nombreProducto', 'cantidadProducto', 'precioProducto'], 'idCompraGranja');
       })();
     });
-    tablaAgregarProductos.addEventListener('click', e => {
-      let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
-      if (target.classList.contains('borrar')){
-        target.parentElement.remove();
-      }
+
+    document.getElementById('agregarProducto').addEventListener('click', e => {
+      let producto = {};
+      let valores = [];
+      formularioCompras.querySelectorAll('.form-control').forEach( (e) => {
+        if (e.id != 'fechaOperacion') {
+          valores.push(e.getAttribute('name'));
+          producto[e.getAttribute('name')] = e.value;
+        }
+      });
+      productos.push(producto);
+      console.log("productos", productos);
+      
+      llenarTabla(productos, '#tablaAgregarProductos', valores);
     });
   }
     // selectProveedor.setAttribute('name', 'documentoProveedor[]')
@@ -315,13 +328,10 @@ document.addEventListener('DOMContentLoaded', () => {
     formularioNuevoLote.addEventListener('submit', e => {
       e.preventDefault();
       let formdataNuevoLote = new FormData(formularioNuevoLote);
-      // galponesLotes.forEach( e => {
-      // });
         galponesLotes.forEach( (e, i) => {
-          console.log("i", i);
-          console.log("e", e);
-          formdataNuevoLote.append(`galpones[${i}][cantidadGallinas]`, e.cantidadGallinas);
-          formdataNuevoLote.append(`galpones[${i}][idGalpon]`, e.idGalpon);
+          Object.entries(e).forEach( ([nombre, valor]) =>  {
+            formdataNuevoLote.append(`galpones[${i}][${nombre}]`, valor);
+          });
         });
       (async () => {
         const respuesta = await insertBD(formdataNuevoLote, '?c=lote&m=agregarNuevoLote', false);
