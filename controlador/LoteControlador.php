@@ -10,7 +10,7 @@ class LoteControlador
 		$vistas = ['InicioLote', 'LineaGenetica', 'NuevoLote', 'Galponeros'];
 		require_once 'vista/includes/layout.php';
 	}
-<<<<<<< HEAD
+
 	public function obtenerLote(){
 
 	}
@@ -71,8 +71,7 @@ class LoteControlador
 
 	public function agregarNuevoLote(){
 		$idInventario = (isset($_POST['idInventarioLote']) && !empty($_POST['idInventarioLote']))
-				? $_POST['idInventarioLote'] : $this->agregarInventario(); 
-		$idInventario = 23;
+				? $_POST['idInventarioLote'] : $this->agregarInventario();
 		if (isset($_POST['precioProducto'],$_POST['cantidadProducto'], $_POST['documentoProveedor'], $_POST['idLineaGenetica'], $_POST['fechaInicio'], $_POST['numeroLote'])) {
 				try {
 					$idCompra = $this->constructorSQL->insert('compragranja', [
@@ -104,13 +103,5 @@ class LoteControlador
 		}else {
 			echo json_encode($_POST);
 		}
-		// 
 	}
-
-=======
-	// public function obtenerLote(){
-	// 	$lote = $this->ConstructorSQL->select('lotes')->where('activogalponLote', '=', '1')->ejecutarSQL();
-	// 	echo json_encode($lote);
-	// }
->>>>>>> 20a642fb44cd49fde895fd36a6640112f70ecb5d
 }

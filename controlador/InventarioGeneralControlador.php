@@ -34,11 +34,11 @@ class InventarioGeneralControlador {
 	}
 
 	public function agregarInventario () {
-		if (isset($_POST['fechaCompraProducto'])) {
+		if (isset($_POST['fechaOperacion'])) {
 			try {
 				return $this->constructorSQL->insert('inventario',
 					[
-						'fechaOperacion'=> $_POST['fechaCompraProducto'],
+						'fechaOperacion'=> $_POST['fechaOperacion'],
 					])
 					->ejecutarSQL();
 			} catch (PDOException $e) {
@@ -50,30 +50,30 @@ class InventarioGeneralControlador {
 
 	public function agregarCompra (){
 
-		$idInventario = (!isset($_POST['idInventario']) || empty($_POST['idInventario'])) 
-									? $this->agregarInventario() : $_POST['idInventario'];
+		// $idInventario = $this->agregarInventario();
 		// echo json_encode($idInventario);
-		if (isset($_POST['idTipoProducto'], $_POST['idProducto'], $_POST['documentoProveedor'], $_POST['cantidadProducto'], $_POST['precioProducto'])) {
-			try {
-				$this->constructorSQL->insert('compragranja',
-					[
-						'idInventario' => $idInventario,
-						// TOMAR GRANJA DEL SESSION DEL USUARIO
-						'idGranja' => 1,
-						'idProducto' => $_POST['idProducto'],
-						'precioProducto' => $_POST['precioProducto'],
-						'cantidadProducto' => $_POST['cantidadProducto'],
-						'documentoProveedor' => $_POST['documentoProveedor']
-					]
-				)->ejecutarSQL();
-				echo json_encode($idInventario);
-			} catch (PDOException $e) {
-				echo json_encode('No se pudo agregar la compra correctamente');
-			}
-		}else {
-			echo json_encode('Por favor introduzca los datos necesarios');
-			// echo json_encode($_POST);
-		}
+		// if (isset($_POST['idTipoProducto'], $_POST['idProducto'], $_POST['documentoProveedor'], $_POST['cantidadProducto'], $_POST['precioProducto'])) {
+		// 	try {
+		// 		$this->constructorSQL->insert('compragranja',
+		// 			[
+		// 				'idInventario' => $idInventario,
+		// 				// TOMAR GRANJA DEL SESSION DEL USUARIO
+		// 				'idGranja' => 1,
+		// 				'idProducto' => $_POST['idProducto'],
+		// 				'precioProducto' => $_POST['precioProducto'],
+		// 				'cantidadProducto' => $_POST['cantidadProducto'],
+		// 				'documentoProveedor' => $_POST['documentoProveedor']
+		// 			]
+		// 		)->ejecutarSQL();
+		// 		echo json_encode($idInventario);
+		// 	} catch (PDOException $e) {
+		// 		echo json_encode('No se pudo agregar la compra correctamente');
+		// 	}
+		// }else {
+		// 	echo json_encode('Por favor introduzca los datos necesarios');
+		// 	// echo json_encode($_POST);
+		// }
+		var_dump($_POST);
 	}
 
 	public function obtenerCompras () {
