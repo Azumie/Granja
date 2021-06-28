@@ -320,6 +320,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `operaciongalpon`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `operaciongalpon` (
   `idInventario` INT NOT NULL,
   `idGalpon` INT NOT NULL,
@@ -351,10 +352,10 @@ CREATE TABLE IF NOT EXISTS `operaciongalpon` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `compragranja`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `compragranja` (
   `idCompraGranja` INT NOT NULL,
   `idGranja` INT NOT NULL,
