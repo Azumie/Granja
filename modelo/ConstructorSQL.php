@@ -29,6 +29,7 @@ class ConstructorSQL {
 		$this->sql = "SELECT $datos FROM $tabla";
 		$this->tipo = ($todos === true) ? 'obtenerTodos' : 'obtener' ;
 		$this->tablas = [$tabla];
+		$this->datos = [];
 		return $this;
 	}
 

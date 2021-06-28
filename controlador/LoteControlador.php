@@ -25,7 +25,7 @@ class LoteControlador
 				->innerJoin($pp, "$pp.documentoProveedor", "=", "$ps.documento")
 				->innerJoin($pd, "$pd.idProducto", "=", "$pp.idProducto")
 				->innerJoin($tp, "$tp.idTipoProducto", "=", "$pd.idTipoProducto")
-				->where("$tp.nombreTipoProducto","=", "Gallina")
+				->where("$tp.nombreTipoProducto","=", "Gallinas")
 				->ejecutarSQL();
 			echo json_encode($proveedores);
 		} catch (PDOException $e) {

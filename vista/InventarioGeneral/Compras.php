@@ -115,7 +115,7 @@
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
+						<table id='tablaCompras' class="table table-striped table-responsive-lg p-0 tablas table-sm">
 							<thead class="table-info" >
 								<th>Fecha</th>
 								<th>Galpón en lote</th>

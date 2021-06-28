@@ -193,6 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tablaAgregarProductos = document.getElementById('tablaAgregarProductos');
     let productos = [];
 
+    obtenerObjeto('?c=InventarioGeneral&m=obtenerCompras', '#tablaCompras', ['fechaOperacion', 'idInventario'], 'idInventario', llenarTabla);
+
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', selectTipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
     selectTipoProducto.addEventListener('change', e => {
       let idTipoProducto = selectTipoProducto.value;
@@ -215,8 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
     formularioCompras.addEventListener('submit', e => {
       e.preventDefault();
       (async () => {
-        // const idInventario = await insertBD(formularioCompras, '?c=InventarioGeneral&m=agregarCompra');
-        // console.log("idInventario", idInventario);
         let formdataCompras = new FormData(formularioCompras);
         productos.forEach( function(producto, i) {
           Object.entries(producto).forEach(([nombre, valor]) => {
@@ -224,12 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         });
         const respuesta = await insertBD(formdataCompras, '?c=InventarioGeneral&m=agregarCompra', false);
-        console.log("respuesta", respuesta);
-        // const compras = await selectBD(`?c=InventarioGeneral&m=obtenerCompras&idInventario=${idInventario}`);
-        // console.log("compras", compras);
-        // document.getElementById('idInventario').value = idInventario;
-        // document.getElementById('fechaOperacion').value = compras[0].fechaOperacion;
-        // llenarTabla(compras, '#tablaAgregarProductos', ['documentoProveedor', 'nombreTipoProducto', 'nombreProducto', 'cantidadProducto', 'precioProducto'], 'idCompraGranja');
+      obtenerObjeto('?c=InventarioGeneral&m=obtenerCompras', '#tablaCompras', ['fechaOperacion', 'idInventario'], 'idInventario', llenarTabla);
+        alerta(respuesta, 'danger');
       })();
     });
 
@@ -246,6 +242,17 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log("productos", productos);
       
       llenarTabla(productos, '#tablaAgregarProductos', valores);
+    });
+
+    document.getElementById('tablaCompras').addEventListener('click', e => {
+      let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
+      if (target.tagName === 'BUTTON') {
+        (async () => {
+          const compras = await selectBD(`?c=InventarioGeneral&m=obtenerCompras&idInventario=${target.id}`);
+          console.log("compras", compras);
+          llenarTabla(compras, '#tablaAgregarProductos', ['nombreTipoProducto', 'nombreProducto', 'documentoProveedor', 'cantidadProducto', 'precioProducto'], 'idCompraGranja');
+        })();
+      }
     });
   }
     // selectProveedor.setAttribute('name', 'documentoProveedor[]')

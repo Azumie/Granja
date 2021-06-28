@@ -38,7 +38,7 @@ class InventarioGeneralControlador {
 			try {
 				return $this->constructorSQL->insert('inventario',
 					[
-						'fechaOperacion'=> $_POST['fechaOperacion'],
+						'fechaOperacion'=> strval($_POST['fechaOperacion']),
 					])
 					->ejecutarSQL();
 			} catch (PDOException $e) {
@@ -78,23 +78,26 @@ class InventarioGeneralControlador {
 	}
 
 	public function obtenerCompras () {
-		if (isset($_GET['idInventario'])) {
 			try {
 				$i = 'inventario';
 				$cg = 'compragranja';
 				$p = 'productos';
 				$tp = 'tiposproducto';
-				$compras = $this->constructorSQL->select($i)
-				 ->innerJoin($cg, "$cg.idInventario", "=", "$i.idInventario")
-				 ->innerJoin($p, "$p.idProducto", "=", "$cg.idProducto")
-				 ->innerJoin($tp, "$tp.idTipoProducto", "=", "$p.idTipoProducto")
-				 ->where("$i.idInventario", '=', $_GET['idInventario'])
-				 ->ejecutarSQL();
+				$this->constructorSQL->select($i)
+				 ->innerJoin($cg, "$cg.idInventario", "=", "$i.idInventario");
+				if (isset($_GET['idInventario'])) {
+			 	$this->constructorSQL
+					->innerJoin($p, "$p.idProducto", "=", "$cg.idProducto")
+					->innerJoin($tp, "$tp.idTipoProducto", "=", "$p.idTipoProducto")
+				 	->where("$i.idInventario", '=', $_GET['idInventario']);
+				}else {
+					$this->constructorSQL->groupBy("$i.idInventario");
+				}
+				$compras = $this->constructorSQL->ejecutarSQL();
 				echo json_encode($compras);
 			} catch (PDOException $e) {
 				echo json_encode('Error al obtener las Compras');				
 			}
-		}
 	}
 
 
