@@ -89,6 +89,9 @@ function tabla(resp, elemento,valores, id = ''){
 }
 
 function llenarSelect(resp, elemento,valores, id){
+	if (valores[0] == 'activoUsuario') {
+		console.log(resp);
+	}
 	for (a in resp) {
 		let select = [];
 		for (propiedad in resp[a]) {
@@ -127,7 +130,11 @@ function agragarObjetoBD(formulario, url, funcion = '', tabla, infotabla, id){
 	})
 	.then(res => res.json())
 	.then(res => {
-		console.log(res);
+		if(res.split(' ')[0] == 'Error:'){
+			alerta(res, 'danger')
+		} else {
+			alerta(res, 'success')
+		}
 		formulario.reset();
 		obtenerObjeto(funcion, tabla,infotabla, id, llenarTabla);
 	});
