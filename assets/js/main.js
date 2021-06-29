@@ -413,7 +413,7 @@ if(elementoExiste('formularioAgregarGalpon')){
           // Validando Confinamiento
           if (probar == 'P' || probar == 'J') {
             // Agregando Galpón
-            agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon');
+            agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinameiento'], 'idGalpon');
             document.getElementById('fechaCreacionGalpon').value= fechaHoy();
           }else alert('Error al escoger el tipo de Confinamiento');
         }else alert('Error al indicar Área Útil');

@@ -28,7 +28,7 @@ class GalponControlador{
 try {
 $this->ConstructorSQL->insert('galpones', ['fechaCreacionGalpon' => $_POST['fechaCreacionGalpon'],'numeroGalpon' => $_POST['numeroGalpon'], 'areaUtil' => $_POST['areaUtilGalpon'],  'confinameiento' => $_POST['ConfinamientoGalpon'], 'idGranja' => 1]);
 $this->ConstructorSQL->ejecutarSQL();
-echo json_encode('Eres una ganadora');
+echo json_encode('Exito: El galpón fue agregado con éxito.');
 } catch (PDOException $e) {
 echo json_encode( 'Error: El número de Galpón ya existe.');
 }
@@ -36,7 +36,7 @@ echo json_encode( 'Error: El número de Galpón ya existe.');
      				}else echo json_encode( 'Error: Área útil no debe estar vacío o contener letras.');
 ;
 			    }else { 
-			    	echo json_encode( 'Error: Número de Galpón no debe estar vacío o contener letras');
+			    	echo json_encode( 'Error: Número de Galpón no debe estar vacío o contener letras.');
 	    		}
 	   		}
 	  	}else echo json_encode('Error: Campos Vacíos.');
