@@ -100,6 +100,21 @@ class InventarioGeneralControlador {
 			}
 	}
 
+	public function editarCompra(){
+		if (isset($_POST['cantidadProducto'], $_POST['precioProducto'])) {
+			try {
+				$this->constructorSQL->update('compragranja', [
+					'cantidadProducto' => $_POST['cantidadProducto'],
+					'precioProducto' => $_POST['precioProducto']
+				]->ejecutarSQL());
+				echo json_encode('Compra actualizada exitosamente');
+			} catch (PDOException $e) {
+				echo json_encode('Error: No se pudo actualizar la compra');
+				
+			}
+		}
+	}
+
 
 
 }

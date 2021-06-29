@@ -94,12 +94,12 @@
 
 						<table id='tablaAgregarProductos' class="table table-striped table-responsive p-0 tablas table-sm text-center">
 							<thead class="table-info">
-								<th>Tipo</th>
-								<th>Producto</th>
-								<th>Proveedor</th>
-								<th>Cantidad</th>
-								<th>Precio</th>
-								<th>Borrar</th>
+								<th campo='nombreTipoProducto'>Tipo</th>
+								<th campo='nombreProducto'>Producto</th>
+								<th campo='documentoProveedor'>Proveedor</th>
+								<th campo='cantidadProducto'>Cantidad</th>
+								<th campo='precioProducto'>Precio</th>
+								<th campo='acciones'>Acciones</th>
 							</thead>
 							<tbody>
 							</tbody>

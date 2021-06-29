@@ -185,6 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  // COMPRAS
+
   if (elementoExiste('formularioCompras')){
     let formularioCompras = document.getElementById('formularioCompras')
     let selectTipoProducto = document.getElementById('idTipoProductoCompra');
@@ -254,6 +256,65 @@ document.addEventListener('DOMContentLoaded', () => {
         })();
       }
     });
+    (async () => {
+      const resp = await selectBD('?c=InventarioGeneral&m=obtenerCompras&idInventario=34');
+      tablallena(resp, 'tablaAgregarProductos', 'idCompraGranja', true, 
+        {
+          color: 'info',
+          icon: 'pen',
+          nombre: 'editar',
+          funcion: (x) => {
+            const inputs = ['cantidadProducto', 'precioProducto'];
+            const fila = x.fila.children;
+            const titulos = x.titulos;
+            if (x.fila.querySelector('.form-control') == null){
+              inputs.forEach( i => {
+                let input = document.createElement('input');
+                let col = fila[titulos.indexOf(i)];
+                let value = col.innerText;
+                input.setAttribute('class', 'form-control');
+                input.setAttribute('name', i);
+                input.value = value;
+                col.innerHTML = '';
+                col.appendChild(input);
+              });
+            }
+            console.log(fila[fila.length - 1].querySelector('.editar'));
+            fila[fila.length - 1].querySelector('.editar').classList.toggle('d-none');
+            fila[fila.length - 1].querySelector('.eliminar').classList.toggle('d-none');
+            fila[fila.length - 1].querySelector('.guardar').classList.toggle('d-none');
+            fila[fila.length - 1].querySelector('.cancelar').classList.toggle('d-none');
+          }
+        },
+        {
+          color: 'danger',
+          icon: 'trash',
+          nombre: 'eliminar',
+          funcion: x => {
+            console.log('eliminando');
+          }
+        },
+        {
+          color: 'success d-none',
+          icon: 'check',
+          nombre: 'guardar',
+          funcion: x => {
+              console.log('eliminando');
+          }
+        },
+        {
+          color: 'danger d-none',
+          icon: 'trash',
+          nombre: 'cancelar',
+          funcion: x => {
+            console.log('eliminando');
+          }
+        },
+      );
+    })();
+
+
+
   }
     // selectProveedor.setAttribute('name', 'documentoProveedor[]')
     // fetch(`?c=Configuracion&m=obtenerProveedor`);
