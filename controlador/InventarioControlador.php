@@ -47,6 +47,7 @@ class InventarioControlador
 				 		$this->constructorSQL = new ConstructorSQL();
 				 		$this->constructorSQL->insert('detalledespachos', ['idInventarioProduccion' => $inventarioProduccion, 'idDespachos' => $despachos[0]->idDespachos]);
 				 		$this->constructorSQL->ejecutarSQL();
+				 		echo json_encode('Agregado');
 				 	}
 			 	}
 			} catch (PDOException $e) {

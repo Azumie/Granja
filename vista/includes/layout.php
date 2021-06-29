@@ -141,7 +141,6 @@
 		<!-- CHARTjs core JavaScript -->
 		<script type="text/javascript" src="assets/js/Chart.min.js"></script>
 		<script type="text/javascript" src="vista/js/Ayudante.js"></script>
-		<script type="text/javascript" src="vista/js/Galpon.js"></script>
 		<script type="text/javascript" src="vista/js/Reportes.js"></script>
 		<!-- CAMBIO AQUIIIIIII -->
 		<!-- <script type="text/javascript" src="assets/js/moment.min.js"></script> -->

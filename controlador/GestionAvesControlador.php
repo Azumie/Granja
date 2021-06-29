@@ -29,10 +29,11 @@ class GestionAvesControlador {
 						}
 					} 
 				}
+				echo json_encode($tipoHuevo);
 			} catch (PDOException $e) {
-				echo json_encode($e->getMessage());
+				echo json_encode('Error');
 			}
-		}
+		} else echo json_encode('No pasamos los post');
 	}
 
 	public function obtenerGalponesLotes(){
@@ -69,7 +70,7 @@ class GestionAvesControlador {
 			}
 			echo json_encode('Agregado');
 			} catch (PDOException $e) {
-				echo json_encode($e);
+				echo json_encode($e->getMessage());
 			}
 		}
 	}

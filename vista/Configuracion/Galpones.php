@@ -20,7 +20,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">Fecha Creación</span>
 							</div>
-							<input type="date" class="form-control" name="fechaCreacionGalpon">
+							<input type="date" class="form-control" name="fechaCreacionGalpon" id="fechaCreacionGalpon">
 						</div>
 						<div class="row">
 							<div class="col-12 col-md-6">
@@ -57,7 +57,7 @@
 					</form>
 					</div>
 					<div class="col-12 col-md-6 table-scrolly">
-						<table class="datatable table table-striped table-responsive-sm p-0 table-sm text-center" id="tablaGalpon">
+						<table class="datatable table table-striped table-responsive p-0 table-sm text-center" id="tablaGalpon">
 							<thead class="table-info">
 								<th>Número Galpón</th>
 								<th>Área útil</th>
@@ -67,19 +67,6 @@
 								<th>Acción</th>
 							</thead>
 							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-									<td>
-										<button class="btn btn-info rounded-circle btn-sm botonesModales" data-toggle="modal" data-target='#editarGalpon'>
-										<i class="fas fa-pen-fancy"></i>
-										</button>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>

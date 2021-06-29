@@ -448,6 +448,42 @@ if (elementoExiste('formularioConsumos')) {
 
   })
 }
+// Validando de que exista el formulario respectivo al módulo de Galpón
+if(elementoExiste('formularioAgregarGalpon')){
+  // Rellenando tabla con la información de los Galpones
+  obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon', llenarTabla);
+  document.getElementById('fechaCreacionGalpon').value= fechaHoy();
+  // Obteniendo formulario del Módulo Galpón
+  const formularioAgregarGalpon = document.getElementById('formularioAgregarGalpon');
+  // Evento que ocurrirá al presionar el botón de guardado en el módulo de Galpón
+  formularioAgregarGalpon.addEventListener('submit',function(e){
+    // Silencia la acción por defecto del submit
+    e.preventDefault();
+    // Variable para validar campos
+    let probar = formularioAgregarGalpon.fechaCreacionGalpon.value;
+    // Validando Fecha
+    if (probar != null && probar != '') {
+      let probar = formularioAgregarGalpon.numeroGalpon.value;
+      // Validando  número Galpón
+      if (probar != '' && (probar > 0 && probar < 500)
+      && !probar.match(/[^0-9]/)) {
+        probar= formularioAgregarGalpon.areaUtilGalpon.value;
+      // Validando Área Útil
+        if (probar != '' && probar != null && !probar.match(/[^,.\d]/) && probar >= 100 && probar <= 2000) {
+          probar = formularioAgregarGalpon.ConfinamientoGalpon.value.toUpperCase();
+          // Validando Confinamiento
+          if (probar == 'P' || probar == 'J') {
+            // Agregando Galpón
+            agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinameiento'], 'idGalpon');
+            document.getElementById('fechaCreacionGalpon').value= fechaHoy();
+          }else alert('Error al escoger el tipo de Confinamiento');
+        }else alert('Error al indicar Área Útil');
+      }else alert('Error en número galpón');
+      
+    }
+    
+  })
+}
   // VAMOS A LEER LA URL
 
   // let url = window.location.href;
