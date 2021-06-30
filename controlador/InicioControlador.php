@@ -59,7 +59,7 @@ class InicioControlador {
 	}
 
 	public function mostrarProduccion(){
-		$this->constructorSQL->select('inventarioproduccion')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'inventarioproduccion.idGalpon')->where('inventarioproduccion.idGalpon', '=', $_POST['idGalponInicio'])->where('galponeslotes.activo', '=', 1)->where('inventario.fechaOperacion', '>=', $fechaDesde)->where('inventario.fechaOperacion', '<=', $fechaHasta);
+		$this->constructorSQL->select('inventarioproduccion', 'sum(inventarioproduccion.cantidadProduccion) as suma')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'inventarioproduccion.idGalpon')->where('inventarioproduccion.idGalpon', '=', $_POST['idGalponInicio'])->where('galponeslotes.activo', '=', 1)->where('inventarioproduccion.fechaInventarioProduccion', '>=', $_POST['fechaDesde'])->where('inventarioproduccion.fechaInventarioProduccion', '<=', $_POST['fechaHasta']);
 		$huevosProducidos = $this->constructorSQL->ejecutarSQL();
 		// SELECT sum(inventarioproduccion.cantidadProduccion) FROM inventarioproduccion INNER JOIN galponeslotes on galponeslotes.idGalpon = inventarioproduccion.idGalpon where inventarioproduccion.idGalpon = 1 AND galponeslotes.activo = 1 and inventarioproduccion.fechaInventarioProduccion = '2021-06-28'
 		echo json_encode($huevosProducidos);

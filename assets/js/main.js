@@ -16,7 +16,7 @@ formularioInicio.addEventListener('submit', (e)=>{
   if (elementoExiste('formularioAgregarProducto')) {
     const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
-      obtenerObjeto('?c=Configuracion&m=obtenerProveedor', document.getElementById('idProveedorProducto'), ['documento', 'nombrePersona'], '', llenarSelect);
+    obtenerObjeto('?c=Configuracion&m=obtenerProveedor', document.getElementById('idProveedorProducto'), ['documento', 'nombrePersona'], '', llenarSelect);
 
     console.log('yes');
     //Presionar botón Guardar en Productos se enviará el Formulario
