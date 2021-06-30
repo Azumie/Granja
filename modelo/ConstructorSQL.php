@@ -69,6 +69,7 @@ class ConstructorSQL {
 			$this->where .= $where;
 			array_push($this->datos, $valor);
 		}
+		return $this;
 	}
 
 	public function update($tabla , array $datos = []){
@@ -81,6 +82,7 @@ class ConstructorSQL {
 			$this->datos = array_values($datos);
 			$this->tipo  = 'consulta';
 		}
+		return $this;
 	}
 
 	public function delete($tabla , array $datos = []){
