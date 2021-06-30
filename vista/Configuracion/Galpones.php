@@ -57,7 +57,7 @@
 					</form>
 					</div>
 					<div class="col-12 col-md-6 table-scrolly">
-						<table class="datatable table table-striped table-responsive p-0 table-sm text-center" id="tablaGalpon">
+						<table class="table table-striped table-responsive p-0 table-sm text-center" id="tablaGalpon">
 							<thead class="table-info">
 								<th>Número Galpón</th>
 								<th>Área útil</th>

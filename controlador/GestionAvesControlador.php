@@ -37,7 +37,10 @@ class GestionAvesControlador {
 	}
 
 	public function obtenerGalponesLotes(){
-		$this->constructorSQL->select('galponeslotes')->where('activo', '=', '1')->where('idGalpon', '=', $_GET['idGalpon']);
+		$this->constructorSQL->select('galponeslotes', 'galponeslotes.*, galpones.numeroGalpon')->innerJoin('galpones', 'galponeslotes.idGalpon', '=', 'galpones.idGalpon')->where('galponeslotes.activo', '=', '1');
+		if (isset($_GET['idGalpon'])) {
+			$this->constructorSQL->where('idGalpon', '=', $_GET['idGalpon']);
+		}
 		
 		$galponLote = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($galponLote);

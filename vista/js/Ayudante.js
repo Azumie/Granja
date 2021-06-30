@@ -11,17 +11,86 @@ function elementoExiste (elemento) {
  // OBTENER GRANJAS 
 function obtenerObjeto (url,elemento,valores = '', id= '', funcion = '') {
 	fetch(url).then(resp => resp.json())
-    .then(resp => {
-    	if (funcion != '') {
+  .then(resp => {
+    if (funcion != '') {
+    	funcion(resp, elemento,valores, id);
+    }else {
+    	return resp;
+    }
+  });
+}
 
-    		funcion(resp, elemento,valores, id);
-    	}else {
-    		return resp;
-    	}
-    	if (id == '' && valores == '') {
-    		console.log('lla')
-    	}
-    });
+function llenarCards(formulario, url, name='', valores, funcion){
+	let datos = new FormData(formulario);
+	fetch(url,{
+		method: 'POST',
+		body: datos
+	})
+	.then(res => res.json())
+	.then(res => {
+		// if (typeof res == 'string') {
+
+		// }
+		console.log(res);
+		// funcion(name, res);
+		// let consumoAve = 0;
+		// Object.entries(res).forEach(([pos]) => {
+		// 		consumoAve += res[pos][cantidadProducto]
+		// 		for (variable in res[pos]) {
+		// 			console.log(variable);
+		// 		}
+		// 		// document.getElementsByName(name[0])[x].innerText = ;
+
+		// 	});
+		// for (let x = 0; x < name[1]; x++) {
+		// 	for (let objet in res) {
+		// 		console.log(res[objet])
+		// 		if (objet[x] == name[0][x]) {
+
+		// 		}
+		// 		// document.getElementsByName(name[0])[x]
+		// 	}
+		// }
+		
+		// for (let x = 0; x < name[1]; x++) {
+		// console.log(res['suma'][valores[x]]);
+		// // 	console.log('')
+		// // 	Object.entries(res).forEach(([pos]) => {
+		// // 		for (variable in res[pos]) {
+		// // 			console.log(variable);
+		// // 		}
+		// 	document.getElementsByName(name[0])[x].innerText = res['suma'][valores[x]];
+
+		// // 	});
+		// }
+		// document.getElementsByName(name[0])[2].innerText = res['division'];
+		
+	});
+}
+
+function cardMortalidad(name, res){
+	document.getElementsByName(name)[0].innerText = res['Lote'];
+	document.getElementsByName(name)[1].innerText = res['mortalidadObtenida'];
+	document.getElementsByName(name)[2].innerText = res['mortalidadTotal'];
+	document.getElementsByName(name)[3].innerText = res['gallinasRestantes'];
+}
+
+function cardProduccion(name, res){
+	// document.getElementsByName(name)[]
+}
+
+function cardAlimento(name, res){
+	document.getElementsByName(name)[0].innerText = dateFormato(res['Post'][0]);
+	document.getElementsByName(name)[0].innerText += ' / ';
+	document.getElementsByName(name)[0].innerText += dateFormato(res['Post'][1]);
+	document.getElementsByName(name)[1].innerText = res['division'];
+	document.getElementsByName(name)[2].innerText = res['suma']
+	document.getElementsByName(name)[3].innerText = res['Inventario'];
+}
+
+function dateFormato(string) {
+  var info = string.split('-');
+  return info[2] + '-' + info[1] + '-' + info[0];
 }
 
 // function inputsTabla(resp, elemento, id = ''){

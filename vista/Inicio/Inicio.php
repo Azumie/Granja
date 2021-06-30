@@ -2,22 +2,18 @@
 
 	<!-- FILTROS -->
 
-	<div class="col-12 d-flex justify-content-center mb-4">
+	<form class="col-12 d-flex justify-content-center mb-4" id="formularioInicio">
 		<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-			<button type="button" class="btn btn-secondary">Desde</button>
-			<input type="date" class="form-control-sm form-control rounded-0">
-			<button type="button" class="btn btn-secondary">Hasta</button>
-			<input type="date" class="form-control-sm form-control rounded-0">
 			<button type="button" class="btn btn-secondary">Galpon</button>
-			<select name="idGalpon " id="idGalpon" class="form-control-sm form-control rounded-left-0">
-				<option value="Todos">Todos</option>
-				<option value="1">G-1</option>
-				<option value="2">G-2</option>
-				<option value="3">G-3</option>
-				<option value="4">G-4</option>
+			<select name="idGalponInicio" id="idGalponInicio" class="form-control-sm form-control rounded-left-0">
 			</select>
+			<button type="button" class="btn btn-secondary">Desde</button>
+			<input type="date" id="fechaDesde" name="fechaDesde" class="form-control-sm form-control rounded-0">
+			<button type="button" class="btn btn-secondary">Hasta</button>
+			<input type="date" id="fechaHasta" name="fechaHasta" class="form-control-sm form-control rounded-0">
+			<button class='btn btn-primary'>-</button>
 		</div>
-	</div>
+	</form>
 
 	<!-- CARDS ESTADO DE LA GRANJA -->
 
@@ -30,12 +26,12 @@
 						<img src="https://image.flaticon.com/icons/png/128/3363/3363571.png" height="40px" class="align-self-center">
 					</div>
 					<div class="col-10 bg-white rounded">
-						<h5>Alimentacion
-							<label class="text-muted h6">fecha: <span>20-05-2021</span></label>
+						<h5>Alimentación
+							<label class="text-muted h6">Fecha: <span name='cardAlimentacion'></span></label>
 						</h5>
-						<p>Consumo por Ave: <span class="text-primary font-weight-bold">150g</span></p>
-						<p>Consumo Total: <span class="text-primary font-weight-bold">150k</span></p>
-						<p>Alimento en inventario: <span class="text-primary font-weight-bold">500k</span></p>
+						<p>Consumo por Ave: <span name='cardAlimentacion' class="text-primary font-weight-bold">150g</span></p>
+						<p>Consumo Total: <span class="text-primary font-weight-bold" name='cardAlimentacion'>150k</span></p>
+						<p>Alimento en inventario: <span class="text-primary font-weight-bold" name='cardAlimentacion'>500k</span></p>
 
 					</div>
 				</div>
@@ -50,12 +46,11 @@
 					</div>
 					<div class="col-10 bg-white rounded">
 						<h5>Mortalidad
-							<label class="text-muted h6">fecha: <span>20-05-2021</span></label>
+							<label class="text-muted h6">Lote: <span name='cardMortalidad'></span></label>
 						</h5>
-						<p>Mortalidad Esperada: <span class="text-danger font-weight-bold">0.15%</span></p>
-						<p>Mortalidad Obtenida: <span class="text-danger font-weight-bold">1%</span></p>
-						<p>Mortaloidad Total: <span class="text-danger font-weight-bold">10 Gallinas</span></p>
-						<p>Gallinas Restantes: <span class="text-danger font-weight-bold">1000</span></p>
+						<p>Mortalidad Obtenida: <span class="text-danger font-weight-bold" name='cardMortalidad'>1%</span></p>
+						<p>Mortalidad Total: <span name='cardMortalidad' class="text-danger font-weight-bold">10 Gallinas</span></p>
+						<p>Gallinas Restantes: <span name='cardMortalidad' class="text-danger font-weight-bold">1000</span></p>
 
 					</div>
 				</div>
@@ -69,12 +64,12 @@
 						<img src="assets/img/transportador.svg" height="40px" class="align-self-center">
 					</div>
 					<div class="col-10 bg-white rounded">
-						<h5>Produccion
-							<label class="text-muted h6">fecha: <span>20-05-2021</span></label>
+						<h5>Producción
+							<label class="text-muted h6" name='cardProduccion'>Fecha: <span></span></label>
 						</h5>
-						<p>Produccion Esperada: <span class="text-info font-weight-bold">60%</span></p>
-						<p>Produccion Obtenida: <span class="text-info font-weight-bold">61%</span></p>
-						<p>Huevos Producidos: <span class="text-info font-weight-bold">2000</span></p>
+						<p>Huevos Producidos: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
+						<p>Huevos Aptos para la venta: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
+						<p>Huevos no aptos para la venta: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
 
 					</div>
 				</div>

@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const formularioInicio = document.getElementById('formularioInicio');
+ document.getElementById('fechaDesde').value = fechaHoy();
+ document.getElementById('fechaHasta').value = fechaHoy();
+ obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idGalponInicio'), ['idGalpon', 'idGalpon'], '', llenarSelect);
+formularioInicio.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  // llenarCards(formularioInicio, '?c=Inicio&m=mostrarAlimentacion&idTipoProducto=1', 'cardAlimentacion', [0, 1, 'suma'], cardAlimento);
+  // llenarCards(formularioInicio, '?c=Inicio&m=mostrarMortalidad&idTipoProducto=3', 'cardMortalidad', [0, 1, 'suma'], cardMortalidad);
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarProduccion', 'cardMortalidad', [0, 1, 'suma'], cardMortalidad);
+
+   
+})
+
   //&& class === modal fade
   if (elementoExiste('formularioAgregarProducto')) {
     const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
