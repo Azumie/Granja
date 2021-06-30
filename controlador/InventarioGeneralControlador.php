@@ -1,11 +1,4 @@
 <?php 
-
-
-
-
-/**
- * 
- */
 class InventarioGeneralControlador {
 	
 	function __construct() {

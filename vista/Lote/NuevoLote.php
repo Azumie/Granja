@@ -87,10 +87,6 @@
 
 							<p>Asignar gallinas a los galpones</p>
 
-							<!-- ID LOTET -->
-
-							<input type="hidden" name="idLote" id="idLote">
-
 							<!-- IDGALPON -->
 
 							<div class="input-group input-group-sm mb-2">
@@ -115,14 +111,13 @@
 
 							<button id="agregarGalonLote" type="button" class="btn btn-info btn-block btn-sm mb-2">Agregar Galpon Al lote</button>
 
-							<table id="tablaGalponesLotes" class="table table-responsive-sm table-sm table-striped mb-3">
+							<table id="tablaGalponesLotes" class="table table-responsive table-sm table-striped mb-3">
 								<thead class="table-info">
-									<th>Galpon</th>
-									<th>Numero de Gallinas</th>
-									<th>borrar</th>
+									<th campo='idGalpon'>Galpon</th>
+									<th campo='cantidadGallinas'>Numero de Gallinas</th>
+									<th campo='acciones'>borrar</th>
 								</thead>
 								<tbody>
-									
 								</tbody>
 							</table>
 
@@ -134,10 +129,21 @@
 						</div>
 					</form>
 					<div class="col-md-6">
-						<table class="table table-sm table-striped">
-							<thead>
-								
+						<table id="tablaLotes" class="table table-sm table-striped table-responsive-sm">
+							<thead class="table-info">
+								<th campo='documentoProveedor'>Proveedor</th>
+								<th campo='fechaOperacion'>fecha Compra</th>
+								<th campo='precioProducto'>Precio</th>
+								<th campo='cantidadProducto'>cantidad</th>
+								<!-- LOTE -->
+								<th campo='fechaInicio'>Fecha de Inicio</th>
+								<th campo='nombreLineaGenerica'>Linea Genetica</th>
+								<th campo='nombreLineaGenerica'>Linea Genetica</th>
+								<th campo='numeroLote'>Nuemero Lote</th>
+								<th campo='acciones'>Acciones</th>
 							</thead>
+							<tbody>
+							</tbody>
 						</table>
 					</div>
 				</div>

@@ -117,26 +117,11 @@
 					<div class="col-lg-7">
 						<table id='tablaCompras' class="table table-striped table-responsive-lg p-0 tablas table-sm">
 							<thead class="table-info" >
-								<th>Fecha</th>
-								<th>Galpón en lote</th>
-								<th>Alimento</th>
-								<th>Cantidad</th>
-								<th>Acción</th>
+								<th campo='fechaOperacion'>Fecha</th>
+								<th campo='idInventario'>Galpón en lote</th>
+								<th campo='acciones'>Alimento</th>
 							</thead>
 							<tbody>
-
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-
-									<td>
-										<button class="btn btn-info btn-sm rounded-circle"><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>

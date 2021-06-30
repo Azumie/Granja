@@ -81,6 +81,7 @@ class ConstructorSQL {
 			$this->datos = array_values($datos);
 			$this->tipo  = 'consulta';
 		}
+		return $this;
 	}
 
 	public function delete($tabla , array $datos = []){
