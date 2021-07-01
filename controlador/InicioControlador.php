@@ -30,9 +30,7 @@ class InicioControlador {
 		} else $gallinas = $gallinas[0]->cantidadGallinas;
 		
 		$alimento = $resp[0]->suma / $gallinas;
-		// SELECT sum(operaciongalpon.cantidadProducto) as suma FROM operaciongalpon INNER JOIN productos on productos.idProducto = operaciongalpon.idProducto INNER JOIN inventario on inventario.idInventario = operaciongalpon.idInventario WHERE productos.idTipoProducto = 3 AND (inventario.fechaOperacion > '2021-06-27' AND inventario.fechaOperacion < '2021-06-30')
 		$res = ['suma' => $resp[0]->suma, 'division' => $alimentoInventario[0]->suma, 'Inventario' => $alimento, 'Post' => [$_POST['fechaDesde'], $_POST['fechaHasta']]];
-// 
 		echo json_encode($res);
 	}
 
@@ -60,12 +58,13 @@ class InicioControlador {
 
 	public function mostrarProduccion(){
 		$this->constructorSQL->select('inventarioproduccion', 'sum(inventarioproduccion.cantidadProduccion) as suma')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'inventarioproduccion.idGalpon')->where('inventarioproduccion.idGalpon', '=', $_POST['idGalponInicio'])->where('galponeslotes.activo', '=', 1)->where('inventarioproduccion.fechaInventarioProduccion', '>=', $_POST['fechaDesde'])->where('inventarioproduccion.fechaInventarioProduccion', '<=', $_POST['fechaHasta']);
-		$mortalidadTotal = $this->consumosProductos($_POST['fechaDesde'], $_POST['fechaHasta'], $_POST['idGalponInicio'], $_GET['idTipoProducto']);
+		$mortalidadTotal = $this->consumosProductos($_POST['fechaDesde'], $_POST['fechaHasta'], $_POST['idGalponInicio'], 3);
 		$huevosProducidos = $this->constructorSQL->ejecutarSQL();
-		$Porcentaje = (100 * $huevosProducidos[0]->suma)/ $mortalidadTotal[0]->suma;
+		$porcentaje = (100 * $huevosProducidos[0]->suma)/ $mortalidadTotal[0]->suma;
+		$res = ['porcentaje' => $porcentaje, 'huevosProducidos' => $huevosProducidos[0]->suma, 'Post' => [$_POST['fechaDesde'], $_POST['fechaHasta']]];
 
 		// SELECT sum(inventarioproduccion.cantidadProduccion) FROM inventarioproduccion INNER JOIN galponeslotes on galponeslotes.idGalpon = inventarioproduccion.idGalpon where inventarioproduccion.idGalpon = 1 AND galponeslotes.activo = 1 and inventarioproduccion.fechaInventarioProduccion = '2021-06-28'
-		echo json_encode($huevosProducidos);
+		echo json_encode($res);
 	}
 
 }

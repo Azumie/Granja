@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
  obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idGalponInicio'), ['idGalpon', 'idGalpon'], '', llenarSelect);
 formularioInicio.addEventListener('submit', (e)=>{
   e.preventDefault();
-  // llenarCards(formularioInicio, '?c=Inicio&m=mostrarAlimentacion&idTipoProducto=1', 'cardAlimentacion', [0, 1, 'suma'], cardAlimento);
-  // llenarCards(formularioInicio, '?c=Inicio&m=mostrarMortalidad&idTipoProducto=3', 'cardMortalidad', [0, 1, 'suma'], cardMortalidad);
-  llenarCards(formularioInicio, '?c=Inicio&m=mostrarProduccion', 'cardMortalidad', [0, 1, 'suma'], cardMortalidad);
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarAlimentacion&idTipoProducto=1', 'cardAlimentacion', [0, 1, 'suma'], cardAlimento);
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarMortalidad&idTipoProducto=3', 'cardMortalidad', [0, 1, 'suma'], cardMortalidad);
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarProduccion', 'cardProduccion', [0, 1, 'suma'], cardProduccion);
+  obtenerObjeto('?c=Configuracion&m=obtenerProveedor','#tablaProveedor',['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla);
 
    
 })

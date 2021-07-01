@@ -32,7 +32,7 @@ function llenarCards(formulario, url, name='', valores, funcion){
 
 		// }
 		console.log(res);
-		// funcion(name, res);
+		funcion(name, res);
 		// let consumoAve = 0;
 		// Object.entries(res).forEach(([pos]) => {
 		// 		consumoAve += res[pos][cantidadProducto]
@@ -76,7 +76,11 @@ function cardMortalidad(name, res){
 }
 
 function cardProduccion(name, res){
-	// document.getElementsByName(name)[]
+	document.getElementsByName(name)[0].innerText = dateFormato(res['Post'][0]);
+	document.getElementsByName(name)[0].innerText += ' / ';
+	document.getElementsByName(name)[0].innerText += dateFormato(res['Post'][1]);
+	document.getElementsByName(name)[1].innerText = res['porcentaje'];
+	document.getElementsByName(name)[2].innerText = res['huevosProducidos'];
 }
 
 function cardAlimento(name, res){

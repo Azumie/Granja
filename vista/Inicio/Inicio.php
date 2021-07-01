@@ -26,7 +26,7 @@
 						<img src="https://image.flaticon.com/icons/png/128/3363/3363571.png" height="40px" class="align-self-center">
 					</div>
 					<div class="col-10 bg-white rounded">
-						<h5>Alimentación
+						<h5>Alimentación <br>
 							<label class="text-muted h6">Fecha: <span name='cardAlimentacion'></span></label>
 						</h5>
 						<p>Consumo por Ave: <span name='cardAlimentacion' class="text-primary font-weight-bold">150g</span></p>
@@ -44,8 +44,8 @@
 					<div class="col-2 text-center d-flex justify-content-center">
 						<img src="https://image.flaticon.com/icons/png/128/1979/1979819.png" height="40px" class="align-self-center">
 					</div>
-					<div class="col-10 bg-white rounded">
-						<h5>Mortalidad
+					<div class="col-10 bg-white rounded"> 
+						<h5>Mortalidad <br>
 							<label class="text-muted h6">Lote: <span name='cardMortalidad'></span></label>
 						</h5>
 						<p>% de Mortalidad Obtenida: <span class="text-danger font-weight-bold" name='cardMortalidad'>1%</span></p>
@@ -64,7 +64,7 @@
 						<img src="assets/img/transportador.svg" height="40px" class="align-self-center">
 					</div>
 					<div class="col-10 bg-white rounded">
-						<h5>Producción
+						<h5>Producción <br>
 							<label class="text-muted h6" name='cardProduccion'>Fecha: <span></span></label>
 						</h5>
 						<p>% de Huevos Producidos: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
@@ -89,7 +89,7 @@
 						<canvas id="graficoHuevos" style="height: 15em"></canvas>
 					</div>
 					<div class="col-4 align-self-center">
-						<table class="table-sm table-responsive text-center">
+						<table class="table-sm table-responsive text-center" id="">
 							<thead class="table-secondary">
 								<th width="100">Dias</th>
 								<th>Grandes</th>
@@ -133,7 +133,7 @@
 				Inventario de Productos
 			</div>
 			<div class="card-body pb-2">
-				<table class="datatable table table-responsive-sm table-sm table-striped">
+				<table class="datatable table table-responsive-sm table-sm table-striped" id="tablaInicioProductos">
 					<thead class="table-info">
 						<th>Tipo de Producto</th>
 						<th>Nombre Producto</th>
