@@ -1,4 +1,5 @@
 <?php
+//probando git Token
 session_start();
 function autoload($clase){
 	if (file_exists("controlador/$clase.php")) {
