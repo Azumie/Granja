@@ -48,7 +48,7 @@
 						<h5>Mortalidad
 							<label class="text-muted h6">Lote: <span name='cardMortalidad'></span></label>
 						</h5>
-						<p>Mortalidad Obtenida: <span class="text-danger font-weight-bold" name='cardMortalidad'>1%</span></p>
+						<p>% de Mortalidad Obtenida: <span class="text-danger font-weight-bold" name='cardMortalidad'>1%</span></p>
 						<p>Mortalidad Total: <span name='cardMortalidad' class="text-danger font-weight-bold">10 Gallinas</span></p>
 						<p>Gallinas Restantes: <span name='cardMortalidad' class="text-danger font-weight-bold">1000</span></p>
 
@@ -67,9 +67,8 @@
 						<h5>Producción
 							<label class="text-muted h6" name='cardProduccion'>Fecha: <span></span></label>
 						</h5>
+						<p>% de Huevos Producidos: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
 						<p>Huevos Producidos: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
-						<p>Huevos Aptos para la venta: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
-						<p>Huevos no aptos para la venta: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
 
 					</div>
 				</div>

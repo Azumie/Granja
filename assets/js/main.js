@@ -428,11 +428,11 @@ if (elementoExiste('formularioMortalidad')) {
   const formularioMortalidad = document.getElementById('formularioMortalidad');
     obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponEnLoteMortalidad'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
     document.getElementById('fechaMortalidad').value = fechaHoy();
-    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario', llenarTabla);
+    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['fechaOperacion' ,'idGalpon', 'cantidadProducto','cantidadGallinas'], 'idInventario', llenarTabla);
     
     formularioMortalidad.addEventListener('submit', (e) =>{
       e.preventDefault();
-      agragarObjetoBD(formularioMortalidad, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario');
+      agragarObjetoBD(formularioMortalidad, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['fechaOperacion' ,'idGalpon', 'cantidadProducto','cantidadGallinas'], 'idInventario');
     });
 }
 
@@ -454,7 +454,7 @@ if (elementoExiste('formularioConsumos')) {
   obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponConsumo'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
   obtenerObjeto('?c=Configuracion&m=obtenerProducto&idTipoProducto=2', document.getElementById('idProducto'), ['idProducto', 'nombreProducto'], '', llenarSelect);
   document.getElementById('fechaConsumo').value = fechaHoy();
-  obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=2','#tablaDetalleCompra', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
+  obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1','#tablaDetalleCompra', ['fechaOperacion', 'idGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
   formularioConsumos.addEventListener('submit', (e) =>{
     e.preventDefault();
     agragarObjetoBD(formularioConsumos, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=2','#tablaDetalleCompra', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
