@@ -85,12 +85,11 @@ class ConstructorSQL {
 		return $this;
 	}
 
-	public function delete($tabla , array $datos = []){
-		$campo     = key($datos);
-		$valor     = current($datos);
+	public function delete($tabla , $campo, $id){
 		$this->sql = "DELETE FROM $tabla WHERE $campo = ? ";
-		$this->datos = [$valor];
+		$this->datos = [$id];
 		$this->tipo  = 'consulta';
+		return $this;
 	}
 
 	public function ejecutarSQL(){

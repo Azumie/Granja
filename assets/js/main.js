@@ -213,25 +213,30 @@ document.addEventListener('DOMContentLoaded', () => {
               col.appendChild(input);
             });
           }
-          fila[fila.length - 1].querySelector('.editar').classList.toggle('d-none');
-          fila[fila.length - 1].querySelector('.eliminar').classList.toggle('d-none');
-          fila[fila.length - 1].querySelector('.guardar').classList.toggle('d-none');
-          fila[fila.length - 1].querySelector('.cancelar').classList.toggle('d-none');
+          [... x.fila.querySelectorAll('.btn')].forEach( btn => {
+            btn.classList.toggle('d-none');
+          });
         }
       },
       {
         color: 'danger', icon: 'trash', nombre: 'eliminar',
-        funcion: x => {
-          console.log('eliminando');
+        funcion: async x => {
+          const idCompraGranja = x.fila.getAttribute('idRow');
+          if (confirm('¿Estas Seguro de que dese Eliminar el Producto? Esta operacion no se puede revertir')) {
+            const resp = await selectBD(`?c=InventarioGeneral&m=eliminarProductoCompra&idCompraGranja=${idCompraGranja}`);
+            console.log('eliminando');
+            x.fila.remove();
+            alerta('Producto eliminado Correctamente');
+          }
         }
       },
       {
         color: 'primary d-none', icon: 'check', nombre: 'guardar',
         funcion: x => {
           let formdata = new FormData();
-          const fila = x.fila.children;
           const titulos = x.titulos;
-          const inputs = x.fila.querySelectorAll('.form-control');
+          const fila = x.fila;
+          const inputs = fila.querySelectorAll('.form-control');
           formdata.append('idCompraGranja', x.fila.getAttribute('idRow'))
           inputs.forEach( input => {
             formdata.append(input.getAttribute('name'), input.value);
@@ -239,13 +244,32 @@ document.addEventListener('DOMContentLoaded', () => {
           (async () => {
             const respuesta = await insertBD(formdata,'?c=InventarioGeneral&m=editarCompra',false);
             console.log("respuesta", respuesta);
+            inputs.forEach( input => {
+              // formdata.append(input.getAttribute('name'), input.value);
+              let valor = input.value;
+              let td = input.parentElement;
+              td.innerHTML = valor;
+            });
+            [... fila.querySelectorAll('.btn')].forEach( btn => {
+              btn.classList.toggle('d-none');
+            });
+
           })();
         }
       },
       {
-        color: 'danger d-none', icon: 'trash', nombre: 'cancelar',
+        color: 'danger d-none', icon: 'ban', nombre: 'cancelar',
         funcion: x => {
-          console.log('eliminando');
+          [... x.fila.querySelectorAll('.form-control')].forEach(input => {
+            let tr = input.parentElement;
+            let idFila = x.fila.getAttribute('idRow');
+            let value = x.datos.find(fila => fila.idCompraGranja == idFila).idCompraGranja;
+            tr.innerHTML = value;
+          });
+          [... x.fila.querySelectorAll('.btn')].forEach( btn => {
+            btn.classList.toggle('d-none');
+            console.log(btn)
+          });
         }
       }
     );

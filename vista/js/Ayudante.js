@@ -328,7 +328,8 @@ class Tabla {
 				let accion = this.actions.find( accion => target.classList.contains(accion.nombre));
 				accion.funcion({
 					titulos: tablaHeaders(this.table),
-					fila: target.parentElement.parentElement.parentElement
+					fila: target.parentElement.parentElement.parentElement,
+					datos: this.resp
 				});
 			}
 		});

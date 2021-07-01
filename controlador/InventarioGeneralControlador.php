@@ -110,6 +110,18 @@ class InventarioGeneralControlador {
 		// echo json_encode($_POST);
 	}
 
+	public function eliminarProductoCompra(){
+		if (isset($_GET['idCompraGranja'])) {
+			try {
+				$this->constructorSQL->delete('compragranja', 'idCompraGranja', $_GET['idCompraGranja'])
+					->ejecutarSQL();
+				echo json_encode('Producto Eliminado correctamente');
+			} catch (PDOException $e) {
+				echo json_encode('Error: No se ha podido Eliminar el Producto de la compra');
+			}
+		}
+	}
+
 
 
 }
