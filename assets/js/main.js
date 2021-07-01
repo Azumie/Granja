@@ -208,7 +208,84 @@ formularioInicio.addEventListener('submit', (e)=>{
     const tablaAgregarProductos = document.getElementById('tablaAgregarProductos');
     let productos = [];
 
-    obtenerObjeto('?c=InventarioGeneral&m=obtenerCompras', '#tablaCompras', ['fechaOperacion', 'idInventario'], 'idInventario', llenarTabla);
+    (async () => {
+      const inventario = await selectBD('?c=InventarioGeneral&m=obtenerCompras');
+      
+      tablallena( inventario, 'tablaCompras', 'idInventario', true, {
+        color: 'info',
+        icon: 'pen',
+        nombre: 'editar',
+        funcion: (tabla) => {
+          (async () => {
+            const idInventario = tabla.fila.getAttribute('idRow');
+            const resp = await selectBD('?c=InventarioGeneral&m=obtenerCompras&idInventario='+idInventario);
+            tablallena(resp, 'tablaAgregarProductos', 'idCompraGranja', true, 
+              {
+                color: 'info',
+                icon: 'pen',
+                nombre: 'editar',
+                funcion: (x) => {
+                  const inputs = ['cantidadProducto', 'precioProducto'];
+                  const fila = x.fila.children;
+                  const titulos = x.titulos;
+                  if (x.fila.querySelector('.form-control') == null){
+                    inputs.forEach( i => {
+                      let input = document.createElement('input');
+                      let col = fila[titulos.indexOf(i)];
+                      let value = col.innerText;
+                      input.setAttribute('class', 'form-control');
+                      input.setAttribute('name', i);
+                      input.value = value;
+                      col.innerHTML = '';
+                      col.appendChild(input);
+                    });
+                  }
+                  fila[fila.length - 1].querySelector('.editar').classList.toggle('d-none');
+                  fila[fila.length - 1].querySelector('.eliminar').classList.toggle('d-none');
+                  fila[fila.length - 1].querySelector('.guardar').classList.toggle('d-none');
+                  fila[fila.length - 1].querySelector('.cancelar').classList.toggle('d-none');
+                }
+              },
+              {
+                color: 'danger',
+                icon: 'trash',
+                nombre: 'eliminar',
+                funcion: x => {
+                  console.log('eliminando');
+                }
+              },
+              {
+                color: 'primary d-none',
+                icon: 'check',
+                nombre: 'guardar',
+                funcion: x => {
+                  let formdata = new FormData();
+                  const fila = x.fila.children;
+                  const titulos = x.titulos;
+                  const inputs = x.fila.querySelectorAll('.form-control');
+                  formdata.append('idCompraGranja', x.fila.getAttribute('idRow'))
+                  inputs.forEach( input => {
+                    formdata.append(input.getAttribute('name'), input.value);
+                  });
+                  (async () => {
+                    const respuesta = await insertBD(formdata,'?c=InventarioGeneral&m=editarCompra',false);
+                    console.log("respuesta", respuesta);
+                  })();
+                }
+              },
+              {
+                color: 'danger d-none',
+                icon: 'trash',
+                nombre: 'cancelar',
+                funcion: x => {
+                  console.log('eliminando');
+                }
+              },
+            );
+          })();
+        }
+      });
+    })();
 
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', selectTipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
     selectTipoProducto.addEventListener('change', e => {
@@ -246,85 +323,35 @@ formularioInicio.addEventListener('submit', (e)=>{
 
     document.getElementById('agregarProducto').addEventListener('click', e => {
       let producto = {};
-      let valores = [];
-      formularioCompras.querySelectorAll('.form-control').forEach( (e) => {
-        if (e.id != 'fechaOperacion') {
-          valores.push(e.getAttribute('name'));
-          producto[e.getAttribute('name')] = e.value;
+      formularioCompras.querySelectorAll('.form-control').forEach( input => {
+        if (input.id != 'fechaOperacion') {
+          let value = input.value;
+          producto.idCompraGranja = productos.length;
+          producto[input.getAttribute('name')] = value;
+
+            console.log(input.getAttribute('name').includes('id'));
+          if (input.getAttribute('name').includes('id') && input.tagName == 'SELECT') {
+            producto[input.getAttribute('name').replace('id', 'nombre')] = input.selectedOptions[0].innerText;
+            
+          }
+
         }
       });
       productos.push(producto);
       console.log("productos", productos);
       
-      llenarTabla(productos, '#tablaAgregarProductos', valores);
-    });
+      tablallena(productos, 'tablaAgregarProductos', 'idCompraGranja', false, {
+        color: 'danger', icon: 'trash', nombre: 'eliminarProducto',
+        funcion: x => {
+          productos.splice(x.fila.getAttribute('idRow'), 1);
+          console.log(productos);
+          x.fila.remove();
 
-    document.getElementById('tablaCompras').addEventListener('click', e => {
-      let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
-      if (target.tagName === 'BUTTON') {
-        (async () => {
-          const compras = await selectBD(`?c=InventarioGeneral&m=obtenerCompras&idInventario=${target.id}`);
-          console.log("compras", compras);
-          llenarTabla(compras, '#tablaAgregarProductos', ['nombreTipoProducto', 'nombreProducto', 'documentoProveedor', 'cantidadProducto', 'precioProducto'], 'idCompraGranja');
-        })();
-      }
+
+        }
+      });
     });
-    (async () => {
-      const resp = await selectBD('?c=InventarioGeneral&m=obtenerCompras&idInventario=34');
-      tablallena(resp, 'tablaAgregarProductos', 'idCompraGranja', true, 
-        {
-          color: 'info',
-          icon: 'pen',
-          nombre: 'editar',
-          funcion: (x) => {
-            const inputs = ['cantidadProducto', 'precioProducto'];
-            const fila = x.fila.children;
-            const titulos = x.titulos;
-            if (x.fila.querySelector('.form-control') == null){
-              inputs.forEach( i => {
-                let input = document.createElement('input');
-                let col = fila[titulos.indexOf(i)];
-                let value = col.innerText;
-                input.setAttribute('class', 'form-control');
-                input.setAttribute('name', i);
-                input.value = value;
-                col.innerHTML = '';
-                col.appendChild(input);
-              });
-            }
-            console.log(fila[fila.length - 1].querySelector('.editar'));
-            fila[fila.length - 1].querySelector('.editar').classList.toggle('d-none');
-            fila[fila.length - 1].querySelector('.eliminar').classList.toggle('d-none');
-            fila[fila.length - 1].querySelector('.guardar').classList.toggle('d-none');
-            fila[fila.length - 1].querySelector('.cancelar').classList.toggle('d-none');
-          }
-        },
-        {
-          color: 'danger',
-          icon: 'trash',
-          nombre: 'eliminar',
-          funcion: x => {
-            console.log('eliminando');
-          }
-        },
-        {
-          color: 'success d-none',
-          icon: 'check',
-          nombre: 'guardar',
-          funcion: x => {
-              console.log('eliminando');
-          }
-        },
-        {
-          color: 'danger d-none',
-          icon: 'trash',
-          nombre: 'cancelar',
-          funcion: x => {
-            console.log('eliminando');
-          }
-        },
-      );
-    })();
+    
 
 
 
@@ -384,14 +411,59 @@ formularioInicio.addEventListener('submit', (e)=>{
     const idLote = document.getElementById('idLote');
     let galponesLotes = [];
 
-    (async () => {
+    const tablaLotes = async () => {
       const proveedoresGallinas = await selectBD('?c=lote&m=obtenerProveedoresGallina');
       const galpones = await selectBD('?c=lote&m=obtenerGalpones');
       const lineaGenerica = await selectBD('?c=lote&m=obtenerLineagenetica');
       llenarSelect(proveedoresGallinas, documentoProveedorLote, ['documento', 'nombrePersona'], 'documento');
       llenarSelect(lineaGenerica, lineaNuevo, ['idLineaGenetica', 'nombreLineaGenetica'], 'idLineaGenetica');
       llenarSelect(galpones, idGalponLote, ['idGalpon', 'numeroGalpon'], 'idGalpon');
-    })();
+
+      const lotes = await selectBD('?c=lote&m=obtenerlotes')
+      console.log(lotes)
+      tablallena(lotes, 'tablaLotes', 'idLote', true, {
+        color: 'info', icon: 'pen', nombre: 'editar',
+        funcion: tabla => {
+          const idLote = tabla.fila.getAttribute('idRow');
+          const datosLote = lotes.find(lote => lote.idLote == idLote);
+          document.getElementById("fechaCompraGallinas").value = datosLote.fechaOperacion;
+          document.getElementById("documentoProveedorLote").value = datosLote.documentoProveedor;
+          document.getElementById("precioGallinas").value = datosLote.precioProducto;
+          document.getElementById("cantidadGallinas Total").value = datosLote.cantidadProducto;
+          document.getElementById("fechaInicioNuevoLote").value = datosLote.fechaInicio;
+          document.getElementById("idLineaNuevoLote").value = datosLote.idLineaGenetica;
+          document.getElementById("numeroLote").value = datosLote.numeroLote;
+          if (!elementoExiste('inputIdLote')){
+            let inputIdLote = document.createElement('input');
+            inputIdLote.id = 'inputIdLote';
+            inputIdLote.setAttribute('name', 'idLote');
+            inputIdLote.setAttribute('hidden', true);
+            inputIdLote.value = idLote;
+            formularioNuevoLote.appendChild(inputIdLote);
+            let inputIdCompraGranja = document.createElement('input');
+            inputIdCompraGranja.id = 'inputIdCompraGranja';
+            inputIdCompraGranja.setAttribute('name', 'idCompraGranja');
+            inputIdCompraGranja.setAttribute('hidden', true);
+            inputIdCompraGranja.value = datosLote.idCompraGranja;
+            formularioNuevoLote.appendChild(inputIdCompraGranja);
+          }else {
+            document.getElementById('inputIdLote').value = idLote
+            document.getElementById('inputIdCompraGranja').value = datosLote.idCompraGranja;
+          }
+          (async () =>{
+            const galponesl = await selectBD('?c=lote&m=obtenerGalponeslotes&idLote='+idLote);
+            tablallena(galponesl, 'tablaGalponesLotes', 'idGalpon', true, {
+              color: 'info', icon: 'pen', nombre: 'editar', 
+              funcion: (tabla) =>{
+                console.log(tabla.fila.getAttribute('idRow'));
+              } 
+            });
+            console.log('galpones en lote', galponesl);
+          })();
+        }
+      });
+    }
+    tablaLotes();
 
     document.getElementById('agregarGalonLote').addEventListener('click', e => {
       if (idGalponLote.selectedOptions[0] != undefined) {
@@ -416,8 +488,15 @@ formularioInicio.addEventListener('submit', (e)=>{
           });
         });
       (async () => {
-        const respuesta = await insertBD(formdataNuevoLote, '?c=lote&m=agregarNuevoLote', false);
-        console.log(respuesta);
+        let metodo = '';
+        if (elementoExiste('inputIdLote')) {
+          metodo = 'editarLote';
+        }else {
+          metodo = 'agregarNuevoLote'
+        }
+        const respuesta = await insertBD(formdataNuevoLote, '?c=lote&m='+metodo, false);
+        alerta(respuesta, 'success');
+        tablaLotes();
       })();
     });
   }

@@ -98,10 +98,55 @@ class LoteControlador
 					}
 					echo json_encode($idLote);
 				} catch (PDOException $e) {
-					echo json_encode($e->getMessage());
+					echo json_encode($e->getMessage());					
 				}
 		}else {
 			echo json_encode($_POST);
 		}
 	}
+
+	public function editarLote() {
+		if (isset($_POST['precioProducto'],$_POST['cantidadProducto'], $_POST['idCompraGranja'], $_POST['idLineaGenetica'], $_POST['fechaInicio'], $_POST['idLote'])) {
+			try {
+				$this->constructorSQL->update('lotes', [
+					'idLineaGenetica' => $_POST['idLineaGenetica'],
+					'fechaInicio' => $_POST['fechaInicio'],
+				])->where('idLote', '=', $_POST['idLote'])->ejecutarSQL();
+				$this->constructorSQL = new ConstructorSQL();
+				$this->constructorSQL->update('compragranja', [ 
+					'precioProducto' => $_POST['precioProducto'],
+					'cantidadProducto' => $_POST['cantidadProducto'],
+				])->where('idCompraGranja', '=', $_POST['idCompraGranja'])->ejecutarSQL();
+				echo json_encode('Lote Editado Correctamente');
+			} catch (PDOException $e) {
+				echo json_encode('Error al editar el Lote');
+			}
+		}else 
+				echo json_encode($_POST['cantidadProducto']);
+	}
+
+	public function obtenerLotes () {
+		try {
+			$lotes = $this->constructorSQL->select('compragranja cg')
+				->innerJoin('inventario i', 'i.idInventario', '=', 'cg.idInventario')
+				->innerJoin('lotes l', 'l.idInventario', '=', 'i.idInventario')
+				// ->innerJoin('inventario', 'inventario.idInventario', '=', 'compragranja.idInventario')
+				->ejecutarSQL();
+			echo json_encode($lotes);
+		} catch (PDOException $e) {
+			echo json_encode($e->getMessage());
+		}
+	}
+
+	public function obtenerGalponeslotes () {
+		try {
+			$galpones = $this->constructorSQL->select('galponeslotes')
+				->where('idLote', '=', $_GET['idLote'])
+				->ejecutarSQL();
+			echo json_encode($galpones);
+		} catch (PDOException $e) {
+			
+		}
+	}
+
 }
