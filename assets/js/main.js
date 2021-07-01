@@ -194,84 +194,73 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectProveedor = document.getElementById('documentoProveedorCompra');
     const tablaAgregarProductos = document.getElementById('tablaAgregarProductos');
     let productos = [];
+    let tablita = new Tabla ([], 'tablaAgregarProductos', 'idCompraGranja', true, 
+      {
+        color: 'info', icon: 'pen', nombre: 'editar',
+        funcion: (x) => {
+          const inputs = ['cantidadProducto', 'precioProducto'];
+          const fila = x.fila.children;
+          const titulos = x.titulos;
+          if (x.fila.querySelector('.form-control') == null){
+            inputs.forEach( i => {
+              let input = document.createElement('input');
+              let col = fila[titulos.indexOf(i)];
+              let value = col.innerText;
+              input.setAttribute('class', 'form-control');
+              input.setAttribute('name', i);
+              input.value = value;
+              col.innerHTML = '';
+              col.appendChild(input);
+            });
+          }
+          fila[fila.length - 1].querySelector('.editar').classList.toggle('d-none');
+          fila[fila.length - 1].querySelector('.eliminar').classList.toggle('d-none');
+          fila[fila.length - 1].querySelector('.guardar').classList.toggle('d-none');
+          fila[fila.length - 1].querySelector('.cancelar').classList.toggle('d-none');
+        }
+      },
+      {
+        color: 'danger', icon: 'trash', nombre: 'eliminar',
+        funcion: x => {
+          console.log('eliminando');
+        }
+      },
+      {
+        color: 'primary d-none', icon: 'check', nombre: 'guardar',
+        funcion: x => {
+          let formdata = new FormData();
+          const fila = x.fila.children;
+          const titulos = x.titulos;
+          const inputs = x.fila.querySelectorAll('.form-control');
+          formdata.append('idCompraGranja', x.fila.getAttribute('idRow'))
+          inputs.forEach( input => {
+            formdata.append(input.getAttribute('name'), input.value);
+          });
+          (async () => {
+            const respuesta = await insertBD(formdata,'?c=InventarioGeneral&m=editarCompra',false);
+            console.log("respuesta", respuesta);
+          })();
+        }
+      },
+      {
+        color: 'danger d-none', icon: 'trash', nombre: 'cancelar',
+        funcion: x => {
+          console.log('eliminando');
+        }
+      }
+    );
+    let tablaCompras = new Tabla ( [], 'tablaCompras', 'idInventario', true, {
+      color: 'info', icon: 'pen', nombre: 'editar',
+      funcion: async (tabla) => {
+        const idInventario = tabla.fila.getAttribute('idRow');
+        const resp = await selectBD('?c=InventarioGeneral&m=obtenerCompras&idInventario='+idInventario);
+        tablita.update(resp);
+      }
+    });
 
     (async () => {
       const inventario = await selectBD('?c=InventarioGeneral&m=obtenerCompras');
-      
-      tablallena( inventario, 'tablaCompras', 'idInventario', true, {
-        color: 'info',
-        icon: 'pen',
-        nombre: 'editar',
-        funcion: (tabla) => {
-          (async () => {
-            const idInventario = tabla.fila.getAttribute('idRow');
-            const resp = await selectBD('?c=InventarioGeneral&m=obtenerCompras&idInventario='+idInventario);
-            tablallena(resp, 'tablaAgregarProductos', 'idCompraGranja', true, 
-              {
-                color: 'info',
-                icon: 'pen',
-                nombre: 'editar',
-                funcion: (x) => {
-                  const inputs = ['cantidadProducto', 'precioProducto'];
-                  const fila = x.fila.children;
-                  const titulos = x.titulos;
-                  if (x.fila.querySelector('.form-control') == null){
-                    inputs.forEach( i => {
-                      let input = document.createElement('input');
-                      let col = fila[titulos.indexOf(i)];
-                      let value = col.innerText;
-                      input.setAttribute('class', 'form-control');
-                      input.setAttribute('name', i);
-                      input.value = value;
-                      col.innerHTML = '';
-                      col.appendChild(input);
-                    });
-                  }
-                  fila[fila.length - 1].querySelector('.editar').classList.toggle('d-none');
-                  fila[fila.length - 1].querySelector('.eliminar').classList.toggle('d-none');
-                  fila[fila.length - 1].querySelector('.guardar').classList.toggle('d-none');
-                  fila[fila.length - 1].querySelector('.cancelar').classList.toggle('d-none');
-                }
-              },
-              {
-                color: 'danger',
-                icon: 'trash',
-                nombre: 'eliminar',
-                funcion: x => {
-                  console.log('eliminando');
-                }
-              },
-              {
-                color: 'primary d-none',
-                icon: 'check',
-                nombre: 'guardar',
-                funcion: x => {
-                  let formdata = new FormData();
-                  const fila = x.fila.children;
-                  const titulos = x.titulos;
-                  const inputs = x.fila.querySelectorAll('.form-control');
-                  formdata.append('idCompraGranja', x.fila.getAttribute('idRow'))
-                  inputs.forEach( input => {
-                    formdata.append(input.getAttribute('name'), input.value);
-                  });
-                  (async () => {
-                    const respuesta = await insertBD(formdata,'?c=InventarioGeneral&m=editarCompra',false);
-                    console.log("respuesta", respuesta);
-                  })();
-                }
-              },
-              {
-                color: 'danger d-none',
-                icon: 'trash',
-                nombre: 'cancelar',
-                funcion: x => {
-                  console.log('eliminando');
-                }
-              },
-            );
-          })();
-        }
-      });
+      tablaCompras.update(inventario);
     })();
 
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', selectTipoProducto, ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
@@ -303,8 +292,9 @@ document.addEventListener('DOMContentLoaded', () => {
           })
         });
         const respuesta = await insertBD(formdataCompras, '?c=InventarioGeneral&m=agregarCompra', false);
-      obtenerObjeto('?c=InventarioGeneral&m=obtenerCompras', '#tablaCompras', ['fechaOperacion', 'idInventario'], 'idInventario', llenarTabla);
-        alerta(respuesta, 'danger');
+        const compras = await selectBD('?c=InventarioGeneral&m=obtenerCompras');
+        tablaCompras.update(compras);
+        alerta(respuesta, 'success');
       })();
     });
 
