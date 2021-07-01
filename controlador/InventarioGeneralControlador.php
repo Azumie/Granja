@@ -99,13 +99,15 @@ class InventarioGeneralControlador {
 				$this->constructorSQL->update('compragranja', [
 					'cantidadProducto' => $_POST['cantidadProducto'],
 					'precioProducto' => $_POST['precioProducto']
-				]->ejecutarSQL());
+				])
+				->where('idCompraGranja', '=', $_POST['idCompraGranja'])
+				->ejecutarSQL();
 				echo json_encode('Compra actualizada exitosamente');
 			} catch (PDOException $e) {
 				echo json_encode('Error: No se pudo actualizar la compra');
-				
 			}
 		}
+		// echo json_encode($_POST);
 	}
 
 

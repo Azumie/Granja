@@ -231,7 +231,6 @@ function tablallena(resp, idTabla, idRow, reset, ...actions) {
 		tableheaders.forEach( campo => {
 			let columna = document.createElement('td');
 			columna.innerText = registro[campo];
-
 			if (campo.toLowerCase() == 'acciones'){
 				columna.innerText = '';
 				let buttonsAction = btnGroup();

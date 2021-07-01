@@ -69,6 +69,7 @@ class ConstructorSQL {
 			$this->where .= $where;
 			array_push($this->datos, $valor);
 		}
+		return $this;
 	}
 
 	public function update($tabla , array $datos = []){
