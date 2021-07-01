@@ -12,10 +12,10 @@ function elementoExiste (elemento) {
 function obtenerObjeto (url,elemento,valores = '', id= '', funcion = '') {
 	fetch(url).then(resp => resp.json())
   .then(resp => {
-    if (funcion != '') {
+    if (valores[0] != '') {
     	funcion(resp, elemento,valores, id);
     }else {
-    	return resp;
+    	console.log(resp);
     }
   });
 }

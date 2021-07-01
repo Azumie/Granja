@@ -29,9 +29,9 @@
 						<h5>Alimentación <br>
 							<label class="text-muted h6">Fecha: <span name='cardAlimentacion'></span></label>
 						</h5>
-						<p>Consumo por Ave: <span name='cardAlimentacion' class="text-primary font-weight-bold">150g</span></p>
-						<p>Consumo Total: <span class="text-primary font-weight-bold" name='cardAlimentacion'>150k</span></p>
-						<p>Alimento en inventario: <span class="text-primary font-weight-bold" name='cardAlimentacion'>500k</span></p>
+						<p>Consumo por Ave: <span name='cardAlimentacion' class="text-primary font-weight-bold"></span>g</p>
+						<p>Consumo Total: <span class="text-primary font-weight-bold" name='cardAlimentacion'></span>k</p>
+						<p>Alimento en inventario: <span class="text-primary font-weight-bold" name='cardAlimentacion'></span>k</p>
 
 					</div>
 				</div>
@@ -48,9 +48,9 @@
 						<h5>Mortalidad <br>
 							<label class="text-muted h6">Lote: <span name='cardMortalidad'></span></label>
 						</h5>
-						<p>% de Mortalidad Obtenida: <span class="text-danger font-weight-bold" name='cardMortalidad'>1%</span></p>
-						<p>Mortalidad Total: <span name='cardMortalidad' class="text-danger font-weight-bold">10 Gallinas</span></p>
-						<p>Gallinas Restantes: <span name='cardMortalidad' class="text-danger font-weight-bold">1000</span></p>
+						<p>% de Mortalidad Obtenida: <span class="text-danger font-weight-bold" name='cardMortalidad'></span>%</p>
+						<p>Mortalidad Total: <span name='cardMortalidad' class="text-danger font-weight-bold"></span></p>
+						<p>Gallinas Restantes: <span name='cardMortalidad' class="text-danger font-weight-bold"></span></p>
 
 					</div>
 				</div>
@@ -65,9 +65,9 @@
 					</div>
 					<div class="col-10 bg-white rounded">
 						<h5>Producción <br>
-							<label class="text-muted h6" name='cardProduccion'>Fecha: <span></span></label>
+							<label class="text-muted h6">Fecha: <span name='cardProduccion'></span></label>
 						</h5>
-						<p>% de Huevos Producidos: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
+						<p>% de Huevos Producidos: <span class="text-info font-weight-bold" name='cardProduccion'></span>%</p>
 						<p>Huevos Producidos: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>
 
 					</div>
@@ -89,7 +89,7 @@
 						<canvas id="graficoHuevos" style="height: 15em"></canvas>
 					</div>
 					<div class="col-4 align-self-center">
-						<table class="table-sm table-responsive text-center" id="">
+						<table class="table-sm table-responsive text-center" id="inicioCaducidad">
 							<thead class="table-secondary">
 								<th width="100">Dias</th>
 								<th>Grandes</th>
@@ -133,56 +133,18 @@
 				Inventario de Productos
 			</div>
 			<div class="card-body pb-2">
-				<table class="datatable table table-responsive-sm table-sm table-striped" id="tablaInicioProductos">
+				<table class="table table-responsive-sm table-sm table-striped" id="tablaInicioProductos">
 					<thead class="table-info">
 						<th>Tipo de Producto</th>
 						<th>Nombre Producto</th>
 						<th>Proveedor</th>
 						<th>Ultima compra</th>
-						<th>Cantidad</th>
+						<th>Cantidad kg</th>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Alimento </td>
-							<td>Iniciador </td>
-							<td>Granja las Tunas </td>
-							<td>05-10-2021 </td>
-							<td>500kg</td>
-						</tr>
-						<tr>
-							<td>Consumible </td>
-							<td>Cajas </td>
-							<td>El chino </td>
-							<td>05-06-2021 </td>
-							<td>100 </td>
-						</tr>
-						<tr>
-							<td>Consumible </td>
-							<td>Separadores </td>
-							<td>El chino </td>
-							<td>03-06-2021 </td>
-							<td>30 </td>
-						</tr>
-						<tr>
-							<td>Alimento </td>
-							<td>Crecimiento </td>
-							<td>Granja las Tunas </td>
-							<td>02-02-2021 </td>
-							<td>1kg </td>
-						</tr>
-						<tr>
-							<td>Alimento </td>
-							<td>Postura </td>
-							<td>El tunal alimentos</td>
-							<td>03-03-2021 </td>
-							<td>30k</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		
 	</div>
-	
-
 </div>

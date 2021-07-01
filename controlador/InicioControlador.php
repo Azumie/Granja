@@ -62,9 +62,17 @@ class InicioControlador {
 		$huevosProducidos = $this->constructorSQL->ejecutarSQL();
 		$porcentaje = (100 * $huevosProducidos[0]->suma)/ $mortalidadTotal[0]->suma;
 		$res = ['porcentaje' => $porcentaje, 'huevosProducidos' => $huevosProducidos[0]->suma, 'Post' => [$_POST['fechaDesde'], $_POST['fechaHasta']]];
-
-		// SELECT sum(inventarioproduccion.cantidadProduccion) FROM inventarioproduccion INNER JOIN galponeslotes on galponeslotes.idGalpon = inventarioproduccion.idGalpon where inventarioproduccion.idGalpon = 1 AND galponeslotes.activo = 1 and inventarioproduccion.fechaInventarioProduccion = '2021-06-28'
 		echo json_encode($res);
 	}
+// select productos.nombreProducto, max(inventario.fechaOperacion) as fecha, sum(compragranja.cantidadProducto) as suma, compragranja.documentoProveedor, tiposproducto.nombreTipoProducto from compragranja INNER JOIN productos on productos.idProducto = compragranja.idProducto INNER JOIN inventario on inventario.idInventario = compragranja.idInventario INNER JOIN tiposproducto on productos.idProducto = tiposproducto.idTipoProducto GROUP BY productos.idProducto ORDER BY productos.nombreProducto ASC
+	// select productos.nombreProducto, personas.nombrePersona, personas.apellidosPersona, max(inventario.fechaOperacion) as fecha, sum(compragranja.cantidadProducto) as suma, compragranja.documentoProveedor, tiposproducto.nombreTipoProducto from compragranja INNER JOIN productos on productos.idProducto = compragranja.idProducto INNER JOIN inventario on inventario.idInventario = compragranja.idInventario INNER JOIN tiposproducto on productos.idProducto = tiposproducto.idTipoProducto INNER JOIN personas on personas.documento = compragranja.documentoProveedor GROUP BY productos.idProducto ORDER BY productos.nombreProducto ASC
+	public function mostrarInicioProductos(){
+		$this->constructorSQL->select('compragranja', 'productos.nombreProducto, personas.nombrePersona, personas.apellidosPersona, max(inventario.fechaOperacion) as fecha, sum(compragranja.cantidadProducto) as suma, compragranja.documentoProveedor, tiposproducto.nombreTipoProducto')->innerJoin('productos', 'productos.idProducto', '=','compragranja.idProducto')->innerJoin('inventario', 'inventario.idInventario', '=', 'compragranja.idInventario')->innerJoin('tiposproducto', 'productos.idProducto', '=', 'tiposproducto.idTipoProducto')->innerJoin('personas', 'personas.documento', '=', 'compragranja.documentoProveedor')->groupBy('productos.idTipoProducto');
+		$tabla = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($tabla);
+	}
 
+	public function tablaCaducidad(){
+
+	}
 }
