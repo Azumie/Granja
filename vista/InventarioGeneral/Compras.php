@@ -92,7 +92,7 @@
 
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
-						<table id='tablaAgregarProductos' class="table table-striped table-responsive-sm p-0 tablas table-sm text-center">
+						<table id='tablaAgregarProductos' class="table table-striped table-responsive p-0 tablas table-sm text-center">
 							<thead class="table-info">
 								<th campo='nombreTipoProducto'>Tipo</th>
 								<th campo='nombreProducto'>Producto</th>

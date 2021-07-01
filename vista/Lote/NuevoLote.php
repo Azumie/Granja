@@ -129,7 +129,7 @@
 						</div>
 					</form>
 					<div class="col-md-6">
-						<table id="tablaLotes" class="table table-sm table-striped table-responsive-sm">
+						<table id="tablaLotes" class="table table-sm table-striped table-responsive w-100">
 							<thead class="table-info">
 								<th campo='documentoProveedor'>Proveedor</th>
 								<th campo='fechaOperacion'>fecha Compra</th>

@@ -1,4 +1,3 @@
-<?php require_once "vista/InventarioGeneral/Proveedores.php"; ?>
 <div class="modal fade" id="TipoProducto">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
