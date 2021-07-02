@@ -40,28 +40,12 @@
 							<input type="date" class="form-control" id="fechaProduccion" name="fechaProduccion">
 						</div>
 						<p>Clasificación de los huevos recolectados.</p>
-						<table class="table table-responsive p-0 table-sm text-center col-12">
+						<table id="tablaHuevos" class="table table-responsive-sm p-0 table-sm text-center col-12 table-striped">
 							<thead class="table-info" >
-								<th>Grandes</th>
-								<th>Medianos</th>
-								<th>Pequeños</th>
-								<th>Picados</th>
-								<th>Débil</th>
-								<th>Derramados</th>
-								<th>Rústicos</th>
-								<th>Pool</th>
+								<th campo='nombreTipoHuevo'>Tipo de Huevo</th>
+								<th campo='cantidadProduccion'>Cantidad</th>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input type="number" id="Grande" name="Grande" min="0" max="50000"></td>
-									<td><input type="number" id="Mediano" min="0" max="50000" name="Mediano"></td>
-									<td><input type="number" id="Pequeno" min="0" max="50000" name="Pequeno"></td>
-									<td><input type="number" id="Picado" min="0" max="50000" name="Picado"></td>
-									<td><input type="number" id="Debil" min="0" max="50000" name="Debil"></td>
-									<td><input type="number" id="Derramado" min="0" max="50000" name="Derramado"></td>
-									<td><input type="number" id="Rustico" min="0" max="50000" name="Rustico"></td>
-									<td><input type="number" id="Pool" min="0" max="50000" name="Pool"></td>
-								</tr>
 							</tbody>
 						</table>
 						<div class="row justify-content-center d-flex">
@@ -73,10 +57,11 @@
 						<p>Recogidas llevadas a cabo con anterioridad</p>
 						<table class="table table-sm text-center" id="tablaProduccionHuevos">
 							<thead class="table-info">
-								<th>Fecha</th>
-								<th>Producción</th>
-								<th>Galpón</th>
-								<th>Acción</th>
+								<th campo='fechaInventarioProduccion'>Fecha</th>
+								<th campo='produccion'>Producción</th>
+								<th campo='idGalpon'>Galpón</th>
+								<th campo='idLote'>Lote</th>
+								<th campo='acciones'>Acción</th>
 							</thead>
 							<tbody>
 							</tbody>

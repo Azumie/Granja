@@ -373,9 +373,55 @@ document.addEventListener('DOMContentLoaded', () => {
     // }
   if (elementoExiste('formularioProduccionHuevos')) {
     const formularioProduccionHuevos = document.getElementById('formularioProduccionHuevos');
-    obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('gProduccion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
-    document.getElementById(`fechaProduccion`).value = fechaHoy();
-    obtenerObjeto('?c=GestionAves&m=obtenerRecogidas','#tablaProduccionHuevos', ['fechaInventarioProduccion', 'produccion', 'idGalpon'], 'idInventarioProduccion', llenarTabla);
+    const tablaHuevos = new Tabla([], 'tablaHuevos', 'idInventarioProduccion', true);
+
+    const tablaProduccionHuevos = new Tabla([], 'tablaProduccionHuevos', 'id', true,{
+      color: 'info', icon: 'pen ', nombre: 'editar',
+      funcion: async x => {
+        console.log(x.datos);
+        let formdata = new FormData();
+        const filaDatos = {};
+        [...x.fila.children].forEach((col, i) => {
+          filaDatos[x.titulos[i]] = col.innerText;
+        });
+        const alldatafila = x.datos.find(fila => {
+          return fila.fechaInventarioProduccion == filaDatos.fechaInventarioProduccion
+              && fila.produccion == filaDatos.produccion
+              && fila.idLote == filaDatos.idLote
+              && fila.idGalpon == filaDatos.idGalpon;
+        });
+        formdata.append('idGalpon', alldatafila.idGalpon);
+        formdata.append('idLote', alldatafila.idLote);
+        formdata.append('fechaInventarioProduccion', alldatafila.fechaInventarioProduccion);
+        const detalleConsumo = await insertBD(formdata, '?c=GestionAves&m=obtenerdetalleRecogida', false);
+        detalleConsumo.forEach(tipo => {
+          tipo.cantidadProduccion = `<input type="number" class='form-control' name='${tipo.nombreTipoHuevo}' value='${tipo.cantidadProduccion}'>`
+        })
+        let datosTabla = tablaHuevos.tiposHuevo.map( e => {
+          if (detalleConsumo.find(fila => fila.nombreTipoHuevo == e.nombreTipoHuevo) != undefined) {
+            return detalleConsumo.find(fila => fila.nombreTipoHuevo == e.nombreTipoHuevo);
+          }else {
+            return e;
+          }
+        });
+        console.log(datosTabla);
+        tablaHuevos.update(datosTabla);
+      }
+    });
+    const initForm = async () => {
+      obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('gProduccion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+      document.getElementById(`fechaProduccion`).value = fechaHoy();
+      // vamos a generar la tabla de huevos
+      const produccionHuevos = await selectBD('?c=GestionAves&m=obtenerRecogidas');
+      const tiposHuevo = await selectBD('?c=GestionAves&m=obtenerTipoHuevo');
+      tiposHuevo.forEach(tipo => {
+        tipo.cantidadProduccion = `<input type="number" class='form-control' name='${tipo.nombreTipoHuevo}'>`
+      })
+      tablaHuevos.update(tiposHuevo);
+      tablaHuevos.tiposHuevo = tiposHuevo;
+      tablaProduccionHuevos.update(produccionHuevos);
+    };
+    initForm();
     // Rellenar select del idLote al seleccionar un galpon
     document.getElementById('gProduccion').addEventListener('change', (e)=>{
       let select = document.getElementById('gProduccion');
@@ -421,7 +467,6 @@ document.addEventListener('DOMContentLoaded', () => {
       llenarSelect(galpones, idGalponLote, ['idGalpon', 'numeroGalpon'], 'idGalpon');
 
       const lotes = await selectBD('?c=lote&m=obtenerlotes')
-      console.log(lotes)
       tablallena(lotes, 'tablaLotes', 'idLote', true, {
         color: 'info', icon: 'pen', nombre: 'editar',
         funcion: tabla => {
@@ -531,13 +576,79 @@ if (elementoExiste('formularioDespachos')) {
 
 if (elementoExiste('formularioConsumos')) {
   const formularioConsumos = document.getElementById('formularioConsumos');
-  obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponConsumo'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
-  obtenerObjeto('?c=Configuracion&m=obtenerProducto&idTipoProducto=2', document.getElementById('idProducto'), ['idProducto', 'nombreProducto'], '', llenarSelect);
-  document.getElementById('fechaConsumo').value = fechaHoy();
-  obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=2','#tablaDetalleCompra', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
+
+  const tablaDetalleConsumos = new Tabla([], 'tablaDetalleConsumos', '', true,
+    {
+      color: 'info', icon: 'pen', nombre: 'editar',
+      funcion: (x) =>{
+        const inputs = ['cantidadProducto'];
+        const posInput = x.titulos.indexOf('cantidadProducto');
+        const trInput = x.fila.children[posInput];
+        let input = document.createElement('input');
+        input.value = trInput.innerText;
+        input.setAttribute('class', 'form-control');
+        input.setAttribute('nameInput', 'cantidadProducto');
+        trInput.innerHTML = '';
+        trInput.appendChild(input);
+        [... x.fila.querySelectorAll('.btn')].forEach( btn => {
+          btn.classList.toggle('d-none');
+        });
+      }
+    },{
+      color: 'danger', icon: 'trash', nombre: 'eliminar',
+      funcion: async x => {
+        let formdata = new FormData();
+        if (confirm('¿Estas Seguro de que desea eliminar este Consumo? Esta operacion no se puede revertir')) {
+      // tenemos que mandar la id para poder eliminar, pero como no hay una unica por la cual poderlo identificar
+      // nos jodemos, tendriamos que pasar 3 campos como id que son
+      // idLote - idInventario - idGalpon - id Producto - fecha
+      // una vaina asi super crazy
+      // igual o peor con el editar
+          alerta('eliminando');
+        }
+      }
+    },{
+      color: 'primary d-none', icon: 'check', nombre: 'guardar',
+      funcion: async x => {
+
+      }
+    },{
+      color: 'danger d-none', icon: 'ban', nombre: 'cancelar',
+      funcion: async x => {
+
+      }
+    }
+  );
+
+  const tablaConsumos = new Tabla([], 'tablaConsumos', 'fechaOperacion', true, {
+    color: 'info', icon: 'pen', nombre: 'editar',
+    funcion: async x => {
+      const fecha = x.fila.getAttribute('idRow');
+      const detalleConsumo = await selectBD(`?c=InventarioGeneral&m=ObtenerDetalleConsumos&fechaOperacion=${fecha}`);
+      // console.log("detalleConsumo", detalleConsumo);
+      tablaDetalleConsumos.update(detalleConsumo);
+    }
+  });
+  const initForm = async () => {
+    const consumos = await selectBD('?c=InventarioGeneral&m=ObtenerConsumos');
+    tablaConsumos.update(consumos);
+    const detalleConsumo = await selectBD(`?c=InventarioGeneral&m=ObtenerDetalleConsumos&fechaOperacion=${fechaHoy()}`);
+    tablaDetalleConsumos.update(detalleConsumo);
+    obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponConsumo'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+    obtenerObjeto('?c=Configuracion&m=obtenerProducto&idTipoProducto=3', document.getElementById('idProducto'), ['idProducto', 'nombreProducto'], '', llenarSelect);
+    document.getElementById('fechaConsumo').value = fechaHoy();
+  };
+  initForm();
+
+  document.getElementById('resetFormularioConsumo').addEventListener('click', e => {
+    initForm();
+  })
+
+
+  // obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaDetalleCompra', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
   formularioConsumos.addEventListener('submit', (e) =>{
     e.preventDefault();
-    agragarObjetoBD(formularioConsumos, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=2','#tablaDetalleCompra', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
+    agragarObjetoBD(formularioConsumos, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=2','#tablaDetalleConsumos', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
 
   })
 }

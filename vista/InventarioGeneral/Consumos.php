@@ -74,42 +74,33 @@
 
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaDetalleCompra">
+						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaDetalleConsumos">
 							<thead class="table-warning">
-								<th>Tipo</th>
-								<th>Producto</th>
-								<th>Cantidad</th>
-								<th>Precio</th>
-								<th>Borrar</th>
+								<th campo='nombreTipoProducto'>Tipo</th>
+								<th campo='nombreProducto'>Producto</th>
+								<th campo='cantidadProducto'>Cantidad</th>
+								<th campo='acciones'>Acciones</th>
 							</thead>
 							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><i class="fa fa-trash"></i></td>
-								</tr>
 							</tbody>
 						</table>
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
 						<div class="row justify-content-center d-flex">
 							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button type="button" id="resetFormularioConsumo" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 						</div>
 					</form>
 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm">
+						<table id="tablaConsumos" class="table table-striped table-responsive-lg p-0 tablas table-sm">
 							<thead class="table-info" >
-								<th>Fecha</th>
-								<th>Galpón en lote</th>
-								<th>Alimento</th>
-								<th>Cantidad</th>
-								<th>Editar</th>
+								<th campo='fechaOperacion'>Fecha</th>
+								<th campo='idGalpon'>Galpón en lote</th>
+								<th campo='idLote'>Lote</th>
+								<th campo='acciones'>Acciones</th>
 							</thead>
 							<tbody>
 							</tbody>

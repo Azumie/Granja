@@ -12,10 +12,39 @@ class GestionAvesControlador {
 		require_once 'vista/includes/layout.php';
 	}
 	public function obtenerRecogidas(){
-		$this->constructorSQL->select('inventarioproduccion GROUP BY fechaInventarioProduccion', 'sum(cantidadProduccion) AS produccion, fechaInventarioProduccion, idGalpon');
+		// select * from inventarioproduccion ip
+		// inner join tiposhuevo tp on tp.idTipoHuevo = ip.idTipoHuevo
+		// where ip.idGalpon = 1
+		// and ip.idLote = 1
+		// and ip.fechaInventarioProduccion = '2021-07-02'
+		// and ip.entrada = 1
+		$this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) AS produccion, concat(fechaInventarioProduccion,idGalpon,idLote) AS id, inventarioproduccion.*')
+			->where('entrada', '=', '1')
+			->groupBy('fechaInventarioProduccion, idGalpon, idLote')
+			->ejecutarSQL();
 		$recogidas = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($recogidas);
 	}
+
+	public function obtenerdetalleRecogida () {
+		if (isset($_POST['idGalpon'] , $_POST['idLote'], $_POST['fechaInventarioProduccion'])) {
+			try {
+				$ip = 'inventarioproduccion';
+				$th = 'tiposhuevo';
+				$detalleRecogida = $this->constructorSQL->select($ip)
+					->innerJoin($th, "$th.idTipoHuevo", '=', "$ip.idTipoHuevo")
+					->where("$ip.idLote", '=', $_POST['idLote'])
+					->where("$ip.idGalpon", '=', $_POST['idGalpon'])
+					->where("$ip.fechaInventarioProduccion", '=', $_POST['fechaInventarioProduccion'])
+					->where("$ip.entrada", '=', 1)
+					->ejecutarSQL();
+				echo json_encode($detalleRecogida);
+			} catch (PDOException $e) {
+				echo json_encode('Error al obtener el Detalle de la produccion');
+			}
+		}
+	}
+
 	public function agregarRecogidas () {
 		if (isset($_POST['gProduccion'], $_POST['fechaProduccion'])) {
 			try {
@@ -37,7 +66,7 @@ class GestionAvesControlador {
 	}
 
 	public function obtenerGalponesLotes(){
-		$this->constructorSQL->select('galponeslotes')->where('activo', '=', '1')->where('idGalpon', '=', $_GET['idGalpon']);
+		$this->constructorSQL->select('galponeslotes')->where('activoGalponeLote', '=', '1')->where('idGalpon', '=', $_GET['idGalpon']);
 		
 		$galponLote = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($galponLote);
@@ -57,7 +86,7 @@ class GestionAvesControlador {
 			$ultID = $this->constructorSQL->ejecutarSQL();
 			// Obteniendo lote activo
 			$this->constructorSQL = new ConstructorSQL();
-			$this->constructorSQL->select('galponeslotes')->where('activo', '=', '1')->where('idGalpon', '=', $_POST['idGalponEnLote']);
+			$this->constructorSQL->select('galponeslotes')->where('activoGalponeLote', '=', '1')->where('idGalpon', '=', $_POST['idGalponEnLote']);
 			$galponLote = $this->constructorSQL->ejecutarSQL();
 			if (($ultID != '' ||  !is_null($ultID)) && ($galponLote != '' || !is_null($galponLote))) {
 				$producto = 2;
@@ -74,4 +103,12 @@ class GestionAvesControlador {
 			}
 		}
 	}
+
+	public function obtenerTipoHuevo(){
+		$tiposHuevo = $this->constructorSQL->select('tiposhuevo')
+			->where('activoHuevo', '=', 1)
+			->ejecutarSQL();
+		echo json_encode($tiposHuevo);
+	}
+
 }

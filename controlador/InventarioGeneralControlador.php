@@ -122,6 +122,43 @@ class InventarioGeneralControlador {
 		}
 	}
 
+	public function obtenerConsumos() {
+		try {
+			$og = 'operaciongalpon';
+			$iv = 'inventario';
+			$consumos = $this->constructorSQL->select($og)
+				->innerJoin($iv, "$iv.idInventario", "=", "$og.idInventario")
+				->where("$iv.entrada", "=", 0)
+				->groupBy("$iv.fechaOperacion, $og.idGalpon, $og.idLote")
+				->ejecutarSQL();
+
+			echo json_encode($consumos);
+		} catch (PDOException $e) {
+			echo json_encode("Error: No se pudieron Obtener las Consumos");
+		}
+	}
+
+	public function ObtenerDetalleConsumos () {
+		if (isset($_GET['fechaOperacion'])) {
+			try {
+				$og = 'operaciongalpon';
+				$pd = 'productos';
+				$iv = 'inventario';
+				$tp = 'tiposproducto';
+				$detalleConsumo = $this->constructorSQL->select($iv)
+					->innerJoin($og, "$og.idInventario", '=', "$iv.idInventario")
+					->innerJoin($pd, "$pd.idProducto", '=', "$og.idProducto")
+					->innerJoin($tp, "$tp.idTipoProducto", '=', "$pd.idTipoProducto")
+					->where("$iv.fechaOperacion", '=', $_GET['fechaOperacion'])
+					->where("$iv.entrada", '=', 0)
+					->ejecutarSQL();
+				echo json_encode($detalleConsumo);
+			} catch (PDOException $e) {
+				
+			}
+		}
+	}
+
 
 
 }

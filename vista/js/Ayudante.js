@@ -304,9 +304,9 @@ class Tabla {
 			
 			tableheaders.forEach( campo => {
 				let columna = document.createElement('td');
-				columna.innerText = registro[campo];
+				columna.innerHTML = registro[campo];
 				if (campo.toLowerCase() == 'acciones'){
-					columna.innerText = '';
+					columna.innerHTML = '';
 					let buttonsAction = btnGroup();
 					this.actions.forEach( action => {
 						let button = btn(action.color, action.nombre, action.icon);
