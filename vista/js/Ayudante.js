@@ -20,7 +20,7 @@ function obtenerObjeto (url,elemento,valores = '', id= '', funcion = '') {
   });
 }
 
-function llenarCards(formulario, url, name='', valores, funcion){
+function llenarCards(formulario, url, name='', funcion){
 	let datos = new FormData(formulario);
 	fetch(url,{
 		method: 'POST',
@@ -28,68 +28,21 @@ function llenarCards(formulario, url, name='', valores, funcion){
 	})
 	.then(res => res.json())
 	.then(res => {
-		// if (typeof res == 'string') {
-
-		// }
 		console.log(res);
 		funcion(name, res);
-		// let consumoAve = 0;
-		// Object.entries(res).forEach(([pos]) => {
-		// 		consumoAve += res[pos][cantidadProducto]
-		// 		for (variable in res[pos]) {
-		// 			console.log(variable);
-		// 		}
-		// 		// document.getElementsByName(name[0])[x].innerText = ;
-
-		// 	});
-		// for (let x = 0; x < name[1]; x++) {
-		// 	for (let objet in res) {
-		// 		console.log(res[objet])
-		// 		if (objet[x] == name[0][x]) {
-
-		// 		}
-		// 		// document.getElementsByName(name[0])[x]
-		// 	}
-		// }
-		
-		// for (let x = 0; x < name[1]; x++) {
-		// console.log(res['suma'][valores[x]]);
-		// // 	console.log('')
-		// // 	Object.entries(res).forEach(([pos]) => {
-		// // 		for (variable in res[pos]) {
-		// // 			console.log(variable);
-		// // 		}
-		// 	document.getElementsByName(name[0])[x].innerText = res['suma'][valores[x]];
-
-		// // 	});
-		// }
-		// document.getElementsByName(name[0])[2].innerText = res['division'];
-		
 	});
 }
 
-function cardMortalidad(name, res){
-	document.getElementsByName(name)[0].innerText = res['Lote'];
-	document.getElementsByName(name)[1].innerText = res['mortalidadObtenida'];
-	document.getElementsByName(name)[2].innerText = res['mortalidadTotal'];
-	document.getElementsByName(name)[3].innerText = res['gallinasRestantes'];
-}
-
-function cardProduccion(name, res){
-	document.getElementsByName(name)[0].innerText = dateFormato(res['Post'][0]);
-	document.getElementsByName(name)[0].innerText += ' / ';
-	document.getElementsByName(name)[0].innerText += dateFormato(res['Post'][1]);
-	document.getElementsByName(name)[1].innerText = res['porcentaje'];
-	document.getElementsByName(name)[2].innerText = res['huevosProducidos'];
-}
-
-function cardAlimento(name, res){
-	document.getElementsByName(name)[0].innerText = dateFormato(res['Post'][0]);
-	document.getElementsByName(name)[0].innerText += ' / ';
-	document.getElementsByName(name)[0].innerText += dateFormato(res['Post'][1]);
-	document.getElementsByName(name)[1].innerText = res['division'];
-	document.getElementsByName(name)[2].innerText = res['suma']
-	document.getElementsByName(name)[3].innerText = res['Inventario'];
+function cardsInicio(name, res){
+	let i = 0; let formato = "-";
+	for (variable in res) {
+		if (res[variable] == null) 
+			res[variable] = 0;
+		if (variable == 'fechaDesde' || variable == 'fechaHasta') 
+			res[variable] = dateFormato(res[variable]);
+		document.getElementsByName(name)[i].innerText = res[variable];
+		i++;
+	}
 }
 
 function dateFormato(string) {
@@ -126,7 +79,8 @@ function llenarTabla(resp, elemento,valores, id = ''){
 			
 			tbody += `<td>${resp[pos][valores[e]]}</td>`;
 		}
-		if (id != '') {
+		if (id == '.') {
+		}	else if (id != '') {
 		tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
                     <i class="fas fa-pen-fancy"></i></button></td>`
 		}else {
@@ -145,7 +99,7 @@ function llenarTabla(resp, elemento,valores, id = ''){
 	}
 	}
     tabla = resp;
-    if (id != '') {
+    if (id != '' || id == '.') {
     	document.querySelector(elemento+' tbody').innerHTML = tbody;
     } else document.querySelector(elemento+' tbody').innerHTML += tbody;
 }

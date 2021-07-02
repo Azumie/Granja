@@ -27,7 +27,7 @@
 					</div>
 					<div class="col-10 bg-white rounded">
 						<h5>Alimentación <br>
-							<label class="text-muted h6">Fecha: <span name='cardAlimentacion'></span></label>
+							<label class="text-muted h6">Fecha: <span name='cardAlimentacion'></span> / <span name='cardAlimentacion'></span></label>
 						</h5>
 						<p>Consumo por Ave: <span name='cardAlimentacion' class="text-primary font-weight-bold"></span>g</p>
 						<p>Consumo Total: <span class="text-primary font-weight-bold" name='cardAlimentacion'></span>k</p>
@@ -65,7 +65,7 @@
 					</div>
 					<div class="col-10 bg-white rounded">
 						<h5>Producción <br>
-							<label class="text-muted h6">Fecha: <span name='cardProduccion'></span></label>
+							<label class="text-muted h6">Fecha: <span name='cardProduccion'></span> / <span name='cardProduccion'></span></label>
 						</h5>
 						<p>% de Huevos Producidos: <span class="text-info font-weight-bold" name='cardProduccion'></span>%</p>
 						<p>Huevos Producidos: <span class="text-info font-weight-bold" name='cardProduccion'></span></p>

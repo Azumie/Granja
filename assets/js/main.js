@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
  obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idGalponInicio'), ['idGalpon', 'idGalpon'], '', llenarSelect);
 formularioInicio.addEventListener('submit', (e)=>{
   e.preventDefault();
-  // llenarCards(formularioInicio, '?c=Inicio&m=mostrarAlimentacion&idTipoProducto=1', 'cardAlimentacion', [0, 1, 'suma'], cardAlimento);
-  // llenarCards(formularioInicio, '?c=Inicio&m=mostrarMortalidad&idTipoProducto=3', 'cardMortalidad', [0, 1, 'suma'], cardMortalidad);
-  // llenarCards(formularioInicio, '?c=Inicio&m=mostrarProduccion', 'cardProduccion', [0, 1, 'suma'], cardProduccion);
-  obtenerObjeto('?c=Inicio&m=mostrarInicioProductos','#tablaInicioProductos',['nombreTipoProducto', 'nombreProducto', 'nombrePersona', 'fecha', 'suma'], '', llenarTabla);
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarAlimentacion&idTipoProducto=1', 'cardAlimentacion', cardsInicio);
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarMortalidad&idTipoProducto=3', 'cardMortalidad', cardsInicio);
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarProduccion', 'cardProduccion', cardsInicio);
+  obtenerObjeto('?c=Inicio&m=mostrarInicioProductos','#tablaInicioProductos',['nombreTipoProducto', 'nombreProducto', 'nombrePersona', 'fecha', 'suma'], '.', llenarTabla);
 
    
 })

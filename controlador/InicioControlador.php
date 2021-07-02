@@ -30,7 +30,7 @@ class InicioControlador {
 		} else $gallinas = $gallinas[0]->cantidadGallinas;
 		
 		$alimento = $resp[0]->suma / $gallinas;
-		$res = ['suma' => $resp[0]->suma, 'division' => $alimentoInventario[0]->suma, 'Inventario' => $alimento, 'Post' => [$_POST['fechaDesde'], $_POST['fechaHasta']]];
+		$res = ['fechaDesde' =>$_POST['fechaDesde'], 'fechaHasta' => $_POST['fechaHasta'], 'division' => $alimentoInventario[0]->suma, 'suma' => $resp[0]->suma,  'Inventario' => $alimento];
 		echo json_encode($res);
 	}
 
@@ -50,22 +50,21 @@ class InicioControlador {
 			$mortalidadObtenida = (100 * $mortalidadTotal[0]->suma) / $gallinasTotal[0]->cantidadGallinas;
 		$res = ['Lote' => $mortalidadTotal[0]->idLote, 'mortalidadObtenida' => $mortalidadObtenida, 'mortalidadTotal' => $mortalidadTotal[0]->suma, 'gallinasRestantes' => $gallinasRestantes];
 
-			echo json_encode($res);
-		}else echo json_encode('Vacío ');
-		// typeof singleQuotes
-		// echo json_encode($mortalidadTotal);
+		}else $res = [$gallinasTotal[0]->idLote,0,0, $gallinasTotal[0]->cantidadGallinas];
+		echo json_encode($res);
 	}
 
 	public function mostrarProduccion(){
 		$this->constructorSQL->select('inventarioproduccion', 'sum(inventarioproduccion.cantidadProduccion) as suma')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'inventarioproduccion.idGalpon')->where('inventarioproduccion.idGalpon', '=', $_POST['idGalponInicio'])->where('galponeslotes.activo', '=', 1)->where('inventarioproduccion.fechaInventarioProduccion', '>=', $_POST['fechaDesde'])->where('inventarioproduccion.fechaInventarioProduccion', '<=', $_POST['fechaHasta']);
 		$mortalidadTotal = $this->consumosProductos($_POST['fechaDesde'], $_POST['fechaHasta'], $_POST['idGalponInicio'], 3);
 		$huevosProducidos = $this->constructorSQL->ejecutarSQL();
-		$porcentaje = (100 * $huevosProducidos[0]->suma)/ $mortalidadTotal[0]->suma;
-		$res = ['porcentaje' => $porcentaje, 'huevosProducidos' => $huevosProducidos[0]->suma, 'Post' => [$_POST['fechaDesde'], $_POST['fechaHasta']]];
+		$porcentaje = 0;
+		if ($mortalidadTotal[0]->suma != 0 || $mortalidadTotal[0]->suma != null) {
+			$porcentaje = (100 * $huevosProducidos[0]->suma)/ $mortalidadTotal[0]->suma;
+		}
+		$res = ['fechaDesde' =>$_POST['fechaDesde'], 'fechaHasta' => $_POST['fechaHasta'],'porcentaje' => $porcentaje, 'huevosProducidos' => $huevosProducidos[0]->suma];
 		echo json_encode($res);
 	}
-// select productos.nombreProducto, max(inventario.fechaOperacion) as fecha, sum(compragranja.cantidadProducto) as suma, compragranja.documentoProveedor, tiposproducto.nombreTipoProducto from compragranja INNER JOIN productos on productos.idProducto = compragranja.idProducto INNER JOIN inventario on inventario.idInventario = compragranja.idInventario INNER JOIN tiposproducto on productos.idProducto = tiposproducto.idTipoProducto GROUP BY productos.idProducto ORDER BY productos.nombreProducto ASC
-	// select productos.nombreProducto, personas.nombrePersona, personas.apellidosPersona, max(inventario.fechaOperacion) as fecha, sum(compragranja.cantidadProducto) as suma, compragranja.documentoProveedor, tiposproducto.nombreTipoProducto from compragranja INNER JOIN productos on productos.idProducto = compragranja.idProducto INNER JOIN inventario on inventario.idInventario = compragranja.idInventario INNER JOIN tiposproducto on productos.idProducto = tiposproducto.idTipoProducto INNER JOIN personas on personas.documento = compragranja.documentoProveedor GROUP BY productos.idProducto ORDER BY productos.nombreProducto ASC
 	public function mostrarInicioProductos(){
 		$this->constructorSQL->select('compragranja', 'productos.nombreProducto, personas.nombrePersona, personas.apellidosPersona, max(inventario.fechaOperacion) as fecha, sum(compragranja.cantidadProducto) as suma, compragranja.documentoProveedor, tiposproducto.nombreTipoProducto')->innerJoin('productos', 'productos.idProducto', '=','compragranja.idProducto')->innerJoin('inventario', 'inventario.idInventario', '=', 'compragranja.idInventario')->innerJoin('tiposproducto', 'productos.idProducto', '=', 'tiposproducto.idTipoProducto')->innerJoin('personas', 'personas.documento', '=', 'compragranja.documentoProveedor')->groupBy('productos.idTipoProducto');
 		$tabla = $this->constructorSQL->ejecutarSQL();
