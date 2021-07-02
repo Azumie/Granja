@@ -72,6 +72,10 @@ class InicioControlador {
 	}
 
 	public function tablaCaducidad(){
+		$this->constructorSQL->select('inventarioproduccion')->where('entrada', '=', 1)->where('fechaInventarioProduccion', '<=', date('Y-m-d'));
+		// SELECT * FROM inventarioproduccion WHERE entrada =1 and fechaInventarioProduccion <= "2021-07-01" and fechaInventarioProduccion >= "2021-06-12" AND inventarioproduccion.idGalpon group by fechaInventarioProduccion
 
+		// SELECT * FROM inventarioproduccion INNER JOIN galponeslotes on galponeslotes.idGalpon = inventarioproduccion.idGalpon WHERE entrada =1 and fechaInventarioProduccion <= "2021-07-01" and fechaInventarioProduccion >= "2021-06-12" AND inventarioproduccion.idGalpon = 1 AND galponeslotes.activo = 1 group by fechaInventarioProduccion
+		echo json_encode(date('d-m-Y'));
 	}
 }

@@ -544,7 +544,7 @@ if (elementoExiste('formularioConsumos')) {
 // Validando de que exista el formulario respectivo al módulo de Galpón
 if(elementoExiste('formularioAgregarGalpon')){
   // Rellenando tabla con la información de los Galpones
-  obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon', llenarTabla);
+  obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon', llenarTabla);
   document.getElementById('fechaCreacionGalpon').value= fechaHoy();
   // Obteniendo formulario del Módulo Galpón
   const formularioAgregarGalpon = document.getElementById('formularioAgregarGalpon');
@@ -567,7 +567,7 @@ if(elementoExiste('formularioAgregarGalpon')){
           // Validando Confinamiento
           if (probar == 'P' || probar == 'J') {
             // Agregando Galpón
-            agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinameiento'], 'idGalpon');
+            agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon');
             document.getElementById('fechaCreacionGalpon').value= fechaHoy();
           }else alert('Error al escoger el tipo de Confinamiento');
         }else alert('Error al indicar Área Útil');

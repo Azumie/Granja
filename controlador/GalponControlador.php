@@ -44,10 +44,17 @@ echo json_encode( 'Error: El número de Galpón ya existe.');
 	
 	public function obtenerGalpones(){
 		try {
-			(isset($_GET['e'])) ? $galpon = 'galpones '.$_GET['e'] : $galpon = 'galpones';
-			$galpon = $this->ConstructorSQL->select($galpon)
-				->where('idGranja', '=', 1)
-				->ejecutarSQL();
+			$this->ConstructorSQL->select('galpones', ' galpones.*, galponeslotes.cantidadGallinas, sum(operaciongalpon.cantidadProducto) as suma')->innerJoin('operaciongalpon', 'operaciongalpon.idGalpon', '=', 'galpones.idGalpon')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'galpones.idGalpon')->where('galponeslotes.activo', '=', '1')->where('operaciongalpon.idProducto', '=', 3)->groupBy('galpones.idGalpon');
+			$galpon = $this->ConstructorSQL->ejecutarSQL();
+			for ($i=0; $i < count($galpon); $i++) { 
+				if ($galpon[$i]->suma != null) {
+					$galpon[$i]->cantidadGallinas = $galpon[$i]->cantidadGallinas - $galpon[$i]->suma;
+				}
+			}
+			// (isset($_GET['e'])) ? $galpon = 'galpones '.$_GET['e'] : $galpon = 'galpones';
+			// $galpon = $this->ConstructorSQL->select($galpon)
+			// 	->where('idGranja', '=', 1)
+			// 	->ejecutarSQL();
 			echo json_encode($galpon);
 		} catch (PDOException $e) {
 			echo json_encode($e->getMessage());
