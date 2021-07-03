@@ -1,9 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const formularioInicio = document.getElementById('formularioInicio');
+ document.getElementById('fechaDesde').value = fechaHoy();
+ document.getElementById('fechaHasta').value = fechaHoy();
+ obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idGalponInicio'), ['idGalpon', 'idGalpon'], '', llenarSelect);
+ obtenerObjeto('?c=Inicio&m=mostrarInicioProductos','#tablaInicioProductos',['nombreTipoProducto', 'nombreProducto', 'nombrePersona', 'fecha', 'suma'], '.', llenarTabla);
+ // llenarCards(formularioInicio, '?c=Inicio&m=tablaCaducidad', 'cardProduccion', cardsInicio); 
+
+formularioInicio.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarAlimentacion&idTipoProducto=1', 'cardAlimentacion', cardsInicio);
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarMortalidad&idTipoProducto=3', 'cardMortalidad', cardsInicio);
+  llenarCards(formularioInicio, '?c=Inicio&m=mostrarProduccion', 'cardProduccion', cardsInicio); 
+})
+
   //&& class === modal fade
   if (elementoExiste('formularioAgregarProducto')) {
     const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
-      obtenerObjeto('?c=Configuracion&m=obtenerProveedor', document.getElementById('idProveedorProducto'), ['documento', 'nombrePersona'], '', llenarSelect);
+    obtenerObjeto('?c=Configuracion&m=obtenerProveedor', document.getElementById('idProveedorProducto'), ['documento', 'nombrePersona'], '', llenarSelect);
 
     console.log('yes');
     //Presionar botón Guardar en Productos se enviará el Formulario
@@ -17,19 +31,40 @@ document.addEventListener('DOMContentLoaded', () => {
   // FORMULARIO PROVEEDORES
 
   if (elementoExiste('formularioProveedores')) {
-    // console.log(document.getElementById('Proveedores').classList.contains('show'))
+    
     const formularioProveedores = document.getElementById('formularioProveedores');
     obtenerObjeto('?c=Configuracion&m=obtenerProveedor','#tablaProveedor',['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento', llenarTabla);
     formularioProveedores.addEventListener('submit', (e) =>{
       e.preventDefault();
-      let metodo;
-      if (elementoExiste('documentoProveedor')) {
-        let inputDocumento = document.getElementById('documentoProveedor');
+      let probar = formularioProveedores.documentoProveedor.value;
+    // Validando Fecha
+    // if (probar != null && probar != '') {
+      if (probar != '' && (probar > 5000000 && probar < 40000000) && !probar.match(/[^0-9]/)) {
+        probar = formularioProveedores.nombresProveedor.value;
+        if (probar.match(/[^\D]/) == null && probar.length < 45 && probar.length > 1) {
+          probar = formularioProveedores.apellidosProveedor.value;
+          if (!probar.match(/[^\D]/) && probar.length < 45 && probar.length > 1) {
+            probar = formularioProveedores.telefonoProveedor.value;
+            if (probar.match(/(^|416|424|412|426| {3})([0-9]+)/) && probar.length == 11 && !probar.match(/\D/)) {
+              probar = formularioProveedores.emailProveedor.value;
+              if (probar.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/) && probar.length <= 30) {
+                alert('pasamos');
+              }
+            }else alert('Error en el teléfono ingresado');
+          }else alert('Error en el apellido del proveedor');
+        }else alert('Error en el nombre del proveedor');
+          // (^416|424|412|426| {3})([0-9]+)
+    //     if (document.getElementById('nombresProveedor').value.match(/[^\D]/)== null){
+    // console.log('chido')} else console.log('nopo')
+      }else alert('Error el documento no puede contener letras o estar vacío');
+      // let metodo; ^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$
+      // if (elementoExiste('documentoProveedor')) {
+      //   let inputDocumento = document.getElementById('documentoProveedor');
 
-        metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
-        metodo += 'Proveedor';
-      }
-      agragarObjetoBD(formularioProveedores, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
+      //   metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
+      //   metodo += 'Proveedor';
+      // }
+      // agragarObjetoBD(formularioProveedores, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
     });
 
     editarObjetoBD(
@@ -177,12 +212,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (elementoExiste('formularioLineaGenetica')) {
     const formularioLineaGenetica = document.getElementById('formularioLineaGenetica');
-    obtenerObjeto('?c=Configuracion&m=obtenerLineaGenetica', '#tablaLineaGenetica', ['nombreLineaGenetica'], 'idLineaGenetica', llenarTabla);
+    const idLineaGenetica = document.getElementById('idLineaGenetica');
+    const nombreLineaGenetica = document.getElementById('nombreLineaGenetica');
+    const tablaLineaGenetica = new Tabla([], 'tablaLineaGenetica', 'idLineaGenetica', true, {
+      color: 'info', icon: 'pen', nombre: 'editar',
+      funcion: async (x) => {
+        const id = x.fila.getAttribute('idRow');
+        const datosFila = x.datos.find( fila => fila.idLineaGenetica == id);
+        console.log("datosFila", datosFila);
+        idLineaGenetica.removeAttribute('disabled');
+        idLineaGenetica.value = datosFila.idLineaGenetica ;
+        nombreLineaGenetica.value = datosFila.nombreLineaGenetica;
+      }
+    })
+    const initForm = async () =>{
+      formularioLineaGenetica.reset();
+      idLineaGenetica.setAttribute('disabled', true);
+      const lineasGenetica = await selectBD('?c=Configuracion&m=obtenerLineaGenetica');
+      console.log("lineasGenetica", lineasGenetica);
+      tablaLineaGenetica.update(lineasGenetica);
+    }
+
     formularioLineaGenetica.addEventListener('submit',(e)=>{
       e.preventDefault();
-      agragarObjetoBD(formularioLineaGenetica, '?c=Configuracion&m=agregarLineaGenetica', '?c=Configuracion&m=obtenerLineaGenetica', '#tablaLineaGenetica', ['nombreLineaGenetica'], 'idLineaGenetica');
-      
+      (async () => {
+        const resp = insertBD (formularioLineaGenetica, '?c=Configuracion&m=agregarLineaGenetica');
+        initForm();
+      })();
     })
+
+    initForm();
   }
 
   // COMPRAS
@@ -447,16 +506,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if(elementoExiste('formularioAgregarAlimentacion')){
     const formularioAgregarAlimentacion = document.getElementById('formularioAgregarAlimentacion');
-    obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idAlimentandoGalpon'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
-    obtenerObjeto('?c=Configuracion&m=obtenerProducto&tipoProducto=1', document.getElementById('alimentoAUsar'), ['idProducto', 'nombreProducto'], '', llenarSelect);    
-    document.getElementById(`fechaDeAlimentacion`).value = fechaHoy();
-    console.log('resp')
-    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1','#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
+    const tablaAlimentacion = new Tabla([], 'tablaAlimentacion', 'id', true, {
+      color: 'info', icon: 'pen', nombre: 'editar',
+      funcion: async () => {
+        console.log('hola estamos editando alimentacion gg');
+      }
+    });
+    const initForm = async () => {
+      obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idAlimentandoGalpon'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+      obtenerObjeto('?c=Configuracion&m=obtenerProducto&tipoProducto=1', document.getElementById('alimentoAUsar'), ['idProducto', 'nombreProducto'], '', llenarSelect);    
+      document.getElementById(`fechaDeAlimentacion`).value = fechaHoy();
+      const alimentacion = await selectBD('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1');
+      // console.log("alimentacion", alimentacion);
+      tablaAlimentacion.update(alimentacion);
+    };
+
     // tablaAlimentacion
     formularioAgregarAlimentacion.addEventListener('submit', (e)=>{
       e.preventDefault();
-      agragarObjetoBD(formularioAgregarAlimentacion, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1', '#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
+      (async () => {
+        insertBD(formularioAgregarAlimentacion ,'?c=GestionAves&m=agregarOperacionGalpon', false);
+        initForm();
+      })();
+      // agragarObjetoBD(formularioAgregarAlimentacion, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1', '#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
     })
+    initForm();
   }
 
   if (elementoExiste('formularioNuevoLote')) {
@@ -563,11 +637,11 @@ if (elementoExiste('formularioMortalidad')) {
   const formularioMortalidad = document.getElementById('formularioMortalidad');
     obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponEnLoteMortalidad'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
     document.getElementById('fechaMortalidad').value = fechaHoy();
-    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario', llenarTabla);
+    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['fechaOperacion' ,'idGalpon', 'cantidadProducto','cantidadGallinas'], 'idInventario', llenarTabla);
     
     formularioMortalidad.addEventListener('submit', (e) =>{
       e.preventDefault();
-      agragarObjetoBD(formularioMortalidad, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario');
+      agragarObjetoBD(formularioMortalidad, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['fechaOperacion' ,'idGalpon', 'cantidadProducto','cantidadGallinas'], 'idInventario');
     });
 }
 
@@ -656,6 +730,7 @@ if (elementoExiste('formularioConsumos')) {
 
 
   // obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaDetalleCompra', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario', llenarTabla);
+
   formularioConsumos.addEventListener('submit', (e) =>{
     e.preventDefault();
     agragarObjetoBD(formularioConsumos, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=2','#tablaDetalleConsumos', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
@@ -665,7 +740,7 @@ if (elementoExiste('formularioConsumos')) {
 // Validando de que exista el formulario respectivo al módulo de Galpón
 if(elementoExiste('formularioAgregarGalpon')){
   // Rellenando tabla con la información de los Galpones
-  obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinamiento'], 'idGalpon', llenarTabla);
+  obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon', llenarTabla);
   document.getElementById('fechaCreacionGalpon').value= fechaHoy();
   // Obteniendo formulario del Módulo Galpón
   const formularioAgregarGalpon = document.getElementById('formularioAgregarGalpon');
@@ -688,7 +763,7 @@ if(elementoExiste('formularioAgregarGalpon')){
           // Validando Confinamiento
           if (probar == 'P' || probar == 'J') {
             // Agregando Galpón
-            agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','confinameiento'], 'idGalpon');
+            agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon');
             document.getElementById('fechaCreacionGalpon').value= fechaHoy();
           }else alert('Error al escoger el tipo de Confinamiento');
         }else alert('Error al indicar Área Útil');

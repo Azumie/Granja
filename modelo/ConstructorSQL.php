@@ -9,6 +9,7 @@ class ConstructorSQL {
 	private $where = '';
 	private $group = '';
 	private $tipo  = '';
+	private $order = '';
 
 	function __construct() {}
 
@@ -30,6 +31,7 @@ class ConstructorSQL {
 		$this->tipo = ($todos === true) ? 'obtenerTodos' : 'obtener' ;
 		$this->tablas = [$tabla];
 		$this->datos = [];
+		$this->where = '';
 		return $this;
 	}
 
@@ -58,6 +60,14 @@ class ConstructorSQL {
 		if ($this->group == '') {
 			$this->group = " GROUP BY $campo";
 			$this->sql  .= $this->group;
+		}
+		return $this;
+	}
+
+	public function orderBy($campo, $forma){
+		if ($this->order == '') {
+			$this->order = " ORDER BY $campo $forma";
+			$this->sql  .= $this->order;
 		}
 		return $this;
 	}

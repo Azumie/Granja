@@ -292,9 +292,16 @@ class ConfiguracionControlador
 	public function agregarLineaGenetica(){
 		if (isset($_POST['nombreLineaGenetica'])) {
 			try {
-				$this->constructorSQL->insert('lineagenetica', ['nombreLineaGenetica' => $_POST['nombreLineaGenetica']]);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode('Eres una ganadora');
+				if (isset($_POST['idLineaGenetica'])) {
+					$this->constructorSQL->update('lineagenetica', ['nombreLineaGenetica' => $_POST['nombreLineaGenetica']])
+						->where('idLineaGenetica', '=', $_POST['idLineaGenetica'])
+						->ejecutarSQL();
+					echo json_encode('Linea Genetica editada correctamente');
+				}else {
+					$this->constructorSQL->insert('lineagenetica', ['nombreLineaGenetica' => $_POST['nombreLineaGenetica']]);
+					$this->constructorSQL->ejecutarSQL();
+					echo json_encode('Error: no se pudo editar la linea genetica correctamente');
+				}
 			} catch (PDOException $e) {
 				echo json_encode('Fallida');
 			}

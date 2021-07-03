@@ -11,17 +11,43 @@ function elementoExiste (elemento) {
  // OBTENER GRANJAS 
 function obtenerObjeto (url,elemento,valores = '', id= '', funcion = '') {
 	fetch(url).then(resp => resp.json())
-    .then(resp => {
-    	if (funcion != '') {
+  .then(resp => {
+    if (valores[0] != '') {
+    	funcion(resp, elemento,valores, id);
+    }else {
+    	console.log(resp);
+    }
+  });
+}
 
-    		funcion(resp, elemento,valores, id);
-    	}else {
-    		return resp;
-    	}
-    	if (id == '' && valores == '') {
-    		console.log('lla')
-    	}
-    });
+function llenarCards(formulario, url, name='', funcion){
+	let datos = new FormData(formulario);
+	fetch(url,{
+		method: 'POST',
+		body: datos
+	})
+	.then(res => res.json())
+	.then(res => {
+		console.log(res);
+		// funcion(name, res);
+	});
+}
+
+function cardsInicio(name, res){
+	let i = 0; let formato = "-";
+	for (variable in res) {
+		if (res[variable] == null) 
+			res[variable] = 0;
+		if (variable == 'fechaDesde' || variable == 'fechaHasta') 
+			res[variable] = dateFormato(res[variable]);
+		document.getElementsByName(name)[i].innerText = res[variable];
+		i++;
+	}
+}
+
+function dateFormato(string) {
+  var info = string.split('-');
+  return info[2] + '-' + info[1] + '-' + info[0];
 }
 
 // function inputsTabla(resp, elemento, id = ''){
@@ -53,7 +79,8 @@ function llenarTabla(resp, elemento,valores, id = ''){
 			
 			tbody += `<td>${resp[pos][valores[e]]}</td>`;
 		}
-		if (id != '') {
+		if (id == '.') {
+		}	else if (id != '') {
 		tbody += `<td><button id="${resp[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
                     <i class="fas fa-pen-fancy"></i></button></td>`
 		}else {
@@ -72,7 +99,7 @@ function llenarTabla(resp, elemento,valores, id = ''){
 	}
 	}
     tabla = resp;
-    if (id != '') {
+    if (id != '' || id == '.') {
     	document.querySelector(elemento+' tbody').innerHTML = tbody;
     } else document.querySelector(elemento+' tbody').innerHTML += tbody;
 }

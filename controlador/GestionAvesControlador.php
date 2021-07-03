@@ -80,7 +80,7 @@ class GestionAvesControlador {
 	}
 
 	public function obtenerGalponesLotes(){
-		$this->constructorSQL->select('galponeslotes')->where('activoGalponeLote', '=', '1')->where('idGalpon', '=', $_GET['idGalpon']);
+		$this->constructorSQL->select('galponeslotes')->where('activoGalponeLote', '=', '1');
 		
 		$galponLote = $this->constructorSQL->ejecutarSQL();
 		echo json_encode($galponLote);
@@ -95,23 +95,42 @@ class GestionAvesControlador {
 	public function agregarOperacionGalpon(){
 		if ((isset($_POST['idGalponEnLote'], $_POST['fechaOperacion'], $_POST['cantidadProducto']))) {
 			try {
-				$this->constructorSQL->insert('inventario',['fechaOperacion' => $_POST['fechaOperacion'], 'entrada' => 0]);
-			// Ejecutando
-			$ultID = $this->constructorSQL->ejecutarSQL();
-			// Obteniendo lote activo
-			$this->constructorSQL = new ConstructorSQL();
-			$this->constructorSQL->select('galponeslotes')->where('activoGalponeLote', '=', '1')->where('idGalpon', '=', $_POST['idGalponEnLote']);
-			$galponLote = $this->constructorSQL->ejecutarSQL();
-			if (($ultID != '' ||  !is_null($ultID)) && ($galponLote != '' || !is_null($galponLote))) {
-				$producto = 2;
-				if (isset($_POST['alimentoAUsar'])) {
-					$producto = $_POST['alimentoAUsar'];
+				$ultID = $this->constructorSQL->select('inventario')
+					->where('fechaOperacion', '=', $_POST['fechaOperacion'])
+					->ejecutarSQL();
+				if (!empty($ultID)) {
+					$ultID = $ultID[0]->idInventario;
+					echo json_encode($ultID);
+				}else {
+					echo json_encode('no esta vacio');
+					$ultID = $this->constructorSQL->insert('inventario',['fechaOperacion' => $_POST['fechaOperacion'], 'entrada' => 0])
+						->ejecutarSQL();
 				}
-			// 	// Insertando en operación galpón
-				$this->constructorSQL->insert('operaciongalpon', ['idInventario' => $ultID, 'idGalpon' => $_POST['idGalponEnLote'], 'idLote' => $galponLote[0]->idLote, 'cantidadProducto' => $_POST['cantidadProducto'], 'idProducto' => $producto]);
-				$this->constructorSQL->ejecutarSQL();
-			}
-			echo json_encode('Agregado');
+
+				$this->constructorSQL->select('galponeslotes')->where('activoGalponeLote', '=', '1')->where('idGalpon', '=', $_POST['idGalponEnLote']);
+				$galponLote = $this->constructorSQL->ejecutarSQL();
+				
+				if (($ultID != '' ||  !is_null($ultID)) && ($galponLote != '' || !is_null($galponLote))) {
+					$producto = 2;
+					if (isset($_POST['alimentoAUsar'])) {
+						$producto = $_POST['alimentoAUsar'];
+					}
+				// 	// Insertando en operación galpón
+					$this->constructorSQL->insert('operaciongalpon', ['idInventario' => $ultID, 'idGalpon' => $_POST['idGalponEnLote'], 'idLote' => $galponLote[0]->idLote, 'cantidadProducto' => $_POST['cantidadProducto'], 'idProducto' => $producto]);
+					$this->constructorSQL->ejecutarSQL();
+				}
+
+
+				// if (isset($_POST['editar'])) {
+				// 	foreach ($_POST['editar'] as $id => $valor) {
+				// 		// editar
+				// 	}
+				// }
+
+				// // Ejecutando
+				// // Obteniendo lote activo
+				// $this->constructorSQL = new ConstructorSQL();
+				echo json_encode('Agregado');
 			} catch (PDOException $e) {
 				echo json_encode($e->getMessage());
 			}

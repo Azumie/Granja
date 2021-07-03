@@ -16,8 +16,8 @@
 					<form id="formularioProveedores" class="col-lg-5 mb-3 mb-lg-0 ">
 
 						<!-- DOCUMENTO -->
-						<div class="row">
-							<h6>A continuación...<br>Proporcione la información referente al proveedor </h6>
+						<div class="row justify-content-center">
+							<h6 class="col-12">A continuación...<br>Proporcione la información referente al proveedor </h6>
 							<div class="input-group input-group-sm mb-3 col-md-10">
 						  	<div class="input-group-prepend">
 						    	<label for="idProveedor" class="input-group-text">
@@ -68,7 +68,7 @@
 					    		Teléfono
 					    	</label>
 					  	</div>
-							<input type="text" name="telefonoProveedor" id="telefonoProveedor" class="form-control">
+							<input type="text" name="telefonoProveedor" id="telefonoProveedor" class="form-control" placeholder="Teléfono del proveedor">
 						</div>
 
 
@@ -85,8 +85,8 @@
 
 						<!-- BOTONES GUARDAR Y CANCELAR -->
 						<div class="row justify-content-center d-flex">
-							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
 						</div>
 					</form>
 

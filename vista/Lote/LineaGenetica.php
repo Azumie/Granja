@@ -19,6 +19,7 @@
 								<label class="input-group-text">Nombre</label>
 							</div>
 							<input type="text" class="form-control" placeholder="Nombre de la Línea Genética" name="nombreLineaGenetica" id="nombreLineaGenetica">
+							<input type="hidden" id="idLineaGenetica" name="idLineaGenetica">
 						</div>
 						<div class="row justify-content-center d-flex">
 							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
@@ -28,8 +29,8 @@
 					<div class="col-md-6">
 						<table class="datatable table table-sm text-center table-sm table-striped" id="tablaLineaGenetica">
 							<thead class="table-info">
-								<th>Nombre</th>
-								<th>Acción</th>
+								<th campo='nombreLineaGenetica'>Nombre</th>
+								<th campo='acciones'>Acción</th>
 							</thead>
 							<tbody>
 							</tbody>

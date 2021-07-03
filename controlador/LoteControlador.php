@@ -78,7 +78,7 @@ class LoteControlador
 						'idInventario' => $idInventario,
 						// obtener la granja de la session del usuario
 						'idGranja' => 1,
-						'idProducto' => 2,
+						'idProducto' => 3,
 						'documentoProveedor' => $_POST['documentoProveedor'],
 						'precioProducto' => $_POST['precioProducto'],
 						'cantidadProducto' => $_POST['cantidadProducto'],
