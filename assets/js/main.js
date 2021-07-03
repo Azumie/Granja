@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
  document.getElementById('fechaHasta').value = fechaHoy();
  obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idGalponInicio'), ['idGalpon', 'idGalpon'], '', llenarSelect);
  obtenerObjeto('?c=Inicio&m=mostrarInicioProductos','#tablaInicioProductos',['nombreTipoProducto', 'nombreProducto', 'nombrePersona', 'fecha', 'suma'], '.', llenarTabla);
- // llenarCards(formularioInicio, '?c=Inicio&m=tablaCaducidad', 'cardProduccion', cardsInicio); 
+ obtenerObjeto('?c=Inicio&m=tablaCaducidad','#inicioCaducidad',[], '', tablaCaducidad);
 
 formularioInicio.addEventListener('submit', (e)=>{
   e.preventDefault();

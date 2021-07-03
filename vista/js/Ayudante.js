@@ -28,8 +28,8 @@ function llenarCards(formulario, url, name='', funcion){
 	})
 	.then(res => res.json())
 	.then(res => {
-		console.log(res);
-		// funcion(name, res);
+		// console.log(res);
+		funcion(name, res);
 	});
 }
 
@@ -43,6 +43,22 @@ function cardsInicio(name, res){
 		document.getElementsByName(name)[i].innerText = res[variable];
 		i++;
 	}
+}
+
+function tablaCaducidad(resp, elemento,valores='', id=''){
+	let tbody = ''; console.log(resp);
+	for (variable in resp) {
+		tbody += `<tr class="table-${variable}">`;
+		for (let i = 0; i < resp[variable].length; i++) {
+			clase = '';
+			if (i == 0) {
+				clase = "class='bg-white' width='100'";
+			}
+			tbody += `<td ${clase}">${resp[variable][i]}</td>`;
+		}
+		tbody += `</tr>`;
+	}
+	document.querySelector(elemento+' tbody').innerHTML = tbody;
 }
 
 function dateFormato(string) {
