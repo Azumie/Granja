@@ -13,8 +13,9 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="row mt-2">
+				<div class="row mt-2 justify-content-center">
 					<div class="col-12 col-md-6">
+					<h6>A continuación...<br>Proporcione la información referente al galpón</h6>
 					<form id="formularioAgregarGalpon">
 						<div class="input-group input-group-sm mb-4 col-12 col-md-10">
 							<div class="input-group-prepend">
@@ -22,22 +23,20 @@
 							</div>
 							<input type="date" class="form-control" name="fechaCreacionGalpon" id="fechaCreacionGalpon">
 						</div>
-						<div class="row">
-							<div class="col-12 col-md-6">
-								<div class="input-group input-group-sm mb-4">
-									<div class="input-group-prepend">
-										<span class="input-group-text">Galpón</span>
-									</div>
-									<input type="number" class="form-control" placeholder="Número de Galpón" name="numeroGalpon" min="0" max="500">
+						<div class="col-12 col-md-10">
+							<div class="input-group input-group-sm mb-4">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Galpón</span>
 								</div>
+								<input type="number" class="form-control" placeholder="Número de Galpón" name="numeroGalpon" min="0" max="500">
 							</div>
-							<div class="col-12 col-md-6">
-								<div class="input-group input-group-sm mb-4">
-									<div class="input-group-prepend">
-										<div class="input-group-text">Área útil</div>
-									</div>
-									<input type="number" class="form-control" placeholder="Área útil del galpón" name="areaUtilGalpon" min="100" max="2000" step="0.01">
+						</div>
+						<div class="col-12 col-md-10">
+							<div class="input-group input-group-sm mb-4">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Área útil</div>
 								</div>
+								<input type="number" class="form-control" placeholder="Área útil del galpón" name="areaUtilGalpon" min="100" max="2000" step="0.01">
 							</div>
 						</div>
 						<div class="input-group input-group-sm mb-4 col-12 col-md-10">
@@ -51,12 +50,13 @@
 							</select>
 						</div>
 						<div class="row justify-content-center d-flex">
-							<button type="submit" class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button type="submit" class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
 						</div>
 					</form>
 					</div>
 					<div class="col-12 col-md-6 table-scrolly">
+						<p>Galpones agregados con anterioridad</p>
 						<table class="table table-striped table-responsive p-0 table-sm text-center" id="tablaGalpon">
 							<thead class="table-info">
 								<th>Número Galpón</th>

@@ -71,11 +71,101 @@ class InicioControlador {
 		echo json_encode($tabla);
 	}
 
+		// SELECT sum(cantidadProduccion) as suma, idTipoHuevo, fechaInventarioProduccion from inventarioproduccion where entrada =1 and fechaInventarioProduccion <= '2021-07-02'and fechaInventarioProduccion >= '2021-06-12' GROUP BY fechaInventarioProduccion, idTipoHuevo
 	public function tablaCaducidad(){
-		$this->constructorSQL->select('inventarioproduccion')->where('entrada', '=', 1)->where('fechaInventarioProduccion', '<=', date('Y-m-d'));
+		$fecha = date('Y-m-d');
+		$nuevafecha = strtotime ( '-20 day' , strtotime ( $fecha ));
+		$this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) as suma, idTipoHuevo, fechaInventarioProduccion')->where('entrada', '=', 1)->where('fechaInventarioProduccion', '<=', $fecha)->where('fechaInventarioProduccion', '>=', $nuevafecha)->groupBy('fechaInventarioProduccion, idTipoHuevo');
+		$producidos = $this->constructorSQL->ejecutarSQL();
+		$this->constructorSQL = new ConstructorSQL();
+		$this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) as suma, idTipoHuevo')->where('entrada', '=', 0)->groupBy('idTipoHuevo');
+		$despachados = $this->constructorSQL->ejecutarSQL();
+		$this->constructorSQL = new ConstructorSQL();
+		$producido = $this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) as suma, idTipoHuevo, fechaInventarioProduccion')->where('entrada', '=', 1)->where('fechaInventarioProduccion', '<=', date("Y-m-d", $nuevafecha))->groupBy('idTipoHuevo')->ejecutarSQL();
+		$producido = $producido[0]->suma - $despachados[0]->suma;
+		$huevosGrandes = [0,0,0,0];
+		$huevosMedianos = [0,0,0,0];
+		$huevosPequenos = [0,0,0,0];
+		for ($i=0; $i < count($producidos); $i++) { 
+			if (strtotime($producidos[$i]->fechaInventarioProduccion)  >= strtotime ( '-5 day' , strtotime ( $fecha )) && strtotime($producidos[$i]->fechaInventarioProduccion)  <= strtotime ( $fecha )) {
+
+				switch ($producidos[$i]->idTipoHuevo) {
+					case 1:
+						$huevosGrandes[0] += $producidos[$i]->suma; 
+						break;
+					case 2:
+						$huevosMedianos[0] += $producidos[$i]->suma; 
+						break;
+					case 3: 
+						$huevosPequenos[0] += $producidos[$i]->suma; 
+						break;
+				}
+			
+			}else if (strtotime($producidos[$i]->fechaInventarioProduccion)  >= strtotime ( '-10 day' , strtotime ( $fecha )) && strtotime($producidos[$i]->fechaInventarioProduccion)  <= strtotime ( '-6 day' , strtotime ( $fecha ))) {
+
+				switch ($producidos[$i]->idTipoHuevo) {
+					case 1:
+						$huevosGrandes[1] += $producidos[$i]->suma; 
+						break;
+					case 2:
+						$huevosMedianos[1] += $producidos[$i]->suma; 
+						break;
+					case 3: 
+						$huevosPequenos[1] += $producidos[$i]->suma; 
+						break;
+				}
+				
+			}else if (strtotime($producidos[$i]->fechaInventarioProduccion)  >= strtotime ( '-15 day' , strtotime ( $fecha )) && strtotime($producidos[$i]->fechaInventarioProduccion)  <= strtotime ( '-11 day' , strtotime ( $fecha ))) {
+
+				switch ($producidos[$i]->idTipoHuevo) {
+					case 1:
+						$huevosGrandes[2] += $producidos[$i]->suma; 
+						break;
+					case 2:
+						$huevosMedianos[2] += $producidos[$i]->suma; 
+						break;
+					case 3: 
+						$huevosPequenos[2] += $producidos[$i]->suma; 
+						break;
+				}
+			
+			}else if (strtotime($producidos[$i]->fechaInventarioProduccion)  >= strtotime ( '-20 day' , strtotime ( $fecha )) && strtotime($producidos[$i]->fechaInventarioProduccion)  <= strtotime ( '-16 day' , strtotime ( $fecha ))) {
+
+				switch ($producidos[$i]->idTipoHuevo) {
+					case 1:
+						$huevosGrandes[3] += $producidos[$i]->suma; 
+						break;
+					case 2:
+						$huevosMedianos[3] += $producidos[$i]->suma; 
+						break;
+					case 3: 
+						$huevosPequenos[3] += $producidos[$i]->suma; 
+						break;
+				}
+				
+			}
+		}
+		if ($producido > 0) {
+			// code...
+		}
+		for ($i = count($huevosGrandes)-1; $i >= 0; $i--) {
+		if ($huevosGrandes[$i] > 0) {
+			$huevosGrandes[$i] -= $producido;
+		 } 
+		}
+		echo json_encode($producido);
+
+
+
 		// SELECT * FROM inventarioproduccion WHERE entrada =1 and fechaInventarioProduccion <= "2021-07-01" and fechaInventarioProduccion >= "2021-06-12" AND inventarioproduccion.idGalpon group by fechaInventarioProduccion
 
 		// SELECT * FROM inventarioproduccion INNER JOIN galponeslotes on galponeslotes.idGalpon = inventarioproduccion.idGalpon WHERE entrada =1 and fechaInventarioProduccion <= "2021-07-01" and fechaInventarioProduccion >= "2021-06-12" AND inventarioproduccion.idGalpon = 1 AND galponeslotes.activo = 1 group by fechaInventarioProduccion
-		echo json_encode(date('d-m-Y'));
+		// $nuevafecha = date ( 'Y-m-d' , $nuevafecha );
+		
 	}
+	// public function fechaMayor($fechaNueva, $fechaVieja){
+ // 		if ($fechaNueva  <= strtotime ( $intervalo , strtotime ( $fechaVieja ))){
+
+ // 		}
+	// }
 }

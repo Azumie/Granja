@@ -138,7 +138,7 @@
 						<th>Tipo de Producto</th>
 						<th>Nombre Producto</th>
 						<th>Proveedor</th>
-						<th>Ultima compra</th>
+						<th>Última compra</th>
 						<th>Cantidad kg</th>
 					</thead>
 					<tbody>

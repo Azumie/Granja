@@ -29,7 +29,7 @@ function llenarCards(formulario, url, name='', funcion){
 	.then(res => res.json())
 	.then(res => {
 		console.log(res);
-		funcion(name, res);
+		// funcion(name, res);
 	});
 }
 
