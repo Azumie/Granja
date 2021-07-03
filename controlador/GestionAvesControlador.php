@@ -48,21 +48,35 @@ class GestionAvesControlador {
 	public function agregarRecogidas () {
 		if (isset($_POST['gProduccion'], $_POST['fechaProduccion'])) {
 			try {
-				$this->constructorSQL->select('tiposhuevo')->where('activoHuevo', '=', '1');
-				$tipoHuevo = $this->constructorSQL->ejecutarSQL();
-				for ($i=0; $i < count($tipoHuevo); $i++) {
-					foreach($_POST as $campo => $valor){
-						if ($campo == $tipoHuevo[$i]->nombreTipoHuevo && $valor != "") {
-							$this->constructorSQL->insert('inventarioproduccion', ['idLote' => $_POST['loteActivo'], 'idGalpon' => $_POST['gProduccion'], 'idTipoHuevo' => $tipoHuevo[$i]->idTipoHuevo, 'fechaInventarioProduccion' => $_POST['fechaProduccion'], 'cantidadProduccion' => $valor]);
-							$this->constructorSQL->ejecutarSQL();
-						}
-					} 
+				if (isset($_POST['editar'])) {
+					foreach ($_POST['editar'] as $idInventarioProduccion => $cantidadProduccion) {
+						$sql = $this->constructorSQL->update('inventarioproduccion', [
+								'cantidadProduccion' =>  $cantidadProduccion
+							])
+							->where('idInventarioProduccion', '=', $idInventarioProduccion)
+							->ejecutarSQL();
+					}
 				}
-				echo json_encode($tipoHuevo);
+				if (isset($_POST['agregar'])) {
+					foreach ($_POST['agregar'] as $idTipoHuevo => $cantidadProduccion) {
+						if ($cantidadProduccion != '') {
+							$this->constructorSQL->insert('inventarioproduccion', [
+									'idGalpon' => $_POST['gProduccion'],
+									'idLote' => $_POST['loteActivo'],
+									'fechaInventarioProduccion' => $_POST['fechaProduccion'],
+									'idTipoHuevo' => $idTipoHuevo,
+									'cantidadProduccion' => $cantidadProduccion
+								])
+								->ejecutarSQL();
+						}
+					}
+				}
+				echo json_encode('Se agrego la Produccion conrrectamente');
 			} catch (PDOException $e) {
-				echo json_encode('Error');
+				echo json_encode($e->getMessage());
 			}
 		} else echo json_encode('No pasamos los post');
+		// echo json_encode($_POST);
 	}
 
 	public function obtenerGalponesLotes(){

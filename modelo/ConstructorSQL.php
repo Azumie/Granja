@@ -81,6 +81,7 @@ class ConstructorSQL {
 			$this->sql = rtrim($sql, ','); 
 			$this->datos = array_values($datos);
 			$this->tipo  = 'consulta';
+			$this->where = '';
 		}
 		return $this;
 	}
