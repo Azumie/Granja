@@ -461,7 +461,6 @@ formularioInicio.addEventListener('submit', (e)=>{
     const tablaProduccionHuevos = new Tabla([], 'tablaProduccionHuevos', 'id', true,{
       color: 'info', icon: 'pen ', nombre: 'editar',
       funcion: async x => {
-        console.log(x.datos);
         const filaDatos = x.datos.find(fila => fila.id == x.fila.getAttribute('idRow'));
         let formdata = new FormData();
 
@@ -668,13 +667,63 @@ if (elementoExiste('formularioMortalidad')) {
 
 if (elementoExiste('formularioDespachos')) {
   const formularioDespachos = document.getElementById('formularioDespachos');
-  obtenerObjeto('?c=Configuracion&m=obtenerCliente', document.getElementById('idCliente'), ['documento', 'documento'], '', llenarSelect);
-  document.getElementById('fechaDespacho').value = fechaHoy();
-  obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', document.getElementById('idTipoHuevoDespacho'), ['idTipoHuevo', 'nombreTipoHuevo'], '', llenarSelect);
-  obtenerObjeto('?c=Inventario&m=obtenerDespachos','#tablaDespachos', ['fechaInventarioProduccion', 'produccion','produccion'], 'idInventario', llenarTabla);
+  const fechaDespacho = document.getElementById('fechaDespacho');
+  const precinto = document.getElementById('precinto');
+
+  const tablaDetalleDespacho = new Tabla([], 'tablaDetalleDespacho', 'idInventarioProduccion', true);
+
+  const tablaDespachos = new Tabla([], 'tablaDespachos', 'idDespacho',true, {
+    color: 'info', icon: 'pen', nombre: 'editar',
+    funcion: async x => {
+      const filaDatos = x.datos.find(fila => fila.id == x.fila.getAttribute('idRow'));
+      const detalleRecogida = await selectBD('?c=InventarioGeneral&m=obtenerdetalleRecogida', false);
+      console.log("detalleRecogida", detalleRecogida);
+
+      // let datosTabla = tablaHuevos.tiposHuevo.map( e => {
+      //   if (detalleConsumo.find(fila => fila.nombreTipoHuevo == e.nombreTipoHuevo) != undefined) {
+      //     let detalle =  detalleConsumo.find(fila => fila.nombreTipoHuevo == e.nombreTipoHuevo);
+      //     detalle.cantidadProduccion =`<input type="number" class='form-control' name='editar[${detalle.idInventarioProduccion}]' value='${detalle.cantidadProduccion}'>`;
+      //     return detalle
+      //   }else {
+      //     return e;
+      //   }
+      // });
+      // tablaHuevos.update(datosTabla);
+      // fechaProduccion.value = filaDatos.fechaInventarioProduccion;
+      // fechaProduccion.setAttribute('readonly', 'true');
+      // idGalpon.innerHTML = `<option selected value='${filaDatos.idGalpon}'>${filaDatos.idGalpon}</option>`;
+      // idLote.innerHTML = `<option selected value='${filaDatos.idLote}'>${filaDatos.idLote}</option>`;
+    }
+  });
+
+  const initForm = async () => {
+    // const despachos = await selectBD('?c=Inventario&m=obtenerDespachos');
+    obtenerObjeto('?c=Configuracion&m=obtenerCliente', document.getElementById('idCliente'), ['documento', 'documento'], '', llenarSelect);
+    precinto.value = '';
+    const tiposHuevo = await selectBD('?c=GestionAves&m=obtenerTipoHuevo');
+    const despachos = await selectBD('?c=InventarioGeneral&m=obtenerDespachos');
+    console.log("despachos", despachos);
+    tiposHuevo.forEach(tipo => {
+      tipo.cantidadProduccion = `<input type="number" class='form-control' name='agregar[${tipo.idTipoHuevo}]'>`
+    })
+    tablaDetalleDespacho.update(tiposHuevo);
+    tablaDetalleDespacho.tiposHuevo = tiposHuevo;
+    tablaDespachos.update(despachos);
+    fechaDespacho.value = fechaHoy();
+    // obtenerObjeto('?c=Inventario&m=obtenerDespachos','#tablaDespachos', ['fechaInventarioProduccion', 'produccion','produccion'], 'idInventario', llenarTabla);
+
+  };
+  initForm();
+
+
+
   formularioDespachos.addEventListener('submit', (e)=>{
     e.preventDefault();
-    agragarObjetoBD(formularioDespachos, '?c=Inventario&m=agregarInventario', '?c=Inventario&m=obtenerDespachos','#tablaDespachos', ['numeroGalpon', 'cantidadProducto','cantidadProducto'], 'idInventario');
+    (async () => {
+      const respuesta = await insertBD(formularioDespachos, '?c=InventarioGeneral&m=agregarDespachos')
+      console.log("respuesta", respuesta);
+      initForm();
+    })();
   });
 
 }

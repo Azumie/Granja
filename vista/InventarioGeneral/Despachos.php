@@ -14,9 +14,8 @@
 			<div class="modal-body">
 				<div class="row">
 					<form id="formularioDespachos" class="col-lg-5 mb-3 mb-lg-0">
-						<div class="row justify-content-center">
-							<p class="col-12">A continuación...<br>Ingresa la información pertinente a los despachos realizados.</p>
-							<div class="input-group input-group-sm mb-3 col-12">
+							<p class="">A continuación...<br>Ingresa la información pertinente a los despachos realizados.</p>
+							<div class="input-group input-group-sm mb-3">
 								<div class="input-group-prepend">
 									<label for="fechaDespacho" class="input-group-text">
 										Fecha Despacho
@@ -24,7 +23,7 @@
 								</div>
 								<input class="form-control" type="date" id="fechaDespacho" name="fechaDespacho"></input>
 							</div>
-							<div class="col-md-11 input-group input-group-sm mb-3 ">
+							<div class="input-group input-group-sm mb-3 ">
 								<div class="input-group-prepend">
 									<label for="idCliente" class="input-group-text">
 										Cliente
@@ -34,7 +33,7 @@
 									<option selected disabled>Elegir Cliente</option>
 								</select>
 							</div>
-							<div class="input-group input-group-sm mb-3 col-12">
+							<div class="input-group input-group-sm mb-3">
 								<div class="input-group-prepend">
 									<label for="precinto" class="input-group-text">
 										Precinto
@@ -44,65 +43,31 @@
 							</div>
 							
 							<p class="col-12">Indique los productos vendidos y presione en el botón + para adicionarlo a la cola.</p>
-							<div class="input-group input-group-sm mb-3 col-md-10">
-								<div class="input-group-prepend">
-									<label for="idTipoHuevo" class="input-group-text">
-										Tipo Huevo
-									</label>
-								</div>
-								<select id="idTipoHuevoDespacho" class="form-control" name="idTipoHuevoDespacho">
-									<option selected disabled>Elegir Tipo de Huevo</option>
-								</select>
-							</div>
-							<div class="input-group input-group-sm mb-3 col-md-10">
-								<div class="input-group-prepend">
-									<label for="cantidadHuevos" class="input-group-text">
-										Cantidad
-									</label>
-								</div>
-								<input class="form-control" type="number" id="cantidadHuevos" name="cantidadHuevos"></input>
-							</div>
-							<button id="botonAgregarDespacho" class="btn form-control btn-primary btn-sm mb-2 col-4">+</button>
-							<div class="col-12">
-								
-							<table class="table table-striped p-0 tablas table-sm text-center">
-								<thead class="table-info">
-									<th>Tipo de Huevo</th>
-									<th>Cantidad</th>
-									<th>Borrar</th>
+							
+							<table id="tablaDetalleDespacho" class="table table-responsive-sm p-0 table-sm text-center col-12 table-striped">
+								<thead class="table-info" >
+									<th campo='nombreTipoHuevo'>Tipo de Huevo</th>
+									<th campo='cantidadProduccion'>Cantidad</th>
 								</thead>
 								<tbody>
-									<tr>
-										<td></td>
-										<td></td>
-										<td><i class="fa fa-trash"></i></td>
-									</tr>
 								</tbody>
 							</table>
+							<div class="row justify-content-center d-flex">
+								<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
+								<button type="button" id="resetFormularioPoduccion" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 							</div>
-						</div>
-						<div class="col-12 justify-content-center">
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-md-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
-						</div>
 						
-						</form><!-- col-lg-5 -->
+					</form><!-- col-lg-5 -->
 						<div class="col-lg-7">
 							<table class="table table-striped table-responsive-lg p-0 tablas table-sm" id="tablaDespachos">
 								<thead class="table-info" >
-									<th>Fecha</th>
-									<th>precinto</th>
-									<th>Total Huevos</th>
-									<th>Acción</th>
+									<th campo='fechaInventarioProduccion'>Fecha</th>
+									<th campo='produccion'>Producción</th>
+									<th campo='documentoCliente'>Galpón</th>
+									<th campo='precinto'>Precinto</th>
+									<th campo='acciones'>Acción</th>
 								</thead>
 								<tbody>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>
-											<button class="btn btn-info btn-sm rounded-circle"><i class="fas fa-pen-fancy"></i></button>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 							</div> <!-- col-lg-7 -->

@@ -159,6 +159,84 @@ class InventarioGeneralControlador {
 		}
 	}
 
+	public function obtenerDespachos(){
+		$ip = 'inventarioproduccion';
+		$dd ='detalledespachos';
+		$dp = 'despachos';
+		$this->constructorSQL->select($ip, "sum($ip.cantidadProduccion) AS produccion, $ip.*, $dp.*")
+			->innerJoin($dd, "$dd.idInventarioProduccion", '=', "$ip.idInventarioProduccion")
+			->innerJoin($dp, "$dp.idDespachos", '=', "$dd.idDespachos")
+			->where("entrada", "=", "0")
+			->groupBy("$ip.fechaInventarioProduccion, $dp.idDespachos");
+		$recogidas = $this->constructorSQL->ejecutarSQL();
+		echo json_encode($recogidas);
+	}
 
+	// ya cargamos la infor a la tabla gracias a esto
+	//  ahora lo que tenemos que hacer es colocar lo mismo en mi culo 
+	// otra cosita es que falta cargar la info en el formulario y despues de ahi editar // gracias bb
+
+	public function agregarDespachos () {
+		if (isset($_POST['fechaDespacho'])) {
+			try {
+				if (isset($_POST['editar'])) {
+					foreach ($_POST['editar'] as $idInventarioProduccion => $cantidadProduccion) {
+						$sql = $this->constructorSQL->update('inventarioproduccion', [
+								'cantidadProduccion' =>  $cantidadProduccion
+							])
+							->where('idInventarioProduccion', '=', $idInventarioProduccion)
+							->ejecutarSQL();
+					}
+				}
+				if (isset($_POST['agregar'], $_POST['idCliente'], $_POST['precinto'])) {
+					$idDespachos = $this->constructorSQL->insert('despachos', [
+						'documentoCliente' => $_POST['idCliente'],
+						'precinto' => $_POST['precinto']
+					])->ejecutarSQL();
+					foreach ($_POST['agregar'] as $idTipoHuevo => $cantidadProduccion) {
+						if ($cantidadProduccion != '') {
+							$idInventario = $this->constructorSQL->insert('inventarioproduccion', [
+									'idGalpon' => 1,
+									'idLote' => 1,
+									'fechaInventarioProduccion' => $_POST['fechaDespacho'],
+									'idTipoHuevo' => $idTipoHuevo,
+									'cantidadProduccion' => $cantidadProduccion,
+									'entrada' => 0
+								])
+								->ejecutarSQL();
+							$this->constructorSQL->insert('detalledespachos', [
+								'idInventarioProduccion' => $idInventario,
+								'idDespachos' => $idDespachos
+							])->ejecutarSQL();
+						}
+					}
+				}
+				echo json_encode('Se agrego el depacho conrrectamente');
+			} catch (PDOException $e) {
+				echo json_encode($e->getMessage());
+			}
+		} else echo json_encode('No pasamos los post');
+		// echo json_encode($_POST);
+	}
+
+	public function obtenerdetalleDespacho () {
+		// if (isset($_POST['idCliente'] , $_POST['idLote'], $_POST['fechaInventarioProduccion'])) {
+		// 	try {
+		// 		$ip = 'inventarioproduccion';
+		// 		$th = 'tiposhuevo';
+		// 		$detalleRecogida = $this->constructorSQL->select($ip)
+		// 			->innerJoin($th, "$th.idTipoHuevo", '=', "$ip.idTipoHuevo")
+		// 			->where("$ip.idLote", '=', $_POST['idLote'])
+		// 			->where("$ip.idGalpon", '=', $_POST['idGalpon'])
+		// 			->where("$ip.fechaInventarioProduccion", '=', $_POST['fechaInventarioProduccion'])
+		// 			->where("$ip.entrada", '=', 1)
+		// 			->ejecutarSQL();
+		// 		echo json_encode($detalleRecogida);
+		// 	} catch (PDOException $e) {
+		// 		echo json_encode('Error al obtener el Detalle de la produccion');
+		// 	}
+		// }
+		echo json_encode($_POST);
+	}
 
 }
