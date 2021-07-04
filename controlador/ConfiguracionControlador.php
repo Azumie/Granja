@@ -48,13 +48,16 @@ class ConfiguracionControlador
 
 	public function agregarTipoHuevo () {
 		if (isset($_POST['nombreTipoHuevo'])) {
-			try {
-				$this->constructorSQL->insert('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode($this->constructorSQL->getSql());
-			} catch (PDOException $e) {
-				echo json_encode('Operacion Fallida');
-			}
+			if (preg_match('/[^a-zA-Zñáéíóú ]/', $_POST['nombreTipoHuevo']) == 0 && strlen($_POST['nombreTipoHuevo']) <= 45 && strlen($_POST['nombreTipoHuevo']) >= 3) {
+try {
+$this->constructorSQL->insert('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
+$this->constructorSQL->ejecutarSQL();
+echo json_encode('Éxito: El tipo de huevo fue agregado exitosamente.');
+} catch (PDOException $e) {
+echo json_encode('Error: El tipo de huevo ingresado ya existe.');
+}
+				
+			}else echo json_encode('Error: El tipo de huevo no debe contener caracteres especiales o dígitos.');
 		}
 	}
 
@@ -65,18 +68,6 @@ class ConfiguracionControlador
 				$this->constructorSQL->where('idTipoHuevo', '=', $_POST['idTipoHuevo']);
 				$this->constructorSQL->ejecutarSQL();
 				echo json_encode('Operacion Exitosa');
-			} catch (PDOException $e) {
-				echo json_encode($e->getMessage());
-			}
-		}
-	}
-
-	public function agregarTipoPersona () {
-		if (isset($_POST['nombreTipoPersona'])) {
-			try {
-				$this->constructorSQL->insert('tipospersona', ['nombreTipoPersona' => $_POST['nombreTipoPersona']]);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode($this->constructorSQL->getDatos());
 			} catch (PDOException $e) {
 				echo json_encode($e->getMessage());
 			}
@@ -133,25 +124,9 @@ class ConfiguracionControlador
 
 	public function agregarProveedor(){
 		if (isset($_POST['documentoProveedor'], $_POST['nombresProveedor'], $_POST['apellidosProveedor'], $_POST['telefonoProveedor'], $_POST['emailProveedor'])) {
-			if ($_POST['documentoProveedor'] > 5000000 && $_POST['documentoProveedor'] < 40000000 && preg_match('/\D/', $_POST['documentoProveedor']) == 0) {
-				if (preg_match('/[^a-zA-Z ]/', $_POST['nombresProveedor']) == 0 && strlen($_POST['nombresProveedor']) < 45 && strlen($_POST['nombresProveedor']) > 1) {
-					if (preg_match('/[^a-zA-Z ]/', $_POST['nombresProveedor']) == 0 && strlen($_POST['nombresProveedor']) < 45 && strlen($_POST['nombresProveedor']) > 1) {
-            			if (preg_match('/(^|416|424|412|426| {3})([0-9]+)/', $_POST['telefonoProveedor']) == 1 && strlen($_POST['telefonoProveedor']) == 11 && preg_match('/\D/', $_POST['telefonoProveedor']) == 0) {
-              				if (preg_match('/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/',  $_POST['emailProveedor']) == 1 && strlen($_POST['emailProveedor']) <= 30) { 
-try {
-	$documento =$_POST['nacionalidadProveedor'].'-'.$_POST['documentoProveedor'];
-	$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 3, 'nombrePersona' => $_POST['nombresProveedor'], 'apellidosPersona' => $_POST['apellidosProveedor'], 'telefonoPersona' => $_POST['telefonoProveedor'],'emailPersona' => $_POST['emailProveedor'], 'activoPersona' => 1]);
-	$this->constructorSQL->ejecutarSQL();
-	echo json_encode('Exito: El proveedor fue agregado con éxito.');
-} catch (PDOException $e) {
-	echo json_encode('Error: Ocurrió un problema al agregar proveedor, inténtelo nuevamente.');
-}
-              				}else echo json_encode(preg_match('/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/',  $_POST['emailProveedor']));
-            			}else echo json_encode('Error: Teléfono proveedor no consta de formato válido');
-					}else echo json_encode('Error: Apellido proveedor no debe contener dígitos o caracteres especiales.');
-				}else echo json_encode('Error: Nombre proveedor no debe contener dígitos o caracteres especiales.');
-			}else echo json_encode('Error: Documento debe ser entero.');
-		}else echo json_encode('No existe');
+			$resp = $this->agregandoPersona($_POST['documentoProveedor'], $_POST['nacionalidadProveedor'], $_POST['nombresProveedor'], $_POST['apellidosProveedor'], $_POST['telefonoProveedor'], $_POST['emailProveedor'], 3);
+			echo json_encode($resp);
+		}else echo json_encode('Error: Al agregar proveedor.');
 	}
 	public function editarProveedor () {
 		if (isset($_POST['documentoProveedor'], $_POST['nombresProveedor'], $_POST['apellidosProveedor'], $_POST['telefonoProveedor'], $_POST['emailProveedor'])) {
@@ -190,15 +165,8 @@ try {
 
 	public function agregarCliente(){
 		if (isset($_POST['documentoCliente'], $_POST['nombresCliente'], $_POST['apellidosCliente'], $_POST['telefonoCliente'], $_POST['emailCliente'])) {
-			try {
-				$documento =$_POST['nacionalidadCliente'].'-'.$_POST['documentoCliente'];
-				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 2, 'nombrePersona' => $_POST['nombresCliente'], 'apellidosPersona' => $_POST['apellidosCliente'], 'telefonoPersona' => $_POST['telefonoCliente'],'emailPersona' => $_POST['emailCliente'], 'activoPersona' => 1]);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode('Eres una ganadora');
-			} catch (PDOException $e) {
-				echo json_encode('Fallida');
-				echo json_encode($e->getMessage());
-			}
+			$resp = $this->agregandoPersona($_POST['documentoCliente'], $_POST['nacionalidadCliente'], $_POST['nombresCliente'], $_POST['apellidosCliente'], $_POST['telefonoCliente'], $_POST['emailCliente'], 2);
+			echo json_encode($resp);
 		}else echo json_encode('No existe');
 	}
 
@@ -229,15 +197,9 @@ try {
 
 	public function agregarGalponero(){
 		if (isset($_POST['documentoGalponero'], $_POST['nombresGalponero'], $_POST['apellidosGalponero'], $_POST['telefonoGalponero'], $_POST['emailGalponero'])) {
-			try {
-				$documento =$_POST['nacionalidadGalponero'].'-'.$_POST['documentoGalponero'];
-				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 1, 'nombrePersona' => $_POST['nombresGalponero'], 'apellidosPersona' => $_POST['apellidosGalponero'], 'telefonoPersona' => $_POST['telefonoGalponero'],'emailPersona' => $_POST['emailGalponero'], 'activoPersona' => 1]);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode('Eres una ganadora');
-			} catch (PDOException $e) {
-				echo json_encode($e->getMessage());
-			}
-		}else echo json_encode($_POST);
+			$resp = $this->agregandoPersona($_POST['documentoGalponero'], $_POST['nacionalidadGalponero'], $_POST['nombresGalponero'], $_POST['apellidosGalponero'], $_POST['telefonoGalponero'], $_POST['emailGalponero'], 1);
+			echo json_encode($resp);
+		}else echo json_encode('Error: Al agregar Galponero.');
 	}
 
 	public function editarGalponero () {
@@ -341,6 +303,28 @@ try {
 				echo json_encode('Fallida');
 			}
 		}else echo json_encode('No existe');
+	}
+
+	public function agregandoPersona($documentoP, $nacionalidaP, $nombre, $apellido, $telefono, $email, $tipoPersona){
+		$resp = "";
+		if ($documentoP > 5000000 && $documentoP < 40000000 && preg_match('/\D/', $documentoP) == 0) {
+				if (preg_match('/[^a-zA-Z ]/', $nombre) == 0 && strlen($nombre) < 45 && strlen($nombre) > 1) {
+					if (preg_match('/[^a-zA-Z ]/', $apellido) == 0 && strlen($apellido) < 45 && strlen($apellido) > 1) {
+            			if (preg_match('/(^|416|424|412|426| {3})([0-9]+)/', $telefono) == 1 && strlen($telefono) == 11 && preg_match('/\D/', $telefono) == 0) {
+              				if (preg_match('/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/',  $email) == 1 && strlen($email) <= 30) { 
+try {
+	$documento =$nacionalidaP.'-'.$documentoP;
+	$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => $tipoPersona, 'nombrePersona' => $nombre, 'apellidosPersona' => $apellido, 'telefonoPersona' => $telefono,'emailPersona' => $email, 'activoPersona' => 1]);
+	$this->constructorSQL->ejecutarSQL();
+	$resp = 'Éxito: La persona fue agregada satisfactoriamente.';
+} catch (PDOException $e) {
+	$resp = 'Error: Al agregar a persona.';
+}
+              				}else $resp ='Error: Email persona no consta con el formato válido';
+            			}else $resp ='Error: Teléfono persona no consta con el formato válido';
+					}else $resp ='Error: Apellido persona no debe contener dígitos o caracteres especiales.';
+				}else $resp ='Error: Nombre persona no debe contener dígitos o caracteres especiales.';
+			}else $resp ='Error: Documento debe ser entero.';
 	}
 
 }

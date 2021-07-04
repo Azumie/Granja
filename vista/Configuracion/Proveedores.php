@@ -69,7 +69,7 @@
 					    		Teléfono
 					    	</label>
 					  	</div>
-							<input type="text" name="telefonoProveedor" id="telefonoProveedor" class="form-control" placeholder="Teléfono del proveedor">
+							<input type="text" name="telefonoProveedor" id="telefonoProveedor" class="form-control" placeholder="04161234567">
 						</div>
 
 

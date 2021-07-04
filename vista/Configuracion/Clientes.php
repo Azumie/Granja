@@ -15,10 +15,10 @@
 				<div class="row">
 					<form id='formularioClientes' class="col-lg-5 mb-3 mb-lg-0 ">
 						<div class="row">
-							<h6>A continuación...<br>Proporcione la información referente al cliente </h6>
+							<h6 class="col-12">A continuación...<br>Proporcione la información referente al cliente </h6>
 							<div class="input-group input-group-sm mb-3 col-md-10">
 						  	<div class="input-group-prepend">
-						    	<label for="idClinete" class="input-group-text">
+						    	<label for="documentoCliente" class="input-group-text">
 						    		Documento
 						    	</label>
 						  	</div>
@@ -67,7 +67,7 @@
 					    		Teléfono
 					    	</label>
 					  	</div>
-							<input placeholder="Número celular del cliente" type="text" name="telefonoCliente" id="telefonoCliente" class="form-control">
+							<input placeholder="04161234567" type="text" name="telefonoCliente" id="telefonoCliente" class="form-control">
 						</div>
 
 
@@ -93,8 +93,7 @@
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
-						<p>Lista de clientes previamente agregados</p>
-						<table class="datatable table table-striped table-responsive p-0 tablas table-sm" id="tablaCliente">
+						<p>Clientes agregados con anterioridad</p>						<table class="datatable table table-striped table-responsive p-0 tablas table-sm" id="tablaCliente">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>

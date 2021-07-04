@@ -14,7 +14,7 @@
 			<div class="modal-body">
 				<div class="row">
 					<form id="formTiposHuevo" class="col-lg-5 mb-3 mb-lg-0 ">
-
+						<h6>A continuación...<br>Proporcione la información referente al tipo de huevo</h6>
 						<span id="estadoFormTipoHuevo">Agregando...</span>
 
 						<!-- NOMBRE TIPO HUEVO -->
@@ -37,6 +37,7 @@
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->
 
 					<div class="col-lg-7">
+						<p>Tipos de huevos agregados con anterioridad</p>
 						<table id="tablaTiposHuevo" class=" datatable table table-striped table-responsive-lg p-0 tablas table-sm">
 							<thead class="table-info" >
 								<th>Nombre</th>

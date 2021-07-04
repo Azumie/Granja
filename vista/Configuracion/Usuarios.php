@@ -29,6 +29,7 @@
 					<span class="input-group-text text-white">Documento</span>
 				</div>
 				<select class='form-control' name='documentoUsuario' id='documentoUsuario'>
+					<option value="" selected disabled>Seleccione Usuario</option>
 				</select>
 			</div>
 
@@ -48,7 +49,7 @@
 			<div class="input-group-prepend">
 				<span class="input-group-text text-white">Usuario</span>
 			</div>
-			<input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control" required minlength="4" maxlength="20">
+			<input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control" required minlength="4" maxlength="20" placeholder="Nombre del usuario">
 		</div>
 		
 		<!-- CLAVE -->
@@ -57,7 +58,7 @@
 			<div class="input-group-prepend">
 				<span class="input-group-text text-white ">Clave</span>
 			</div>
-			<input type="password" name="claveUsuario" id="claveUsuario" class="form-control" required minlength="4" maxlength="20">
+			<input placeholder="Constraseña del usuario" type="password" name="claveUsuario" id="claveUsuario" class="form-control" required minlength="4" maxlength="20">
 		</div>
 
 		<!-- PREGUNTA -->
@@ -81,13 +82,13 @@
 			<div class="input-group-prepend">
 				<span class="input-group-text text-white">Respuesta</span>
 			</div>
-			<input type="text" name="respuestaUsuario" id="respuestaUsuario" class="form-control" required minlength="4" maxlength="20">
+			<input placeholder="Respuesta a la pregunta de seguridad" type="text" name="respuestaUsuario" id="respuestaUsuario" class="form-control" required minlength="4" maxlength="20">
 		</div>
 
 		<!-- BOTONES - AGREGAR Y CANCELAR -->
 
-		<button type="submit" class="btn btn-primary text-white  btn-block mt-4">Guardar</button>
-		<button type="button" class="btn btn-outline-danger btn-block">Cancelar</button>
+		<button type="submit" class="btn btn-primary btn-sm text-white  btn-block mt-4">Guardar</button>
+		<button type="button" class="btn btn-sm btn-outline-danger btn-block">Cancelar</button>
 	</form>
 
 

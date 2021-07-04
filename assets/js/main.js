@@ -37,17 +37,16 @@ formularioInicio.addEventListener('submit', (e)=>{
     formularioProveedores.addEventListener('submit', (e) =>{
       e.preventDefault();
       let probar = formularioProveedores.documentoProveedor.value;
-    // Validando Fecha
-    // if (probar != null && probar != '') {
-      // if (probar != '' && (probar > 5000000 && probar < 40000000) && !probar.match(/[^0-9]/)) {
-        // probar = formularioProveedores.nombresProveedor.value;
-        // if (probar.match(/[^\D]/) == null && probar.length < 45 && probar.length > 1) {
-          // probar = formularioProveedores.apellidosProveedor.value;
-          // if (!probar.match(/[^\D]/) && probar.length < 45 && probar.length > 1) {
-            // probar = formularioProveedores.telefonoProveedor.value;
-            // if (probar.match(/(^|416|424|412|426| {3})([0-9]+)/) && probar.length == 11 && !probar.match(/\D/)) {
-              // probar = formularioProveedores.emailProveedor.value;
-              // if (probar.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/) && probar.length <= 30) {  
+    if (probar != null && probar != '') {
+      if (probar != '' && (probar > 5000000 && probar < 40000000) && !probar.match(/[^0-9]/)) {
+        probar = formularioProveedores.nombresProveedor.value;
+        if (probar.match(/[^\D]/) == null && probar.length < 45 && probar.length > 1) {
+          probar = formularioProveedores.apellidosProveedor.value;
+          if (!probar.match(/[^\D]/) && probar.length < 45 && probar.length > 1) {
+            probar = formularioProveedores.telefonoProveedor.value;
+            if (probar.match(/(^|416|424|412|426| {3})([0-9]+)/) && probar.length == 11 && !probar.match(/\D/)) {
+              probar = formularioProveedores.emailProveedor.value;
+              if (probar.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/) && probar.length <= 30) {  
                 let metodo;
                 if (elementoExiste('documentoProveedor')) {
                   let inputDocumento = document.getElementById('documentoProveedor');
@@ -56,12 +55,13 @@ formularioInicio.addEventListener('submit', (e)=>{
                   metodo += 'Proveedor';
                 }
                 agragarObjetoBD(formularioProveedores, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
-              // }
-            // }else alert('Error en el teléfono ingresado');
-          // }else alert('Error en el apellido del proveedor');
-        // }else alert('Error en el nombre del proveedor');
-      // }else alert('Error el documento no puede contener letras o estar vacío');
-    });
+              }
+            }else alert('Error en el teléfono ingresado');
+          }else alert('Error en el apellido del proveedor');
+        }else alert('Error en el nombre del proveedor');
+      }else alert('Error el documento no puede contener letras o estar vacío');
+    }
+  });
 
     editarObjetoBD(
       formularioProveedores,
