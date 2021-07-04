@@ -175,11 +175,6 @@ class InicioControlador {
 			}
 		}
 		echo json_encode($caducidad);
-		// SELECT * FROM inventarioproduccion WHERE entrada =1 and fechaInventarioProduccion <= "2021-07-01" and fechaInventarioProduccion >= "2021-06-12" AND inventarioproduccion.idGalpon group by fechaInventarioProduccion
-
-		// SELECT * FROM inventarioproduccion INNER JOIN galponeslotes on galponeslotes.idGalpon = inventarioproduccion.idGalpon WHERE entrada =1 and fechaInventarioProduccion <= "2021-07-01" and fechaInventarioProduccion >= "2021-06-12" AND inventarioproduccion.idGalpon = 1 AND galponeslotes.activo = 1 group by fechaInventarioProduccion
-		// $nuevafecha = date ( 'Y-m-d' , $nuevafecha );
-		
 	}
 	public function fechaMayor($fechaNueva, $fechaActual, $intervaloA, $intervaloB){
 		$res = false;

@@ -28,7 +28,8 @@
 						  		<option>V</option>
 						  		<option>R</option>
 						  	</select>
-								<input type="text" name="documentoProveedor" id="documentoProveedor" placeholder='Número de cédula' class="form-control">
+								<input type="text" name="documentoProveedor" id="documentoProveedor" placeholder='Número de cédula' class="form-control" >
+								<!-- max="50000000" min="5000000" -->
 							</div>
 							<div class="form-check col-md-2">
 				        <input class="form-check-input" type="checkbox" id="activoProveedor" name="activoProveedor" checked>
@@ -94,7 +95,7 @@
 
 					<div class="col-lg-7">
 						<p>Proveedores agregados con anterioridad</p>
-						<table class="datatable table table-striped table-responsive p-0 tablas table-sm" id="tablaProveedor">
+						<table class="datatable table table-striped table-responsive p-0 tablas table-sm text-center" id="tablaProveedor">
 							<thead class="table-info" >
 								<th>Documento</th>
 								<th>Nombres</th>

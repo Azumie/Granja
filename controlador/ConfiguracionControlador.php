@@ -133,14 +133,24 @@ class ConfiguracionControlador
 
 	public function agregarProveedor(){
 		if (isset($_POST['documentoProveedor'], $_POST['nombresProveedor'], $_POST['apellidosProveedor'], $_POST['telefonoProveedor'], $_POST['emailProveedor'])) {
-			try {
-				$documento =$_POST['nacionalidadProveedor'].'-'.$_POST['documentoProveedor'];
-				$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 3, 'nombrePersona' => $_POST['nombresProveedor'], 'apellidosPersona' => $_POST['apellidosProveedor'], 'telefonoPersona' => $_POST['telefonoProveedor'],'emailPersona' => $_POST['emailProveedor'], 'activoPersona' => 1]);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode('Eres una ganadora');
-			} catch (PDOException $e) {
-				echo json_encode('Fallida');
-			}
+			if ($_POST['documentoProveedor'] > 5000000 && $_POST['documentoProveedor'] < 40000000 && preg_match('/\D/', $_POST['documentoProveedor']) == 0) {
+				if (preg_match('/[^a-zA-Z ]/', $_POST['nombresProveedor']) == 0 && strlen($_POST['nombresProveedor']) < 45 && strlen($_POST['nombresProveedor']) > 1) {
+					if (preg_match('/[^a-zA-Z ]/', $_POST['nombresProveedor']) == 0 && strlen($_POST['nombresProveedor']) < 45 && strlen($_POST['nombresProveedor']) > 1) {
+            			if (preg_match('/(^|416|424|412|426| {3})([0-9]+)/', $_POST['telefonoProveedor']) == 1 && strlen($_POST['telefonoProveedor']) == 11 && preg_match('/\D/', $_POST['telefonoProveedor']) == 0) {
+              				if (preg_match('/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/',  $_POST['emailProveedor']) == 1 && strlen($_POST['emailProveedor']) <= 30) { 
+try {
+	$documento =$_POST['nacionalidadProveedor'].'-'.$_POST['documentoProveedor'];
+	$this->constructorSQL->insert('personas', ['documento' => $documento,'idTipoPersona' => 3, 'nombrePersona' => $_POST['nombresProveedor'], 'apellidosPersona' => $_POST['apellidosProveedor'], 'telefonoPersona' => $_POST['telefonoProveedor'],'emailPersona' => $_POST['emailProveedor'], 'activoPersona' => 1]);
+	$this->constructorSQL->ejecutarSQL();
+	echo json_encode('Exito: El proveedor fue agregado con éxito.');
+} catch (PDOException $e) {
+	echo json_encode('Error: Ocurrió un problema al agregar proveedor, inténtelo nuevamente.');
+}
+              				}else echo json_encode(preg_match('/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/',  $_POST['emailProveedor']));
+            			}else echo json_encode('Error: Teléfono proveedor no consta de formato válido');
+					}else echo json_encode('Error: Apellido proveedor no debe contener dígitos o caracteres especiales.');
+				}else echo json_encode('Error: Nombre proveedor no debe contener dígitos o caracteres especiales.');
+			}else echo json_encode('Error: Documento debe ser entero.');
 		}else echo json_encode('No existe');
 	}
 	public function editarProveedor () {

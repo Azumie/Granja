@@ -17,13 +17,13 @@
 					<div class="col-12 col-md-6">
 					<h6>A continuación...<br>Proporcione la información referente al galpón</h6>
 					<form id="formularioAgregarGalpon">
-						<div class="input-group input-group-sm mb-4 col-12 col-md-10">
+						<div class="input-group input-group-sm mb-4 col-12 col-lg-10">
 							<div class="input-group-prepend">
 								<span class="input-group-text">Fecha Creación</span>
 							</div>
 							<input type="date" class="form-control" name="fechaCreacionGalpon" id="fechaCreacionGalpon">
 						</div>
-						<div class="col-12 col-md-10">
+						<div class="col-12 col-lg-10">
 							<div class="input-group input-group-sm mb-4">
 								<div class="input-group-prepend">
 									<span class="input-group-text">Galpón</span>
@@ -31,7 +31,7 @@
 								<input type="number" class="form-control" placeholder="Número de Galpón" name="numeroGalpon" min="0" max="500">
 							</div>
 						</div>
-						<div class="col-12 col-md-10">
+						<div class="col-12 col-lg-10">
 							<div class="input-group input-group-sm mb-4">
 								<div class="input-group-prepend">
 									<div class="input-group-text">Área útil</div>
@@ -39,7 +39,7 @@
 								<input type="number" class="form-control" placeholder="Área útil del galpón" name="areaUtilGalpon" min="100" max="2000" step="0.01">
 							</div>
 						</div>
-						<div class="input-group input-group-sm mb-4 col-12 col-md-10">
+						<div class="input-group input-group-sm mb-4 col-12 col-lg-10">
 							<div class="input-group-prepend">
 								<div class="input-group-text">Confinamiento</div>
 							</div>
@@ -51,7 +51,7 @@
 						</div>
 						<div class="row justify-content-center d-flex">
 							<button type="submit" class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
+							<button type="button" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3" id="cancelarGalpones"><strong>Cancelar</strong></button>
 						</div>
 					</form>
 					</div>

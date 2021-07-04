@@ -323,3 +323,9 @@ function btnGroup(){
 	btnGroup.setAttribute('class', 'btn-group');
 	return btnGroup;
 }
+
+function modalGalpones(){
+  formularioAgregarGalpon.reset();
+	obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon', llenarTabla);
+  document.getElementById('fechaCreacionGalpon').value= fechaHoy();
+}
