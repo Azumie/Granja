@@ -28,7 +28,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text">Galpón</span>
 								</div>
-								<input type="number" class="form-control" placeholder="Número de Galpón" name="numeroGalpon" min="0" max="500">
+								<input type="number" class="form-control" placeholder="Número de Galpón" name="numeroGalpon" id="numeroGalpon" min="0" max="500">
 							</div>
 						</div>
 						<div class="col-12 col-md-10">
@@ -36,7 +36,7 @@
 								<div class="input-group-prepend">
 									<div class="input-group-text">Área útil</div>
 								</div>
-								<input type="number" class="form-control" placeholder="Área útil del galpón" name="areaUtilGalpon" min="100" max="2000" step="0.01">
+								<input type="number" class="form-control" placeholder="Área útil del galpón" name="areaUtilGalpon" id="areaUtilGalpon" min="100" max="2000" step="0.01">
 							</div>
 						</div>
 						<div class="input-group input-group-sm mb-4 col-12 col-md-10">
@@ -49,22 +49,22 @@
 								<option value="J">Jaula</option>
 							</select>
 						</div>
+						<input type="hidden" name="idGalpon" id="idGalponViejo">
 						<div class="row justify-content-center d-flex">
 							<button type="submit" class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
+							<button type="button" id="resetFormularioGalpon" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
 						</div>
 					</form>
 					</div>
 					<div class="col-12 col-md-6 table-scrolly">
 						<p>Galpones agregados con anterioridad</p>
-						<table class="table table-striped table-responsive p-0 table-sm text-center" id="tablaGalpon">
+						<table class="table table-striped table-responsive p-0 table-sm text-center" id="tablaGalpones">
 							<thead class="table-info">
-								<th>Número Galpón</th>
-								<th>Área útil</th>
-								<th>N° gallinas actuales</th>
-								<th>Confinamiento</th>
-								<th>Inicio del Lote</th>
-								<th>Acción</th>
+								<th campo='fechaCreacionGalpon'>Fecha de Creación</th>
+								<th campo='numeroGalpon'>Número Galpón</th>
+								<th campo='areaUtil'>Área útil</th>
+								<th campo='confinameiento'>Confinamiento</th>
+								<th campo='acciones'>Acción</th>
 							</thead>
 							<tbody>
 							</tbody>

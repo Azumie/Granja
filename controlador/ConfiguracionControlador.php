@@ -49,9 +49,16 @@ class ConfiguracionControlador
 	public function agregarTipoHuevo () {
 		if (isset($_POST['nombreTipoHuevo'])) {
 			try {
-				$this->constructorSQL->insert('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode($this->constructorSQL->getSql());
+				if (isset($_POST['idTipoHuevo'])) {
+					$this->constructorSQL->update('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
+					$this->constructorSQL->where('idTipoHuevo', '=', $_POST['idTipoHuevo']);
+					$this->constructorSQL->ejecutarSQL();
+					echo json_encode('Exito: Tipo de huevo editado Exitosamente');
+				}else {
+					$this->constructorSQL->insert('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
+					$this->constructorSQL->ejecutarSQL();
+					echo json_encode($this->constructorSQL->getSql());
+				}
 			} catch (PDOException $e) {
 				echo json_encode('Operacion Fallida');
 			}
@@ -61,10 +68,6 @@ class ConfiguracionControlador
 	public function editarTipoHuevo () {
 		if (isset($_POST['nombreTipoHuevo'], $_POST['idTipoHuevo'])) {
 			try {
-				$this->constructorSQL->update('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
-				$this->constructorSQL->where('idTipoHuevo', '=', $_POST['idTipoHuevo']);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode('Operacion Exitosa');
 			} catch (PDOException $e) {
 				echo json_encode($e->getMessage());
 			}

@@ -90,22 +90,43 @@ formularioInicio.addEventListener('submit', (e)=>{
 
   if (elementoExiste('formTiposHuevo')) {
     const formTiposHuevo = document.getElementById('formTiposHuevo');
-    obtenerObjeto('?c=Configuracion&m=obtenerTipoHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo', llenarTabla);
+    const idTipoHuevo = document.getElementById('idTipoHuevoEditar')
+    const tablaTiposHuevo = new Tabla([], 'tablaTiposHuevo', 'idTipoHuevo', true,{
+      color: 'info', icon: 'pen', nombre: 'editar',
+      funcion: x => {
+        console.log('hello')
+        const datosFila = x.datos.find( fila => fila.idTipoHuevo == x.fila.getAttribute('idRow'));
+        idTipoHuevo.removeAttribute('disabled');
+        idTipoHuevo.value = datosFila.idTipoHuevo;
+        document.getElementById('nombreTipoHuevo').value = datosFila.nombreTipoHuevo;
+      }
+    })
+    const initForm = async () => {
+      const tiposHuevo = await selectBD('?c=Configuracion&m=obtenerTipoHuevo');
+      tablaTiposHuevo.update(tiposHuevo);
+      formTiposHuevo.reset();
+      idTipoHuevo.setAttribute('disabled', 'true');
+    };
+    initForm();
+
     formTiposHuevo.addEventListener('submit', (e) =>{
-      let metodo = elementoExiste('idTipoHuevo') ? 'editarTipoHuevo' : 'agregarTipoHuevo';
       e.preventDefault();
-      agragarObjetoBD(formTiposHuevo, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerTipoHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
+      (async () => {
+        const respuesta = insertBD(formTiposHuevo, `?c=Configuracion&m=agregarTipoHuevo`);
+        initForm();
+        alerta(respuesta, 'success');
+      })();
     });
 
-    editarObjetoBD(
-      formTiposHuevo,
-      'tablaTiposHuevo',
-      'Configuracion',
-      'obtenerTipoHuevo',
-      'idTipoHuevo',
-      {
-        'nombreTipoHuevo': 'nombreTipoHuevo'
-      });
+    // editarObjetoBD(
+    //   formTiposHuevo,
+    //   'tablaTiposHuevo',
+    //   'Configuracion',
+    //   'obtenerTipoHuevo',
+    //   'idTipoHuevo',
+    //   {
+    //     'nombreTipoHuevo': 'nombreTipoHuevo'
+    //   });
   }
   // FORMULARIO GALPONEROS
   
@@ -739,11 +760,38 @@ if (elementoExiste('formularioConsumos')) {
 }
 // Validando de que exista el formulario respectivo al módulo de Galpón
 if(elementoExiste('formularioAgregarGalpon')){
-  // Rellenando tabla con la información de los Galpones
-  obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon', llenarTabla);
-  document.getElementById('fechaCreacionGalpon').value= fechaHoy();
-  // Obteniendo formulario del Módulo Galpón
   const formularioAgregarGalpon = document.getElementById('formularioAgregarGalpon');
+  const fechaCreacion = document.getElementById('fechaCreacionGalpon'); 
+  const idGalpon = document.getElementById('idGalponViejo'); 
+
+  const tablaGalpon = new Tabla([], 'tablaGalpones', 'idGalpon', true, {
+    color: 'info', icon: 'pen', nombre: 'editar',
+    funcion: async (x)=>{
+      const datosFila = x.datos.find( fila => fila.idGalpon == x.fila.getAttribute('idRow'));
+      fechaCreacion.value = datosFila.fechaCreacionGalpon;
+      document.getElementById('numeroGalpon').value = datosFila.numeroGalpon;
+      document.getElementById('areaUtilGalpon').value = datosFila.areaUtil;
+      document.getElementById('ConfinamientoGalpon').value = datosFila.confinameiento;
+      console.log("datosFila.ConfinamientoGalpon", datosFila.confinameiento);
+      idGalpon.removeAttribute('disabled');
+      idGalpon.value = datosFila.idGalpon;
+
+      //cargar info en el formulario
+    }
+  });
+  const initForm = async () => {
+    //  datos por defecto del fomulario
+    formularioAgregarGalpon.reset();
+    const galpones = await selectBD('?c=Galpon&m=obtenerGalpones');
+    idGalpon.setAttribute('disabled','true');
+    console.log("galpones", galpones);
+    tablaGalpon.update(galpones);
+    fechaCreacion.value= fechaHoy();
+  }
+  initForm();
+  // Rellenando tabla con la información de los Galpones
+  // obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon', llenarTabla);
+  // Obteniendo formulario del Módulo Galpón
   // Evento que ocurrirá al presionar el botón de guardado en el módulo de Galpón
   formularioAgregarGalpon.addEventListener('submit',function(e){
     // Silencia la acción por defecto del submit
@@ -763,15 +811,17 @@ if(elementoExiste('formularioAgregarGalpon')){
           // Validando Confinamiento
           if (probar == 'P' || probar == 'J') {
             // Agregando Galpón
-            agragarObjetoBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon', '?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon');
-            document.getElementById('fechaCreacionGalpon').value= fechaHoy();
+            insertBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon');
+            initForm();
           }else alert('Error al escoger el tipo de Confinamiento');
         }else alert('Error al indicar Área Útil');
       }else alert('Error en número galpón');
-      
-    }
-    
+    }    
   })
+
+  document.getElementById('resetFormularioGalpon').addEventListener('click', () => {
+    console.log('helo')
+  });
 }
   // VAMOS A LEER LA URL
 

@@ -27,6 +27,7 @@
 						  	</div>
 						  	<input class="form-control" type="text" id="nombreTipoHuevo" name="nombreTipoHuevo"></input>
 						</div>
+						<input type="hidden" name="idTipoHuevo" id="idTipoHuevoEditar">
 
 						<!-- BOTONES - AGREGAR Y CANCELAR -->
 
@@ -39,8 +40,8 @@
 					<div class="col-lg-7">
 						<table id="tablaTiposHuevo" class=" datatable table table-striped table-responsive-lg p-0 tablas table-sm">
 							<thead class="table-info" >
-								<th>Nombre</th>
-								<th>Editar</th>
+								<th campo='nombreTipoHuevo'>Nombre</th>
+								<th campo='acciones'>Editar</th>
 							</thead>
 							<tbody>
 

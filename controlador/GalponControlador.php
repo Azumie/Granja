@@ -26,9 +26,20 @@ class GalponControlador{
 	      				if ($_POST['ConfinamientoGalpon'] == 'P' || $_POST['ConfinamientoGalpon'] == 'J') {
 // Agregando en tabla galpones 
 try {
-$this->ConstructorSQL->insert('galpones', ['fechaCreacionGalpon' => $_POST['fechaCreacionGalpon'],'numeroGalpon' => $_POST['numeroGalpon'], 'areaUtil' => $_POST['areaUtilGalpon'],  'confinameiento' => $_POST['ConfinamientoGalpon'], 'idGranja' => 1]);
-$this->ConstructorSQL->ejecutarSQL();
-echo json_encode('Exito: El galpón fue agregado con éxito.');
+	if (isset($_POST['idGalpon'])) {
+		$this->ConstructorSQL->update('galpones', [
+			'fechaCreacionGalpon' => $_POST['fechaCreacionGalpon'],
+			'areaUtil' => $_POST['areaUtilGalpon'],
+			'confinameiento' => $_POST['ConfinamientoGalpon']
+		])
+		->where('idGalpon', '=', $_POST['idGalpon'])
+		->ejecutarSQL();
+		echo json_encode('Exito: El galpón fue editado con éxito.');
+	}else {
+		$this->ConstructorSQL->insert('galpones', ['fechaCreacionGalpon' => $_POST['fechaCreacionGalpon'],'numeroGalpon' => $_POST['numeroGalpon'], 'areaUtil' => $_POST['areaUtilGalpon'],  'confinameiento' => $_POST['ConfinamientoGalpon'], 'idGranja' => 1]);
+		$this->ConstructorSQL->ejecutarSQL();
+		echo json_encode('Exito: El galpón fue agregado con éxito.');
+	}
 } catch (PDOException $e) {
 echo json_encode( 'Error: El número de Galpón ya existe.');
 }
@@ -44,18 +55,23 @@ echo json_encode( 'Error: El número de Galpón ya existe.');
 	
 	public function obtenerGalpones(){
 		try {
-			$this->ConstructorSQL->select('galpones', ' galpones.*, galponeslotes.cantidadGallinas, sum(operaciongalpon.cantidadProducto) as suma')->innerJoin('operaciongalpon', 'operaciongalpon.idGalpon', '=', 'galpones.idGalpon')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'galpones.idGalpon')->where('galponeslotes.activoGalponeLote', '=', '1')->where('operaciongalpon.idProducto', '=', 3)->groupBy('galpones.idGalpon');
-			$galpon = $this->ConstructorSQL->ejecutarSQL();
-			for ($i=0; $i < count($galpon); $i++) { 
-				if ($galpon[$i]->suma != null) {
-					$galpon[$i]->cantidadGallinas = $galpon[$i]->cantidadGallinas - $galpon[$i]->suma;
-				}
-			}
+			// $this->ConstructorSQL->select('galpones', ' galpones.*, galponeslotes.cantidadGallinas, sum(operaciongalpon.cantidadProducto) as suma')->innerJoin('operaciongalpon', 'operaciongalpon.idGalpon', '=', 'galpones.idGalpon')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'galpones.idGalpon')->where('galponeslotes.activoGalponeLote', '=', '1')->where('operaciongalpon.idProducto', '=', 3)->groupBy('galpones.idGalpon');
+			// $galpon = $this->ConstructorSQL->ejecutarSQL();
+			// for ($i=0; $i < count($galpon); $i++) { 
+			// 	if ($galpon[$i]->suma != null) {
+			// 		$galpon[$i]->cantidadGallinas = $galpon[$i]->cantidadGallinas - $galpon[$i]->suma;
+			// 	}
+			// }
 			// (isset($_GET['e'])) ? $galpon = 'galpones '.$_GET['e'] : $galpon = 'galpones';
 			// $galpon = $this->ConstructorSQL->select($galpon)
 			// 	->where('idGranja', '=', 1)
 			// 	->ejecutarSQL();
-			echo json_encode($galpon);
+			// echo json_encode($galpon);
+			$this->ConstructorSQL->select('galpones')
+				->where('activoGalpon', '=', '0')
+				->where('idGranja', '=', '1');
+			$galponLote = $this->ConstructorSQL->ejecutarSQL();
+			echo json_encode($galponLote);
 		} catch (PDOException $e) {
 			echo json_encode($e->getMessage());
 		}
