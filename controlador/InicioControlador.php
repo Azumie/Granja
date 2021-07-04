@@ -17,7 +17,7 @@ class InicioControlador {
 	public function mostrarAlimentacion(){
 		$resp = $this->consumosProductos($_POST['fechaDesde'], $_POST['fechaHasta'], $_POST['idGalponInicio'], $_GET['idTipoProducto']);
 		$this->constructorSQL = new ConstructorSQL();
-		$this->constructorSQL->select(' galponeslotes')->where('idGalpon', '=', $_POST['idGalponInicio'])->where('activo', '=', 1);
+		$this->constructorSQL->select(' galponeslotes')->where('idGalpon', '=', $_POST['idGalponInicio'])->where('activoGalponeLote', '=', 1);
 		$gallinas = $this->constructorSQL->ejecutarSQL();
 		$this->constructorSQL = new ConstructorSQL();
 		$this->constructorSQL->select('operaciongalpon', 'sum(operaciongalpon.cantidadProducto) as suma')->innerJoin('productos', 'productos.idProducto', '=', 'operaciongalpon.idProducto')->innerJoin('inventario', 'inventario.idInventario','=', 'operaciongalpon.idInventario')->where('productos.idTipoProducto', '=', 3)->where('inventario.fechaOperacion', '>=', $_POST['fechaDesde'])->where('inventario.fechaOperacion', '<=', $_POST['fechaHasta'])->where('operaciongalpon.idGalpon', '=', 1);
@@ -43,7 +43,7 @@ class InicioControlador {
 	function mostrarMortalidad(){
 		$mortalidadTotal = $this->consumosProductos($_POST['fechaDesde'], $_POST['fechaHasta'], $_POST['idGalponInicio'], $_GET['idTipoProducto']);
 		$this->constructorSQL = new ConstructorSQL();
-		$this->constructorSQL->select(' galponeslotes')->where('idGalpon', '=', $_POST['idGalponInicio'])->where('activo', '=', 1);
+		$this->constructorSQL->select(' galponeslotes')->where('idGalpon', '=', $_POST['idGalponInicio'])->where('activoGalponeLote', '=', 1);
 		$gallinasTotal = $this->constructorSQL->ejecutarSQL();
 		if ($mortalidadTotal[0]->suma != null || $mortalidadTotal[0]->suma != []) {
 			$gallinasRestantes = $gallinasTotal[0]->cantidadGallinas - $mortalidadTotal[0]->suma;
@@ -55,7 +55,7 @@ class InicioControlador {
 	}
 
 	public function mostrarProduccion(){
-		$this->constructorSQL->select('inventarioproduccion', 'sum(inventarioproduccion.cantidadProduccion) as suma')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'inventarioproduccion.idGalpon')->where('inventarioproduccion.idGalpon', '=', $_POST['idGalponInicio'])->where('galponeslotes.activo', '=', 1)->where('inventarioproduccion.fechaInventarioProduccion', '>=', $_POST['fechaDesde'])->where('inventarioproduccion.fechaInventarioProduccion', '<=', $_POST['fechaHasta']);
+		$this->constructorSQL->select('inventarioproduccion', 'sum(inventarioproduccion.cantidadProduccion) as suma')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'inventarioproduccion.idGalpon')->where('inventarioproduccion.idGalpon', '=', $_POST['idGalponInicio'])->where('galponeslotes.activoGalponeLote', '=', 1)->where('inventarioproduccion.fechaInventarioProduccion', '>=', $_POST['fechaDesde'])->where('inventarioproduccion.fechaInventarioProduccion', '<=', $_POST['fechaHasta']);
 		$mortalidadTotal = $this->consumosProductos($_POST['fechaDesde'], $_POST['fechaHasta'], $_POST['idGalponInicio'], 3);
 		$huevosProducidos = $this->constructorSQL->ejecutarSQL();
 		$porcentaje = 0;
@@ -71,101 +71,116 @@ class InicioControlador {
 		echo json_encode($tabla);
 	}
 
-		// SELECT sum(cantidadProduccion) as suma, idTipoHuevo, fechaInventarioProduccion from inventarioproduccion where entrada =1 and fechaInventarioProduccion <= '2021-07-02'and fechaInventarioProduccion >= '2021-06-12' GROUP BY fechaInventarioProduccion, idTipoHuevo
+		// SELECT sum(cantidadProduccion) as suma, idTipoHuevo, fechaInventarioProduccion from inventarioproduccion where entrada =1 and fechaInventarioProduccion <= '2021-07-03'and fechaInventarioProduccion >= '2021-06-13' GROUP BY fechaInventarioProduccion, idTipoHuevo
 	public function tablaCaducidad(){
+		// Fecha actual
 		$fecha = date('Y-m-d');
-		$nuevafecha = strtotime ( '-20 day' , strtotime ( $fecha ));
-		$this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) as suma, idTipoHuevo, fechaInventarioProduccion')->where('entrada', '=', 1)->where('fechaInventarioProduccion', '<=', $fecha)->where('fechaInventarioProduccion', '>=', $nuevafecha)->groupBy('fechaInventarioProduccion, idTipoHuevo');
-		$producidos = $this->constructorSQL->ejecutarSQL();
+		// Restando 20 días a la fecha actual 
+		$nuevafecha = strtotime ('-20 day' , strtotime ( $fecha ));
+		// Obteniendo huevos producidos entre las dos fechas anteriores
+		$producidosReciente = $this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) as suma, idTipoHuevo, fechaInventarioProduccion')->where('entrada', '=', 1)->where('fechaInventarioProduccion', '<=', $fecha)->where('fechaInventarioProduccion', '>=', date('Y-m-d',$nuevafecha))->groupBy('fechaInventarioProduccion, idTipoHuevo')->ejecutarSQL();
+		// Todos los huevos despachados a lo largo del tiempo
 		$this->constructorSQL = new ConstructorSQL();
-		$this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) as suma, idTipoHuevo')->where('entrada', '=', 0)->groupBy('idTipoHuevo');
-		$despachados = $this->constructorSQL->ejecutarSQL();
+		$despachados = $this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) as suma, idTipoHuevo')->where('entrada', '=', 0)->groupBy('idTipoHuevo')->ejecutarSQL();
+		// Los huevos producidosReciente antes de esa fecha 
+		// 15-20 Dias
+		// 10-15 Dias
+		// 5-10 Dias
+		// 0-5 Dias
 		$this->constructorSQL = new ConstructorSQL();
-		$producido = $this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) as suma, idTipoHuevo, fechaInventarioProduccion')->where('entrada', '=', 1)->where('fechaInventarioProduccion', '<=', date("Y-m-d", $nuevafecha))->groupBy('idTipoHuevo')->ejecutarSQL();
-		$producido = $producido[0]->suma - $despachados[0]->suma;
-		$huevosGrandes = [0,0,0,0];
-		$huevosMedianos = [0,0,0,0];
-		$huevosPequenos = [0,0,0,0];
-		for ($i=0; $i < count($producidos); $i++) { 
-			if (strtotime($producidos[$i]->fechaInventarioProduccion)  >= strtotime ( '-5 day' , strtotime ( $fecha )) && strtotime($producidos[$i]->fechaInventarioProduccion)  <= strtotime ( $fecha )) {
-
-				switch ($producidos[$i]->idTipoHuevo) {
+		$producido = $this->constructorSQL->select('inventarioproduccion', 'sum(cantidadProduccion) as suma, idTipoHuevo')->where('entrada', '=', 1)->where('fechaInventarioProduccion', '<', date("Y-m-d", $nuevafecha))->groupBy('idTipoHuevo')->ejecutarSQL();
+		$res = [];
+		$caducidad = ['danger' => ['16-20 Dias',0,0,0], 'warning' => ['11-15 Dias',0,0,0], 'info' => ['6-10 Dias',0,0,0], 'success' => ['0-5 Dias',0,0,0]];
+		for ($i=0; $i < count($producidosReciente); $i++) { 
+			if ($this->fechaMayor($producidosReciente[$i]->fechaInventarioProduccion, $fecha, '-5 day', '0 day')) {
+				switch ($producidosReciente[$i]->idTipoHuevo) {
 					case 1:
-						$huevosGrandes[0] += $producidos[$i]->suma; 
+						$caducidad['success'][1] += $producidosReciente[$i]->suma; 
 						break;
 					case 2:
-						$huevosMedianos[0] += $producidos[$i]->suma; 
+						$caducidad['success'][2] += $producidosReciente[$i]->suma; 
 						break;
 					case 3: 
-						$huevosPequenos[0] += $producidos[$i]->suma; 
+						$caducidad['success'][3] += $producidosReciente[$i]->suma; 
 						break;
 				}
 			
-			}else if (strtotime($producidos[$i]->fechaInventarioProduccion)  >= strtotime ( '-10 day' , strtotime ( $fecha )) && strtotime($producidos[$i]->fechaInventarioProduccion)  <= strtotime ( '-6 day' , strtotime ( $fecha ))) {
+			}
+			else if ($this->fechaMayor($producidosReciente[$i]->fechaInventarioProduccion, $fecha, '-10 day', '6 day')) {
 
-				switch ($producidos[$i]->idTipoHuevo) {
+				switch ($producidosReciente[$i]->idTipoHuevo) {
 					case 1:
-						$huevosGrandes[1] += $producidos[$i]->suma; 
+						$caducidad['info'][1] += $producidosReciente[$i]->suma; 
 						break;
 					case 2:
-						$huevosMedianos[1] += $producidos[$i]->suma; 
+						$caducidad['info'][2] += $producidosReciente[$i]->suma; 
 						break;
 					case 3: 
-						$huevosPequenos[1] += $producidos[$i]->suma; 
+						$caducidad['info'][3] += $producidosReciente[$i]->suma; 
 						break;
 				}
-				
-			}else if (strtotime($producidos[$i]->fechaInventarioProduccion)  >= strtotime ( '-15 day' , strtotime ( $fecha )) && strtotime($producidos[$i]->fechaInventarioProduccion)  <= strtotime ( '-11 day' , strtotime ( $fecha ))) {
+			}else if ($this->fechaMayor($producidosReciente[$i]->fechaInventarioProduccion, $fecha, '-15 day', '11 day')) {
 
-				switch ($producidos[$i]->idTipoHuevo) {
+				switch ($producidosReciente[$i]->idTipoHuevo) {
 					case 1:
-						$huevosGrandes[2] += $producidos[$i]->suma; 
+						$caducidad['warning'][1] += $producidosReciente[$i]->suma; 
 						break;
 					case 2:
-						$huevosMedianos[2] += $producidos[$i]->suma; 
+						$caducidad['warning'][2] += $producidosReciente[$i]->suma; 
 						break;
 					case 3: 
-						$huevosPequenos[2] += $producidos[$i]->suma; 
+						$caducidad['warning'][3] += $producidosReciente[$i]->suma; 
 						break;
 				}
-			
-			}else if (strtotime($producidos[$i]->fechaInventarioProduccion)  >= strtotime ( '-20 day' , strtotime ( $fecha )) && strtotime($producidos[$i]->fechaInventarioProduccion)  <= strtotime ( '-16 day' , strtotime ( $fecha ))) {
+			}else if ($this->fechaMayor($producidosReciente[$i]->fechaInventarioProduccion, $fecha, '-20 day', '16 day')) {
 
-				switch ($producidos[$i]->idTipoHuevo) {
+				switch ($producidosReciente[$i]->idTipoHuevo) {
 					case 1:
-						$huevosGrandes[3] += $producidos[$i]->suma; 
+						$caducidad['danger'][1] += $producidosReciente[$i]->suma; 
 						break;
 					case 2:
-						$huevosMedianos[3] += $producidos[$i]->suma; 
+						$caducidad['danger'][2] += $producidosReciente[$i]->suma; 
 						break;
 					case 3: 
-						$huevosPequenos[3] += $producidos[$i]->suma; 
+						$caducidad['danger'][3] += $producidosReciente[$i]->suma; 
 						break;
 				}
-				
 			}
 		}
-		if ($producido > 0) {
-			// code...
+		if ($despachados != null) {
+			// Recorriendo despachos y producidos antes de fecha para calcular los huevos restantes por despachar
+			for ($i=0; $i < count($despachados); $i++) { 
+				for ($e=0; $e < count($producido); $e++) { 
+					if ($despachados[$i]->idTipoHuevo == $producido[$e]->idTipoHuevo) {
+						if ($despachados[$i]->suma > $producido[$e]->suma) {
+							$despachados[$i]->suma = $producido[$e]->suma - $despachados[$i]->suma;
+						}else $despachados[$i]->suma = 0;
+					} 
+				}
+			}
+			// $iterando = 1;
+			// foreach ($caducidad as $iterador => $value) {
+			// 	for ($e=0; $e < count($despachados); $e++){
+			// 		if ($despachados[$e]->idTipoHuevo == 1 && $despachados[$e]->suma > 0) {
+			// 			if ($caducidad[$iterador][$iterando] >= $despachados[$e]->suma) {
+			// 				$caducidad[$iterador][$iterando] -= $despachados[$e]->suma;
+			// 				$despachados[$e]->suma = 0;
+			// 			} else{
+			// 				$despachados[$e]->suma -= $caducidad[$iterador][$iterando];
+			// 				$caducidad[$iterador][$iterando] = 0;
+			// 			}
+			// 		}
+			// 	}
+			// 	$iterando++;
+			// }
 		}
-		for ($i = count($huevosGrandes)-1; $i >= 0; $i--) {
-		if ($huevosGrandes[$i] > 0) {
-			$huevosGrandes[$i] -= $producido;
-		 } 
-		}
-		echo json_encode($producido);
-
-
-
-		// SELECT * FROM inventarioproduccion WHERE entrada =1 and fechaInventarioProduccion <= "2021-07-01" and fechaInventarioProduccion >= "2021-06-12" AND inventarioproduccion.idGalpon group by fechaInventarioProduccion
-
-		// SELECT * FROM inventarioproduccion INNER JOIN galponeslotes on galponeslotes.idGalpon = inventarioproduccion.idGalpon WHERE entrada =1 and fechaInventarioProduccion <= "2021-07-01" and fechaInventarioProduccion >= "2021-06-12" AND inventarioproduccion.idGalpon = 1 AND galponeslotes.activo = 1 group by fechaInventarioProduccion
-		// $nuevafecha = date ( 'Y-m-d' , $nuevafecha );
-		
+		echo json_encode($caducidad);
 	}
-	// public function fechaMayor($fechaNueva, $fechaVieja){
- // 		if ($fechaNueva  <= strtotime ( $intervalo , strtotime ( $fechaVieja ))){
-
- // 		}
-	// }
+	public function fechaMayor($fechaNueva, $fechaActual, $intervaloA, $intervaloB){
+		$res = false;
+ 		if (strtotime($fechaNueva)  >= strtotime ( $intervaloA , strtotime ( $fechaActual )) && strtotime($fechaNueva)  <= strtotime ( $intervaloB , strtotime ( $fechaActual ))){
+ 			$res = true;
+ 		}
+ 		return $res;
+	}
 }

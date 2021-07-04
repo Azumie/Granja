@@ -192,7 +192,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `tiposhuevo` (
   `idTipoHuevo` INT NOT NULL AUTO_INCREMENT,
-  `nombreTipoHuevo` VARCHAR(45) NOT NULL,
+  `nombreTipoHuevo` VARCHAR(45) NOT NULL UNIQUE,
   `activoHuevo` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`idTipoHuevo`))
 ENGINE = InnoDB;

@@ -16,7 +16,7 @@
 					<form id="formularioGalponeros" class="col-lg-5 mb-3 mb-lg-0 ">
 						<!-- DOCUMENTO -->
 						<div class="row">
-							<h6 class="col-12">A continuación... <br>Ingrese los datos del <em>Galponero:</em></h6>
+							<h6 class="col-12">A continuación... Ingrese los datos del Galponero:</h6>
 							<div class="input-group input-group-sm mb-3 col-md-10">
 								<div class="input-group-prepend">
 									<label for="idGalponero" class="input-group-text">
@@ -27,7 +27,7 @@
 									<option>V</option>
 									<option>R</option>
 								</select>
-								<input type="text" name="documentoGalponero" id="documentoGalponero" class="form-control">
+								<input type="text" name="documentoGalponero" id="documentoGalponero" class="form-control" placeholder="Número de cédula">
 							</div>
 							<div class="form-check col-md-2 mt-1">
 								<input class="form-check-input" type="checkbox" id="activoGalponero" name="activoGalponero" disabled checked>
@@ -43,7 +43,7 @@
 									Nombres
 								</label>
 							</div>
-							<input type="text" name="nombresGalponero" id="nombresGalponero" class="form-control" placeholder="Antonella Alessandra Lourdes">
+							<input type="text" name="nombresGalponero" id="nombresGalponero" class="form-control" placeholder="Nombres del galponero">
 						</div>
 						<!-- APELLIDOS Galponero -->
 						<div class="input-group input-group-sm mb-3 ">
@@ -52,7 +52,7 @@
 									Apellidos
 								</label>
 							</div>
-							<input type="text" name="apellidosGalponero" id="apellidosGalponero" class="form-control" placeholder="Mujica Navarro">
+							<input type="text" name="apellidosGalponero" id="apellidosGalponero" class="form-control" placeholder="Apellidos del galponero">
 						</div>
 						<!-- TELEFONO	 -->
 						<div class="input-group input-group-sm mb-3 ">
@@ -70,12 +70,12 @@
 									Email
 								</label>
 							</div>
-							<input class="form-control" type="email" id="emailGalponero" name="emailGalponero" placeholder="ejemplo@gmail.com"></input>
+							<input class="form-control" type="email" id="emailGalponero" name="emailGalponero" placeholder="Email del galponero"></input>
 						</div>
 						<!-- BOTONES GUARDAR Y CANCELAR -->
 						<div class="row justify-content-center d-flex">
-							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><strong>Guardar</strong></button>
+							<button class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><strong>Cancelar</strong></button>
 						</div>
 					</form> 
 					<!-- TABLA COMPRAS PREVIAMENTE REGISTRADAS -->

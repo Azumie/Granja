@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
  document.getElementById('fechaHasta').value = fechaHoy();
  obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idGalponInicio'), ['idGalpon', 'idGalpon'], '', llenarSelect);
  obtenerObjeto('?c=Inicio&m=mostrarInicioProductos','#tablaInicioProductos',['nombreTipoProducto', 'nombreProducto', 'nombrePersona', 'fecha', 'suma'], '.', llenarTabla);
- // llenarCards(formularioInicio, '?c=Inicio&m=tablaCaducidad', 'cardProduccion', cardsInicio); 
+ obtenerObjeto('?c=Inicio&m=tablaCaducidad','#inicioCaducidad',[], '', tablaCaducidad);
 
 formularioInicio.addEventListener('submit', (e)=>{
   e.preventDefault();
@@ -37,8 +37,7 @@ formularioInicio.addEventListener('submit', (e)=>{
     formularioProveedores.addEventListener('submit', (e) =>{
       e.preventDefault();
       let probar = formularioProveedores.documentoProveedor.value;
-    // Validando Fecha
-    // if (probar != null && probar != '') {
+    if (probar != null && probar != '') {
       if (probar != '' && (probar > 5000000 && probar < 40000000) && !probar.match(/[^0-9]/)) {
         probar = formularioProveedores.nombresProveedor.value;
         if (probar.match(/[^\D]/) == null && probar.length < 45 && probar.length > 1) {
@@ -47,25 +46,22 @@ formularioInicio.addEventListener('submit', (e)=>{
             probar = formularioProveedores.telefonoProveedor.value;
             if (probar.match(/(^|416|424|412|426| {3})([0-9]+)/) && probar.length == 11 && !probar.match(/\D/)) {
               probar = formularioProveedores.emailProveedor.value;
-              if (probar.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/) && probar.length <= 30) {
-                alert('pasamos');
+              if (probar.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$/) && probar.length <= 30) {  
+                let metodo;
+                if (elementoExiste('documentoProveedor')) {
+                  let inputDocumento = document.getElementById('documentoProveedor');
+
+                  metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
+                  metodo += 'Proveedor';
+                }
+                agragarObjetoBD(formularioProveedores, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
               }
             }else alert('Error en el teléfono ingresado');
           }else alert('Error en el apellido del proveedor');
         }else alert('Error en el nombre del proveedor');
-          // (^416|424|412|426| {3})([0-9]+)
-    //     if (document.getElementById('nombresProveedor').value.match(/[^\D]/)== null){
-    // console.log('chido')} else console.log('nopo')
       }else alert('Error el documento no puede contener letras o estar vacío');
-      // let metodo; ^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+[a-zA-Z]{3})+$
-      // if (elementoExiste('documentoProveedor')) {
-      //   let inputDocumento = document.getElementById('documentoProveedor');
-
-      //   metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
-      //   metodo += 'Proveedor';
-      // }
-      // agragarObjetoBD(formularioProveedores, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerProveedor', '#tablaProveedor', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
-    });
+    }
+  });
 
     editarObjetoBD(
       formularioProveedores,
@@ -839,7 +835,8 @@ if(elementoExiste('formularioAgregarGalpon')){
   }
   initForm();
   // Rellenando tabla con la información de los Galpones
-  // obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon', llenarTabla);
+
+  // modalGalpones();
   // Obteniendo formulario del Módulo Galpón
   // Evento que ocurrirá al presionar el botón de guardado en el módulo de Galpón
   formularioAgregarGalpon.addEventListener('submit',function(e){
@@ -862,15 +859,16 @@ if(elementoExiste('formularioAgregarGalpon')){
             // Agregando Galpón
             insertBD(formularioAgregarGalpon, '?c=Galpon&m=agregarGalpon');
             initForm();
+            // modalGalpones();
           }else alert('Error al escoger el tipo de Confinamiento');
         }else alert('Error al indicar Área Útil');
       }else alert('Error en número galpón');
     }    
   })
 
-  document.getElementById('resetFormularioGalpon').addEventListener('click', () => {
-    console.log('helo')
-  });
+  document.getElementById('cancelarGalpones').addEventListener('click', (e)=>{
+    // modalGalpones();
+  })
 }
   // VAMOS A LEER LA URL
 

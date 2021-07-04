@@ -95,17 +95,8 @@ class GestionAvesControlador {
 	public function agregarOperacionGalpon(){
 		if ((isset($_POST['idGalponEnLote'], $_POST['fechaOperacion'], $_POST['cantidadProducto']))) {
 			try {
-				$ultID = $this->constructorSQL->select('inventario')
-					->where('fechaOperacion', '=', $_POST['fechaOperacion'])
-					->ejecutarSQL();
-				if (!empty($ultID)) {
-					$ultID = $ultID[0]->idInventario;
-					echo json_encode($ultID);
-				}else {
-					echo json_encode('no esta vacio');
 					$ultID = $this->constructorSQL->insert('inventario',['fechaOperacion' => $_POST['fechaOperacion'], 'entrada' => 0])
 						->ejecutarSQL();
-				}
 
 				$this->constructorSQL->select('galponeslotes')->where('activoGalponeLote', '=', '1')->where('idGalpon', '=', $_POST['idGalponEnLote']);
 				$galponLote = $this->constructorSQL->ejecutarSQL();
