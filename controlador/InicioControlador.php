@@ -71,6 +71,12 @@ class InicioControlador {
 		echo json_encode($tabla);
 	}
 
+	public function graficoInicio(){
+		$res = $this->constructorSQL->select('inventarioproduccion', 'tiposhuevo.nombreTipoHuevo, sum(inventarioproduccion.cantidadProduccion) as suma')->innerJoin('galponeslotes','galponeslotes.idGalpon', '=', 'inventarioproduccion.idGalpon')->innerJoin('tiposhuevo', 'tiposhuevo.idTipoHuevo', '=', 'inventarioproduccion.idTipoHuevo')->where('galponeslotes.activo', '=', 1)->where('inventarioproduccion.entrada', '=', 1)->groupBy('inventarioproduccion.idTipoHuevo')->ejecutarSQL();
+		echo json_encode($res);
+		// SELECT tiposhuevo.nombreTipoHuevo, sum(inventarioproduccion.cantidadProduccion) as suma FROM inventarioproduccion inner JOIN galponeslotes on galponeslotes.idGalpon = inventarioproduccion.idGalpon INNER JOIN tiposhuevo on tiposhuevo.idTipoHuevo = inventarioproduccion.idTipoHuevo where galponeslotes.activo = 1 and inventarioproduccion.entrada = 1 GROUP BY inventarioproduccion.idTipoHuevo
+	}
+
 		// SELECT sum(cantidadProduccion) as suma, idTipoHuevo, fechaInventarioProduccion from inventarioproduccion where entrada =1 and fechaInventarioProduccion <= '2021-07-03'and fechaInventarioProduccion >= '2021-06-13' GROUP BY fechaInventarioProduccion, idTipoHuevo
 	public function tablaCaducidad(){
 		// Fecha actual

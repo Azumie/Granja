@@ -7,7 +7,7 @@
 			</div>
 			<div class="col-12">
 				<!-- action="?c=login&m=login" -->
-				<form method="post" action="?c=login&m=login" id="formLogin">
+				<form id="formLogin">
 					<div class="form-group">
 						<strong class="d-block text-center  text-muted">Usuario</strong>
 						<input type="text" name="nombreUsuario" class="form-control" required minlength="4" maxlength="20">
@@ -17,7 +17,7 @@
 						<input type="password" name="claveUsuario" class="form-control" required minlength="6" maxlength="15">
 					</div>
 					<button class="btn btn-primary btn-block">Aceptar</button>
-					<button class="btn  btn-block text-muted" data-toggle="modal" data-target="#CambiarContra" type="button">¿Olvidó su contraseña?</button>
+					<button type="button" class="btn btn-block text-muted" data-toggle="modal" data-target="#CambiarContra">¿Olvidó su contraseña?</button>
 				</form>
 			</div>
 		</div>

@@ -23,7 +23,6 @@ function prepararRequire ($string){
 	$string = str_replace(' ', '', $string);
 	return $string;
 }
-
 $menuItems = 
 [
 	'Inicio'=> 'Inicio',
@@ -60,7 +59,6 @@ $menuItems =
 
 define ('MENUITEMS', $menuItems);
 $controlador = isset($_GET['c'], $_SESSION['nombreUsuario']) ? $_GET['c'] : 'Login';
-$controlador = isset($_GET['c']) ? $_GET['c'] : 'Login';
 $metodo		 = isset($_GET['m']) ? $_REQUEST['m'] : 'index';
 define('CONTROLADOR', $controlador);
 $controlador = ucwords($controlador).'Controlador';
