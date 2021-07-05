@@ -1,17 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const formularioInicio = document.getElementById('formularioInicio');
- document.getElementById('fechaDesde').value = fechaHoy();
- document.getElementById('fechaHasta').value = fechaHoy();
- obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idGalponInicio'), ['idGalpon', 'idGalpon'], '', llenarSelect);
- obtenerObjeto('?c=Inicio&m=mostrarInicioProductos','#tablaInicioProductos',['nombreTipoProducto', 'nombreProducto', 'nombrePersona', 'fecha', 'suma'], '.', llenarTabla);
- obtenerObjeto('?c=Inicio&m=tablaCaducidad','#inicioCaducidad',[], '', tablaCaducidad);
-
-formularioInicio.addEventListener('submit', (e)=>{
-  e.preventDefault();
-  llenarCards(formularioInicio, '?c=Inicio&m=mostrarAlimentacion&idTipoProducto=1', 'cardAlimentacion', cardsInicio);
-  llenarCards(formularioInicio, '?c=Inicio&m=mostrarMortalidad&idTipoProducto=3', 'cardMortalidad', cardsInicio);
-  llenarCards(formularioInicio, '?c=Inicio&m=mostrarProduccion', 'cardProduccion', cardsInicio); 
-})
+  if (elementoExiste('formularioInicio')) {
+     const formularioInicio = document.getElementById('formularioInicio');
+     document.getElementById('fechaDesde').value = fechaHoy();
+     document.getElementById('fechaHasta').value = fechaHoy();
+     obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idGalponInicio'), ['idGalpon', 'idGalpon'], '', llenarSelect);
+     obtenerObjeto('?c=Inicio&m=mostrarInicioProductos','#tablaInicioProductos',['nombreTipoProducto', 'nombreProducto', 'nombrePersona', 'fecha', 'suma'], '.', llenarTabla);
+     obtenerObjeto('?c=Inicio&m=tablaCaducidad','#inicioCaducidad',[], '', tablaCaducidad);
+     llenarCards(formularioInicio, '?c=Inicio&m=graficoInicio', '', graficoInicio);
+     
+     formularioInicio.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        llenarCards(formularioInicio, '?c=Inicio&m=mostrarAlimentacion&idTipoProducto=1', 'cardAlimentacion', cardsInicio);
+        llenarCards(formularioInicio, '?c=Inicio&m=mostrarMortalidad&idTipoProducto=3', 'cardMortalidad', cardsInicio);
+        llenarCards(formularioInicio, '?c=Inicio&m=mostrarProduccion', 'cardProduccion', cardsInicio); 
+      })
+  }
+ 
 
   //&& class === modal fade
   if (elementoExiste('formularioAgregarProducto')) {
@@ -512,6 +516,7 @@ formularioInicio.addEventListener('submit', (e)=>{
 
   if(elementoExiste('formularioAgregarAlimentacion')){
     const formularioAgregarAlimentacion = document.getElementById('formularioAgregarAlimentacion');
+
     const tablaAlimentacion = new Tabla([], 'tablaAlimentacion', 'id', true, {
       color: 'info', icon: 'pen', nombre: 'editar',
       funcion: async () => {
@@ -878,232 +883,37 @@ if(elementoExiste('formularioAgregarGalpon')){
     // modalGalpones();
   })
 }
-  // VAMOS A LEER LA URL
 
-  // let url = window.location.href;
-  // let variablesGet = url.split('?')[1];
-  // variablesGet = variablesGet.split('&');
-  // variablesGet = variablesGet.map((item) => {
-  //   item = item.split('=');
-  //   console.log(item[1]);
-  //   let variable = {nombre: item[0], valor: item[1]};
-
-  //   if(elementoExiste('formAgregarGalpon') && item[1] == 'Galpon'){
-  //     form('Granja', 'Granjas');
-  // //     form('Granja', 'Granjas');
-  // // form('TipoPersona', 'TiposPersona');
-  //   } {console.log('yes bb');}
-  //   else console.log('noup');
-  //   return item;
-  // });
-
-  // const controlador = variablesGet.find(item => item.nombre === 'c').valor;
-
-  // let modulos = {
-  //   Configuracion: [
-  //     {nombre: 'granjas', prefijo: 'Granja'},
-  //     {nombre: 'tiposhuevo', prefijo: 'TiposHuevo'}
-  //   ]
-  // }
+if (elementoExiste('formLogin')) {
+  const formLogin = document.getElementById('formLogin');
+  formLogin.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    // ?c=Inicio&m=mostrarAlimentacion&idTipoProducto=1', 'cardAlimentacion', cardsInicio)
+    llenarCards(formLogin, '?c=Login&m=accederLogin')
+  })
+}
 
 
-//   function form (prefijo, nombre) {
-//     const formObjetivo = document.getElementById(`form${prefijo}`)
+  /////////////////////////////////////////////////////////////////////
+ //                            Reportes                             //
+/////////////////////////////////////////////////////////////////////
 
-//     formObjetivo.addEventListener('submit', (e) => {
-//       e.preventDefault();
-//       const datosFormObjetivo = new FormData(formObjetivo);
-//       const metodo = elementoExiste(`id${prefijo}`) ? `editar${prefijo}` : `agregar${prefijo}`;
-//       console.log("metodo", metodo);
-// //Metodo: Agregar
-//       post(controlador, metodo, datosFormObjetivo);
-//       get(controlador, `obtener${nombre}`, `tabla${nombre}`, llenarTabla);
-//       console.log("`tabla${nombre}`", `tabla${nombre}`);
+if (elementoExiste('graficoProduccion')) {
+  document.getElementById('fechaDesdeGrafico').value = fechaHoy();
+  document.getElementById('fechaHastaGrafico').value = fechaHoy();
+  obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('galponGraficaProduccion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+  
+  let inputsGraficoProduccion = document.getElementById('inputsGraficoProduccion');
+  inputsGraficoProduccion.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    llenarCards(inputsGraficoProduccion, '?c=Reportes&m=graficaProduccion', ['nombreTipoHuevo','suma'], graficoProduccion);
 
-//       formObjetivo.reset();
-//       let mensaje = 'Granja agregada Exitosamente';
-//       if (elementoExiste(`id${prefijo}`)) {
-//         document.getElementById(`id${prefijo}`).remove();
-//         document.getElementById(`estadoForm${prefijo}`).innerText = 'Agregando...'
-//         mensaje = 'Granja editada Exitosamente';
-//       }
-//       alerta(mensaje);
-//     });
-//   }
+  })
+}
 
-  // function post (controlador, metodo, datosForm, ...funciones) {
-  //   fetch(`?c=${controlador}&m=${metodo}`, {
-  //     method: 'POST',
-  //     body: datosForm
-  //   })
-  //   .then(resp => resp.json())
-  //   .then(resp => {
-  //     console.log(resp);
-
-  //   });
-  // }
-
-  // function get (controlador, metodo, destino, funcion) {
-  //   fetch(`?c=${controlador}&m=${metodo}`)
-  //   .then(resp => resp.json())
-  //   .then(resp => {
-  //     funcion (resp, destino);
-  //   });
-  // }
-
-  // function llenarTabla (datos, tabla) {
-  //   let tbody = '';
-  //   let valores = [];
-  //   let id = '';
-  //   Object.entries(datos[0]).forEach(([key, pos]) => {
-  //     if (!key.includes('id')) {
-  //       valores.push(key);
-  //     }else {
-  //       id = key;
-  //     }
-  //   });
-
-  //   console.log(datos);
-  //   Object.entries(datos).forEach(([pos]) => {
-  //     tbody += `<tr>`
-  //     for (let e = 0; e < valores.length; e++) {
-  //       tbody += `<td>${datos[pos][valores[e]]}</td>`;
-  //     }
-  //     tbody += `<td><button id="${datos[pos][id]}" type="button"class="btn btn-sm btn-info rounded-circle editarGranja">
-  //                       <i class="fas fa-pen-fancy"></i></button></td>`
-  //     tbody += `</tr>`
-  //   });
-  //   for (var i = 0; i < 4; i++) {
-  //     tbody += `<tr>`
-  //     for (var e = 0; e <= valores.length; e++) {
-  //       tbody += `<td></td>`;
-  //     }
-  //     tbody += `</tr>`
-  //   }
-  //     document.querySelector(`#${tabla} tbody`).innerHTML = tbody;
-  // }
-
-  // AGREGAR/EDITAR GRANJA
-
-  // const formGranja = document.getElementById('formGranja');
-
-  // formGranja.addEventListener('submit', (e) =>{
-  //   e.preventDefault();
-  //   const datosAgregarGranja = new FormData(formGranja);
-
-  //   let metodo = elementoExiste('idGranja') ? 'editarGranja' : 'agregarGranja';
-
-  //   fetch(`?c=Configuracion&m=${metodo}`, {
-  //     method: 'POST',
-  //     body: datosAgregarGranja
-  //   })
-  //   .then(resp => resp.json())
-  //   .then(datos => {
-  //     obtenerGranjas('?c=Configuracion&m=obtenerGranjas', '#tablaGranjas', ['nombreGranja','ubicacionGranja'], 'idGranja');
-  //     formGranja.reset();
-  //     let mensaje = 'Granja agregada Exitosamente';
-  //     if (elementoExiste('idGranja')) {
-  //       document.getElementById('idGranja').remove();
-  //       document.getElementById('estadoFormGranja').innerText = 'Agregando...'
-  //       mensaje = 'Granja editada Exitosamente';
-  //     }
-  //     alerta(mensaje);
-  //   });
-  // });
-
-  // EDITAR - CARGAR DATA EN EL FORMULARIO
-
-  // let tablaGranjas = document.getElementById('tablaGranjas');
-
-  // tablaGranjas.addEventListener('click', (e) => {
-
-  //   console.log(e.target);
-  //   editarObjetoBD(e, 'obtenerGranjas', 'idGranja', ['nombreGranja', 'ubicacionGranja'], ['nombreGranja', 'ubicacion']);
-    // let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
-    // if (target.tagName === 'BUTTON') {
-    //   // target.attributes
-    //   let idGranja = target.getAttribute('id');
-    //   console.log(idGranja);
-    //   fetch(`?c=Configuracion&m=obtenerGranjas&idGranja=${idGranja}`)
-    //   .then(resp => resp.json())
-    //   .then(resp => {
-    //     resp = resp[0];
-    //     if (elementoExiste('idGranja')) {
-    //       document.getElementById('idGranja').value = idGranja;
-    //     }else {
-    //       let inputIdGranja = document.createElement('input');
-    //       inputIdGranja.id = 'idGranja';
-    //       inputIdGranja.name = 'idGranja';
-    //       inputIdGranja.type = 'hidden';
-    //       inputIdGranja.value = idGranja;
-    //       formGranja.appendChild(inputIdGranja);
-    //     }
-
-    //     document.getElementById('nombreGranja').value = resp.nombreGranja;
-    //     document.getElementById('ubicacionGranja').value = resp.ubicacion;
-    //     document.getElementById('estadoFormGranja').innerText = 'Editando...'
-    //   });
-    // }
-  // });
-
-  // AGREGAR/EDITAR TIPOS HUEVO
-
-  // const formTiposHuevo = document.getElementById('formTiposHuevo');
-
-  // formTiposHuevo.addEventListener('submit', (e) =>{
-  //   e.preventDefault();
-  //   const datosAgregarTipoHuevo = new FormData(formTiposHuevo);
-
-  //   let metodo = elementoExiste('idTipoHuevo') ? 'editarTipoHuevo' : 'agregarTipoHuevo';
-  //   console.log("elementoExiste('idTipoHuevo')", elementoExiste('idTipoHuevo'));
-  //   console.log(metodo);
-  //   fetch(`?c=Configuracion&m=${metodo}`, {
-  //     method: 'POST',
-  //     body: datosAgregarTipoHuevo
-  //   })
-  //   .then(resp => resp.json())
-  //   .then(resp => {
-  //     obtenerGranjas('?c=Configuracion&m=obtenerTiposHuevo', '#tablaTiposHuevo', ['nombreTipoHuevo'], 'idTipoHuevo');
-  //     formTiposHuevo.reset();
-  //     let mensaje = 'El tipo de huevo fue agregado Exitosamente';
-  //     if (elementoExiste('idTipoHuevo')) {
-  //       document.getElementById('idTipoHuevo').remove();
-  //       document.getElementById('estadoFormGranja').innerText = 'Agregando...'
-  //       mensaje = 'El tipo de huevo fue editado Exitosamente';
-  //     }
-  //     alerta(mensaje);
-  //   });
-  // });
-
-  // // EDITAR - CARGAR DATA EN EL FORMULARIO TIPOS DE HUEVO
-
-  // let tablaTiposHuevo = document.getElementById('tablaTiposHuevo');
-
-  // tablaTiposHuevo.addEventListener('click', (e) => {
-  //   let target = (e.target.tagName === 'I') ? e.target.parentElement : e.target ;
-  //   if (target.tagName === 'BUTTON') {
-  //     // target.attributes
-  //     let idTipoHuevo = target.getAttribute('id');
-  //     console.log(idTipoHuevo)
-  //     fetch(`?c=Configuracion&m=obtenerTiposHuevo&idTipoHuevo=${idTipoHuevo}`)
-  //     .then(resp => resp.json())
-  //     .then(resp => {
-  //       console.log(resp)
-  //       resp = resp[0];
-  //       if (elementoExiste('idTipoHuevo')) {
-  //         document.getElementById('idTipoHuevo').value = idTipoHuevo;
-  //       }else {
-  //         let inputIdTipoHueo = document.createElement('input');
-  //         inputIdTipoHueo.id = 'idTipoHuevo';
-  //         inputIdTipoHueo.name = 'idTipoHuevo';
-  //         inputIdTipoHueo.type = 'hidden';
-  //         inputIdTipoHueo.value = idTipoHuevo;
-  //         formTiposHuevo.appendChild(inputIdTipoHueo);
-  //       }
-
-  //       document.getElementById('nombreTipoHuevo').value = resp.nombreTipoHuevo;
-  //       // document.getElementById('ubicacionGranja').value = resp.ubicacionGranja;
-  //       document.getElementById('estadoFormTipoHuevo').innerText = 'Editando...'
-  //     });
-  //   }
-  // });
+if (elementoExiste('graficoAlimentacion')) {
+  obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponGrAlimentacion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+  document.getElementById('fechaGraficoAlimentacion').value = fechaHoy();
+  document.getElementById('fechaFinGrAlimentacion').value = fechaHoy();
+  
+}

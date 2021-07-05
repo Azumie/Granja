@@ -20,7 +20,103 @@ function obtenerObjeto (url,elemento,valores = '', id= '', funcion = '') {
   });
 }
 
-function llenarCards(formulario, url, name='', funcion){
+function graficoInicio(name, res){
+	if (res != [] || res != null) {
+		let labels = [], datos = [];
+		for (var i = 0; i < res.length; i++) {
+			labels.push(res[i]['nombreTipoHuevo']);
+			datos.push(res[i]['suma']);
+		}
+
+		let data = {
+			labels: labels,
+			datasets: [{
+				label: 'Huevos por tipo',
+				data: datos,
+				backgroundColor: [
+	      'rgba(239, 183, 62, 0.5)',
+	      'rgba(233, 84, 32, 0.5)',
+	      'rgba(23, 162, 184, 0.5)',
+	      'rgba(156, 148, 138, 0.5)',
+	    	],
+	    	borderColor: [
+	      'rgb(239, 183, 62)',
+	      'rgb(233, 84, 32)',
+	      'rgb(23, 162, 184)',
+	      'rgb(156, 148, 138)',
+	    	],
+	    	borderWidth: 1
+			}]
+		}
+		let config = {
+			type: 'bar',
+		  data: data,
+		  options: {
+		    scales: {
+		      y: {
+		        beginAtZero: true
+		      }
+		    }
+		  },
+		};
+		// console.log(labels)
+		var graficoHuevos = new Chart(
+			document.getElementById('graficoHuevos'),
+			config
+		);
+
+	}
+}
+
+function graficoProduccion(name, res){
+	if (res != [] || res != null) {
+		let labels = [], datos = [];
+		let graficos = document.getElementById("graficoProduccion");
+		
+		for (let i = 0; i < res.length; i++) {
+			labels.push(res[i][name[0]]);
+			datos.push(res[i][name[1]]);
+		}
+		let speedData = {
+labels: labels,
+datasets: [{
+  label: "Producción de huevos",
+  data: datos,
+  lineTension: 0,
+  fill: false,
+  borderColor: 'orange',
+  backgroundColor: 'transparent',
+  borderDash: [5, 5],
+  pointBorderColor: 'orange',
+  pointBackgroundColor: 'rgba(255,150,0,0.5)',
+  pointRadius: 5,
+  pointHoverRadius: 10,
+  pointHitRadius: 30,
+  pointBorderWidth: 2,
+  pointStyle: 'rectRounded'
+}]
+};
+let chartOptions = {
+  legend: {
+    display: true,
+    position: 'top',
+    labels: {
+      boxWidth: 80,
+      fontColor: 'black'
+    }
+  }
+};
+let lineChart = new Chart(
+		graficos, {
+    type: 'line',
+    data: speedData,
+    options: chartOptions
+});
+// console.log(graficos.data.datasets.);
+	}
+}
+
+function llenarCards(formulario, url, name='', funcion=''){
 	let datos = new FormData(formulario);
 	fetch(url,{
 		method: 'POST',
@@ -28,8 +124,16 @@ function llenarCards(formulario, url, name='', funcion){
 	})
 	.then(res => res.json())
 	.then(res => {
-		// console.log(res);
+		console.log(res);
+		if (funcion != '') {
 		funcion(name, res);
+		} else if (typeof res == 'Array' || typeof res == 'object') {
+			console.log('Es un objeto')
+		}else if(res.split(' ')[0] == 'Error:'){
+			alerta(res, 'danger')
+		}else if(res.split('=')[0] == '?c') {
+			 window.location.replace(res);
+		}
 	});
 }
 

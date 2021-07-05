@@ -11,7 +11,7 @@
 		</div>
 	</div>
 	<div class="card-body px-5">
-		<div class="row mx-5">
+		<form class="row mx-5">
 
 				<!-- DESDE -->
 
@@ -20,7 +20,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text">Desde</span>
 					</div>
-					<input type="date" name="fechaInicio" id="fechaInicio" class="form-control">
+					<input type="date" name="fechaGraficoAlimentacion" id="fechaGraficoAlimentacion" class="form-control">
 				</div>
 			</div>
 
@@ -31,46 +31,26 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text">Hasta</span>
 					</div>
-					<input type="date" name="fechaFin" id="fechaFin" class="form-control">
+					<input type="date" name="fechaFinGrAlimentacion" id="fechaFinGrAlimentacion" class="form-control">
 				</div>
 			</div>
 
-				<!-- Granja -->
+				<!-- Galpon -->
 				
 			<div class="col-md-6">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">Granja</span>
 					</div>
-					<select name="idGranja" id="idGranja" class="form-control">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-					</select>
+					<select name="idGalponGrAlimentacion" id="idGalponGrAlimentacion" class="form-control"></select>
 				</div>
 			</div>
-
-				<!-- Calpon -->
-				
-			<div class="col-md-6">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text">Galpón</span>
-					</div>
-					<select name="idGranja" id="idGranja" class="form-control">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-					</select>
-				</div>
+		</form>
+		<div class="row">
+			<div class="col-12 d-block contenedor-grafico" style="height: 20em">
+				<canvas id="graficoAlimentacion" style="max-height:20em"></canvas>
+				<br>
 			</div>
-
-				<!-- GRAFICO -->
-
-				<div class="col-12 contenedor-grafico" style="height: 20em"></div>
-
 		</div>
 	</div>
 </div>
