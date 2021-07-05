@@ -37,6 +37,9 @@
 							</div>
 							<input type="number" class="form-control" id="GallinaMortalidad" name="cantidadProducto" placeholder="Cant. de Gallinas">
 						</div>
+
+						<input type="hidden" name="idInventario" id="idInventarioMortalidad" disabled="true">
+
 						<div class="row justify-content-center d-flex">
 							<button class="btn btn-primary btn-sm col-5 form-control text-white"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
 							<button class="btn btn-outline-danger btn-sm col-5 form-control ml-4"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
@@ -44,37 +47,14 @@
 					</form>
 					<div class="col-lg-7 table-scrolly">
 						<p>Cantidad de gallinas que han perecido a lo largo del tiempo.</p>
-						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaMortalidad">
+						<table class="table table-striped table-responsive-sm p-0 tablas table-sm text-center" id="tablaMortalidad">
 							<thead class="table-info" >
-								<th>Fecha</th>
-								<th>Galpón</th>
-								<th>Mortalidad</th>
-								<th>%</th>
-								<th>Acción</th>
+								<th campo='fechaOperacion'>Fecha</th>
+								<th campo='numeroGalpon'>Galpón</th>
+								<th campo='cantidadProducto'>Cantidad</th>
+								<th campo='acciones'>Acción</th>
 							</thead>
-							<tbody class="table-light">
-								<tr>
-									<td>11/06/2021</td>
-									<td>1</td>
-									<td>2</td>
-									<td>0,2</td>
-									<!-- BUTTONS / MOSTRAR-EDITAR-ELIMINAR -->
-									<td>
-										<button class="btn btn-info rounded-circle btn-sm icono"><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
+							<tbody>
 							</tbody>
 						</table>
 					</div>

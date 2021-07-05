@@ -516,27 +516,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if(elementoExiste('formularioAgregarAlimentacion')){
     const formularioAgregarAlimentacion = document.getElementById('formularioAgregarAlimentacion');
+    const idGalpon = document.getElementById('idAlimentandoGalpon');
+    const idAlimento = document.getElementById('alimentoAUsar');
+    const cantidadProducto = document.getElementById('cantidadAlimento');
+    const fechaAlimentacion = document.getElementById('fechaDeAlimentacion');
+    const idInventario = document.getElementById('idInventarioAlimentacion');
 
-    const tablaAlimentacion = new Tabla([], 'tablaAlimentacion', 'id', true, {
+    const tablaAlimentacion = new Tabla([], 'tablaAlimentacion', 'idInventario', true, {
       color: 'info', icon: 'pen', nombre: 'editar',
-      funcion: async () => {
-        console.log('hola estamos editando alimentacion gg');
+      funcion: async (x) => {
+        const idFila = x.fila.getAttribute('idRow');
+        const filaDatos = x.datos.find(fila => fila.idInventario == idFila);
+
+        fechaAlimentacion.value = filaDatos.fechaOperacion;
+        fechaAlimentacion.setAttribute('readonly', 'true');
+        idInventario.removeAttribute('disabled');
+        idInventario.value = filaDatos.idInventario;
+        idGalpon.innerHTML = `<option value='${filaDatos.idGalpon}' selected>${filaDatos.idGalpon}</option>`;
+        idAlimento.innerHTML = `<option value='${filaDatos.idAlimento}' selected>${filaDatos.nombreProducto}</option>`;
+        cantidadProducto.setAttribute('name', `editar[${filaDatos.idOperacionGalpon}]`);
+        cantidadProducto.value = filaDatos.cantidadProducto;
+
       }
     });
     const initForm = async () => {
-      obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', document.getElementById('idAlimentandoGalpon'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
-      obtenerObjeto('?c=Configuracion&m=obtenerProducto&tipoProducto=1', document.getElementById('alimentoAUsar'), ['idProducto', 'nombreProducto'], '', llenarSelect);    
       document.getElementById(`fechaDeAlimentacion`).value = fechaHoy();
       const alimentacion = await selectBD('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1');
       // console.log("alimentacion", alimentacion);
       tablaAlimentacion.update(alimentacion);
+
+      cantidadProducto.setAttribute('name', `agregar[1]`);
+      fechaAlimentacion.value = fechaHoy();
+      fechaAlimentacion.removeAttribute('readonly');
+      idGalpon.innerHTML = `<option disabled selected>Elija el Galpon</option>`;
+      idAlimento.innerHTML = `<option disabled selected>Elija la Alimentacion</option>`;
+      obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', idGalpon, ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+      obtenerObjeto('?c=Configuracion&m=obtenerProducto&tipoProducto=1', idAlimento, ['idProducto', 'nombreProducto'], '', llenarSelect);    
     };
 
     // tablaAlimentacion
     formularioAgregarAlimentacion.addEventListener('submit', (e)=>{
       e.preventDefault();
       (async () => {
-        insertBD(formularioAgregarAlimentacion ,'?c=GestionAves&m=agregarOperacionGalpon', false);
+        insertBD(formularioAgregarAlimentacion ,'?c=InventarioGeneral&m=agregarOperacionGalpon', false);
         initForm();
       })();
       // agragarObjetoBD(formularioAgregarAlimentacion, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1', '#tablaAlimentacion', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
@@ -645,15 +667,54 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 if (elementoExiste('formularioMortalidad')) {
+  // idInventarioMortalidad
   const formularioMortalidad = document.getElementById('formularioMortalidad');
-    obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponEnLoteMortalidad'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
-    document.getElementById('fechaMortalidad').value = fechaHoy();
-    obtenerObjeto('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['fechaOperacion' ,'idGalpon', 'cantidadProducto','cantidadGallinas'], 'idInventario', llenarTabla);
-    
-    formularioMortalidad.addEventListener('submit', (e) =>{
-      e.preventDefault();
-      agragarObjetoBD(formularioMortalidad, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3','#tablaMortalidad', ['fechaOperacion' ,'idGalpon', 'cantidadProducto','cantidadGallinas'], 'idInventario');
-    });
+  const idGalpon = document.getElementById('idGalponEnLoteMortalidad');
+  const cantidadProducto = document.getElementById('GallinaMortalidad');
+  const fechaAlimentacion = document.getElementById('fechaMortalidad');
+  const idInventario = document.getElementById('idInventarioMortalidad');
+
+  const tablaMortalidad = new Tabla([], 'tablaMortalidad', 'idInventario', true, {
+    color: 'info', icon: 'pen', nombre: 'editar',
+    funcion: async (x) => {
+      const idFila = x.fila.getAttribute('idRow');
+      const filaDatos = x.datos.find(fila => fila.idInventario == idFila);
+
+      fechaAlimentacion.value = filaDatos.fechaOperacion;
+      fechaAlimentacion.setAttribute('readonly', 'true');
+      idInventario.removeAttribute('disabled');
+      idInventario.value = filaDatos.idInventario;
+      idGalpon.innerHTML = `<option value='${filaDatos.idGalpon}' selected>${filaDatos.idGalpon}</option>`;
+      cantidadProducto.setAttribute('name', `editar[${filaDatos.idOperacionGalpon}]`);
+      cantidadProducto.value = filaDatos.cantidadProducto;
+
+    }
+  });
+  const initForm = async () => {
+    document.getElementById(`fechaDeAlimentacion`).value = fechaHoy();
+    const mortalidad = await selectBD('?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=3');
+    console.log("mortalidad", mortalidad);
+    // console.log("alimentacion", alimentacion);
+    tablaMortalidad.update(mortalidad);
+
+    cantidadProducto.setAttribute('name', `agregar[2]`);
+    fechaAlimentacion.value = fechaHoy();
+    fechaAlimentacion.removeAttribute('readonly');
+    idGalpon.innerHTML = `<option disabled selected>Elija el Galpon</option>`;
+    obtenerObjeto('?c=GestionAves&m=obtenerGalponesLotes', idGalpon, ['idGalpon', 'numeroGalpon'], '', llenarSelect);
+  };
+
+  // tablaMortalidad
+  formularioMortalidad.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    (async () => {
+      const respuesta = insertBD(formularioMortalidad ,'?c=InventarioGeneral&m=agregarOperacionGalpon', false);
+      console.log("respuesta", respuesta);
+      initForm();
+    })();
+    // agragarObjetoBD(formularioAgregarAlimentacion, '?c=GestionAves&m=agregarOperacionGalpon', '?c=GestionAves&m=obtenerAlimentacion&idTipoProducto=1', '#tablaMortalidad', ['fechaOperacion', 'numeroGalpon', 'nombreProducto', 'cantidadProducto'], 'idInventario');
+  })
+  initForm();
 }
 
 if (elementoExiste('formularioDespachos')) {
