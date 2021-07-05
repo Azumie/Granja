@@ -40,7 +40,9 @@
 									</label>
 								</div>
 								<input type="text" name="precinto" id="precinto" class="form-control" placeholder='Número de precinto'>
+								<input type="hidden" name="idDespachos" id="idDespachos">
 							</div>
+
 							
 							<p class="col-12">Indique los productos vendidos y presione en el botón + para adicionarlo a la cola.</p>
 							

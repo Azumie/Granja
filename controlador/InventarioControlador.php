@@ -17,7 +17,7 @@ class InventarioControlador
 	public function agregarInventario(){
 		if (isset($_POST['fechaDespacho'], $_POST['idCliente'], $_POST['precinto'], $_POST['idTipoHuevoDespacho'], $_POST['cantidadHuevos'])) {
 			try {
-				$this->constructorSQL->select('galponeslotes', ' MIN(idGalpon) as idGalpon, idLote')->where('activoGalponeLote', '=', 1);
+				$this->constructorSQL->select('galponeslotes', ' MIN(idGalpon) as idGalpon, idLote')->where('activo', '=', 1);
 				 $lote = $this->constructorSQL->ejecutarSQL();
 				 if ($lote != []) {
 				 	$this->constructorSQL = new ConstructorSQL();

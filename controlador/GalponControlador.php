@@ -55,7 +55,7 @@ echo json_encode( 'Error: El número de Galpón ya existe.');
 	
 	public function obtenerGalpones(){
 		try {
-			// $this->ConstructorSQL->select('galpones', ' galpones.*, galponeslotes.cantidadGallinas, sum(operaciongalpon.cantidadProducto) as suma')->innerJoin('operaciongalpon', 'operaciongalpon.idGalpon', '=', 'galpones.idGalpon')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'galpones.idGalpon')->where('galponeslotes.activoGalponeLote', '=', '1')->where('operaciongalpon.idProducto', '=', 3)->groupBy('galpones.idGalpon');
+			// $this->ConstructorSQL->select('galpones', ' galpones.*, galponeslotes.cantidadGallinas, sum(operaciongalpon.cantidadProducto) as suma')->innerJoin('operaciongalpon', 'operaciongalpon.idGalpon', '=', 'galpones.idGalpon')->innerJoin('galponeslotes', 'galponeslotes.idGalpon', '=', 'galpones.idGalpon')->where('galponeslotes.activo', '=', '1')->where('operaciongalpon.idProducto', '=', 3)->groupBy('galpones.idGalpon');
 			// $galpon = $this->ConstructorSQL->ejecutarSQL();
 			// for ($i=0; $i < count($galpon); $i++) { 
 			// 	if ($galpon[$i]->suma != null) {

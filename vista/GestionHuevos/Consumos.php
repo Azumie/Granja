@@ -1,4 +1,4 @@
-<div class="modal fade" id="Consumos">
++<div class="modal fade" id="Consumos">
 	<div class="modal-dialog modal-fluid" role="document">
 		<div class="modal-content">
 			<div class="modal-header iconosModales mt-2 mt-md-0">
@@ -33,53 +33,22 @@
 						<div class="input-group input-group-sm mb-3">
 						  	<div class="input-group-prepend">
 						    	<label for="fechaConsumo" class="input-group-text">
-						    		Fecha Compra
+						    		Fecha Consumo
 						    	</label>
 						  	</div>
 						  	<input class="form-control" type="date" id="fechaConsumo" name="fechaOperacion"></input>
 						</div>
 
+						<input type="hidden" name="idInventario" id="idInventarioConsumo" disabled="true">
+
 						<hr>
-
-						<div class="row">
-
-							<!-- PRODUCTO -->
-
-							<div class="input-group input-group-sm mb-3  col-md-6">
-							  	<div class="input-group-prepend">
-							    	<label for="idProducto" class="input-group-text">
-							    		Producto
-							    	</label>
-							  	</div>
-								<select id="idProducto" class="form-control" name="alimentoAUsar">
-									<option selected disabled>Elegir Galpón en Lote</option>
-								</select>
-							</div>
-
-							<!-- CANTIDAD -->
-
-							<div class="input-group input-group-sm mb-3  col-md-11">
-							  	<div class="input-group-prepend">
-							    	<label for="cantidadProductoConsumido" class="input-group-text">
-							    		Cantidad
-							    	</label>
-							  	</div>
-							  	<input class="form-control" type="number" id="cantidadProductoConsumido" name="cantidadProducto"></input>
-							</div>
-
-							<!-- BOTON AGREGAR A DETALLE CONSUMO -->
-
-							<button class="btn btn-info font-weight-bold btn-sm  col-md-auto h-100">+</button>
-						</div>
 
 						<!-- TABLA DEL DETALLE DE LA COMPRA -->
 
 						<table class="table table-striped table-responsive-lg p-0 tablas table-sm text-center" id="tablaDetalleConsumos">
 							<thead class="table-warning">
-								<th campo='nombreTipoProducto'>Tipo</th>
 								<th campo='nombreProducto'>Producto</th>
 								<th campo='cantidadProducto'>Cantidad</th>
-								<th campo='acciones'>Acciones</th>
 							</thead>
 							<tbody>
 							</tbody>
