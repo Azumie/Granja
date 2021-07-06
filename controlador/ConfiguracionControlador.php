@@ -96,11 +96,18 @@ class ConfiguracionControlador
 	public function agregarProductos(){
 		if (isset($_POST['idProveedorProducto'], $_POST['idTipoProducto'], $_POST['nombreProducto'])) {
 			try {
-				$this->constructorSQL->insert('productos', ['documentoProveedor' => $_POST['idProveedorProducto'],'idTipoProducto' => $_POST['idTipoProducto'], 'nombreProducto' => $_POST['nombreProducto']]);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode('Eres una ganadora');
+				$idProducto = $this->constructorSQL->insert('productos', [
+					'idTipoProducto' => $_POST['idTipoProducto'], 
+					'nombreProducto' => $_POST['nombreProducto']
+				])->ejecutarSQL();
+				$this->constructorSQL->insert('proveedoresproducto', [
+					'documentoProveedor' => $_POST['idProveedorProducto'],
+					'idProducto' => $idProducto
+				])->ejecutarSQL();
+				echo json_encode('Exito: El Producto fue agregado exitosamente');
 			} catch (PDOException $e) {
-				echo json_encode('Fallida');
+				echo json_encode($e->getMessage());
+				// echo json_encode('Error: No se puedo agregar el Producto');
 			}
 		}else echo json_decode('no existe');
 	}

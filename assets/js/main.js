@@ -20,12 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
   //&& class === modal fade
   if (elementoExiste('formularioAgregarProducto')) {
     const formularioAgregarProducto = document.getElementById('formularioAgregarProducto');
+    console.log("formularioAgregarProducto", formularioAgregarProducto);
     obtenerObjeto('?c=Configuracion&m=obtenerTipoProducto', document.getElementById('idTipoProducto'), ['idTipoProducto', 'nombreTipoProducto'], '', llenarSelect);
     obtenerObjeto('?c=Configuracion&m=obtenerProveedor', document.getElementById('idProveedorProducto'), ['documento', 'nombrePersona'], '', llenarSelect);
     //Presionar botón Guardar en Productos se enviará el Formulario
     formularioAgregarProducto.addEventListener('submit',function(e){
       e.preventDefault();
       agragarObjetoBD(formularioAgregarProducto, '?c=Configuracion&m=agregarProductos', '?c=Configuracion&m=obtenerProducto', '#tablaProducto', ['nombreProducto', 'documentoProveedor'], 'documento');
+      console.log('hiellodsa')
     })
   }
 
@@ -173,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         metodo = inputDocumento.getAttribute('editar') != null ? 'editar' : 'agregar';
         metodo += 'Cliente';
+        console.log(metodo)
       }
       agragarObjetoBD(formularioClientes, `?c=Configuracion&m=${metodo}`, '?c=Configuracion&m=obtenerCliente', '#tablaCliente', ['documento', 'nombrePersona','apellidosPersona', 'telefonoPersona', 'emailPersona', 'activoPersona'], 'documento');
     });
@@ -194,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     );
   }
-
   // FORMULARIO USUARIO
 
   if(elementoExiste('formularioUsuario')){
@@ -967,7 +969,8 @@ if (elementoExiste('graficoProduccion')) {
   let inputsGraficoProduccion = document.getElementById('inputsGraficoProduccion');
   inputsGraficoProduccion.addEventListener('submit', (e)=>{
     e.preventDefault();
-    llenarCards(inputsGraficoProduccion, '?c=Reportes&m=graficaProduccion', ['nombreTipoHuevo','suma'], graficoProduccion);
+    llenarCards(inputsGraficoProduccion, '?c=Reportes&m=graficaProduccion', ['graficoProduccion','nombreTipoHuevo','suma',false], graficoProduccion);
+
 
   })
 }
@@ -976,5 +979,11 @@ if (elementoExiste('graficoAlimentacion')) {
   obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponGrAlimentacion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
   document.getElementById('fechaGraficoAlimentacion').value = fechaHoy();
   document.getElementById('fechaFinGrAlimentacion').value = fechaHoy();
+  let inputsGraficoAlimentacion = document.getElementById('inputsGraficoAlimentacion');
+  inputsGraficoAlimentacion.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    llenarCards(inputsGraficoAlimentacion, '?c=Reportes&m=graficoAlimentacion', ['graficoAlimentacion','fechaOperacion','suma', true], graficoProduccion);
+    
+  })
   
 }

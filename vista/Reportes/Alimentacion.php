@@ -11,12 +11,12 @@
 		</div>
 	</div>
 	<div class="card-body px-5">
-		<form class="row mx-5">
+		<form id="inputsGraficoAlimentacion" class="row mx-5">
 
 				<!-- DESDE -->
 
 			<div class="col-md-6">
-				<div class="input-group mb-3">
+				<div class="input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">Desde</span>
 					</div>
@@ -27,7 +27,7 @@
 				<!-- HASTA -->
 
 			<div class="col-md-6">
-				<div class="input-group mb-3">
+				<div class="input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">Hasta</span>
 					</div>
@@ -38,12 +38,15 @@
 				<!-- Galpon -->
 				
 			<div class="col-md-6">
-				<div class="input-group mb-3">
+				<div class="input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">Granja</span>
 					</div>
 					<select name="idGalponGrAlimentacion" id="idGalponGrAlimentacion" class="form-control"></select>
 				</div>
+			</div>
+			<div class="col-md-6">
+				<button class="btn form-control btn-primary btn-sm">Buscar</button>
 			</div>
 		</form>
 		<div class="row">

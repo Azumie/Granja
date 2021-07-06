@@ -138,7 +138,6 @@
 								<!-- LOTE -->
 								<th campo='fechaInicio'>Fecha de Inicio</th>
 								<th campo='nombreLineaGenerica'>Linea Genetica</th>
-								<th campo='nombreLineaGenerica'>Linea Genetica</th>
 								<th campo='numeroLote'>Nuemero Lote</th>
 								<th campo='acciones'>Acciones</th>
 							</thead>

@@ -70,12 +70,17 @@ function graficoInicio(name, res){
 
 function graficoProduccion(name, res){
 	if (res != [] || res != null) {
+		
 		let labels = [], datos = [];
-		let graficos = document.getElementById("graficoProduccion");
+		let graficos = document.getElementById(name[0]);
 		
 		for (let i = 0; i < res.length; i++) {
-			labels.push(res[i][name[0]]);
-			datos.push(res[i][name[1]]);
+			if (name[3] == true) {
+				labels.push(dateFormato(res[i][name[1]]));
+			}else {
+				labels.push(res[i][name[1]]);
+			}
+			datos.push(res[i][name[2]]);
 		}
 		let speedData = {
 labels: labels,
@@ -106,22 +111,26 @@ let chartOptions = {
     }
   }
 };
+// return {
+//   grafico: graficos,
+//   data: {
+//      type: 'line',
+//     data: speedData,
+//     options: chartOptions
+//   }
+// }
 let lineChart = new Chart(
 		graficos, {
     type: 'line',
     data: speedData,
     options: chartOptions
 });
-// console.log(graficos.data.datasets.);
 	}
 }
 
 function llenarCards(formulario, url, name='', funcion=''){
-	let datos = new FormData(formulario);
-	fetch(url,{
-		method: 'POST',
-		body: datos
-	})
+		datos = new FormData(formulario);
+	fetch(url, {method: 'POST',body: datos})
 	.then(res => res.json())
 	.then(res => {
 		console.log(res);

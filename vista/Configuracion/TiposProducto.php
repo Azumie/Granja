@@ -49,27 +49,6 @@
 								<th>Proveedor</th>
 								<th>Editar</th>
 							</thead>
-							<tbody>
-								<tr>
-									<td></td>
-									<td>
-										<button class="btn btn-info btn-sm rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										<button class="btn btn-info btn-sm rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										<button class="btn btn-info btn-sm rounded-circle" data-toggle="modal" data-target='#editarGalpon'><i class="fas fa-pen-fancy"></i></button>
-									</td>
-								</tr>
-								
-							</tbody>
 						</table>
 					</div>
 				</div>
