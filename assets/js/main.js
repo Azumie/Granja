@@ -622,7 +622,7 @@ if (elementoExiste('graficoProduccion')) {
   let inputsGraficoProduccion = document.getElementById('inputsGraficoProduccion');
   inputsGraficoProduccion.addEventListener('submit', (e)=>{
     e.preventDefault();
-    llenarCards(inputsGraficoProduccion, '?c=Reportes&m=graficaProduccion', ['nombreTipoHuevo','suma'], graficoProduccion);
+    llenarCards(inputsGraficoProduccion, '?c=Reportes&m=graficaProduccion', ['graficoProduccion','fechaInventarioProduccion','suma',true], graficoProduccion);
 
   })
 }
@@ -631,5 +631,11 @@ if (elementoExiste('graficoAlimentacion')) {
   obtenerObjeto('?c=Galpon&m=obtenerGalpones', document.getElementById('idGalponGrAlimentacion'), ['idGalpon', 'numeroGalpon'], '', llenarSelect);
   document.getElementById('fechaGraficoAlimentacion').value = fechaHoy();
   document.getElementById('fechaFinGrAlimentacion').value = fechaHoy();
+  let inputsGraficoAlimentacion = document.getElementById('inputsGraficoAlimentacion');
+  inputsGraficoAlimentacion.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    llenarCards(inputsGraficoAlimentacion, '?c=Reportes&m=graficoAlimentacion', ['graficoAlimentacion','fechaOperacion','suma', true], graficoProduccion);
+    
+  })
   
 }

@@ -70,12 +70,15 @@ function graficoInicio(name, res){
 
 function graficoProduccion(name, res){
 	if (res != [] || res != null) {
+		
 		let labels = [], datos = [];
-		let graficos = document.getElementById("graficoProduccion");
+		let graficos = document.getElementById(name[0]);
 		
 		for (let i = 0; i < res.length; i++) {
-			labels.push(res[i][name[0]]);
-			datos.push(res[i][name[1]]);
+			if (name[3] == true) {
+				labels.push(dateFormato(res[i][name[1]]));
+			}
+			datos.push(res[i][name[2]]);
 		}
 		let speedData = {
 labels: labels,
