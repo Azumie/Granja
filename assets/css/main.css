@@ -1,3 +1,20 @@
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu a::after {
+  transform: rotate(-90deg);
+  position: absolute;
+  right: 6px;
+  top: .8em;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-left: .1rem;
+  margin-right: .1rem;
+}
 /* ---------------------------------------------------
     FONDO STYLE
 ----------------------------------------------------- */
@@ -336,7 +353,7 @@ a[aria-expanded="true"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #f0ad4ecc;
+    /*background: #f0ad4ecc;*/
 }
 ul.CTAs {
     padding: 20px;

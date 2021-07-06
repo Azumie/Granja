@@ -164,21 +164,21 @@ class InicioControlador {
 					} 
 				}
 			}
-			$iterando = 1;
-			foreach ($caducidad as $iterador => $value) {
-				for ($e=0; $e < count($despachados); $e++){
-					if ($despachados[$e]->idTipoHuevo == 1 && $despachados[$e]->suma > 0) {
-						if ($caducidad[$iterador][$iterando] >= $despachados[$e]->suma) {
-							$caducidad[$iterador][$iterando] -= $despachados[$e]->suma;
-							$despachados[$e]->suma = 0;
-						} else{
-							$despachados[$e]->suma -= $caducidad[$iterador][$iterando];
-							$caducidad[$iterador][$iterando] = 0;
-						}
-					}
-				}
-				$iterando++;
-			}
+			// $iterando = 1;
+			// foreach ($caducidad as $iterador => $value) {
+			// 	for ($e=0; $e < count($despachados); $e++){
+			// 		if ($despachados[$e]->idTipoHuevo == 1 && $despachados[$e]->suma > 0) {
+			// 			if ($caducidad[$iterador][$iterando] >= $despachados[$e]->suma) {
+			// 				$caducidad[$iterador][$iterando] -= $despachados[$e]->suma;
+			// 				$despachados[$e]->suma = 0;
+			// 			} else{
+			// 				$despachados[$e]->suma -= $caducidad[$iterador][$iterando];
+			// 				$caducidad[$iterador][$iterando] = 0;
+			// 			}
+			// 		}
+			// 	}
+			// 	$iterando++;
+			// }
 		}
 		echo json_encode($caducidad);
 	}

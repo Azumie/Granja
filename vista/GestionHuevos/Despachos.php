@@ -40,10 +40,10 @@
 									</label>
 								</div>
 								<input type="text" name="precinto" id="precinto" class="form-control" placeholder='Número de precinto'>
-								<input type="hidden" name="idDespachos" id="idDespachos">
 							</div>
-
 							
+							<input type="hidden" name="idDespachos" id="idDespachos" disabled="true">
+
 							<p class="col-12">Indique los productos vendidos y presione en el botón + para adicionarlo a la cola.</p>
 							
 							<table id="tablaDetalleDespacho" class="table table-responsive-sm p-0 table-sm text-center col-12 table-striped">
@@ -56,7 +56,7 @@
 							</table>
 							<div class="row justify-content-center d-flex">
 								<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
-								<button type="button" id="resetFormularioPoduccion" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
+								<button type="button" id="resetFormularioDespachos" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 							</div>
 						
 					</form><!-- col-lg-5 -->

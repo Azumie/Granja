@@ -320,12 +320,13 @@ ENGINE = InnoDB;
 -- Table `operaciongalpon`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `operaciongalpon` (
+  `idOperacionGalpon` INT NOT NULL AUTO_INCREMENT,
   `idInventario` INT NOT NULL,
   `idGalpon` INT NOT NULL,
   `idLote` INT NOT NULL,
   `cantidadProducto` INT NOT NULL,
   `idProducto` INT NOT NULL,
-  PRIMARY KEY (`idInventario`, `idGalpon`, `idLote`),
+  PRIMARY KEY (`idOperacionGalpon`),
   INDEX `fk_destinocompra_galponeslotes1_idx` (`idGalpon`),
   INDEX `fk_destinocompra_galponeslotes2_idx` (`idLote`),
   CONSTRAINT `fk_destinocompra_galponeslotes1_idx`
@@ -354,6 +355,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `compragranja`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS compragranja (
   idCompraGranja INT NOT NULL AUTO_INCREMENT,
   idGranja INT NOT NULL,

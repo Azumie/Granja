@@ -36,7 +36,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">Cantidad</span>
 							</div>
-							<input type="number" name="cantidadProducto" id="cantidadAlimento" class="form-control" min="1" max="100" required placeholder="Cantidad en Kg de alimento dado en total">
+							<input type="number" name="agregar[1]" id="cantidadAlimento" class="form-control" min="1" max="100" required placeholder="Cantidad en Kg de alimento dado en total">
 							<div class="input-group-append">
 								<span class="input-group-text">Kg</span>
 							</div>
@@ -47,21 +47,11 @@
 							</div>
 							<input type="date" class="form-control" id="fechaDeAlimentacion" name="fechaOperacion">
 						</div>
+						<input type="hidden" id="idInventarioAlimentacion" name="idInventario" disabled="true">
 						<div class="row justify-content-center d-flex">
 							<button class="btn btn-primary btn-sm col-md-5 form-control text-white ml-4 ml-md-0 mr-4 mr-md-0 mb-3"><i class="far fa-save mr-4"></i><strong>Guardar</strong><i class="far fa-save ml-4"></i></button>
 							<button type="button" class="btn btn-outline-danger btn-sm col-md-5 form-control ml-4 mr-4 mr-md-0 mb-3"><i class="fas fa-ban mr-4"></i><strong>Cancelar</strong><i class="fas fa-ban ml-4"></i></button>
 						</div>
-						<table class="table table-striped table-responsive-sm p-0 tablas table-sm text-center" id="tablaNuevaAlimentacion">
-							<thead class="table-info" >
-								<th campo='fechaOperacion'>Fecha</th>
-								<th campo='numeroGalpon'>Galpón</th>
-								<th campo='nombreProducto'>Alimento</th>
-								<th campo='cantidadProducto'>Cantidad</th>
-								<th campo='acciones'>Acción</th>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
 					</div>
 					<div class="col-lg-7">
 						<p>Edite o busque mayor información acerca del alimento suministrado</p>

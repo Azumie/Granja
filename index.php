@@ -26,35 +26,39 @@ function prepararRequire ($string){
 $menuItems = 
 [
 	'Inicio'=> 'Inicio',
-	'Gestión de Aves' => 
+	'Gestion de Granja' => 
 		[
-			'Alimentacion' => 'Alimentación',
-			'Mortalidad' => 'Mortalidad',
-			'Produccion' => 'Producción'
+			'Gestion de Aves' => [
+				'NuevoLote' => 'Nuevo Lote',
+				'Mortalidad' => 'Mortalidad',
+				'Alimentacion' => 'Alimentación',
+
+			],
+			'Configuración' => [
+				'Usuarios' => 'Usuarios',
+				'Galponeros' => 'Galponeros',
+				'TiposHuevo' => 'Tipos de Huevo',
+				'Galpones' => 'Galpones',
+				'TiposProducto' => 'Tipos de Producto',
+				// 'Granjas' => 'Granjas',
+				'Clientes' => 'Clientes',
+				'Proveedores' => 'Proveedores',
+				'LineaGenetica' => 'Líneas Genéticas',
+			],
+			'Compras' => 'Compras',
+
 		],
-	'InventarioGeneral' => [
-		'Consumos' => 'Consumos',
-		'Despachos' => 'Despachos',
-		'Compras' => 'Compras'
-	],
-	'Lote' => [
-		'LineaGenetica' => 'Líneas Genéticas',
-		'Galponeros' => 'Galponeros',
-		'NuevoLote' => 'Nuevo Lote'
-	],
+	'Gestion de Huevos' => 
+		[
+			'Produccion' => 'Recoleccion',
+			'Consumos' => 'Consumibles',
+			'Despachos' => 'Despachos de Huevos',
+		],
 	'Reportes'		=> [
 		'Alimentacion' => 'Alimentación',
 		'Mortalidad' => 'Mortalidad',
 		'Produccion' => 'Producción'
-	],
-	'Configuración' => [
-			'TiposHuevo' => 'Tipos de Huevo',
-			'Usuarios' => 'Usuarios',
-			'Granjas' => 'Granjas',
-			'Clientes' => 'Clientes',
-			'Proveedores' => 'Proveedores',
-			'Galpones' => 'Galpones'
-		]
+	]
 	];
 
 define ('MENUITEMS', $menuItems);

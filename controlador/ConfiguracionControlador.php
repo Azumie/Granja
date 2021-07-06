@@ -48,15 +48,22 @@ class ConfiguracionControlador
 
 	public function agregarTipoHuevo () {
 		if (isset($_POST['nombreTipoHuevo'])) {
+
 			if (preg_match('/[^a-zA-Zñáéíóú ]/', $_POST['nombreTipoHuevo']) == 0 && strlen($_POST['nombreTipoHuevo']) <= 45 && strlen($_POST['nombreTipoHuevo']) >= 3) {
-try {
-$this->constructorSQL->insert('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
-$this->constructorSQL->ejecutarSQL();
-echo json_encode('Éxito: El tipo de huevo fue agregado exitosamente.');
-} catch (PDOException $e) {
-echo json_encode('Error: El tipo de huevo ingresado ya existe.');
-}
-				
+				try {
+					if (isset($_POST['idTipoHuevo'])) {
+						$this->constructorSQL->update('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
+						$this->constructorSQL->where('idTipoHuevo', '=', $_POST['idTipoHuevo']);
+						$this->constructorSQL->ejecutarSQL();
+						echo json_encode('Exito: Tipo de huevo editado Exitosamente');
+					}else {
+						$this->constructorSQL->insert('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
+						$this->constructorSQL->ejecutarSQL();
+						echo json_encode('Éxito: El tipo de huevo fue agregado exitosamente.');
+					}
+				} catch (PDOException $e) {
+					echo json_encode('Error: El tipo de huevo ingresado ya existe.');
+				}
 			}else echo json_encode('Error: El tipo de huevo no debe contener caracteres especiales o dígitos.');
 		}
 	}
@@ -64,10 +71,6 @@ echo json_encode('Error: El tipo de huevo ingresado ya existe.');
 	public function editarTipoHuevo () {
 		if (isset($_POST['nombreTipoHuevo'], $_POST['idTipoHuevo'])) {
 			try {
-				$this->constructorSQL->update('tiposhuevo', ['nombreTipoHuevo' => $_POST['nombreTipoHuevo']]);
-				$this->constructorSQL->where('idTipoHuevo', '=', $_POST['idTipoHuevo']);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode('Operacion Exitosa');
 			} catch (PDOException $e) {
 				echo json_encode($e->getMessage());
 			}
@@ -264,9 +267,16 @@ echo json_encode('Error: El tipo de huevo ingresado ya existe.');
 	public function agregarLineaGenetica(){
 		if (isset($_POST['nombreLineaGenetica'])) {
 			try {
-				$this->constructorSQL->insert('lineagenetica', ['nombreLineaGenetica' => $_POST['nombreLineaGenetica']]);
-				$this->constructorSQL->ejecutarSQL();
-				echo json_encode('Eres una ganadora');
+				if (isset($_POST['idLineaGenetica'])) {
+					$this->constructorSQL->update('lineagenetica', ['nombreLineaGenetica' => $_POST['nombreLineaGenetica']])
+						->where('idLineaGenetica', '=', $_POST['idLineaGenetica'])
+						->ejecutarSQL();
+					echo json_encode('Linea Genetica editada correctamente');
+				}else {
+					$this->constructorSQL->insert('lineagenetica', ['nombreLineaGenetica' => $_POST['nombreLineaGenetica']]);
+					$this->constructorSQL->ejecutarSQL();
+					echo json_encode('Error: no se pudo editar la linea genetica correctamente');
+				}
 			} catch (PDOException $e) {
 				echo json_encode('Fallida');
 			}

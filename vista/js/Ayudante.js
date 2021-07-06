@@ -431,8 +431,68 @@ function btnGroup(){
 	return btnGroup;
 }
 
+class Tabla {
+	constructor (resp, idTabla, idRow, reset, ...actions) {
+		this.resp = resp;
+		this.table = document.getElementById(idTabla);
+		this.idRow = idRow;
+		this.reset = reset;
+		this.actions = actions;
+		this.construirTabla();
+		this.eventosTabla();
+	}
+	construirTabla () {
+		let tableheaders = tablaHeaders(this.table);
+		let tbody = this.table.querySelector('tbody');
+		let filas = document.createDocumentFragment();
+
+		if (this.reset === true) tbody.innerHTML = '';
+
+		this.resp.forEach((registro) => {
+			let fila = document.createElement('tr');
+			fila.setAttribute('idRow', registro[this.idRow]);
+			
+			tableheaders.forEach( campo => {
+				let columna = document.createElement('td');
+				columna.innerHTML = registro[campo];
+				if (campo.toLowerCase() == 'acciones'){
+					columna.innerHTML = '';
+					let buttonsAction = btnGroup();
+					this.actions.forEach( action => {
+						let button = btn(action.color, action.nombre, action.icon);
+						buttonsAction.appendChild(button);
+					});
+					columna.appendChild(buttonsAction);
+				}
+
+				fila.appendChild(columna);
+			});
+			filas.appendChild(fila);
+		});
+		tbody.appendChild(filas);
+	}
+	eventosTabla(){
+		this.table.addEventListener('click', e => {
+			let target = (e.target.tagName == 'I') ? e.target.parentElement : e.target;
+			if (target.tagName == 'BUTTON'){
+				let accion = this.actions.find( accion => target.classList.contains(accion.nombre));
+				accion.funcion({
+					titulos: tablaHeaders(this.table),
+					fila: target.parentElement.parentElement.parentElement,
+					datos: this.resp
+				});
+			}
+		});
+	}
+	update (resp){
+		this.resp = resp;
+		this.construirTabla();
+	}
+}
+
 function modalGalpones(){
   formularioAgregarGalpon.reset();
 	obtenerObjeto('?c=Galpon&m=obtenerGalpones', '#tablaGalpon', ['numeroGalpon', 'areaUtil','suma', 'confinameiento', 'fechaCreacionGalpon'], 'idGalpon', llenarTabla);
   document.getElementById('fechaCreacionGalpon').value= fechaHoy();
+
 }

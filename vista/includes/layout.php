@@ -51,6 +51,16 @@
 												<a class="dropdown-item" href="?c=<?=$nombreItem?>&p=<?=$nombreSubItem?>">
 													<?=$subItem?>
 												</a>
+											<?php elseif (is_array($subItem)): ?>
+												<div class="dropdown-submenu">
+																												
+													<a class="dropdown-item dropdown-toggle" href="#"><?=$nombreSubItem?></a>
+							            <ul class="dropdown-menu">
+							            	<?php foreach ($subItem as $nombreSubSubItem => $subSubItem): ?>
+							              <li><a class="dropdown-item"data-toggle="modal" data-target="#<?=$nombreSubSubItem?>"><?=$subSubItem?></a></li>
+							            	<?php endforeach ?>
+							            </ul>
+												</div>
 											<?php else: ?>
 												<a class="dropdown-item"  data-toggle="modal" data-target="#<?=$nombreSubItem?>"><?=$subItem?>
 												</a>
@@ -110,10 +120,20 @@
 			foreach (MENUITEMS as $nombreItem => $item) {
 				if (is_array($item) && $nombreItem != 'Reportes') {
 					foreach ($item as $nombreSubIteme => $subItem) {
-						$nombreItem = prepararRequire($nombreItem);
-						$nombreSubIteme = prepararRequire($nombreSubIteme);
-						if (file_exists("vista/$nombreItem/$nombreSubIteme.php")) {
-							require_once "vista/$nombreItem/$nombreSubIteme.php";
+							$nombreItem = prepararRequire($nombreItem);
+							$nombreSubIteme = prepararRequire($nombreSubIteme);
+						if (is_array($subItem)) {
+							foreach ($subItem as $nombreSubSubItem => $subSubItem) {
+								$nombreSubSubItem = prepararRequire($nombreSubSubItem);
+								$subSubItem = prepararRequire($subSubItem);
+								if (file_exists("vista/$nombreItem/$nombreSubSubItem.php")) {
+									require_once "vista/$nombreItem/$nombreSubSubItem.php";
+								}
+							}
+						}else {
+							if (file_exists("vista/$nombreItem/$nombreSubIteme.php")) {
+								require_once "vista/$nombreItem/$nombreSubIteme.php";
+							}
 						}
 					}
 				}
