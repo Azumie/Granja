@@ -1,5 +1,6 @@
 <?php
 
+
 session_start();
 function autoload($clase){
 	if (file_exists("controlador/$clase.php")) {
